@@ -20,7 +20,7 @@ if (-not (Test-Path ".git")) {
   git init -b main
 }
 
-git add index.html "剑琅联盟移动端设计规范.html" preview-server.js .github .gitignore
+git add index.html "剑琅联盟移动端设计规范.html" preview-server.js .github .gitignore deploy-github.ps1 LOGO2.png logo.png "剑琅联盟logo 1.png" 2>$null
 git diff --cached --quiet
 if ($LASTEXITCODE -ne 0) {
   $env:GIT_AUTHOR_NAME = "剑琅联盟"
