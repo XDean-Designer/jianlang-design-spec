@@ -27,8 +27,10 @@ if (Test-Path $assetsSrc) {
 }
 
 $iconsSrc = Join-Path $PSScriptRoot "icons"
+$iconsDeploy = Join-Path $deployDir "icons"
 if (Test-Path $iconsSrc) {
-  Copy-Item -LiteralPath $iconsSrc -Destination (Join-Path $deployDir "icons") -Recurse -Force
+  if (Test-Path $iconsDeploy) { Remove-Item -LiteralPath $iconsDeploy -Recurse -Force }
+  Copy-Item -LiteralPath $iconsSrc -Destination $iconsDeploy -Recurse -Force
 }
 
 Write-Host ">>> 提交并推送到 GitHub..." -ForegroundColor Cyan

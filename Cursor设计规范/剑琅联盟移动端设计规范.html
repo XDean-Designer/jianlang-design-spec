@@ -458,6 +458,20 @@
       .grid-2 { grid-template-columns: 1fr; }
     }
   </style>
+  <script>
+    /** GitHub Pages 子路径（/jianlang-design-spec/）与本地 file:// 兼容 */
+    window.SPEC_BASE = (function () {
+      if (location.protocol === 'file:') return '';
+      if (location.hostname.endsWith('github.io')) {
+        var parts = location.pathname.split('/').filter(Boolean);
+        if (parts.length && parts[0].indexOf('.') === -1) return '/' + parts[0] + '/';
+      }
+      return '';
+    })();
+    window.specAssetUrl = function (rel) {
+      return window.SPEC_BASE + String(rel).replace(/^\//, '');
+    };
+  </script>
   <script src="icons/stratis-map.js"></script>
   <script src="icons/stratis-filled-map.js"></script>
 </head>
@@ -908,7 +922,6 @@
       <table class="comp-catalog">
         <tr><th>分类</th><th>组件 ID</th><th>名称</th><th>场景</th></tr>
         <tr><td>导航</td><td>TabBar</td><td>标准底栏</td><td>子模块 3–4 Tab</td></tr>
-        <tr><td>入口</td><td>QuickEntryGrid</td><td>店务宫格</td><td>5×2 · 70×70</td></tr>
         <tr><td>反馈</td><td>AlertBanner</td><td>蓝色提醒条</td><td>异常信息</td></tr>
         <tr><td>营销</td><td>PromoCard</td><td>渐变营销卡</td><td>获客/推客</td></tr>
         <tr><td>零售</td><td>ProductCard</td><td>商品双列卡</td><td>选品上架</td></tr>
@@ -917,24 +930,6 @@
         <tr><td>零售</td><td>CartBar</td><td>商品底栏</td><td>店铺/客服/加购/购买</td></tr>
         <tr><td>基础</td><td>Button / Cell / …</td><td>TDesign 基础件</td><td>见下方预览</td></tr>
       </table>
-
-      <div class="comp-block" id="comp-grid-entry">
-        <div class="comp-block-hd"><strong>QuickEntryGrid 店务宫格</strong><code>5 列 · 图标 38px</code></div>
-        <div class="comp-block-bd">
-          <div class="u-grid-entry">
-            <div class="item"><span class="s-icon" data-icon="view-list"></span><span>价目表</span></div>
-            <div class="item"><span class="s-icon" data-icon="creditcard"></span><span>会员卡</span></div>
-            <div class="item"><span class="s-icon" data-icon="usergroup"></span><span>会员管理</span></div>
-            <div class="item"><span class="s-icon" data-icon="member"></span><span>员工管理</span></div>
-            <div class="item"><span class="s-icon" data-icon="calendar"></span><span>预约</span></div>
-            <div class="item"><span class="s-icon" data-icon="chart"></span><span>经营分析</span></div>
-            <div class="item"><span class="s-icon" data-icon="chart-bar"></span><span>业绩排行</span></div>
-            <div class="item"><span class="s-icon" data-icon="shop"></span><span>联盟广场</span></div>
-            <div class="item"><span class="s-icon" data-icon="desktop"></span><span>设备管理</span></div>
-            <div class="item"><span class="s-icon" data-icon="ellipsis"></span><span>更多</span></div>
-          </div>
-        </div>
-      </div>
 
       <div class="comp-block" id="comp-product-card">
         <div class="comp-block-hd"><strong>ProductCard 商品卡</strong><code>RTP 选品 · 双列 grid</code></div>
@@ -1865,7 +1860,20 @@
       : (typeof STRATIS_ICON_MAP !== 'undefined' ? STRATIS_ICON_MAP : null);
     const file = map ? map[slug] : null;
     if (!file) return null;
-    return (filled ? 'icons/stratis-filled/' : 'icons/stratis/') + file;
+    const rel = (filled ? 'icons/stratis-filled/' : 'icons/stratis/') + file;
+    return typeof specAssetUrl === 'function' ? specAssetUrl(rel) : rel;
+  }
+
+  /** 修正误带 fill=currentColor 的线性 SVG，避免显示成实心块 */
+  function normalizeStratisSvg(svgText, filled) {
+    if (filled || !svgText) return svgText;
+    let s = svgText.replace(/<svg([^>]*)\sfill="currentColor"/gi, '<svg$1 fill="none"');
+    s = s.replace(/<path\b([^>]*?)>/gi, (m, attrs) => {
+      if (!/\bstroke=/.test(attrs)) return m;
+      if (/\bfill=/.test(attrs)) return '<path' + attrs.replace(/\bfill="[^"]*"/gi, 'fill="none"') + '>';
+      return '<path fill="none"' + attrs + '>';
+    });
+    return s;
   }
 
   const _stratisSvgCache = {};
@@ -1895,12 +1903,15 @@
         el.closest('.icon-lib-item')?.classList.add('is-missing');
         return;
       }
-      const url = (filled ? 'icons/stratis-filled/' : 'icons/stratis/') + file;
+      const rel = (filled ? 'icons/stratis-filled/' : 'icons/stratis/') + file;
+      const url = typeof specAssetUrl === 'function' ? specAssetUrl(rel) : rel;
       try {
         if (!_stratisSvgCache[url]) {
           const res = await fetch(url);
           if (!res.ok) throw new Error(String(res.status));
-          _stratisSvgCache[url] = await res.text();
+          const raw = await res.text();
+          if (!/^\s*<svg/i.test(raw)) throw new Error('not svg');
+          _stratisSvgCache[url] = normalizeStratisSvg(raw, filled);
         }
         el.innerHTML = _stratisSvgCache[url];
         el.dataset.hydrated = '1';
