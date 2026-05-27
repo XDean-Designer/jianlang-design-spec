@@ -301,6 +301,30 @@
     .s-icon--24 { font-size: var(--icon-size); width: var(--icon-size); height: var(--icon-size); color: var(--icon-color-default); }
     .s-icon--16 { font-size: var(--icon-size-sm); width: var(--icon-size-sm); height: var(--icon-size-sm); color: var(--icon-color-secondary); }
     .s-icon--brand { color: var(--icon-color-primary); }
+    .s-icon--on-brand { color: #fff; }
+    .s-icon--on-brand svg [stroke] { stroke: #fff !important; stroke-width: 2 !important; }
+    .s-icon--on-brand svg path:not([stroke]),
+    .s-icon--on-brand svg circle:not([stroke]),
+    .s-icon--on-brand svg rect:not([stroke]) { fill: #fff !important; stroke: none !important; }
+    .u-icon-btn-square {
+      width: 48px; height: 48px; border-radius: var(--radius-input);
+      background: var(--brand-6); border: none; box-shadow: none;
+      display: inline-flex; align-items: center; justify-content: center; flex-shrink: 0;
+    }
+    .u-image-placeholder {
+      background: var(--bg-disabled); border: 1px solid var(--border);
+      display: flex; align-items: center; justify-content: center; overflow: hidden;
+    }
+    .u-image-placeholder .s-icon { color: #fff; }
+    .u-image-placeholder .s-icon svg [stroke] { stroke: #fff !important; stroke-width: 2 !important; }
+    .global-demo-grid { display: flex; flex-wrap: wrap; gap: 20px; align-items: flex-start; margin: 16px 0 8px; }
+    .global-demo-item { text-align: center; font-size: 11px; color: var(--text-secondary); }
+    .global-demo-item .cap { margin-top: 8px; line-height: 1.4; }
+    .global-layout-demo { width: 100%; max-width: 358px; margin: 12px auto 0; border: 1px dashed var(--border); border-radius: var(--radius-input); overflow: hidden; background: var(--bg-page); }
+    .global-layout-demo .demo-tabs { height: 44px; background: #fff; border-bottom: 1px solid var(--border); display: flex; align-items: stretch; }
+    .global-layout-demo .demo-tabs span { flex: 1; display: flex; align-items: center; justify-content: center; font-size: 14px; color: var(--text-secondary); }
+    .global-layout-demo .demo-tabs span.on { color: var(--brand-6); font-weight: 500; box-shadow: inset 0 -2px 0 var(--brand-6); }
+    .global-layout-demo .demo-card { margin: 16px; padding: 16px; background: #fff; border: 1px solid var(--border); border-radius: var(--radius-card); font-size: 13px; color: var(--text-primary); }
     .spec-block strong { color: var(--brand-8); }
     .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
     .grid-2 .card { margin: 0; height: 100%; }
@@ -354,8 +378,9 @@
     .u-grid-entry .s-icon { font-size: 38px; color: var(--gray-8); }
     .u-grid-entry span { display: block; font-size: 13px; color: var(--figma-text-primary); margin-top: 4px; }
     .u-product-card { width: 175px; background: #fff; border-radius: 12px; overflow: hidden; border: 1px solid var(--border); box-shadow: none; }
-    .u-product-card .thumb { aspect-ratio: 1; background: var(--gray-2); display: grid; place-items: center; }
-    .u-product-card .thumb .s-icon { font-size: 40px; color: var(--gray-6); }
+    .u-product-card .thumb { aspect-ratio: 1; background: var(--bg-disabled); display: flex; align-items: center; justify-content: center; border-bottom: 1px solid var(--border); }
+    .u-product-card .thumb .s-icon { font-size: 32px; color: #fff; }
+    .u-product-card .thumb .s-icon svg [stroke] { stroke: #fff !important; stroke-width: 2 !important; }
     .u-product-card .body { padding: 8px; }
     .u-product-card .brand { font-size: 10px; color: var(--figma-text-secondary); }
     .u-product-card .title { font-size: 12px; font-weight: 600; line-height: 1.35; margin: 2px 0; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
@@ -643,6 +668,54 @@
           <li><strong>顶部导航</strong>：固定高 <strong>44px</strong>、白底、底部分割线 1px <code>#D7D7D5</code>，元素垂直居中（不含系统状态栏）。</li>
           <li><strong>全局按钮</strong>：统一高 <strong>48px</strong>、圆角 <strong>16px</strong>、无阴影无渐变；分<strong>主按钮</strong>（实心 #F32F41）/ <strong>边框按钮</strong> / <strong>置灰禁用</strong>（#EDEDED 底）。</li>
         </ol>
+
+        <h3 style="margin-top:28px">页面与组件硬性约束</h3>
+        <p style="font-size:13px;color:var(--text-secondary);margin-bottom:16px">以下规则与上文并列执行，适用于 AI 出图、Figma 稿与前端实现。</p>
+        <ol start="14">
+          <li><strong>品牌图标按钮（圆角方形 + 线性图标）</strong>
+            <ul>
+              <li>由<strong>圆角方形底</strong>与<strong>线性图标</strong>组成的功能入口（如顶栏快捷、宫格图标钮）。</li>
+              <li><strong>常规态</strong>：方形填充品牌色 <code>#F32F41</code>，圆角建议 <strong>8px</strong>（与输入框小模块一致）；内嵌线性图标为<strong>白色</strong>，描边粗细 <strong>stroke-width: 2</strong>。</li>
+              <li>禁用态可用 <code>#EDEDED</code> 底 + <code>#929292</code> 图标；不得用 emoji 代替图标。</li>
+            </ul>
+            <div class="global-demo-grid">
+              <div class="global-demo-item">
+                <button type="button" class="u-icon-btn-square" aria-label="示例">
+                  <span class="s-icon s-icon--24 s-icon--on-brand" data-icon="add"></span>
+                </button>
+                <div class="cap">常规 · 品牌底 + 白线 icon · 2px 描边</div>
+              </div>
+            </div>
+          </li>
+          <li><strong>禁止使用 Emoji</strong>：页面、弹层、空状态与按钮文案中<strong>不得出现 emoji 表情</strong>；情绪与状态须用规范图标、文字或插画素材表达。</li>
+          <li><strong>Tab 与卡片禁止层叠遮挡</strong>：Tabs / 分段器与下方内容卡片分属上下布局，<strong>禁止</strong>负边距、上浮、<code>z-index</code> 叠压导致 Tab 压住卡片或卡片盖住 Tab；模块之间以间距与分割线区分。</li>
+          <li>
+            <strong>图片占位规范</strong>：凡预留图片位置，统一为浅灰底 <code>#EDEDED</code>，居中放置<strong>白色线性</strong> <code>image</code> 图标（描边 2）；未给到素材时亦不得留空或使用 emoji / 外链占位图。
+            <div class="global-demo-grid">
+              <div class="global-demo-item">
+                <div class="u-image-placeholder" style="width:96px;height:96px;border-radius:8px">
+                  <span class="s-icon s-icon--24 s-icon--on-brand" data-icon="image"></span>
+                </div>
+                <div class="cap">96×96 占位示例</div>
+              </div>
+              <div class="global-demo-item">
+                <div class="u-image-placeholder" style="width:100%;max-width:175px;aspect-ratio:1;border-radius:12px">
+                  <span class="s-icon s-icon--24 s-icon--on-brand" data-icon="image"></span>
+                </div>
+                <div class="cap">商品主图位 · 1:1</div>
+              </div>
+            </div>
+          </li>
+          <li><strong>禁止横向溢出画布</strong>：内容区宽度不得超过 <strong>390px</strong>；禁止出现横向滚动条。长文案、表格与标签须换行、截断或改为纵向排布，图片与卡片宽度适配安全边距（左右各 16px）。</li>
+        </ol>
+
+        <div class="spec-block" style="margin-top:20px">
+          <strong>Tab + 卡片布局示意（正确）</strong>：Tab 区域完整落在卡片上方，中间以间距分隔，无重叠。
+        </div>
+        <div class="global-layout-demo">
+          <div class="demo-tabs"><span class="on">全部</span><span>待处理</span><span>已完成</span></div>
+          <div class="demo-card">内容卡片 · 距 Tab 下缘 16px · 独立白底区块</div>
+        </div>
       </div>
     </section>
 
@@ -699,6 +772,7 @@
         <li><strong>颜色 / 圆角 / 间距</strong>：仅使用全局章与第 2–5 章 Token，禁止 4px 主按钮圆角、禁止投影与渐变背景。</li>
         <li><strong>金额排版</strong>：数字 DIN；<code>¥</code> 与「应付/实付」等用苹方，<code>¥</code> 与数字间距 4px。</li>
         <li><strong>品牌露出</strong>：启动/登录/首页 Navbar 使用 <code>LOGO2.png</code> 与「剑琅联盟」。</li>
+        <li><strong>硬性约束</strong>：无 emoji · Tab/卡片不叠压 · 图片位灰底白 icon · 内容不横向溢出 · 图标按钮见全局章第 14 条。</li>
       </ol>
       <h3>技术栈对齐</h3>
       <table>
@@ -1589,6 +1663,7 @@
 - 字体：PingFang SC；金额数字 DIN；¥ 与「应付/实付」用苹方，¥ 与数字间距 4px
 - 文字：#333 / #929292 · 边框 #D7D7D5 · 主色 #F32F41
 - 图标：24px（安全 20）/ 16px 小箭头 · Stratis 库 · 颜色 #F32F41 / #333 / #929
+- 硬性：无 emoji；Tab 与卡片不遮挡；图片位 #EDEDED+白 image 线 icon；不横向溢出；圆角方形品牌钮+白线 icon stroke 2
 - 组件：第7章组件目录
 - 内容：[具体业务字段]</pre>
     </section>
