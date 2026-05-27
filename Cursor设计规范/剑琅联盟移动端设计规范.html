@@ -12,7 +12,7 @@
       --sidebar-text: rgba(0,0,0,0.55);
       --sidebar-text-active: #F32F41;
       --sidebar-border: #E7E7E7;
-      --sidebar-shadow: 2px 0 24px rgba(0,0,0,0.04);
+      --sidebar-shadow: none;
       --main-bg: #F0F1F5;
       --hero-gradient: linear-gradient(135deg, #F32F41 0%, #991D28 55%, #2C2C2C 100%);
       --brand-1: #FEF0F1; --brand-2: #FDD9DC; --brand-3: #FCBDC3; --brand-4: #FB9BA3;
@@ -22,19 +22,27 @@
       --warning-1: #FEF3E6; --warning-6: #E37318; --warning-7: #BE5A00;
       --error-1: #FDECEE; --error-6: #D54941; --error-7: #AD352F;
       --info-1: #ECF2FE; --info-6: #0052D9; --info-7: #003CAB;
-      --gray-1: #F3F3F3; --gray-2: #EEEEEE; --gray-3: #E7E7E7; --gray-4: #DCDCDC;
+      --gray-1: #F7F7F7; --gray-2: #EDEDED; --gray-3: #D7D7D5; --gray-4: #DCDCDC;
       --gray-5: #C5C5C5; --gray-6: #A6A6A6; --gray-7: #8B8B8B; --gray-8: #777777;
       --gray-9: #5E5E5E; --gray-10: #4B4B4B; --gray-11: #383838; --gray-12: #2C2C2C;
-      --text-primary: rgba(0,0,0,0.9); --text-secondary: rgba(0,0,0,0.6);
-      --text-placeholder: rgba(0,0,0,0.4); --text-disabled: rgba(0,0,0,0.26);
+      --text-strong: #000000;
+      --text-primary: #333333; --text-secondary: #929292;
+      --text-placeholder: #929292; --text-disabled: #929292;
       --text-anti: #FFFFFF; --text-brand: #F32F41;
-      --bg-page: #F3F3F3; --bg-container: #FFFFFF; --bg-secondary: #FAFAFA;
-      --border: #E7E7E7; --border-focus: #F32F41;
-      --radius-s: 3px; --radius-m: 6px; --radius-l: 9px; --radius-xl: 12px; --radius-round: 999px;
-      --radius-btn-primary: 4px;
-      --shadow-1: 0 1px 10px rgba(0,0,0,0.05); --shadow-2: 0 3px 14px rgba(0,0,0,0.08);
-      --shadow-3: 0 6px 30px rgba(0,0,0,0.12);
-      --nav-h: 48px; --tabbar-h: 56px; --safe-top: 44px; --safe-bottom: 34px;
+      --bg-page: #F7F7F7; --bg-container: #FFFFFF; --bg-secondary: #EDEDED;
+      --bg-disabled: #EDEDED;
+      --brand-aux-1: #FFD5D9; --brand-aux-2: #FFF2F2;
+      --border: #D7D7D5; --border-focus: #F32F41;
+      --radius-tag: 4px; --radius-input: 8px; --radius-card: 12px; --radius-btn: 16px;
+      --radius-s: 4px; --radius-m: 8px; --radius-l: 12px; --radius-xl: 12px; --radius-round: 999px;
+      --radius-btn-primary: 16px;
+      --shadow-1: none; --shadow-2: none; --shadow-3: none;
+      --nav-h: 44px; --tabbar-h: 56px; --safe-top: 44px; --safe-bottom: 34px;
+      --space-page: 16px; --space-module: 16px; --space-card: 16px;
+      --space-icon-text: 8px; --space-list-y: 12px; --space-tag-y: 4px; --space-tag-x: 8px; --space-divider-y: 12px;
+      --icon-size: 24px; --icon-safe: 20px; --icon-size-sm: 16px;
+      --icon-color-primary: #F32F41; --icon-color-default: #333333; --icon-color-secondary: #929292;
+      --price-gap: 4px;
       --sidebar-w: 280px;
       --canvas-w: 390px; /* 画布宽：固定 */
       --canvas-h: 844px; /* 画布高：默认；phone-frame 使用 min-height 可向下延展 */
@@ -50,8 +58,8 @@
       --figma-orange: #F77357;
       --figma-card-pink: #FFF2F2;
       --figma-promo-border: rgba(249, 117, 107, 0.2);
-      --font-data: "D-DIN-Bold", "DIN Alternate", Roboto, sans-serif;
-      --glass-nav-shadow: inset 0 0 22px rgba(242,242,242,.5), 0 20px 50px rgba(0,0,0,.1);
+      --font-data: "DIN Alternate", "D-DIN-Bold", Roboto, sans-serif;
+      --glass-nav-shadow: none;
     }
     * { box-sizing: border-box; margin: 0; padding: 0; }
     html { scroll-behavior: smooth; }
@@ -60,8 +68,8 @@
     a:hover { opacity: .85; }
     .layout { display: flex; min-height: 100vh; }
     .sidebar { width: var(--sidebar-w); background: var(--sidebar-bg); border-right: 1px solid var(--sidebar-border); box-shadow: var(--sidebar-shadow); position: fixed; top: 0; left: 0; bottom: 0; overflow-y: auto; z-index: 100; scrollbar-width: thin; scrollbar-color: rgba(0,0,0,.12) transparent; }
-    .sidebar-brand { padding: 28px 20px 24px; text-align: center; background: linear-gradient(180deg, var(--brand-1) 0%, #fff 100%); border-bottom: 1px solid var(--sidebar-border); }
-    .sidebar-brand .logo-wrap { width: 72px; height: 72px; margin: 0 auto 14px; border-radius: 18px; background: #fff; padding: 8px; box-shadow: 0 4px 16px rgba(243,47,65,.12), 0 0 0 1px rgba(0,0,0,.04); }
+    .sidebar-brand { padding: 28px 20px 24px; text-align: center; background: var(--brand-aux-2); border-bottom: 1px solid var(--sidebar-border); }
+    .sidebar-brand .logo-wrap { width: 72px; height: 72px; margin: 0 auto 14px; border-radius: 18px; background: #fff; padding: 8px; border: 1px solid rgba(0,0,0,.06); }
     .sidebar-brand .logo-wrap img { width: 100%; height: 100%; object-fit: contain; display: block; }
     .sidebar-brand h1 { font-size: 18px; font-weight: 600; color: var(--gray-12); letter-spacing: .06em; }
     .sidebar-brand .sub { font-size: 11px; color: var(--text-secondary); margin-top: 6px; letter-spacing: .02em; }
@@ -69,7 +77,8 @@
     .nav-list { padding: 16px 12px 24px; list-style: none; }
     .nav-list a { display: block; padding: 10px 14px; font-size: 13px; color: var(--sidebar-text); text-decoration: none; border-radius: 8px; margin-bottom: 2px; transition: background .2s, color .2s, transform .22s cubic-bezier(.34,1.56,.64,1), box-shadow .2s; }
     .nav-list a:hover { color: var(--gray-12); background: var(--sidebar-surface); }
-    .nav-list a.active { color: var(--brand-6); font-weight: 500; background: var(--brand-1); box-shadow: inset 3px 0 0 var(--brand-6); }
+    .nav-list a.active { color: var(--brand-6); font-weight: 500; background: var(--brand-1); border-left: 3px solid var(--brand-6); padding-left: 11px; }
+    .nav-list a.nav-mandate { color: var(--brand-6); font-weight: 600; }
     .main { margin-left: var(--sidebar-w); flex: 1; padding: 0 0 80px; min-width: 0; }
     .main-inner { max-width: 920px; margin: 0 auto; padding: 0 40px 0; }
     .page-hero { position: relative; margin: 0 -40px 40px; padding: 48px 40px 44px; background: #1a0a0e; overflow: hidden; isolation: isolate; }
@@ -80,7 +89,7 @@
     .hero-orb-2 { width: 240px; height: 240px; background: rgba(255, 255, 255, 0.12); bottom: -80px; left: 5%; animation: heroOrb2 20s ease-in-out infinite; }
     .hero-orb-3 { width: 180px; height: 180px; background: rgba(243, 47, 65, 0.35); top: 40%; left: 55%; animation: heroOrb3 16s ease-in-out infinite reverse; }
     .hero-grid { position: absolute; inset: -50% -20%; background-image: linear-gradient(rgba(255,255,255,.06) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,.06) 1px, transparent 1px); background-size: 48px 48px; transform: perspective(400px) rotateX(58deg) translateY(0); animation: heroGridDrift 22s linear infinite; mask-image: radial-gradient(ellipse 90% 75% at 50% 35%, #000 15%, transparent 72%); }
-    .hero-scanline { position: absolute; left: 0; right: 0; height: 1px; background: linear-gradient(90deg, transparent 0%, rgba(255,255,255,.35) 50%, transparent 100%); box-shadow: 0 0 20px rgba(255,255,255,.25); animation: heroScan 7s ease-in-out infinite; opacity: 0.7; }
+    .hero-scanline { position: absolute; left: 0; right: 0; height: 1px; background: linear-gradient(90deg, transparent 0%, rgba(255,255,255,.35) 50%, transparent 100%); animation: heroScan 7s ease-in-out infinite; opacity: 0.7; }
     .hero-particles { position: absolute; inset: 0; background-image: radial-gradient(1.5px 1.5px at 20% 30%, rgba(255,255,255,.25) 50%, transparent 50%), radial-gradient(1px 1px at 60% 70%, rgba(255,255,255,.2) 50%, transparent 50%), radial-gradient(1px 1px at 80% 20%, rgba(255,200,200,.3) 50%, transparent 50%); background-size: 200% 200%; animation: heroParticles 25s linear infinite; opacity: 0.8; }
     @keyframes heroGradientShift { 0%, 100% { background-position: 0% 40%; } 50% { background-position: 100% 60%; } }
     @keyframes heroOrb1 { 0%, 100% { transform: translate(0, 0) scale(1); } 50% { transform: translate(-40px, 30px) scale(1.15); } }
@@ -92,7 +101,7 @@
     .page-hero-inner { position: relative; z-index: 1; display: flex; align-items: center; gap: 28px; }
     .hero-logo { animation: heroLogoFloat 6s ease-in-out infinite; }
     @keyframes heroLogoFloat { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-6px); } }
-    .page-hero .hero-logo { width: 88px; height: 88px; flex-shrink: 0; border-radius: 20px; background: #fff; padding: 10px; box-shadow: 0 12px 40px rgba(0,0,0,.25); }
+    .page-hero .hero-logo { width: 88px; height: 88px; flex-shrink: 0; border-radius: 20px; background: #fff; padding: 10px; border: 1px solid rgba(255,255,255,.2); }
     .page-hero .hero-logo img { width: 100%; height: 100%; object-fit: contain; }
     .page-hero h2 { font-size: 32px; font-weight: 600; color: #fff; border: none; padding: 0; margin: 0 0 8px; letter-spacing: .04em; }
     .page-hero .hero-desc { font-size: 15px; color: rgba(255,255,255,.82); max-width: 520px; line-height: 1.65; }
@@ -109,10 +118,10 @@
     .tag { display: inline-block; padding: 2px 8px; border-radius: var(--radius-m); font-size: 11px; font-weight: 500; margin-right: 6px; }
     .tag-brand { background: var(--brand-1); color: var(--brand-6); }
     .tag-ai { background: #ECF2FE; color: var(--info-6); }
-    .card { background: #fff; border: none; border-radius: 12px; padding: 24px; margin: 16px 0; box-shadow: 0 1px 2px rgba(0,0,0,.04), 0 4px 24px rgba(0,0,0,.04); }
+    .card { background: #fff; border: 1px solid var(--border); border-radius: 12px; padding: 24px; margin: 16px 0; box-shadow: none; }
     .card-title { font-size: 14px; font-weight: 600; margin-bottom: 12px; color: var(--gray-12); }
     .brand-showcase { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin: 20px 0; align-items: stretch; }
-    .brand-showcase .brand-card { display: flex; flex-direction: column; align-items: center; min-height: 220px; padding: 28px 24px 24px; text-align: center; border-radius: 12px; box-shadow: 0 4px 24px rgba(0,0,0,.06); }
+    .brand-showcase .brand-card { display: flex; flex-direction: column; align-items: center; min-height: 220px; padding: 28px 24px 24px; text-align: center; border-radius: 12px; box-shadow: none; }
     .brand-showcase .brand-card--light { background: #fff; border: 1px solid var(--border); }
     .brand-showcase .brand-card--dark { background: var(--gray-12); border: 1px solid var(--gray-11); }
     .brand-logo-stage { width: 120px; height: 120px; flex-shrink: 0; display: flex; align-items: center; justify-content: center; border-radius: 16px; margin-bottom: 16px; }
@@ -127,33 +136,34 @@
     .brand-rules { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-top: 16px; }
     .brand-rule { background: var(--gray-1); border-radius: 8px; padding: 14px; font-size: 13px; }
     .brand-rule strong { display: block; color: var(--gray-12); margin-bottom: 4px; font-size: 13px; }
-    table { width: 100%; border-collapse: separate; border-spacing: 0; font-size: 13px; margin: 12px 0; border-radius: 10px; overflow: hidden; box-shadow: 0 1px 3px rgba(0,0,0,.04); border: 1px solid var(--border); }
+    table { width: 100%; border-collapse: separate; border-spacing: 0; font-size: 13px; margin: 12px 0; border-radius: 10px; overflow: hidden; box-shadow: none; border: 1px solid var(--border); }
     th, td { border: none; border-bottom: 1px solid var(--border); padding: 12px 16px; text-align: left; }
     tr:last-child td { border-bottom: none; }
     th { background: var(--gray-1); font-weight: 600; white-space: nowrap; color: var(--gray-11); font-size: 12px; text-transform: none; }
     tbody tr:hover td { background: rgba(243,47,65,.02); }
     code { background: var(--gray-1); padding: 2px 6px; border-radius: var(--radius-s); font-size: 12px; font-family: Consolas, monospace; }
-    pre { background: linear-gradient(145deg, #1E1E24 0%, #141418 100%); color: #C8CAD0; padding: 20px; border-radius: 10px; overflow-x: auto; font-size: 12px; line-height: 1.6; margin: 12px 0; border: 1px solid rgba(255,255,255,.06); box-shadow: inset 0 1px 0 rgba(255,255,255,.04); }
+    pre { background: linear-gradient(145deg, #1E1E24 0%, #141418 100%); color: #C8CAD0; padding: 20px; border-radius: 10px; overflow-x: auto; font-size: 12px; line-height: 1.6; margin: 12px 0; border: 1px solid rgba(255,255,255,.06); box-shadow: none; }
     .color-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); gap: 12px; margin: 16px 0; }
     .color-item { border-radius: var(--radius-l); overflow: hidden; border: 1px solid var(--border); }
     .color-swatch { height: 64px; }
     .color-info { padding: 8px 10px; background: #fff; font-size: 12px; }
     .color-info strong { display: block; font-size: 13px; }
     .demo-row { display: flex; flex-wrap: wrap; gap: 12px; align-items: center; margin: 12px 0; }
-    .btn { display: inline-flex; align-items: center; justify-content: center; height: 40px; padding: 0 16px; border-radius: var(--radius-m); font-size: 14px; font-weight: 500; border: none; cursor: default; font-family: "PingFang SC", sans-serif; }
-    .btn-primary { background: var(--brand-6); color: #fff; border-radius: var(--radius-btn-primary); }
+    .btn { display: inline-flex; align-items: center; justify-content: center; height: 48px; padding: 0 20px; border-radius: var(--radius-btn); font-size: 14px; font-weight: 500; border: none; cursor: default; font-family: "PingFang SC", sans-serif; box-shadow: none; background-image: none; }
+    .btn-primary { background: var(--brand-6); color: #fff; border-radius: var(--radius-btn); }
     .btn-primary:hover { background: var(--brand-7); }
-    .btn-primary.btn-lg, .btn-primary.btn-sm { border-radius: var(--radius-btn-primary); }
-    .btn-outline { background: #fff; color: var(--brand-6); border: 1px solid var(--brand-6); }
-    .btn-text { background: transparent; color: var(--brand-6); }
-    .btn-ghost { background: var(--brand-1); color: var(--brand-6); }
+    .btn-primary.btn-lg, .btn-primary.btn-sm { border-radius: var(--radius-btn); height: 48px; }
+    .btn-outline { background: #fff; color: var(--brand-6); border: 1px solid var(--brand-6); border-radius: var(--radius-btn); }
+    .btn-text { background: transparent; color: var(--brand-6); border-radius: var(--radius-btn); }
+    .btn-ghost { background: var(--brand-aux-2); color: var(--brand-6); border-radius: var(--radius-btn); }
     .btn-danger { background: var(--error-6); color: #fff; }
     .btn-disabled { background: var(--gray-3); color: var(--text-disabled); }
-    .btn-sm { height: 32px; padding: 0 12px; font-size: 12px; }
+    .btn-sm { height: 48px; padding: 0 16px; font-size: 14px; }
     .btn-lg { height: 48px; padding: 0 24px; font-size: 16px; }
-    .input-demo { height: 40px; border: 1px solid var(--border); border-radius: var(--radius-m); padding: 0 12px; font-size: 14px; width: 240px; outline: none; }
-    .input-demo:focus { border-color: var(--brand-6); box-shadow: 0 0 0 2px var(--brand-2); }
-    .tag-demo { display: inline-flex; align-items: center; height: 24px; padding: 0 8px; border-radius: var(--radius-m); font-size: 12px; }
+    .btn-disabled, .btn-primary.btn-disabled { background: var(--bg-disabled); color: var(--text-secondary); opacity: 1; pointer-events: none; border: none; }
+    .input-demo { height: 44px; border: 1px solid var(--border); border-radius: var(--radius-input); padding: 0 12px; font-size: 14px; width: 240px; outline: none; background: #fff; box-shadow: none; }
+    .input-demo:focus { border-color: var(--brand-6); outline: 2px solid var(--brand-2); outline-offset: 0; }
+    .tag-demo { display: inline-flex; align-items: center; min-height: 22px; padding: var(--space-tag-y) var(--space-tag-x); border-radius: var(--radius-tag); font-size: 12px; box-shadow: none; }
     .tag-default { background: var(--gray-1); color: var(--text-secondary); }
     .tag-brand-demo { background: var(--brand-1); color: var(--brand-6); }
     .tag-success { background: var(--success-1); color: var(--success-6); }
@@ -162,22 +172,22 @@
     .alert { padding: 12px 16px; border-radius: var(--radius-m); font-size: 13px; margin: 8px 0; }
     .alert-info { background: var(--info-1); color: var(--info-7); border-left: 3px solid var(--info-6); }
     .alert-warn { background: var(--warning-1); color: var(--warning-7); border-left: 3px solid var(--warning-6); }
-    .phone-frame { width: var(--canvas-w); border: 10px solid #1A1A1F; border-radius: 40px; overflow: hidden; background: var(--bg-page); margin: 16px auto; box-shadow: 0 24px 80px rgba(0,0,0,.18), 0 0 0 1px rgba(0,0,0,.06); position: relative; }
+    .phone-frame { width: var(--canvas-w); border: 10px solid #1A1A1F; border-radius: 40px; overflow: hidden; background: var(--bg-page); margin: 16px auto; box-shadow: none; position: relative; }
     .phone-frame--844 { height: var(--canvas-h); min-height: var(--canvas-h); max-height: var(--canvas-h); display: flex; flex-direction: column; }
     .phone-frame::before { content: ''; position: absolute; top: 12px; left: 50%; transform: translateX(-50%); width: 100px; height: 28px; background: #1A1A1F; border-radius: 20px; z-index: 10; }
     .phone-splash { flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 24px; background: #fff; min-height: 0; }
     .phone-splash--pure { background: #fff; }
     .phone-layout-stack { flex: 1; display: flex; flex-direction: column; min-height: 0; background: var(--bg-page); }
     .phone-body--fill { flex: 1; min-height: 0; overflow: hidden; padding: 16px; }
-    .phone-splash img { width: 96px; height: 96px; object-fit: contain; margin-bottom: 20px; filter: drop-shadow(0 8px 20px rgba(243,47,65,.2)); }
+    .phone-splash img { width: 96px; height: 96px; object-fit: contain; margin-bottom: 20px; }
     .phone-splash .app-name { font-size: 24px; font-weight: 600; color: var(--gray-12); letter-spacing: .08em; }
     .phone-splash .app-tagline { font-size: 13px; color: var(--text-secondary); margin-top: 8px; }
     .canvas-badge { display: inline-flex; align-items: center; gap: 6px; background: var(--gray-12); color: #fff; font-size: 11px; padding: 5px 12px; border-radius: 4px; margin-bottom: 16px; font-weight: 500; letter-spacing: .03em; }
     .canvas-badge::before { content: ''; width: 6px; height: 6px; background: var(--brand-6); border-radius: 50%; }
     .icon-lib-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(108px, 1fr)); gap: 12px; margin: 12px 0; }
     .icon-lib-item { display: flex; flex-direction: column; background: #fff; border: 1px solid var(--border); border-radius: var(--radius-l); overflow: hidden; min-height: 132px; cursor: pointer; transition: border-color .2s, box-shadow .2s, transform .22s cubic-bezier(.34,1.56,.64,1); }
-    .icon-lib-item:hover { border-color: var(--brand-4); box-shadow: 0 6px 20px rgba(243,47,65,.1); }
-    .icon-lib-item.copied { border-color: var(--success-6); box-shadow: 0 0 0 1px var(--success-6); }
+    .icon-lib-item:hover { border-color: var(--brand-4); box-shadow: none; }
+    .icon-lib-item.copied { border-color: var(--success-6); box-shadow: none; outline: 1px solid var(--success-6); }
     .icon-lib-visual { flex: 0 0 84px; height: 84px; display: flex; align-items: center; justify-content: center; padding: 0 10px; background: var(--gray-1); }
     .icon-lib-item:hover .icon-lib-visual { background: var(--brand-1); }
     .s-icon { display: inline-flex; align-items: center; justify-content: center; width: 1em; height: 1em; flex-shrink: 0; vertical-align: -0.125em; color: inherit; line-height: 0; }
@@ -206,8 +216,8 @@
     .tap-feedback { position: relative; overflow: hidden; -webkit-tap-highlight-color: transparent; cursor: pointer; }
     .tap-feedback { transition: transform .22s cubic-bezier(.34,1.56,.64,1), box-shadow .22s, filter .2s, border-color .2s, background .2s; }
     .tap-feedback:active { transform: scale(0.97); }
-    .tap-feedback.tap-flash { box-shadow: 0 0 0 2px rgba(243,47,65,.25), 0 0 24px rgba(243,47,65,.2); }
-    .sidebar .tap-feedback.tap-flash { box-shadow: 0 0 0 2px rgba(243,47,65,.2), 0 0 16px rgba(243,47,65,.15); }
+    .tap-feedback.tap-flash { outline: 2px solid rgba(243,47,65,.35); outline-offset: 2px; box-shadow: none; }
+    .sidebar .tap-feedback.tap-flash { outline: 2px solid rgba(243,47,65,.25); outline-offset: 2px; box-shadow: none; }
     .ripple-fx { position: absolute; border-radius: 50%; pointer-events: none; transform: scale(0); animation: rippleExpand .55s ease-out forwards; }
     @keyframes rippleExpand { to { transform: scale(2.8); opacity: 0; } }
     .icon-lib-name { font-size: 10px; color: var(--text-secondary); font-family: Consolas, monospace; line-height: 1.3; margin: 0; opacity: .85; }
@@ -218,16 +228,16 @@
     .icon-filter-row input:focus { border-color: var(--brand-6); }
     .filter-chip { padding: 6px 12px; border-radius: var(--radius-btn-primary); border: 1px solid var(--border); background: #fff; font-size: 12px; cursor: pointer; color: var(--text-secondary); }
     .filter-chip.active { border-color: var(--brand-6); color: var(--brand-6); background: var(--brand-1); }
-    .comp-block { background: #fff; border: none; border-radius: 12px; margin-bottom: 24px; overflow: hidden; box-shadow: 0 1px 2px rgba(0,0,0,.04), 0 4px 20px rgba(0,0,0,.05); }
-    .comp-block-hd { padding: 14px 20px; background: linear-gradient(90deg, var(--gray-1) 0%, #fff 100%); border-bottom: 1px solid var(--border); display: flex; justify-content: space-between; align-items: center; }
+    .comp-block { background: #fff; border: 1px solid var(--border); border-radius: 12px; margin-bottom: 24px; overflow: hidden; box-shadow: none; }
+    .comp-block-hd { padding: 14px 20px; background: var(--bg-page); border-bottom: 1px solid var(--border); display: flex; justify-content: space-between; align-items: center; }
     .comp-block-hd strong { font-size: 14px; }
     .comp-block-hd code { font-size: 11px; color: var(--brand-6); }
     .comp-block-bd { padding: 20px 16px; }
     .comp-preview-phone { width: var(--canvas-w); margin: 0 auto; border: 1px solid var(--border); border-radius: var(--radius-l); overflow: hidden; background: var(--bg-page); }
-    .u-navbar { height: 48px; background: #fff; display: flex; align-items: center; padding: 0 16px; border-bottom: 1px solid var(--border); font-size: 16px; font-weight: 500; }
+    .u-navbar { height: var(--nav-h); background: #fff; display: flex; align-items: center; padding: 0 var(--space-page); border-bottom: 1px solid var(--border); font-size: 16px; font-weight: 500; box-shadow: none; }
     .u-navbar .back { margin-right: 8px; color: var(--gray-8); }
     .u-navbar .action { margin-left: auto; font-size: 14px; color: var(--brand-6); font-weight: 400; }
-    .u-cell { background: #fff; min-height: 56px; padding: 12px 16px; display: flex; align-items: center; border-bottom: 0.5px solid var(--gray-3); font-size: 14px; }
+    .u-cell { background: #fff; min-height: 56px; padding: var(--space-list-y) var(--space-page); display: flex; align-items: center; border-bottom: 1px solid var(--border); font-size: 14px; }
     .u-cell:last-child { border-bottom: none; }
     .u-cell .note { font-size: 12px; color: var(--text-secondary); margin-left: auto; margin-right: 4px; }
     .u-cell-group { border-radius: var(--radius-l); overflow: hidden; margin-bottom: 12px; }
@@ -238,7 +248,7 @@
     .u-tabbar { height: 56px; background: #fff; border-top: 1px solid var(--border); display: flex; }
     .u-tabbar .tab { flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 2px; font-size: 10px; color: var(--text-secondary); }
     .u-tabbar .tab.on { color: var(--brand-6); }
-    .u-search { height: 36px; background: var(--gray-1); border-radius: var(--radius-round); margin: 12px 16px; display: flex; align-items: center; padding: 0 12px; gap: 8px; color: var(--text-placeholder); font-size: 14px; }
+    .u-search { height: 36px; background: var(--bg-disabled); border-radius: var(--radius-input); margin: var(--space-list-y) var(--space-page); display: flex; align-items: center; padding: 0 12px; gap: var(--space-icon-text); color: var(--text-secondary); font-size: 14px; border: 1px solid var(--border); box-shadow: none; }
     .u-notice { height: 40px; background: var(--warning-1); color: var(--warning-7); font-size: 13px; display: flex; align-items: center; padding: 0 12px; gap: 8px; }
     .u-steps { display: flex; padding: 16px; background: #fff; gap: 4px; }
     .u-steps .step { flex: 1; text-align: center; font-size: 12px; color: var(--text-secondary); }
@@ -247,13 +257,13 @@
     .u-steps .step.cur .dot { background: var(--brand-6); color: #fff; }
     .u-switch { width: 44px; height: 24px; background: var(--gray-4); border-radius: 12px; position: relative; }
     .u-switch.on { background: var(--brand-6); }
-    .u-switch::after { content: ''; position: absolute; width: 20px; height: 20px; background: #fff; border-radius: 50%; top: 2px; left: 2px; box-shadow: 0 1px 3px rgba(0,0,0,.2); }
+    .u-switch::after { content: ''; position: absolute; width: 20px; height: 20px; background: #fff; border-radius: 50%; top: 2px; left: 2px; border: 1px solid var(--border); box-shadow: none; }
     .u-switch.on::after { left: 22px; }
     .u-badge { display: inline-flex; min-width: 16px; height: 16px; padding: 0 4px; background: var(--brand-6); color: #fff; font-size: 10px; border-radius: 8px; align-items: center; justify-content: center; }
     .u-avatar { width: 40px; height: 40px; border-radius: 50%; background: var(--gray-3); display: flex; align-items: center; justify-content: center; color: var(--gray-7); }
     .u-progress { height: 4px; background: var(--gray-2); border-radius: 2px; overflow: hidden; }
     .u-progress i { display: block; height: 100%; width: 60%; background: var(--brand-6); border-radius: 2px; }
-    .u-fab { width: 48px; height: 48px; border-radius: 50%; background: var(--brand-6); color: #fff; display: flex; align-items: center; justify-content: center; box-shadow: var(--shadow-2); margin-left: auto; }
+    .u-fab { width: 48px; height: 48px; border-radius: 50%; background: var(--brand-6); color: #fff; display: flex; align-items: center; justify-content: center; box-shadow: none; margin-left: auto; }
     .u-bottom-bar { display: flex; gap: 12px; padding: 8px 16px; background: #fff; border-top: 1px solid var(--border); }
     .u-bottom-bar .btn { flex: 1; }
     .u-dialog { width: 311px; margin: 0 auto; background: #fff; border-radius: var(--radius-xl); padding: 24px 16px 16px; text-align: center; }
@@ -266,26 +276,41 @@
     @keyframes shimmer { 0% { background-position: 200% 0; } 100% { background-position: -200% 0; } }
     @keyframes spin { to { transform: rotate(360deg); } }
     .phone-status { height: 44px; background: #fff; display: flex; align-items: center; justify-content: center; font-size: 12px; color: var(--text-secondary); }
-    .phone-nav { height: 48px; background: #fff; display: flex; align-items: center; padding: 0 16px; border-bottom: 1px solid var(--border); font-weight: 600; font-size: 16px; }
+    .phone-nav { height: var(--nav-h); background: #fff; display: flex; align-items: center; padding: 0 var(--space-page); border-bottom: 1px solid var(--border); font-weight: 600; font-size: 16px; box-shadow: none; }
     .phone-body { min-height: 400px; padding: 16px; }
     .phone-tabbar { height: 56px; background: #fff; border-top: 1px solid var(--border); display: flex; }
     .phone-tabbar span { flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: center; font-size: 10px; color: var(--text-secondary); }
     .phone-tabbar span.active { color: var(--brand-6); }
-    .spec-block { background: linear-gradient(90deg, var(--brand-1) 0%, #fff 100%); border: 1px solid var(--brand-3); border-left: 4px solid var(--brand-6); border-radius: 8px; padding: 16px 20px; margin: 16px 0; font-size: 13px; color: var(--gray-11); }
+    .spec-block { background: var(--brand-aux-2); border: 1px solid var(--border); border-left: 4px solid var(--brand-6); border-radius: var(--radius-input); padding: 16px 20px; margin: 16px 0; font-size: 13px; color: var(--gray-11); box-shadow: none; }
+    .global-mandate { border: 2px solid var(--brand-6); background: #fff; }
+    .global-mandate .mandate-lead { font-size: 14px; color: var(--text-secondary); margin-bottom: 20px; line-height: 1.7; }
+    .global-mandate h3 { margin-top: 24px; color: var(--brand-6); }
+    .global-mandate h3:first-of-type { margin-top: 8px; }
+    .global-mandate ol { padding-left: 22px; }
+    .global-mandate ol > li { margin-bottom: 14px; color: var(--text-primary); }
+    .global-mandate ol > li > strong { color: var(--text-strong); }
+    .global-mandate ul { margin-top: 8px; padding-left: 18px; }
+    .global-mandate ul li { color: var(--text-secondary); font-size: 13px; margin-bottom: 4px; }
+    .global-swatch-row { display: flex; flex-wrap: wrap; gap: 10px; margin: 10px 0 4px; }
+    .global-swatch { display: inline-flex; align-items: center; gap: 8px; padding: 6px 10px; border: 1px solid var(--border); border-radius: var(--radius-tag); font-size: 12px; background: #fff; }
+    .global-swatch i { width: 20px; height: 20px; border-radius: 4px; flex-shrink: 0; border: 1px solid rgba(0,0,0,.06); }
+    .price-row-demo { display: flex; align-items: baseline; gap: var(--price-gap); font-size: 20px; margin: 12px 0; }
+    .price-row-demo .yen { font-family: "PingFang SC", sans-serif; font-weight: 500; color: var(--text-primary); }
+    .price-row-demo .num { font-family: var(--font-data); font-weight: 700; color: var(--text-primary); }
+    .price-row-demo .label { font-family: "PingFang SC", sans-serif; font-size: 14px; color: var(--text-secondary); margin-right: 8px; }
+    .s-icon--24 { font-size: var(--icon-size); width: var(--icon-size); height: var(--icon-size); color: var(--icon-color-default); }
+    .s-icon--16 { font-size: var(--icon-size-sm); width: var(--icon-size-sm); height: var(--icon-size-sm); color: var(--icon-color-secondary); }
+    .s-icon--brand { color: var(--icon-color-primary); }
     .spec-block strong { color: var(--brand-8); }
     .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
     .grid-2 .card { margin: 0; height: 100%; }
     .token-visual-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); gap: 16px; margin: 20px 0 28px; }
-    .token-visual-card { background: #fff; border: 1px solid var(--border); border-radius: var(--radius-l); padding: 16px; text-align: center; box-shadow: var(--shadow-1); }
+    .token-visual-card { background: #fff; border: 1px solid var(--border); border-radius: var(--radius-l); padding: 16px; text-align: center; box-shadow: none; }
     .token-visual-card .sample { margin: 0 auto 12px; background: var(--gray-1); display: flex; align-items: center; justify-content: center; }
     .token-visual-card .label { font-size: 12px; font-weight: 600; color: var(--gray-12); }
     .token-visual-card .val { font-size: 11px; color: var(--text-secondary); margin-top: 4px; font-family: Consolas, monospace; }
     .radius-sample { width: 72px; height: 72px; background: #fff; border: 2px solid var(--brand-6); }
     .radius-sample.primary-btn { width: 100%; max-width: 120px; height: 40px; background: var(--brand-6); border: none; color: #fff; font-size: 13px; font-weight: 500; }
-    .shadow-sample { width: 100%; max-width: 160px; height: 72px; background: #fff; border-radius: var(--radius-l); }
-    .shadow-sample.s1 { box-shadow: var(--shadow-1); }
-    .shadow-sample.s2 { box-shadow: var(--shadow-2); }
-    .shadow-sample.s3 { box-shadow: var(--shadow-3); }
     .layout-phones { display: flex; flex-wrap: wrap; gap: 32px; justify-content: center; align-items: flex-start; margin: 16px 0; }
     .layout-phone-wrap { text-align: center; }
     .layout-phone-wrap .cap { font-size: 12px; color: var(--text-secondary); margin-top: 12px; }
@@ -295,28 +320,28 @@
     .site-footer .foot-brand span { font-size: 14px; font-weight: 600; color: var(--gray-12); }
     .site-footer .foot-copy { font-size: 12px; color: var(--text-secondary); }
     .color-item { transition: transform .2s, box-shadow .2s; }
-    .color-item:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(0,0,0,.08); }
-    .figma-link-card { display: flex; align-items: center; gap: 16px; padding: 16px 20px; background: linear-gradient(90deg, var(--brand-1), #fff); border: 1px solid var(--brand-3); border-radius: 10px; margin: 16px 0; text-decoration: none; color: inherit; transition: box-shadow .2s; }
-    .figma-link-card:hover { box-shadow: var(--shadow-2); }
+    .color-item:hover { transform: translateY(-2px); box-shadow: none; }
+    .figma-link-card { display: flex; align-items: center; gap: 16px; padding: 16px 20px; background: var(--brand-aux-2); border: 1px solid var(--border); border-radius: var(--radius-input); margin: 16px 0; text-decoration: none; color: inherit; transition: border-color .2s; box-shadow: none; }
+    .figma-link-card:hover { box-shadow: none; border-color: var(--brand-5); }
     .figma-link-card .icon-box { width: 48px; height: 48px; background: var(--brand-6); border-radius: 10px; display: grid; place-items: center; color: #fff; font-size: 11px; font-weight: 600; }
     .comp-catalog { width: 100%; font-size: 12px; margin-bottom: 24px; }
     .comp-catalog td code { font-size: 11px; }
     .icon-cat-title { grid-column: 1 / -1; font-size: 13px; font-weight: 600; color: var(--gray-11); padding: 16px 0 4px; border-bottom: 1px solid var(--border); margin-top: 8px; }
-    .u-brand-header { height: 200px; background: linear-gradient(180deg, var(--figma-brand-start), var(--figma-brand-end)); padding: 56px 16px 16px; color: #fff; position: relative; }
+    .u-brand-header { height: 200px; background: var(--brand-6); padding: 56px 16px 16px; color: #fff; position: relative; box-shadow: none; }
     .u-brand-header .store-row { display: flex; align-items: center; gap: 8px; font-size: 14px; margin-bottom: 20px; }
     .u-brand-header .store-row img { width: 20px; height: 20px; border-radius: 50%; }
     .u-quick-actions { display: flex; justify-content: space-between; padding: 0 28px; }
     .u-quick-actions .qa { text-align: center; width: 60px; }
     .u-quick-actions .qa .s-icon { font-size: 30px; }
     .u-quick-actions .qa span { display: block; font-size: 15px; font-weight: 500; margin-top: 6px; }
-    .u-glass-tabbar { height: 60px; margin: 12px 16px 24px; padding: 4px; background: rgba(255,255,255,.6); border-radius: 200px; box-shadow: var(--glass-nav-shadow); backdrop-filter: blur(20px); display: flex; align-items: center; position: relative; }
+    .u-glass-tabbar { height: 56px; margin: 12px 16px 24px; padding: 0; background: #fff; border-radius: 0; border-top: 1px solid var(--border); box-shadow: none; backdrop-filter: none; display: flex; align-items: center; position: relative; }
     .u-glass-tabbar .tab { flex: 1; display: flex; flex-direction: column; align-items: center; font-size: 11px; color: var(--figma-text-primary); gap: 2px; z-index: 1; }
     .u-glass-tabbar .tab.on { font-weight: 500; }
-    .u-glass-tabbar .tab-fab { width: 50px; height: 50px; margin-top: -20px; border-radius: 50%; background: #1a1a1a; box-shadow: inset 0 0 0 1px #999; }
+    .u-glass-tabbar .tab-fab { width: 50px; height: 50px; margin-top: -20px; border-radius: 50%; background: #1a1a1a; border: 1px solid #999; box-shadow: none; }
     .u-glass-tabbar .pill-active { position: absolute; left: 4px; top: 4px; width: 72px; height: 52px; background: #1a1a1a; border-radius: 100px; transition: left .2s; }
-    .u-stat-card { background: linear-gradient(180deg, var(--figma-card-pink), #fff); border-radius: 12px; padding: 12px 12px 16px; margin: 0 16px; }
+    .u-stat-card { background: var(--brand-aux-2); border-radius: var(--radius-card); padding: var(--space-card); margin: 0 var(--space-page); border: 1px solid var(--border); box-shadow: none; }
     .u-stat-card .head { display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; }
-    .u-stat-card .seg { display: flex; background: linear-gradient(180deg, #fff, transparent); border-radius: 100px; padding: 2px; font-size: 12px; }
+    .u-stat-card .seg { display: flex; background: #fff; border-radius: 100px; padding: 2px; font-size: 12px; border: 1px solid var(--border); }
     .u-stat-card .seg span { padding: 4px 12px; border-radius: 100px; color: var(--figma-text-inactive); }
     .u-stat-card .seg span.on { background: var(--figma-card-pink); color: var(--figma-text-primary); font-weight: 500; }
     .u-stat-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px 17px; }
@@ -328,7 +353,7 @@
     .u-grid-entry .item { text-align: center; padding: 8px 0; }
     .u-grid-entry .s-icon { font-size: 38px; color: var(--gray-8); }
     .u-grid-entry span { display: block; font-size: 13px; color: var(--figma-text-primary); margin-top: 4px; }
-    .u-product-card { width: 175px; background: #fff; border-radius: 12px; overflow: hidden; box-shadow: var(--shadow-1); }
+    .u-product-card { width: 175px; background: #fff; border-radius: 12px; overflow: hidden; border: 1px solid var(--border); box-shadow: none; }
     .u-product-card .thumb { aspect-ratio: 1; background: var(--gray-2); display: grid; place-items: center; }
     .u-product-card .thumb .s-icon { font-size: 40px; color: var(--gray-6); }
     .u-product-card .body { padding: 8px; }
@@ -352,11 +377,12 @@
       border-radius: 12px;
       overflow: hidden;
       background: #fff;
-      box-shadow: 0 2px 10px rgba(0,0,0,.06);
+      box-shadow: none;
+      border: 1px solid var(--border);
     }
     .u-member-card__head {
-      padding: 14px 14px 12px;
-      background: linear-gradient(135deg, var(--mc-start) 0%, var(--mc-end) 100%);
+      padding: var(--space-card);
+      background: var(--mc-bg, var(--mc-start));
       color: var(--figma-text-primary);
     }
     .u-member-card__type { font-size: 17px; font-weight: 600; line-height: 1.25; margin-bottom: 10px; }
@@ -407,11 +433,11 @@
       font-weight: 500;
       line-height: 30px;
     }
-    .u-member-card--stored { --mc-start: #C8D9F7; --mc-end: #DBD6F4; --mc-cta: #BDD5ED; --mc-compact-start: #D3DAF7; --mc-compact-end: #E8E4F8; }
-    .u-member-card--times { --mc-start: #C0DAE7; --mc-end: #C7DEE6; --mc-cta: #B9D4DD; --mc-compact-start: #D4EBF2; --mc-compact-end: #E4F3F7; }
-    .u-member-card--discount { --mc-start: #E1C989; --mc-end: #F3D8A1; --mc-cta: #E1C789; --mc-compact-start: #F5E6C8; --mc-compact-end: #FBF0DC; }
-    .u-member-card--period { --mc-start: #F5CEBF; --mc-end: #F6D6CB; --mc-cta: #E3BFB3; --mc-compact-start: #FBE4DC; --mc-compact-end: #FFF0EB; }
-    .u-member-card--package { --mc-start: #D4BEA6; --mc-end: #E7D7C0; --mc-cta: #D7C3A8; --mc-compact-start: #EDE3D4; --mc-compact-end: #F7F0E6; }
+    .u-member-card--stored { --mc-bg: #DBD6F4; --mc-cta: #BDD5ED; --mc-compact-bg: #E8E4F8; }
+    .u-member-card--times { --mc-bg: #C7DEE6; --mc-cta: #B9D4DD; --mc-compact-bg: #E4F3F7; }
+    .u-member-card--discount { --mc-bg: #F3D8A1; --mc-cta: #E1C789; --mc-compact-bg: #FBF0DC; }
+    .u-member-card--period { --mc-bg: #F6D6CB; --mc-cta: #E3BFB3; --mc-compact-bg: #FFF0EB; }
+    .u-member-card--package { --mc-bg: #E7D7C0; --mc-cta: #D7C3A8; --mc-compact-bg: #F7F0E6; }
     .u-member-card--compact {
       max-width: 358px;
       height: 40px;
@@ -420,7 +446,7 @@
       gap: 8px;
       padding: 0 12px 0 10px;
       border-radius: 8px;
-      background: linear-gradient(90deg, var(--mc-compact-start) 0%, var(--mc-compact-end) 100%);
+      background: var(--mc-compact-bg, var(--mc-compact-start));
       box-shadow: none;
       position: relative;
       overflow: hidden;
@@ -494,22 +520,21 @@
       <div class="logo-wrap"><img src="LOGO2.png" alt="剑琅联盟"></div>
       <h1>剑琅联盟</h1>
       <p class="sub">移动端设计规范</p>
-      <span class="ver">Design System v1.3</span>
+      <span class="ver">Design System v1.4</span>
     </div>
     <ul class="nav-list">
+      <li><a href="#global-ui" class="nav-mandate">★ 全局强制 UI</a></li>
       <li><a href="#brand">品牌标识</a></li>
       <li><a href="#overview">0. 概述与 AI 指引</a></li>
       <li><a href="#principles">1. 设计原则</a></li>
       <li><a href="#colors">2. 色彩系统</a></li>
       <li><a href="#typography">3. 字体排版</a></li>
       <li><a href="#spacing">4. 间距与布局</a></li>
-      <li><a href="#radius-shadow">5. 圆角与阴影</a></li>
+      <li><a href="#radius-shadow">5. 圆角</a></li>
       <li><a href="#icons">6. 图标库（可调用）</a></li>
       <li><a href="#components">7. 组件库（可调用）</a></li>
-      <li><a href="#patterns">8. 页面模式</a></li>
-      <li><a href="#interaction">9. 交互与反馈</a></li>
-      <li><a href="#b2b">10. B端业务规范</a></li>
-      <li><a href="#tokens">11. Design Token JSON</a></li>
+      <li><a href="#b2b">8. B端业务规范</a></li>
+      <li><a href="#tokens">9. Design Token JSON</a></li>
     </ul>
   </aside>
 
@@ -532,14 +557,94 @@
           <h2>剑琅联盟</h2>
           <p class="hero-desc">B 端商务移动应用设计规范 · 基于 TDesign 体系，统一视觉语言与组件标准，支撑 AI 批量出图与 Flutter 工程落地。</p>
           <div class="hero-meta">
-            <span class="hero-pill">画布 390 × 844（高可延展）</span>
-            <span class="hero-pill">PingFang SC</span>
-            <span class="hero-pill">主色 #F32F41</span>
-            <span class="hero-pill">主按钮圆角 4px</span>
+            <span class="hero-pill">390 × 844 · 1× 画布</span>
+            <span class="hero-pill">页面底 #F7F7F7</span>
+            <span class="hero-pill">无阴影 · 无渐变</span>
+            <span class="hero-pill">按钮 48×16 圆角</span>
           </div>
         </div>
       </div>
     </header>
+
+    <!-- ★ 全局强制 UI（最高优先级） -->
+    <section id="global-ui">
+      <h2 class="section-title"><span class="num">★</span>全局强制 UI 规范</h2>
+      <div class="card global-mandate">
+        <p class="mandate-lead">以下条款为<strong>剑琅联盟移动端</strong>最高优先级约束，优先于本规范其他章节及历史 Figma 样稿。AI 出图、设计评审与 Flutter 落地均须先满足本章；冲突时以本章为准。</p>
+        <ol>
+          <li><strong>画布基准</strong>：390×844px 移动端 1 倍设计稿（宽固定 390；高默认 844，内容超出可向下延展）。</li>
+          <li><strong>页面背景色</strong>：<code>#F7F7F7</code>（<code>--bg-page</code>）。
+            <div class="global-swatch-row"><span class="global-swatch"><i style="background:#F7F7F7"></i>#F7F7F7</span></div>
+          </li>
+          <li><strong>视觉铁律</strong>：全站<strong>无阴影、无投影、无渐变</strong>；层级仅通过<strong>底色 / 1px 分割线 / 间距 / 字重</strong>区分。</li>
+          <li><strong>品牌色体系</strong>
+            <ul>
+              <li>主色：<code>#F32F41</code></li>
+              <li>辅助色：<code>#FFD5D9</code>、<code>#FFF2F2</code></li>
+              <li>文字：重点标题 <code>#333333</code>；常规正文 / 模块标题 <code>#929292</code>；辅助说明 <code>#929292</code>；必要时最强强调可用 <code>#000000</code></li>
+              <li>分割线 / 边框：<code>#D7D7D5</code></li>
+              <li>禁用浅灰块：<code>#EDEDED</code></li>
+              <li>卡片底色：<code>#FFFFFF</code></li>
+            </ul>
+            <div class="global-swatch-row">
+              <span class="global-swatch"><i style="background:#F32F41"></i>主色</span>
+              <span class="global-swatch"><i style="background:#FFD5D9"></i>辅助</span>
+              <span class="global-swatch"><i style="background:#FFF2F2"></i>浅底</span>
+              <span class="global-swatch"><i style="background:#333"></i>标题</span>
+              <span class="global-swatch"><i style="background:#929292"></i>次要</span>
+              <span class="global-swatch"><i style="background:#D7D7D5"></i>分割</span>
+              <span class="global-swatch"><i style="background:#EDEDED"></i>禁用</span>
+              <span class="global-swatch"><i style="background:#fff;border:1px solid #D7D7D5"></i>卡片</span>
+            </div>
+          </li>
+          <li><strong>字体规范</strong>
+            <ul>
+              <li>常规文案：<strong>苹方 PingFang SC</strong></li>
+              <li>金额<strong>纯数字 + 小数点</strong>：<strong>DIN</strong> 字体（<code>DIN Alternate</code> / <code>D-DIN-Bold</code>）</li>
+              <li>硬性规则：<code>¥</code> 符号、价格描述文字（应付 / 实付 / 小计）统一用苹方；<code>¥</code> 与数字间距固定 <strong>4px</strong></li>
+            </ul>
+            <div class="price-row-demo">
+              <span class="label">实付</span><span class="yen">¥</span><span class="num">1,286.40</span>
+            </div>
+          </li>
+          <li><strong>图标规范</strong>
+            <ul>
+              <li>通用功能图标：24×24px 画布，可视安全区 20×20px</li>
+              <li>小箭头 / 辅助图标：16×16px</li>
+              <li>颜色：重要操作 <code>#F32F41</code> · 常规 <code>#333333</code> · 次要 <code>#929292</code></li>
+              <li>风格：线性简约、统一圆角倒角；复用第 6 章 Stratis 组件库，禁止自创</li>
+            </ul>
+            <div class="demo-row" style="margin-top:10px">
+              <span class="s-icon s-icon--24 s-icon--brand" data-icon="add-circle"></span>
+              <span class="s-icon s-icon--24" data-icon="search"></span>
+              <span class="s-icon s-icon--16" data-icon="chevron-right"></span>
+            </div>
+          </li>
+          <li><strong>间距体系（4px 模数）</strong>
+            <ul>
+              <li>页面左右安全边距：16px</li>
+              <li>模块与模块外间距：16px</li>
+              <li>卡片内边距：上下 16px、左右 16px</li>
+              <li>图文 / 图标文字间距：8px</li>
+              <li>列表单行上下间距：12px</li>
+              <li>标签边距：上下 4px、左右 8px</li>
+              <li>分割线上下留白：12px</li>
+            </ul>
+          </li>
+          <li><strong>圆角规范</strong>
+            <ul>
+              <li>全局卡片：12px</li>
+              <li>按钮：16px</li>
+              <li>标签 / 角标：4px</li>
+              <li>输入框 / 小模块：8px</li>
+            </ul>
+          </li>
+          <li><strong>分割线</strong>：1px <code>#D7D7D5</code></li>
+          <li><strong>顶部导航</strong>：固定高 <strong>44px</strong>、白底、底部分割线 1px <code>#D7D7D5</code>，元素垂直居中（不含系统状态栏）。</li>
+          <li><strong>全局按钮</strong>：统一高 <strong>48px</strong>、圆角 <strong>16px</strong>、无阴影无渐变；分<strong>主按钮</strong>（实心 #F32F41）/ <strong>边框按钮</strong> / <strong>置灰禁用</strong>（#EDEDED 底）。</li>
+        </ol>
+      </div>
+    </section>
 
     <!-- 品牌 -->
     <section id="brand">
@@ -582,21 +687,18 @@
     <section id="overview">
       <h2 class="section-title"><span class="num">0</span>概述与 AI 使用指引</h2>
       <div class="card">
-        <div class="card-title"><span class="tag tag-brand">剑琅联盟</span> <span class="tag tag-ai">AI Ready</span> v1.3 · 画布 390×844（高可延展）</div>
-        <p>本规范为<strong>剑琅联盟</strong>（含 RTP 商品零售模块）专属，基于 <a href="https://tdesign.tencent.com/flutter/getting-started">TDesign Flutter</a> 与已落地主页面提取的 Token 定制。</p>
+        <div class="card-title"><span class="tag tag-brand">剑琅联盟</span> <span class="tag tag-ai">AI Ready</span> v1.4 · 390×844</div>
+        <p>本规范为<strong>剑琅联盟</strong>（含 RTP 商品零售模块）专属。请先阅读并遵守 <a href="#global-ui"><strong>★ 全局强制 UI</strong></a>，再使用下方 TDesign 组件与 Token 章节。</p>
       </div>
       <h3>AI 批量出图必读规则</h3>
       <div class="spec-block">
-        <strong>强制约束：</strong>所有页面必须使用本规范中的 Design Token，禁止自行发明颜色、字号、圆角。组件命名对齐 TDesign 组件名（如 Navbar、Cell、TabBar）。<strong>画布宽 390px（固定）</strong>、<strong>高默认 844px</strong>（内容超出时可向下延展，宽不变），全局字体 <strong>PingFang SC</strong>，主要按钮圆角 <strong>4px</strong>，使用 4px 间距网格。
+        <strong>第一优先级：</strong>完整执行 <a href="#global-ui">★ 全局强制 UI</a>（画布、#F7F7F7 底、无阴影无渐变、色板、字体、图标尺寸、间距、圆角、44px 导航、48px 按钮）。组件命名可对齐 TDesign（Navbar、Cell、TabBar），但视觉不得违背全局章。
       </div>
       <ol>
-        <li><strong>先选页面模式</strong>：从第 8 章选择列表页/详情页/表单页/工作台等模板。</li>
-        <li><strong>再组合组件</strong>：从第 7 章按场景选用 TDesign 组件，保持 API 与视觉一致。</li>
-        <li><strong>颜色只用 Token</strong>：主色 <code>brand-6 (#F32F41)</code>，文字/背景/边框从中性色和功能色中选取。</li>
-        <li><strong>信息层级</strong>：标题 16–20px Medium，正文 14px Regular，辅助 12px，数据数字可用 20–28px Medium。</li>
-        <li><strong>B端气质</strong>：克制装饰、强调效率；列表优先于卡片堆叠；操作路径不超过 3 层。</li>
-        <li><strong>输出格式</strong>：设计稿标注 Token 名称（如 <code>--td-brand-color</code>），而非裸 Hex 值。</li>
-        <li><strong>品牌露出</strong>：启动页、登录页、Navbar 首页须使用官方 Logo（<code>LOGO2.png</code>）与应用名「剑琅联盟」。</li>
+        <li><strong>组合组件</strong>：从第 7 章按场景选用组件，API 与交互对齐 TDesign。</li>
+        <li><strong>颜色 / 圆角 / 间距</strong>：仅使用全局章与第 2–5 章 Token，禁止 4px 主按钮圆角、禁止投影与渐变背景。</li>
+        <li><strong>金额排版</strong>：数字 DIN；<code>¥</code> 与「应付/实付」等用苹方，<code>¥</code> 与数字间距 4px。</li>
+        <li><strong>品牌露出</strong>：启动/登录/首页 Navbar 使用 <code>LOGO2.png</code> 与「剑琅联盟」。</li>
       </ol>
       <h3>技术栈对齐</h3>
       <table>
@@ -607,7 +709,8 @@
         <tr><td>设计资源</td><td>TDesign + Figma 实测</td><td>组件库 + Icon SVG + 业务图标映射表</td></tr>
         <tr><td>设计基准</td><td>宽 390（固定）× 高 844（默认）</td><td>高可向下延展；安全区 top 44px / bottom 34px</td></tr>
         <tr><td>全局字体</td><td>PingFang SC</td><td>禁止替换为其他字体族</td></tr>
-        <tr><td>主按钮圆角</td><td>4px</td><td>仅 Primary 实心按钮；其他组件见圆角章节</td></tr>
+        <tr><td>全局 UI</td><td><a href="#global-ui">★ 强制章节</a></td><td>高于本章与 Figma 历史稿</td></tr>
+        <tr><td>主按钮</td><td>高 48px · 圆角 16px</td><td>见全局章</td></tr>
       </table>
     </section>
 
@@ -618,7 +721,7 @@
         <div class="card"><div class="card-title">高效 Efficient</div><p>减少操作步骤，常用功能 2 次点击可达。列表支持搜索、筛选、批量操作。表单支持自动填充与历史记录。</p></div>
         <div class="card"><div class="card-title">清晰 Clear</div><p>信息层级分明，关键数据突出。状态用颜色+文字双重标识。空状态、加载态、错误态均有明确指引。</p></div>
         <div class="card"><div class="card-title">一致 Consistent</div><p>全局统一导航、按钮、表单、反馈方式。同类业务使用相同页面结构与组件组合。</p></div>
-        <div class="card"><div class="card-title">专业 Professional</div><p>视觉克制，避免过度圆角与渐变。品牌色用于关键操作与状态强调，不作为大面积背景。</p></div>
+        <div class="card"><div class="card-title">专业 Professional</div><p>视觉克制：无阴影、无渐变、扁平分区。品牌色用于关键操作与状态强调，不作为大面积铺底（顶栏等见全局章例外）。</p></div>
       </div>
       <h3>视觉风格关键词</h3>
       <p>商务 · 简洁 · 可信赖 · 数据驱动 · 操作明确 · 留白适度 · 白底灰底交替分区</p>
@@ -627,7 +730,7 @@
     <!-- 2. 色彩 -->
     <section id="colors">
       <h2 class="section-title"><span class="num">2</span>色彩系统</h2>
-      <p>主色 <strong>#F32F41</strong>，按 TDesign 10 级色阶扩展。功能色保持 TDesign 标准语义，确保红绿色盲可辨（状态需配合图标/文字）。</p>
+      <p><strong>色值以 <a href="#global-ui">★ 全局强制 UI</a> 为准。</strong>下表为 Token 映射；10 级品牌色阶供按下态/禁用推导，日常界面优先使用全局章固定色板。功能色保持 TDesign 语义（状态须配合图标/文字）。</p>
 
       <h3>2.1 品牌色 Brand Color</h3>
       <div class="color-grid">
@@ -655,9 +758,9 @@
       <h3>2.3 中性色 Neutral Colors</h3>
       <table>
         <tr><th>Token</th><th>色值</th><th>用途</th></tr>
-        <tr><td>gray-1</td><td>#F3F3F3</td><td>页面背景 bg-page</td></tr>
-        <tr><td>gray-2</td><td>#EEEEEE</td><td>分割线、禁用背景</td></tr>
-        <tr><td>gray-3</td><td>#E7E7E7</td><td>边框 border</td></tr>
+        <tr><td>gray-1 ★</td><td>#F7F7F7</td><td>页面背景 bg-page</td></tr>
+        <tr><td>gray-2 ★</td><td>#EDEDED</td><td>禁用浅灰块</td></tr>
+        <tr><td>gray-3 ★</td><td>#D7D7D5</td><td>边框 / 分割线 border</td></tr>
         <tr><td>gray-4 ~ gray-8</td><td>#DCDCDC ~ #777777</td><td>图标、占位、次要元素</td></tr>
         <tr><td>gray-9 ~ gray-12</td><td>#5E5E5E ~ #2C2C2C</td><td>深色文字、深色模式基础</td></tr>
       </table>
@@ -676,25 +779,24 @@
         <tr><td>text-anti</td><td>#FFFFFF</td><td>深色/品牌色背景上的文字</td></tr>
       </table>
 
-      <h3>2.5 场景色（Figma 扩展）</h3>
+      <h3>2.5 场景色（业务扩展 · 禁止渐变）</h3>
       <table>
         <tr><th>Token</th><th>色值</th><th>用途</th></tr>
-        <tr><td>brand-gradient</td><td>#F32F41 → #DD2D38</td><td>首页顶栏、品牌头图 200px 高</td></tr>
+        <tr><td>brand-aux-1</td><td>#FFD5D9</td><td>浅色强调底、标签底</td></tr>
+        <tr><td>brand-aux-2 ★</td><td>#FFF2F2</td><td>业绩卡、品牌浅区块（纯色）</td></tr>
         <tr><td>accent-blue</td><td>#1A70FE</td><td>提醒条文字、可点击「查看」</td></tr>
         <tr><td>accent-blue-bg</td><td>#E7F1FF</td><td>异常/重要提醒条背景</td></tr>
         <tr><td>accent-orange</td><td>#F77357</td><td>营销副标题、活动强调</td></tr>
-        <tr><td>card-pink-gradient</td><td>#FFF2F2 → #FFFFFF</td><td>业绩卡、浅色数据卡背景</td></tr>
-        <tr><td>promo-card-border</td><td>rgba(249,117,107,0.2)</td><td>获客/推客营销卡片描边</td></tr>
       </table>
+      <p class="alert alert-warn" style="margin-top:12px">已废弃：品牌渐变顶栏、卡片渐变底。顶栏可用纯色 <code>#F32F41</code> 或白底 + 品牌字色，见组件示例。</p>
 
       <h3>2.6 背景与边框</h3>
       <table>
         <tr><th>Token</th><th>色值</th><th>用途</th></tr>
-        <tr><td>bg-page</td><td>#F3F3F3</td><td>页面底色</td></tr>
-        <tr><td>bg-container</td><td>#FFFFFF</td><td>卡片、Cell、弹窗</td></tr>
-        <tr><td>bg-secondary</td><td>#FAFAFA</td><td>次级容器、表头</td></tr>
-        <tr><td>bg-brand-light</td><td>#FFF2F2</td><td>品牌浅色区块（同 Figma card-pink）</td></tr>
-        <tr><td>border</td><td>#E7E7E7</td><td>默认边框</td></tr>
+        <tr><td>bg-page ★</td><td>#F7F7F7</td><td>页面底色</td></tr>
+        <tr><td>bg-container ★</td><td>#FFFFFF</td><td>卡片、Cell、弹窗</td></tr>
+        <tr><td>bg-disabled ★</td><td>#EDEDED</td><td>禁用按钮、浅灰块</td></tr>
+        <tr><td>border ★</td><td>#D7D7D5</td><td>默认边框 / 分割线 1px</td></tr>
         <tr><td>border-focus</td><td>#F32F41</td><td>输入框聚焦边框</td></tr>
       </table>
 
@@ -717,7 +819,8 @@
         <tr><td>字重 Regular</td><td>font-weight: 400 · 正文、描述</td></tr>
         <tr><td>字重 Medium</td><td>font-weight: 500 · 标题、按钮、强调</td></tr>
         <tr><td>字重 Semibold</td><td>font-weight: 600 · 核心数据数字</td></tr>
-        <tr><td>数据字体 ★</td><td><strong>D-DIN-Bold</strong>（DIN Alternate 回退）· 业绩金额、统计数字</td></tr>
+        <tr><td>数据字体 ★</td><td><strong>DIN</strong>（DIN Alternate / D-DIN-Bold）· 仅纯数字与小数点</td></tr>
+        <tr><td>金额混排 ★</td><td><code>¥</code>、应付/实付/小计 → 苹方；<code>¥</code> 与数字间距 4px</td></tr>
       </table>
 
       <h3>3.2 字号阶梯（390px 画布，单位 px）</h3>
@@ -749,6 +852,7 @@
     <!-- 4. 间距与布局 -->
     <section id="spacing">
       <h2 class="section-title"><span class="num">4</span>间距与布局</h2>
+      <p>间距以 <a href="#global-ui">★ 全局强制 UI</a> 为准（16 / 8 / 12 / 4px 等），下表为扩展 Token。</p>
       <h3>4.1 间距 Token（4px 基准网格）</h3>
       <table>
         <tr><th>Token</th><th>值</th><th>用途</th></tr>
@@ -776,7 +880,7 @@
         <tr><td>画布高度（延展）</td><td>≥ 844 px，按内容向下增高</td><td>长列表、多段表单、长详情等；仅纵向扩展</td></tr>
         <tr><td>Flutter 2x</td><td>宽 780 · 高 1688 起</td><td>逻辑宽 390 固定；高度 2x 随设计稿延展</td></tr>
         <tr><td>页面水平边距</td><td>16px</td><td>内容区距屏幕边缘</td></tr>
-        <tr><td>Navbar 高度</td><td>48px</td><td>不含状态栏</td></tr>
+        <tr><td>Navbar 高度 ★</td><td>44px</td><td>不含状态栏 · 白底 + 底部分割线</td></tr>
         <tr><td>TabBar 高度</td><td>56px</td><td>含安全区 bottom padding</td></tr>
         <tr><td>状态栏</td><td>44px (iOS)</td><td>Android 24px，使用 safe-area</td></tr>
         <tr><td>底部安全区</td><td>34px</td><td>iPhone 全面屏</td></tr>
@@ -805,9 +909,9 @@
             <div class="phone-layout-stack">
               <div class="phone-nav" style="display:flex;align-items:center;gap:8px;flex-shrink:0"><img src="LOGO2.png" alt="" style="width:28px;height:28px;object-fit:contain">剑琅联盟</div>
               <div class="phone-body phone-body--fill">
-                <div style="background:#fff;border-radius:9px;padding:16px;margin-bottom:12px">
-                  <div style="font-size:16px;font-weight:500;margin-bottom:4px">内容卡片</div>
-                  <div style="font-size:12px;color:var(--text-secondary)">左右边距 16px · 卡片圆角 9px</div>
+                <div style="background:#fff;border-radius:12px;padding:16px;margin-bottom:16px;border:1px solid var(--border)">
+                  <div style="font-size:16px;font-weight:500;margin-bottom:4px;color:#333">内容卡片</div>
+                  <div style="font-size:12px;color:var(--text-secondary)">左右 16px · 模块间距 16px · 圆角 12px</div>
                 </div>
                 <div style="background:#fff;border-radius:9px;height:56px;display:flex;align-items:center;padding:0 16px;font-size:14px">Cell 列表项 · 高度 56px</div>
               </div>
@@ -821,51 +925,39 @@
       </div>
     </section>
 
-    <!-- 5. 圆角与阴影 -->
+    <!-- 5. 圆角 -->
     <section id="radius-shadow">
-      <h2 class="section-title"><span class="num">5</span>圆角与阴影</h2>
-      <h3>5.1 圆角</h3>
+      <h2 class="section-title"><span class="num">5</span>圆角</h2>
+      <p>圆角以 <a href="#global-ui">★ 全局强制 UI</a> 为准，下表为 Token 命名映射。</p>
+      <h3>5.1 圆角 Token</h3>
       <table>
         <tr><th>Token</th><th>值</th><th>用途</th></tr>
-        <tr><td>radius-small</td><td>3px</td><td>Tag、Badge、小元素</td></tr>
-        <tr><td>radius-btn-primary ★</td><td>4px</td><td>主要按钮（Primary）专用</td></tr>
-        <tr><td>radius-default</td><td>6px</td><td>次要按钮、Input、Toast</td></tr>
-        <tr><td>radius-large</td><td>9px</td><td>Card、Popup 顶部、Cell 组</td></tr>
-        <tr><td>radius-extraLarge</td><td>12px</td><td>Dialog、Bottom Sheet</td></tr>
-        <tr><td>radius-round</td><td>999px</td><td>胶囊按钮、Search 框</td></tr>
-        <tr><td>radius-circle</td><td>50%</td><td>Avatar、Fab</td></tr>
+        <tr><td>radius-tag ★</td><td>4px</td><td>标签、角标</td></tr>
+        <tr><td>radius-input ★</td><td>8px</td><td>输入框、小模块、搜索框</td></tr>
+        <tr><td>radius-card ★</td><td>12px</td><td>全局卡片、弹层顶角</td></tr>
+        <tr><td>radius-btn ★</td><td>16px</td><td>全局按钮、AI 悬浮钮</td></tr>
+        <tr><td>radius-circle</td><td>50%</td><td>Avatar、圆形图标底</td></tr>
       </table>
-      <p>B端建议：默认使用 6px/9px，避免过大圆角（&gt;12px）以保持商务感。</p>
-      <h4>圆角可视化示例</h4>
+      <h4>圆角可视化</h4>
       <div class="token-visual-grid">
-        <div class="token-visual-card"><div class="sample radius-sample" style="border-radius:3px"></div><div class="label">radius-small</div><div class="val">3px · Tag</div></div>
-        <div class="token-visual-card"><div class="sample radius-sample primary-btn" style="border-radius:4px">主要按钮</div><div class="label">radius-btn-primary ★</div><div class="val">4px · Primary</div></div>
-        <div class="token-visual-card"><div class="sample radius-sample" style="border-radius:6px"></div><div class="label">radius-default</div><div class="val">6px · Input</div></div>
-        <div class="token-visual-card"><div class="sample radius-sample" style="border-radius:9px"></div><div class="label">radius-large</div><div class="val">9px · Card</div></div>
-        <div class="token-visual-card"><div class="sample radius-sample" style="border-radius:12px"></div><div class="label">radius-extraLarge</div><div class="val">12px · Dialog</div></div>
-        <div class="token-visual-card"><div class="sample radius-sample" style="border-radius:999px;width:96px"></div><div class="label">radius-round</div><div class="val">999px · Search</div></div>
-        <div class="token-visual-card"><div class="sample radius-sample" style="border-radius:50%"></div><div class="label">radius-circle</div><div class="val">50% · Avatar</div></div>
+        <div class="token-visual-card"><div class="sample radius-sample" style="border-radius:4px"></div><div class="label">radius-tag</div><div class="val">4px</div></div>
+        <div class="token-visual-card"><div class="sample radius-sample" style="border-radius:8px"></div><div class="label">radius-input</div><div class="val">8px</div></div>
+        <div class="token-visual-card"><div class="sample radius-sample" style="border-radius:12px"></div><div class="label">radius-card</div><div class="val">12px</div></div>
+        <div class="token-visual-card"><div class="sample radius-sample primary-btn" style="border-radius:16px;height:48px;width:100%;max-width:120px">按钮</div><div class="label">radius-btn</div><div class="val">16px · 高 48</div></div>
       </div>
 
-      <h3>5.2 阴影 Elevation</h3>
-      <table>
-        <tr><th>层级</th><th>值</th><th>用途</th></tr>
-        <tr><td>shadow-1</td><td>0 1px 10px rgba(0,0,0,0.05)</td><td>卡片、Fab</td></tr>
-        <tr><td>shadow-2</td><td>0 3px 14px rgba(0,0,0,0.08)</td><td>Dropdown、Popover</td></tr>
-        <tr><td>shadow-3</td><td>0 6px 30px rgba(0,0,0,0.12)</td><td>Dialog、ActionSheet</td></tr>
-      </table>
-      <h4>阴影可视化示例</h4>
-      <div class="token-visual-grid">
-        <div class="token-visual-card"><div class="sample shadow-sample s1"></div><div class="label">shadow-1</div><div class="val">卡片 · Fab</div></div>
-        <div class="token-visual-card"><div class="sample shadow-sample s2"></div><div class="label">shadow-2</div><div class="val">Dropdown</div></div>
-        <div class="token-visual-card"><div class="sample shadow-sample s3"></div><div class="label">shadow-3</div><div class="val">Dialog</div></div>
-      </div>
+      <h3>5.2 阴影（全局禁用）</h3>
+      <p>剑琅联盟移动端<strong>不使用</strong>投影层级（<code>--shadow-1/2/3</code> 均为 <code>none</code>）。卡片、弹层、底栏、Fab 等通过<strong>白底/灰底、1px 边框（<code>--border</code>）、圆角与间距</strong>区分层次；磨砂底栏仅保留 <code>backdrop-filter</code>，不加外投影。</p>
     </section>
 
     <!-- 6. 图标库 -->
     <section id="icons">
       <h2 class="section-title"><span class="num">6</span>图标库（可直接调用）</h2>
-      <p>线性图标来源 <a href="https://www.figma.com/design/0lZMESxiHe6rxzVUG3hMIT/Stratis-UI-Icons---1000--Free-Figma-icons--Community-">Stratis UI Icons</a>（outline 风格，本地 SVG 资源 <code>icons/stratis/</code>）。面性图标仍使用 TDesign Iconify。已按<strong>通用 / 美业店务 / 零售商城 / 订单财务</strong>整理；设计稿中的「开单/开卡」等为定制 SVG，下表给出规范库内等价图标名。</p>
+      <p><strong>尺寸与颜色以 <a href="#global-ui">★ 全局强制 UI</a> 为准。</strong>图标库对齐 <a href="https://www.figma.com/design/0lZMESxiHe6rxzVUG3hMIT/Stratis-UI-Icons---1000--Free-Figma-icons--Community-?node-id=101-3505">Stratis UI Icons（Figma · node 101-3505）</a>：<strong>线性</strong>为 outline SVG（<code>icons/stratis/</code>），<strong>面性</strong>为 filled SVG（<code>icons/stratis-filled/</code>），构建脚本见 <code>scripts/build-stratis-icons.js</code>。已按<strong>通用 / 美业店务 / 零售商城 / 订单财务</strong>整理；设计稿中的「开单/开卡」等为定制 SVG 时，下表给出规范库内等价图标名。</p>
+      <a class="figma-link-card" href="https://www.figma.com/design/0lZMESxiHe6rxzVUG3hMIT/Stratis-UI-Icons---1000--Free-Figma-icons--Community-?node-id=101-3505" target="_blank" rel="noopener">
+        <span style="font-size:28px">◇</span>
+        <div><strong>Stratis UI Icons · 1000+ 免费图标</strong><br><span style="font-size:12px;color:var(--text-secondary)">Figma Community · 与本规范线性/面性资源同步扩展</span></div>
+      </a>
       <h3>6.0 设计稿功能 → 图标映射（剑琅管家 / RTP）</h3>
       <table>
         <tr><th>设计稿文案</th><th>图标名</th><th>分类</th><th>说明</th></tr>
@@ -892,16 +984,13 @@
       </table>
       <div class="spec-block"><strong>调用方式：</strong>线性 <code>&lt;span class="s-icon" data-icon="search"&gt;&lt;/span&gt;</code> · 面性 <code>&lt;span class="s-icon s-icon--filled" data-icon="home-filled"&gt;&lt;/span&gt;</code> · Figma <a href="https://www.figma.com/design/0lZMESxiHe6rxzVUG3hMIT/Stratis-UI-Icons---1000--Free-Figma-icons--Community-">Stratis UI Icons</a> · AI 标注 <code>icon:search</code> / <code>icon:home-filled</code></div>
       <table>
-        <tr><th>尺寸</th><th>px</th><th>用途</th></tr>
-        <tr><td>icon-xs</td><td>16</td><td>Tag 内、表格操作</td></tr>
-        <tr><td>icon-s</td><td>20</td><td>Cell 箭头、输入框前缀</td></tr>
-        <tr><td>icon-base ★</td><td>24</td><td>Navbar、列表、按钮内</td></tr>
-        <tr><td>icon-l</td><td>28</td><td>TabBar</td></tr>
-        <tr><td>icon-xl / xxl / xxxl</td><td>32 / 48 / 64</td><td>空状态、结果页</td></tr>
+        <tr><th>Token</th><th>px</th><th>用途</th></tr>
+        <tr><td>icon-sm ★</td><td>16</td><td>小箭头、辅助图标</td></tr>
+        <tr><td>icon-base ★</td><td>24（安全区 20）</td><td>通用功能图标、Navbar、按钮内</td></tr>
       </table>
       <h3>图标颜色</h3>
       <ul>
-        <li>默认 gray-8 · 选中 brand-6 · 禁用 gray-5 · 反色 #FFF</li>
+        <li>重要操作 <code>#F32F41</code> · 常规 <code>#333333</code> · 次要 <code>#929292</code> · 反色 <code>#FFFFFF</code></li>
       </ul>
       <h3>浏览与检索</h3>
       <div class="icon-filter-row">
@@ -935,7 +1024,7 @@
         <tr><th>分类</th><th>组件 ID</th><th>名称</th><th>场景</th></tr>
         <tr><td>导航</td><td>TabBar</td><td>标准底栏</td><td>子模块 3–4 Tab</td></tr>
         <tr><td>反馈</td><td>AlertBanner</td><td>蓝色提醒条</td><td>异常信息</td></tr>
-        <tr><td>营销</td><td>PromoCard</td><td>渐变营销卡</td><td>获客/推客</td></tr>
+        <tr><td>营销</td><td>PromoCard</td><td>营销卡（纯色底）</td><td>获客/推客 · 无渐变</td></tr>
         <tr><td>零售</td><td>ProductCard</td><td>商品双列卡</td><td>选品上架</td></tr>
         <tr><td>零售</td><td>PriceRow</td><td>价格三档行</td><td>原价/零售/供货</td></tr>
         <tr><td>美业</td><td>MemberCard</td><td>会员卡</td><td>详卡 · 列表条 · 五类卡面主题</td></tr>
@@ -954,7 +1043,7 @@
                 <div class="title">复合精油按摩护理油 100ml</div>
                 <div class="price">¥128</div>
                 <div class="sub">建议售 ¥298 · 毛利 ¥170</div>
-                <button class="btn btn-primary btn-sm" style="width:100%;margin-top:8px;border-radius:4px">上架到店</button>
+                <button class="btn btn-primary btn-sm" style="width:100%;margin-top:8px">上架到店</button>
               </div>
             </div>
             <div class="u-product-card">
@@ -993,7 +1082,7 @@
             <figcaption>设计稿对照（自 Figma 导出缩略图）· 实现须与上图视觉一致</figcaption>
           </figure>
           <h4 style="margin:0 0 10px;font-size:14px">形态一 · 详卡 MemberCard/detail</h4>
-          <p style="font-size:12px;color:var(--text-secondary);margin-bottom:12px">渐变头区 + 内嵌白底说明 + 底栏操作；标题/金额用 <code>#333</code>，标签用 <code>#929292</code>；主按钮文案为<strong>开单</strong>（浅色胶囊 + 深色字）。</p>
+          <p style="font-size:12px;color:var(--text-secondary);margin-bottom:12px">纯色头区（无渐变）+ 内嵌白底说明 + 底栏操作；标题/金额 <code>#333</code>，标签 <code>#929292</code>；开单为浅色胶囊按钮。</p>
           <article class="u-member-card u-member-card--stored" aria-label="储值卡详卡">
             <div class="u-member-card__head">
               <div class="u-member-card__type">储值卡</div>
@@ -1081,7 +1170,7 @@
             </article>
           </div>
           <h4 style="margin:24px 0 10px;font-size:14px">形态二 · 列表条 MemberCard/compact</h4>
-          <p style="font-size:12px;color:var(--text-secondary);margin-bottom:12px">高度 40px · 圆角 8px · 浅色横渐变 · 左侧类型徽标 + 卡名称。</p>
+          <p style="font-size:12px;color:var(--text-secondary);margin-bottom:12px">高度 40px · 圆角 8px · 纯色横条底 · 左侧类型徽标 + 卡名称。</p>
           <div class="member-card-stack">
             <div class="u-member-card u-member-card--compact u-member-card--stored"><span class="u-member-card__badge">储值</span><span class="u-member-card__name">储值3000元</span></div>
             <div class="u-member-card u-member-card--compact u-member-card--times"><span class="u-member-card__badge">次卡</span><span class="u-member-card__name">基础5次卡</span></div>
@@ -1090,12 +1179,12 @@
             <div class="u-member-card u-member-card--compact u-member-card--package"><span class="u-member-card__badge">套餐</span><span class="u-member-card__name">套餐5次卡</span></div>
           </div>
           <table style="width:100%;font-size:12px;margin-top:20px;border-collapse:collapse">
-            <tr style="background:var(--gray-1)"><th style="text-align:left;padding:8px">修饰符</th><th style="text-align:left;padding:8px">详卡渐变</th><th style="text-align:left;padding:8px">开单按钮</th><th style="text-align:left;padding:8px">列表条渐变</th></tr>
-            <tr><td style="padding:8px"><code>--stored</code></td><td style="padding:8px">#C8D9F7 → #DBD6F4</td><td style="padding:8px">#BDD5ED</td><td style="padding:8px">#D3DAF7 → #E8E4F8</td></tr>
-            <tr><td style="padding:8px"><code>--times</code></td><td style="padding:8px">#C0DAE7 → #C7DEE6</td><td style="padding:8px">#B9D4DD</td><td style="padding:8px">#D4EBF2 → #E4F3F7</td></tr>
-            <tr><td style="padding:8px"><code>--discount</code></td><td style="padding:8px">#E1C989 → #F3D8A1</td><td style="padding:8px">#E1C789</td><td style="padding:8px">#F5E6C8 → #FBF0DC</td></tr>
-            <tr><td style="padding:8px"><code>--period</code></td><td style="padding:8px">#F5CEBF → #F6D6CB</td><td style="padding:8px">#E3BFB3</td><td style="padding:8px">#FBE4DC → #FFF0EB</td></tr>
-            <tr><td style="padding:8px"><code>--package</code></td><td style="padding:8px">#D4BEA6 → #E7D7C0</td><td style="padding:8px">#D7C3A8</td><td style="padding:8px">#EDE3D4 → #F7F0E6</td></tr>
+            <tr style="background:var(--gray-1)"><th style="text-align:left;padding:8px">修饰符</th><th style="text-align:left;padding:8px">详卡头区底色</th><th style="text-align:left;padding:8px">开单按钮</th><th style="text-align:left;padding:8px">列表条底色</th></tr>
+            <tr><td style="padding:8px"><code>--stored</code></td><td style="padding:8px">#DBD6F4</td><td style="padding:8px">#BDD5ED</td><td style="padding:8px">#E8E4F8</td></tr>
+            <tr><td style="padding:8px"><code>--times</code></td><td style="padding:8px">#C7DEE6</td><td style="padding:8px">#B9D4DD</td><td style="padding:8px">#E4F3F7</td></tr>
+            <tr><td style="padding:8px"><code>--discount</code></td><td style="padding:8px">#F3D8A1</td><td style="padding:8px">#E1C789</td><td style="padding:8px">#FBF0DC</td></tr>
+            <tr><td style="padding:8px"><code>--period</code></td><td style="padding:8px">#F6D6CB</td><td style="padding:8px">#E3BFB3</td><td style="padding:8px">#FFF0EB</td></tr>
+            <tr><td style="padding:8px"><code>--package</code></td><td style="padding:8px">#E7D7C0</td><td style="padding:8px">#D7C3A8</td><td style="padding:8px">#F7F0E6</td></tr>
           </table>
           <p style="margin-top:12px;font-size:12px;color:var(--text-secondary)">详卡宽 358（画布 390 左右边距 16）· 头区内边距 14 · 说明区内嵌白底圆角 8 · 金额 <code>20px D-DIN</code> · 底栏右对齐文字链 + 「开单」胶囊。</p>
         </div>
@@ -1108,7 +1197,7 @@
             <img src="LOGO2.png" alt="剑琅联盟" style="width:72px;height:72px;object-fit:contain;margin-bottom:16px">
             <div style="font-size:28px;font-weight:600;letter-spacing:.06em;margin-bottom:24px">剑琅联盟</div>
             <input class="input-demo" placeholder="请输入手机号" style="width:100%;max-width:none;margin-bottom:12px">
-            <button class="btn btn-primary btn-lg" style="width:100%;border-radius:4px;margin-top:8px">登录</button>
+            <button class="btn btn-primary btn-lg" style="width:100%;margin-top:8px">登录</button>
           </div>
         </div>
       </div>
@@ -1128,9 +1217,9 @@
           </div>
           <table>
             <tr><th>变体</th><th>规格</th></tr>
-            <tr><td>Primary ★</td><td>高 40/48/32px · 圆角 <strong>4px</strong> · bg brand-6 · 字 #FFF · 点击 brand-7</td></tr>
-            <tr><td>Outline</td><td>圆角 6px · 描边 brand-6 · 字 brand-6</td></tr>
-            <tr><td>Ghost</td><td>圆角 6px · bg brand-1 · 字 brand-6</td></tr>
+            <tr><td>Primary ★</td><td>高 <strong>48px</strong> · 圆角 <strong>16px</strong> · bg #F32F41 · 字 #FFF · 无投影</td></tr>
+            <tr><td>Outline</td><td>高 48px · 圆角 16px · 1px 描边 #F32F41 · 白底</td></tr>
+            <tr><td>Disabled</td><td>高 48px · 圆角 16px · bg #EDEDED · 字 #929292</td></tr>
             <tr><td>Block</td><td>宽度 100%（表单提交、登录）</td></tr>
             <tr><td>BottomBar</td><td>双按钮：左 Outline + 右 Primary，间距 12px</td></tr>
           </table>
@@ -1138,13 +1227,13 @@
       </div>
 
       <div class="comp-block" id="comp-navbar">
-        <div class="comp-block-hd"><strong>Navbar 导航栏</strong><code>TNavbar · height=48</code></div>
+        <div class="comp-block-hd"><strong>Navbar 导航栏</strong><code>TNavbar · height=44</code></div>
         <div class="comp-block-bd">
           <div class="comp-preview-phone">
             <div class="u-navbar"><span class="s-icon back" data-icon="chevron-left"></span><img src="LOGO2.png" alt="" style="width:24px;height:24px;object-fit:contain;margin-right:6px">订单详情<span class="action">分享</span></div>
           </div>
           <table><tr><th>属性</th><th>值</th></tr>
-            <tr><td>高度</td><td>48px + 状态栏 44px</td></tr>
+            <tr><td>高度 ★</td><td>44px + 状态栏 44px · 白底 · 底边 1px #D7D7D5</td></tr>
             <tr><td>标题</td><td>16px Medium PingFang SC</td></tr>
             <tr><td>返回</td><td>chevron-left · 24px · 距左 16px</td></tr>
             <tr><td>右侧</td><td>最多 2 项 · 14px brand-6</td></tr>
@@ -1194,7 +1283,7 @@
             <input class="input-demo" placeholder="请输入">
             <input class="input-demo" value="已填写内容" style="border-color:var(--brand-6)">
           </div>
-          <div style="border:1px solid var(--border);border-radius:6px;padding:10px 12px;min-height:80px;color:var(--text-placeholder);font-size:14px;width:100%;max-width:360px">多行文本输入…<div style="text-align:right;font-size:12px;margin-top:8px">0/200</div></div>
+          <div style="border:1px solid var(--border);border-radius:8px;padding:10px 12px;min-height:80px;color:var(--text-placeholder);font-size:14px;width:100%;max-width:360px">多行文本输入…<div style="text-align:right;font-size:12px;margin-top:8px">0/200</div></div>
           <p style="margin-top:8px">Input 高 40px · 圆角 6px · 聚焦 border brand-6 · 必填标签前红色 *</p>
         </div>
       </div>
@@ -1268,7 +1357,7 @@
           <div class="u-dialog">
             <h5>确认驳回？</h5>
             <p>驳回后需重新提交审批，是否继续？</p>
-            <div class="acts"><button class="btn btn-outline" style="flex:1">取消</button><button class="btn btn-primary" style="flex:1;border-radius:4px;background:#F32F41">确认驳回</button></div>
+            <div class="acts"><button class="btn btn-outline" style="flex:1">取消</button><button class="btn btn-primary" style="flex:1">确认驳回</button></div>
           </div>
           <div style="margin-top:16px;text-align:center"><span style="display:inline-block;background:rgba(0,0,0,.8);color:#fff;padding:10px 20px;border-radius:6px;font-size:14px">操作成功</span></div>
         </div>
@@ -1281,7 +1370,7 @@
             <span class="s-icon" data-icon="file"></span>
             <p style="margin-top:12px;font-size:14px;color:var(--text-primary)">暂无订单数据</p>
             <p style="font-size:12px">点击下方按钮创建第一笔订单</p>
-            <button class="btn btn-primary" style="margin-top:16px;border-radius:4px">新建订单</button>
+            <button class="btn btn-primary" style="margin-top:16px">新建订单</button>
           </div>
         </div>
       </div>
@@ -1310,7 +1399,7 @@
         <div class="comp-block-hd"><strong>Fab 悬浮按钮</strong><code>TFab</code></div>
         <div class="comp-block-bd">
           <div class="demo-row"><div class="u-fab"><span class="s-icon" data-icon="add" style="font-size:24px"></span></div></div>
-          <p>48×48 圆形 · brand-6 · shadow-2 · 列表页「新建」</p>
+          <p>48×48 圆形 · brand-6 · 无投影 · 列表页「新建」</p>
         </div>
       </div>
 
@@ -1367,7 +1456,7 @@
       <div class="comp-block" id="comp-card">
         <div class="comp-block-hd"><strong>Card 业务卡片</strong><code>组合组件</code></div>
         <div class="comp-block-bd">
-          <div style="background:#fff;border-radius:9px;padding:16px;max-width:360px;box-shadow:var(--shadow-1)">
+          <div style="background:#fff;border-radius:9px;padding:16px;max-width:360px;border:1px solid var(--border)">
             <div style="display:flex;justify-content:space-between;margin-bottom:12px"><span style="font-weight:500">本月销售额</span><span class="s-icon" data-icon="chevron-right" style="color:var(--gray-6)"></span></div>
             <div style="font-size:28px;font-weight:600">¥ 1,286,400</div>
             <div style="font-size:12px;color:var(--success-6);margin-top:4px">↑ 12.5% 较上月</div>
@@ -1377,125 +1466,10 @@
       </div>
     </section>
 
-    <!-- 8. 页面模式 -->
-    <section id="patterns">
-      <h2 class="section-title"><span class="num">8</span>页面模式模板</h2>
-      <p>AI 出图时先声明模式 ID，再填充具体内容。</p>
-
-      <h3>P-H01 剑琅首页（Figma 主页面 ★）</h3>
-      <div class="card">
-        <strong>结构：</strong>BrandHeader(渐变+开单/开卡/验券/结算) → QuickEntryGrid(5×2) → StatCard(虚/实+日期) → AlertBanner(蓝) → PromoCard×2 → 内容卡 → GlassTabBar(5)<br>
-        <strong>Token：</strong>品牌渐变 · 文字 #333/#929 · 业绩数字 D-DIN 20px · 底栏磨砂胶囊<br>
-        <strong>参考：</strong><a href="https://www.figma.com/design/cUaUaxtcNsREKlfnQKXe1L/RTP-%E9%9B%B6%E5%94%AE%E6%A8%A1%E5%9D%97?node-id=72-137">Figma 72-137</a>
-      </div>
-
-      <h3>P-R01 RTP 选品上架（店主端）</h3>
-      <div class="card">
-        <strong>结构：</strong>Navbar → 供货商条 → Tabs(全部/已上架) → Search+筛选 → ProductCard 双列网格<br>
-        <strong>按钮：</strong>「上架到店」Primary 4px · 「已上架」Tag success
-      </div>
-
-      <h3>P-R02 商品详情（消费者/店主预览）</h3>
-      <div class="card">
-        <strong>结构：</strong>大图 → 价格区(零售价+划线原价) → 规格行 → 优惠/配送 → 门店条 → 评价 → CartBar 固定底<br>
-        <strong>底栏：</strong>店铺/客服/购物车(带 Badge) + 加购 Ghost + 购买 Primary
-      </div>
-
-      <h3>P-R03 价格编辑（供应商）</h3>
-      <div class="card">
-        <strong>结构：</strong>Navbar → PriceRow 表格(原价/零售价/供货价/库存) → 分销渠道价折叠 → BottomBar 保存<br>
-        <strong>规则：</strong>retail ≥ supply · 无上游零售指导价（PRD-214）
-      </div>
-
-      <h3>P-01 工作台首页（通用 B 端）</h3>
-      <div class="card">
-        <strong>结构：</strong>Navbar → 数据概览卡 → 快捷入口 → 待办 Cell → TabBar<br>
-        <strong>适用：</strong>非美业首页的通用工作台变体
-      </div>
-
-      <h3>P-02 列表页（通用）</h3>
-      <div class="card">
-        <strong>结构：</strong>Navbar(返回+标题+筛选) → Search → DropdownMenu(可选) → 列表(Cell/SwipeCell) → 浮动 Fab 或 Bottom Bar「新建」<br>
-        <strong>列表项：</strong>左标题+Tag 状态 · 右时间/金额 · 底部分割线<br>
-        <strong>空状态：</strong>Empty + 「暂无数据」
-      </div>
-
-      <h3>P-03 详情页</h3>
-      <div class="card">
-        <strong>结构：</strong>Navbar → 状态头(Tag+标题+元信息) → Collapse 分组(Cell 只读) → 时间线(Steps/自定义) → Bottom Bar(操作按钮)<br>
-        <strong>状态头：</strong>brand-1 或 gray-1 背景 · 审批状态用大 Tag
-      </div>
-
-      <h3>P-04 表单页</h3>
-      <div class="card">
-        <strong>结构：</strong>Navbar → Form(Cell 嵌 Input/Picker/Upload) → Bottom Bar「提交」<br>
-        <strong>规则：</strong>必填 * 号 · 实时校验 · 提交后 Toast + 返回<br>
-        <strong>分组：</strong>组标题 font-s text-secondary 上间距 24px 下间距 8px
-      </div>
-
-      <h3>P-05 审批流程页</h3>
-      <div class="card">
-        <strong>结构：</strong>Navbar → 申请信息卡 → Steps 审批进度 → 审批意见列表 → Bottom Bar「通过」「驳回」<br>
-        <strong>驳回：</strong>danger outline · 通过：primary · 需二次 Dialog 确认
-      </div>
-
-      <h3>P-06 登录 / 企业认证</h3>
-      <div class="card">
-        <strong>结构：</strong>剑琅联盟 Logo 72px + 标题「剑琅联盟」font-xxl → Input 组 → primary block 按钮（圆角 4px）→ 协议链接 font-s<br>
-        <strong>背景：</strong>white 或顶部 brand 渐变 · Logo 必须使用官方 <code>LOGO2.png</code>
-      </div>
-
-      <h3>P-07 消息中心</h3>
-      <div class="card">
-        <strong>结构：</strong>Navbar → Tabs(全部/系统/审批) → 消息 Cell(未读 bold + 红点) → 下拉刷新<br>
-        <strong>未读：</strong>标题 font-base Medium · 已读 text-secondary Regular
-      </div>
-
-      <h3>P-08 个人中心</h3>
-      <div class="card">
-        <strong>结构：</strong>头部(Avatar 48 + 姓名 font-l + 部门 font-s) → Cell 组(设置/关于/退出) → TabBar<br>
-        <strong>退出：</strong>Cell 文字 error-6，无箭头
-      </div>
-    </section>
-
-    <!-- 9. 交互 -->
-    <section id="interaction">
-      <h2 class="section-title"><span class="num">9</span>交互与反馈规范</h2>
-      <h3>9.1 动效</h3>
-      <table>
-        <tr><th>场景</th><th>时长</th><th>曲线</th></tr>
-        <tr><td>页面转场</td><td>300ms</td><td>ease-in-out</td></tr>
-        <tr><td>Popup/BottomSheet 弹出</td><td>240ms</td><td>cubic-bezier(0.38, 0, 0.24, 1)</td></tr>
-        <tr><td>按钮点击</td><td>100ms</td><td>opacity 0.7 或背景色变深</td></tr>
-        <tr><td>Toast 显隐</td><td>200ms</td><td>fade</td></tr>
-        <tr><td>列表加载</td><td>Skeleton  shimmer 1.5s 循环</td><td>—</td></tr>
-      </table>
-
-      <h3>9.2 反馈规则</h3>
-      <div class="alert alert-info">信息提示 → Toast（轻量）或 Message（需手动关闭）</div>
-      <div class="alert alert-warn">警告/待办 → NoticeBar 或 Dialog 确认</div>
-      <ul>
-        <li>操作成功：Toast「操作成功」2s 自动消失</li>
-        <li>操作失败：Toast 或 Dialog 展示具体原因</li>
-        <li>网络错误：Result 页 + 「重试」按钮</li>
-        <li>删除/驳回：Dialog 二次确认，确认按钮 danger</li>
-        <li>表单提交：按钮 Loading 态，防重复点击</li>
-        <li>列表加载更多：底部 Loading + 「没有更多了」font-s text-placeholder</li>
-      </ul>
-
-      <h3>9.3 手势</h3>
-      <ul>
-        <li>右滑/返回按钮：返回上一页</li>
-        <li>下拉：PullDownRefresh 刷新列表</li>
-        <li>左滑 Cell：露出快捷操作（SwipeCell）</li>
-        <li>长按：批量选择模式（列表页）</li>
-      </ul>
-    </section>
-
-    <!-- 10. B端 -->
+    <!-- 8. B端 -->
     <section id="b2b">
-      <h2 class="section-title"><span class="num">10</span>B端业务专项规范</h2>
-      <h3>10.1 状态色映射（通用）</h3>
+      <h2 class="section-title"><span class="num">8</span>B端业务专项规范</h2>
+      <h3>8.1 状态色映射（通用）</h3>
       <table>
         <tr><th>业务状态</th><th>Tag 类型</th><th>颜色</th></tr>
         <tr><td>草稿 / 未提交</td><td>default</td><td>gray-1 / text-secondary</td></tr>
@@ -1506,7 +1480,7 @@
         <tr><td>已归档 / 只读</td><td>default</td><td>gray-2 / gray-8</td></tr>
       </table>
 
-      <h3>10.2 数据展示</h3>
+      <h3>8.2 数据展示</h3>
       <ul>
         <li>金额：¥ 前缀 + 千分位 + 2 位小数，font-m Medium，正数 text-primary，负数 error-6</li>
         <li>百分比：保留 1 位小数 + % 后缀</li>
@@ -1515,7 +1489,7 @@
         <li>大数字概览：font-data + 单位 font-s text-secondary</li>
       </ul>
 
-      <h3>10.3 权限与空状态</h3>
+      <h3>8.3 权限与空状态</h3>
       <ul>
         <li>无权限：Result 页 + lock 图标 + 「暂无访问权限」+ 联系管理员</li>
         <li>无数据：Empty + 引导创建按钮</li>
@@ -1523,7 +1497,7 @@
         <li>维护中：NoticeBar + 全页 Result</li>
       </ul>
 
-      <h3>10.4 表单 B 端规则</h3>
+      <h3>8.4 表单 B 端规则</h3>
       <ul>
         <li>字段分组：基础信息 / 业务信息 / 附件</li>
         <li>长表单：分步 Steps 或锚点 Tabs</li>
@@ -1532,9 +1506,9 @@
       </ul>
     </section>
 
-    <!-- 11. Tokens JSON -->
+    <!-- 9. Tokens JSON -->
     <section id="tokens">
-      <h2 class="section-title"><span class="num">11</span>Design Token JSON</h2>
+      <h2 class="section-title"><span class="num">9</span>Design Token JSON</h2>
       <p>可复制到 Flutter <code>TDThemeData.fromJson</code> 或设计工具 Token 插件。</p>
       <pre id="token-json">{
   "appName": "剑琅联盟",
@@ -1545,7 +1519,10 @@
     "color": {
       "textPrimary": "#333333",
       "textSecondary": "#929292",
-      "textMuted": "#B8B8B8",
+      "textStrong": "#000000",
+      "textMuted": "#929292",
+      "brandAux1": "#FFD5D9",
+      "brandAux2": "#FFF2F2",
       "accentBlue": "#1A70FE",
       "accentOrange": "#F77357",
       "brandNormalColor": "#F32F41",
@@ -1556,14 +1533,17 @@
       "successNormalColor": "#2BA471",
       "warningNormalColor": "#E37318",
       "errorNormalColor": "#D54941",
-      "bgColorPage": "#F3F3F3",
+      "bgColorPage": "#F7F7F7",
       "bgColorContainer": "#FFFFFF",
+      "bgColorDisabled": "#EDEDED",
       "textPrimaryColor": "rgba(0,0,0,0.9)",
       "textSecondaryColor": "rgba(0,0,0,0.6)",
       "textPlaceholderColor": "rgba(0,0,0,0.4)",
       "textDisabledColor": "rgba(0,0,0,0.26)",
       "textAntiColor": "#FFFFFF",
-      "borderColor": "#E7E7E7"
+      "borderColor": "#D7D7D5",
+      "noShadow": true,
+      "noGradient": true
     },
     "font": {
       "fontXs": { "size": 20, "lineHeight": 32 },
@@ -1574,18 +1554,18 @@
       "fontXl": { "size": 48, "lineHeight": 64 }
     },
     "radius": {
-      "radiusSmall": 6,
-      "radiusDefault": 12,
-      "radiusLarge": 18,
-      "radiusExtraLarge": 24,
-      "radiusRound": 999
+      "radiusTag": 8,
+      "radiusInput": 16,
+      "radiusCard": 24,
+      "radiusBtn": 32
     },
     "spacer": {
       "spacer1": 8, "spacer2": 16, "spacer3": 24, "spacer4": 32,
       "spacer5": 40, "spacer6": 48, "spacer8": 64
     },
     "layout": {
-      "navBarHeight": 96,
+      "navBarHeight": 88,
+      "buttonHeight": 96,
       "tabBarHeight": 112,
       "cellHeight": 112,
       "pagePaddingH": 32,
@@ -1595,23 +1575,21 @@
       "designHeightExtendable": true,
       "canvasWidthFixed": 390,
       "canvasHeightDefault": 844,
-      "radiusBtnPrimary": 8
+      "radiusBtnPrimary": 32,
+      "globalUIMandate": "#global-ui"
     }
   }
 }</pre>
-      <p style="font-size:12px;color:var(--text-secondary)">注：画布宽 390 固定、高默认 844（可向下延展）；Flutter 2x 宽 780 固定、高默认 1688 起随内容增加；主按钮圆角 2x=8px（逻辑 4px）。</p>
+      <p style="font-size:12px;color:var(--text-secondary)">注：画布 390×844；Flutter 2x 逻辑值见 JSON；按钮高 48px、圆角 16px；导航 44px；须先遵守 ★ 全局强制 UI。</p>
 
       <h3>AI Prompt 模板</h3>
-      <pre>请按照《剑琅联盟 移动端设计规范 v1.3》设计 [页面名称]：
-- 产品：剑琅联盟 · RTP 零售模块 · Logo: LOGO2.png
-- 设计稿：https://www.figma.com/design/cUaUaxtcNsREKlfnQKXe1L/RTP-零售模块
-- 画布：宽390固定，高默认844，内容超出可向下延展 · 字体 PingFang SC · 数字 D-DIN-Bold
-- 文字色：#333 / #929292 / #b8b8b8
-- 页面模式：P-H01 首页 或 P-R01 选品 等（见第8章）
-- 主色 #F32F41 · 主按钮圆角 4px
-- 首页底栏：GlassTabBar（5项磨砂）· 子页：标准 TabBar
-- 图标：第6章库 + 业务映射表，禁止自创图标
-- 组件：第7章组件目录（MemberCard/BrandHeader/StatCard/ProductCard…）
+      <pre>请按照《剑琅联盟 移动端设计规范 v1.4》设计 [页面名称]：
+- 最高优先级：★ 全局强制 UI（#global-ui）— 390×844、页面底 #F7F7F7、无阴影无渐变、色板/间距/圆角/44px 导航/48px×16px 按钮
+- 产品：剑琅联盟 · Logo: LOGO2.png
+- 字体：PingFang SC；金额数字 DIN；¥ 与「应付/实付」用苹方，¥ 与数字间距 4px
+- 文字：#333 / #929292 · 边框 #D7D7D5 · 主色 #F32F41
+- 图标：24px（安全 20）/ 16px 小箭头 · Stratis 库 · 颜色 #F32F41 / #333 / #929
+- 组件：第7章组件目录
 - 内容：[具体业务字段]</pre>
     </section>
 
@@ -1620,7 +1598,7 @@
         <img src="LOGO2.png" alt="剑琅联盟">
         <span>剑琅联盟 · 设计规范</span>
       </div>
-      <div class="foot-copy">v1.3 · 对齐 Figma RTP 零售模块 · 390×844 · © 剑琅联盟</div>
+      <div class="foot-copy">v1.4 · ★ 全局强制 UI · 390×844 · © 剑琅联盟</div>
     </footer>
 
     </div><!-- .main-inner -->
@@ -1773,7 +1751,23 @@
     { name: 'close-rectangle', cat: 'action', meaning: '未选', scene: '多选列表' },
     { name: 'discount', cat: 'retail', meaning: '折扣', scene: '促销标签' },
     { name: 'hourglass', cat: 'status', meaning: '待处理', scene: '订单待发货' },
-    { name: 'queue', cat: 'status', meaning: '排队/待办', scene: '待审批队列' }
+    { name: 'queue', cat: 'status', meaning: '排队/待办', scene: '待审批队列' },
+    { name: 'arrow-right', cat: 'nav', meaning: '向右箭头', scene: '进入下一级、外链' },
+    { name: 'arrow-up', cat: 'nav', meaning: '向上箭头', scene: '收起、返回顶部' },
+    { name: 'arrow-down', cat: 'nav', meaning: '向下箭头', scene: '展开、下拉' },
+    { name: 'chevron-double-down', cat: 'nav', meaning: '双下箭头', scene: '展开更多' },
+    { name: 'chevron-double-up', cat: 'nav', meaning: '双上箭头', scene: '收起全部' },
+    { name: 'bell-ringing', cat: 'comm', meaning: '消息提醒', scene: '强提醒、未读' },
+    { name: 'bank', cat: 'order', meaning: '银行/账户', scene: '对公、提现' },
+    { name: 'message-square', cat: 'comm', meaning: '留言/会话', scene: '站内信列表' },
+    { name: 'file-03', cat: 'file', meaning: '文档变体', scene: '合同、协议' },
+    { name: 'users', cat: 'user', meaning: '多用户', scene: '客户群、协作' },
+    { name: 'package', cat: 'retail', meaning: '包裹/套装', scene: '套餐、发货' },
+    { name: 'percent', cat: 'retail', meaning: '百分比', scene: '折扣率、提成' },
+    { name: 'tag', cat: 'retail', meaning: '标签', scene: '商品标签、分类' },
+    { name: 'calculator', cat: 'order', meaning: '计算器', scene: '计价、核算' },
+    { name: 'send', cat: 'comm', meaning: '发送', scene: '提交、发出' },
+    { name: 'inbox', cat: 'comm', meaning: '收件箱', scene: '消息收件' }
   ];
 
   const ICON_FILLED = [

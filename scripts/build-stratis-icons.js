@@ -144,7 +144,23 @@ const STRATIS_ICON_MAP = {
   'check-rectangle': 'general-outline/check-square-contained.svg',
   'close-rectangle': 'general-outline/x-square-contained.svg',
   hourglass: 'time-outline/hourglass-01.svg',
-  queue: 'editor-outline/list-numbers.svg'
+  queue: 'editor-outline/list-numbers.svg',
+  'arrow-right': 'arrows-outline/arrow-right.svg',
+  'arrow-up': 'arrows-outline/arrow-up.svg',
+  'arrow-down': 'arrows-outline/arrow-down-contained-01.svg',
+  'chevron-double-down': 'arrows-outline/chevron-double-down.svg',
+  'chevron-double-up': 'arrows-outline/chevron-double-up.svg',
+  'bell-ringing': 'alerts-outline/bell-ringing-01.svg',
+  bank: 'finance-outline/bank.svg',
+  'message-square': 'communication-outline/message-square.svg',
+  'file-03': 'files-outline/file-03.svg',
+  users: 'profiles-and-users-outline/users-profiles-02.svg',
+  package: 'education-outline/package-01.svg',
+  percent: 'general-outline/percent-01.svg',
+  tag: 'finance-outline/tag.svg',
+  calculator: 'charts-outline/calculator-02.svg',
+  send: 'communication-outline/send-01.svg',
+  inbox: 'communication-outline/inbox-01.svg'
 };
 
 if (!fs.existsSync(SRC_ROOT)) {
@@ -171,6 +187,12 @@ for (const [name, rel] of Object.entries(STRATIS_ICON_MAP)) {
 }
 
 fs.writeFileSync(MAP_OUT, JSON.stringify(copied, null, 2), 'utf8');
+const MAP_JS = path.join(__dirname, '..', 'icons', 'stratis-map.js');
+fs.writeFileSync(
+  MAP_JS,
+  'const STRATIS_ICON_MAP = ' + JSON.stringify(copied, null, 2) + ';\n',
+  'utf8'
+);
 
 require('./normalize-stratis-svgs.js');
 

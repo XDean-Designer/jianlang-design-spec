@@ -1,4 +1,4 @@
-﻿const STRATIS_ICON_MAP = {
+const STRATIS_ICON_MAP = {
   "chevron-left": "chevron-left.svg",
   "chevron-right": "chevron-right.svg",
   "chevron-down": "chevron-down.svg",
@@ -132,5 +132,21 @@
   "check-rectangle": "check-rectangle.svg",
   "close-rectangle": "close-rectangle.svg",
   "hourglass": "hourglass.svg",
-  "queue": "queue.svg"
+  "queue": "queue.svg",
+  "arrow-right": "arrow-right.svg",
+  "arrow-up": "arrow-up.svg",
+  "arrow-down": "arrow-down.svg",
+  "chevron-double-down": "chevron-double-down.svg",
+  "chevron-double-up": "chevron-double-up.svg",
+  "bell-ringing": "bell-ringing.svg",
+  "bank": "bank.svg",
+  "message-square": "message-square.svg",
+  "file-03": "file-03.svg",
+  "users": "users.svg",
+  "package": "package.svg",
+  "percent": "percent.svg",
+  "tag": "tag.svg",
+  "calculator": "calculator.svg",
+  "send": "send.svg",
+  "inbox": "inbox.svg"
 };
