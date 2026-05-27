@@ -181,7 +181,19 @@
     .icon-lib-visual { flex: 0 0 84px; height: 84px; display: flex; align-items: center; justify-content: center; padding: 0 10px; background: var(--gray-1); }
     .icon-lib-item:hover .icon-lib-visual { background: var(--brand-1); }
     .s-icon { display: inline-flex; align-items: center; justify-content: center; width: 1em; height: 1em; flex-shrink: 0; vertical-align: -0.125em; color: inherit; line-height: 0; }
-    .s-icon svg { width: 100%; height: 100%; display: block; }
+    .s-icon svg { width: 100%; height: 100%; display: block; color: inherit; overflow: visible; }
+    /* 线性图标：禁止继承填充，描边路径仅显示轮廓 */
+    .s-icon:not(.s-icon--filled):not([data-filled="1"]) svg { fill: none !important; }
+    .s-icon:not(.s-icon--filled):not([data-filled="1"]) svg [stroke] {
+      fill: none !important;
+      stroke: currentColor !important;
+    }
+    .s-icon:not(.s-icon--filled):not([data-filled="1"]) svg path:not([stroke]),
+    .s-icon:not(.s-icon--filled):not([data-filled="1"]) svg circle:not([stroke]),
+    .s-icon:not(.s-icon--filled):not([data-filled="1"]) svg rect:not([stroke]) {
+      fill: currentColor !important;
+      stroke: none !important;
+    }
     .s-icon.is-missing { opacity: 0.35; }
     .icon-lib-item .s-icon { font-size: 36px; width: 36px; height: 36px; color: var(--gray-9); transition: color .2s, transform .22s cubic-bezier(.34,1.56,.64,1); }
     .icon-lib-item.is-filled .s-icon,
@@ -1864,16 +1876,42 @@
     return typeof specAssetUrl === 'function' ? specAssetUrl(rel) : rel;
   }
 
-  /** 修正误带 fill=currentColor 的线性 SVG，避免显示成实心块 */
+  /** 线性 SVG：根节点与描边子元素禁止填充，避免实心色块 */
   function normalizeStratisSvg(svgText, filled) {
-    if (filled || !svgText) return svgText;
-    let s = svgText.replace(/<svg([^>]*)\sfill="currentColor"/gi, '<svg$1 fill="none"');
-    s = s.replace(/<path\b([^>]*?)>/gi, (m, attrs) => {
-      if (!/\bstroke=/.test(attrs)) return m;
-      if (/\bfill=/.test(attrs)) return '<path' + attrs.replace(/\bfill="[^"]*"/gi, 'fill="none"') + '>';
-      return '<path fill="none"' + attrs + '>';
+    if (filled || !svgText || typeof DOMParser === 'undefined') return svgText;
+    const doc = new DOMParser().parseFromString(svgText, 'image/svg+xml');
+    const svg = doc.documentElement;
+    if (!svg || svg.tagName !== 'svg') return svgText;
+    svg.setAttribute('fill', 'none');
+    svg.querySelectorAll('path,circle,rect,ellipse,line,polyline,polygon').forEach(el => {
+      const stroke = el.getAttribute('stroke');
+      const hasStroke = stroke && stroke !== 'none';
+      if (hasStroke) {
+        el.setAttribute('fill', 'none');
+        el.setAttribute('stroke', 'currentColor');
+      } else {
+        const f = el.getAttribute('fill');
+        if (!f || f === '#000' || f === '#000000' || f === 'black') {
+          el.setAttribute('fill', 'currentColor');
+        }
+        el.removeAttribute('stroke');
+      }
     });
-    return s;
+    return new XMLSerializer().serializeToString(svg);
+  }
+
+  function patchOutlineIconEl(el) {
+    if (el.dataset.filled === '1' || el.classList.contains('s-icon--filled')) return;
+    const svg = el.querySelector('svg');
+    if (!svg) return;
+    svg.setAttribute('fill', 'none');
+    svg.style.color = 'inherit';
+    svg.querySelectorAll('[stroke]').forEach(node => {
+      if (node.getAttribute('stroke') !== 'none') {
+        node.setAttribute('fill', 'none');
+        node.setAttribute('stroke', 'currentColor');
+      }
+    });
   }
 
   const _stratisSvgCache = {};
@@ -1914,6 +1952,7 @@
           _stratisSvgCache[url] = normalizeStratisSvg(raw, filled);
         }
         el.innerHTML = _stratisSvgCache[url];
+        patchOutlineIconEl(el);
         el.dataset.hydrated = '1';
         el.classList.remove('is-missing');
         el.closest('.icon-lib-item')?.classList.remove('is-missing');
