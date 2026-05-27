@@ -1,0 +1,1748 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>剑琅联盟移动端设计规范</title>
+  <link rel="icon" href="LOGO2.png" type="image/png">
+  <style>
+    :root {
+      --sidebar-bg: #FFFFFF;
+      --sidebar-surface: #F5F6F8;
+      --sidebar-text: rgba(0,0,0,0.55);
+      --sidebar-text-active: #F32F41;
+      --sidebar-border: #E7E7E7;
+      --sidebar-shadow: 2px 0 24px rgba(0,0,0,0.04);
+      --main-bg: #F0F1F5;
+      --hero-gradient: linear-gradient(135deg, #F32F41 0%, #991D28 55%, #2C2C2C 100%);
+      --brand-1: #FEF0F1; --brand-2: #FDD9DC; --brand-3: #FCBDC3; --brand-4: #FB9BA3;
+      --brand-5: #F97883; --brand-6: #F32F41; --brand-7: #D92939; --brand-8: #BF2432;
+      --brand-9: #991D28; --brand-10: #73161E;
+      --success-1: #E8F8F2; --success-6: #2BA471; --success-7: #008858;
+      --warning-1: #FEF3E6; --warning-6: #E37318; --warning-7: #BE5A00;
+      --error-1: #FDECEE; --error-6: #D54941; --error-7: #AD352F;
+      --info-1: #ECF2FE; --info-6: #0052D9; --info-7: #003CAB;
+      --gray-1: #F3F3F3; --gray-2: #EEEEEE; --gray-3: #E7E7E7; --gray-4: #DCDCDC;
+      --gray-5: #C5C5C5; --gray-6: #A6A6A6; --gray-7: #8B8B8B; --gray-8: #777777;
+      --gray-9: #5E5E5E; --gray-10: #4B4B4B; --gray-11: #383838; --gray-12: #2C2C2C;
+      --text-primary: rgba(0,0,0,0.9); --text-secondary: rgba(0,0,0,0.6);
+      --text-placeholder: rgba(0,0,0,0.4); --text-disabled: rgba(0,0,0,0.26);
+      --text-anti: #FFFFFF; --text-brand: #F32F41;
+      --bg-page: #F3F3F3; --bg-container: #FFFFFF; --bg-secondary: #FAFAFA;
+      --border: #E7E7E7; --border-focus: #F32F41;
+      --radius-s: 3px; --radius-m: 6px; --radius-l: 9px; --radius-xl: 12px; --radius-round: 999px;
+      --radius-btn-primary: 4px;
+      --shadow-1: 0 1px 10px rgba(0,0,0,0.05); --shadow-2: 0 3px 14px rgba(0,0,0,0.08);
+      --shadow-3: 0 6px 30px rgba(0,0,0,0.12);
+      --nav-h: 48px; --tabbar-h: 56px; --safe-top: 44px; --safe-bottom: 34px;
+      --sidebar-w: 280px;
+      --canvas-w: 390px; /* 画布宽：固定 */
+      --canvas-h: 844px; /* 画布高：默认；phone-frame 使用 min-height 可向下延展 */
+      /* Figma 主页面 / RTP 零售模块 实测 Token */
+      --figma-text-primary: #333333;
+      --figma-text-secondary: #929292;
+      --figma-text-muted: #b8b8b8;
+      --figma-text-inactive: #d7d7d5;
+      --figma-brand-start: #F32F41;
+      --figma-brand-end: #DD2D38;
+      --figma-blue: #1A70FE;
+      --figma-blue-bg: #E7F1FF;
+      --figma-orange: #F77357;
+      --figma-card-pink: #FFF2F2;
+      --figma-promo-border: rgba(249, 117, 107, 0.2);
+      --font-data: "D-DIN-Bold", "DIN Alternate", Roboto, sans-serif;
+      --glass-nav-shadow: inset 0 0 22px rgba(242,242,242,.5), 0 20px 50px rgba(0,0,0,.1);
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body, button, input, textarea, select { font-family: "PingFang SC", -apple-system, sans-serif; font-size: 14px; line-height: 1.6; color: var(--text-primary); background: var(--main-bg); -webkit-font-smoothing: antialiased; }
+    a { color: var(--brand-6); text-decoration: none; transition: opacity .15s; }
+    a:hover { opacity: .85; }
+    .layout { display: flex; min-height: 100vh; }
+    .sidebar { width: var(--sidebar-w); background: var(--sidebar-bg); border-right: 1px solid var(--sidebar-border); box-shadow: var(--sidebar-shadow); position: fixed; top: 0; left: 0; bottom: 0; overflow-y: auto; z-index: 100; scrollbar-width: thin; scrollbar-color: rgba(0,0,0,.12) transparent; }
+    .sidebar-brand { padding: 28px 20px 24px; text-align: center; background: linear-gradient(180deg, var(--brand-1) 0%, #fff 100%); border-bottom: 1px solid var(--sidebar-border); }
+    .sidebar-brand .logo-wrap { width: 72px; height: 72px; margin: 0 auto 14px; border-radius: 18px; background: #fff; padding: 8px; box-shadow: 0 4px 16px rgba(243,47,65,.12), 0 0 0 1px rgba(0,0,0,.04); }
+    .sidebar-brand .logo-wrap img { width: 100%; height: 100%; object-fit: contain; display: block; }
+    .sidebar-brand h1 { font-size: 18px; font-weight: 600; color: var(--gray-12); letter-spacing: .06em; }
+    .sidebar-brand .sub { font-size: 11px; color: var(--text-secondary); margin-top: 6px; letter-spacing: .02em; }
+    .sidebar-brand .ver { display: inline-block; margin-top: 10px; font-size: 10px; padding: 3px 10px; border-radius: 4px; background: var(--brand-1); color: var(--brand-6); border: 1px solid var(--brand-3); }
+    .nav-list { padding: 16px 12px 24px; list-style: none; }
+    .nav-list a { display: block; padding: 10px 14px; font-size: 13px; color: var(--sidebar-text); text-decoration: none; border-radius: 8px; margin-bottom: 2px; transition: background .2s, color .2s, transform .22s cubic-bezier(.34,1.56,.64,1), box-shadow .2s; }
+    .nav-list a:hover { color: var(--gray-12); background: var(--sidebar-surface); }
+    .nav-list a.active { color: var(--brand-6); font-weight: 500; background: var(--brand-1); box-shadow: inset 3px 0 0 var(--brand-6); }
+    .main { margin-left: var(--sidebar-w); flex: 1; padding: 0 0 80px; min-width: 0; }
+    .main-inner { max-width: 920px; margin: 0 auto; padding: 0 40px 0; }
+    .page-hero { position: relative; margin: 0 -40px 40px; padding: 48px 40px 44px; background: #1a0a0e; overflow: hidden; isolation: isolate; }
+    .hero-bg { position: absolute; inset: 0; z-index: 0; pointer-events: none; overflow: hidden; }
+    .hero-gradient-anim { position: absolute; inset: -20%; background: linear-gradient(125deg, #F32F41 0%, #C41E30 25%, #991D28 50%, #3d1520 75%, #1a0a0e 100%); background-size: 400% 400%; animation: heroGradientShift 18s ease-in-out infinite; }
+    .hero-orb { position: absolute; border-radius: 50%; filter: blur(70px); opacity: 0.55; }
+    .hero-orb-1 { width: 320px; height: 320px; background: rgba(255, 80, 100, 0.45); top: -100px; right: -60px; animation: heroOrb1 14s ease-in-out infinite; }
+    .hero-orb-2 { width: 240px; height: 240px; background: rgba(255, 255, 255, 0.12); bottom: -80px; left: 5%; animation: heroOrb2 20s ease-in-out infinite; }
+    .hero-orb-3 { width: 180px; height: 180px; background: rgba(243, 47, 65, 0.35); top: 40%; left: 55%; animation: heroOrb3 16s ease-in-out infinite reverse; }
+    .hero-grid { position: absolute; inset: -50% -20%; background-image: linear-gradient(rgba(255,255,255,.06) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,.06) 1px, transparent 1px); background-size: 48px 48px; transform: perspective(400px) rotateX(58deg) translateY(0); animation: heroGridDrift 22s linear infinite; mask-image: radial-gradient(ellipse 90% 75% at 50% 35%, #000 15%, transparent 72%); }
+    .hero-scanline { position: absolute; left: 0; right: 0; height: 1px; background: linear-gradient(90deg, transparent 0%, rgba(255,255,255,.35) 50%, transparent 100%); box-shadow: 0 0 20px rgba(255,255,255,.25); animation: heroScan 7s ease-in-out infinite; opacity: 0.7; }
+    .hero-particles { position: absolute; inset: 0; background-image: radial-gradient(1.5px 1.5px at 20% 30%, rgba(255,255,255,.25) 50%, transparent 50%), radial-gradient(1px 1px at 60% 70%, rgba(255,255,255,.2) 50%, transparent 50%), radial-gradient(1px 1px at 80% 20%, rgba(255,200,200,.3) 50%, transparent 50%); background-size: 200% 200%; animation: heroParticles 25s linear infinite; opacity: 0.8; }
+    @keyframes heroGradientShift { 0%, 100% { background-position: 0% 40%; } 50% { background-position: 100% 60%; } }
+    @keyframes heroOrb1 { 0%, 100% { transform: translate(0, 0) scale(1); } 50% { transform: translate(-40px, 30px) scale(1.15); } }
+    @keyframes heroOrb2 { 0%, 100% { transform: translate(0, 0); } 50% { transform: translate(50px, -25px); } }
+    @keyframes heroOrb3 { 0%, 100% { transform: translate(0, 0) scale(1); } 50% { transform: translate(-25px, 35px) scale(1.2); } }
+    @keyframes heroGridDrift { 0% { transform: perspective(400px) rotateX(58deg) translateY(0); } 100% { transform: perspective(400px) rotateX(58deg) translateY(48px); } }
+    @keyframes heroScan { 0% { top: -5%; opacity: 0; } 8% { opacity: 0.7; } 92% { opacity: 0.5; } 100% { top: 105%; opacity: 0; } }
+    @keyframes heroParticles { 0% { background-position: 0% 0%; } 100% { background-position: 100% 100%; } }
+    .page-hero-inner { position: relative; z-index: 1; display: flex; align-items: center; gap: 28px; }
+    .hero-logo { animation: heroLogoFloat 6s ease-in-out infinite; }
+    @keyframes heroLogoFloat { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-6px); } }
+    .page-hero .hero-logo { width: 88px; height: 88px; flex-shrink: 0; border-radius: 20px; background: #fff; padding: 10px; box-shadow: 0 12px 40px rgba(0,0,0,.25); }
+    .page-hero .hero-logo img { width: 100%; height: 100%; object-fit: contain; }
+    .page-hero h2 { font-size: 32px; font-weight: 600; color: #fff; border: none; padding: 0; margin: 0 0 8px; letter-spacing: .04em; }
+    .page-hero .hero-desc { font-size: 15px; color: rgba(255,255,255,.82); max-width: 520px; line-height: 1.65; }
+    .page-hero .hero-meta { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 18px; }
+    .page-hero .hero-pill { font-size: 12px; padding: 6px 14px; border-radius: 4px; background: rgba(255,255,255,.12); color: #fff; border: 1px solid rgba(255,255,255,.2); backdrop-filter: blur(8px); }
+    section { margin-bottom: 56px; scroll-margin-top: 32px; }
+    h2.section-title { font-size: 22px; font-weight: 600; margin-bottom: 20px; color: var(--gray-12); display: flex; align-items: center; gap: 12px; padding-bottom: 0; border: none; }
+    h2.section-title .num { display: inline-flex; align-items: center; justify-content: center; min-width: 32px; height: 32px; font-size: 14px; font-weight: 600; color: #fff; background: var(--brand-6); border-radius: 8px; }
+    h2.section-title::after { content: ''; flex: 1; height: 1px; background: linear-gradient(90deg, var(--border) 0%, transparent 100%); margin-left: 8px; }
+    h3 { font-size: 17px; font-weight: 600; margin: 28px 0 14px; color: var(--gray-11); }
+    h4 { font-size: 15px; font-weight: 600; margin: 16px 0 8px; }
+    p, li { color: var(--text-secondary); margin-bottom: 8px; }
+    ul, ol { padding-left: 20px; margin-bottom: 12px; }
+    .tag { display: inline-block; padding: 2px 8px; border-radius: var(--radius-m); font-size: 11px; font-weight: 500; margin-right: 6px; }
+    .tag-brand { background: var(--brand-1); color: var(--brand-6); }
+    .tag-ai { background: #ECF2FE; color: var(--info-6); }
+    .card { background: #fff; border: none; border-radius: 12px; padding: 24px; margin: 16px 0; box-shadow: 0 1px 2px rgba(0,0,0,.04), 0 4px 24px rgba(0,0,0,.04); }
+    .card-title { font-size: 14px; font-weight: 600; margin-bottom: 12px; color: var(--gray-12); }
+    .brand-showcase { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin: 20px 0; align-items: stretch; }
+    .brand-showcase .brand-card { display: flex; flex-direction: column; align-items: center; min-height: 220px; padding: 28px 24px 24px; text-align: center; border-radius: 12px; box-shadow: 0 4px 24px rgba(0,0,0,.06); }
+    .brand-showcase .brand-card--light { background: #fff; border: 1px solid var(--border); }
+    .brand-showcase .brand-card--dark { background: var(--gray-12); border: 1px solid var(--gray-11); }
+    .brand-logo-stage { width: 120px; height: 120px; flex-shrink: 0; display: flex; align-items: center; justify-content: center; border-radius: 16px; margin-bottom: 16px; }
+    .brand-logo-stage--light { background: var(--gray-1); border: 1px solid var(--border); }
+    .brand-logo-stage--dark { background: rgba(255,255,255,.06); border: 1px solid rgba(255,255,255,.12); }
+    .brand-logo-stage img { width: 80px; height: 80px; object-fit: contain; display: block; }
+    .brand-card-label { font-size: 14px; font-weight: 600; line-height: 1.4; margin-bottom: 6px; }
+    .brand-card--light .brand-card-label { color: var(--gray-12); }
+    .brand-card--dark .brand-card-label { color: #fff; }
+    .brand-showcase .brand-card p { font-size: 13px; line-height: 1.5; color: var(--text-secondary); margin: 0; max-width: 240px; }
+    .brand-showcase .brand-card--dark p { color: rgba(255,255,255,.65); }
+    .brand-rules { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-top: 16px; }
+    .brand-rule { background: var(--gray-1); border-radius: 8px; padding: 14px; font-size: 13px; }
+    .brand-rule strong { display: block; color: var(--gray-12); margin-bottom: 4px; font-size: 13px; }
+    table { width: 100%; border-collapse: separate; border-spacing: 0; font-size: 13px; margin: 12px 0; border-radius: 10px; overflow: hidden; box-shadow: 0 1px 3px rgba(0,0,0,.04); border: 1px solid var(--border); }
+    th, td { border: none; border-bottom: 1px solid var(--border); padding: 12px 16px; text-align: left; }
+    tr:last-child td { border-bottom: none; }
+    th { background: var(--gray-1); font-weight: 600; white-space: nowrap; color: var(--gray-11); font-size: 12px; text-transform: none; }
+    tbody tr:hover td { background: rgba(243,47,65,.02); }
+    code { background: var(--gray-1); padding: 2px 6px; border-radius: var(--radius-s); font-size: 12px; font-family: Consolas, monospace; }
+    pre { background: linear-gradient(145deg, #1E1E24 0%, #141418 100%); color: #C8CAD0; padding: 20px; border-radius: 10px; overflow-x: auto; font-size: 12px; line-height: 1.6; margin: 12px 0; border: 1px solid rgba(255,255,255,.06); box-shadow: inset 0 1px 0 rgba(255,255,255,.04); }
+    .color-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); gap: 12px; margin: 16px 0; }
+    .color-item { border-radius: var(--radius-l); overflow: hidden; border: 1px solid var(--border); }
+    .color-swatch { height: 64px; }
+    .color-info { padding: 8px 10px; background: #fff; font-size: 12px; }
+    .color-info strong { display: block; font-size: 13px; }
+    .demo-row { display: flex; flex-wrap: wrap; gap: 12px; align-items: center; margin: 12px 0; }
+    .btn { display: inline-flex; align-items: center; justify-content: center; height: 40px; padding: 0 16px; border-radius: var(--radius-m); font-size: 14px; font-weight: 500; border: none; cursor: default; font-family: "PingFang SC", sans-serif; }
+    .btn-primary { background: var(--brand-6); color: #fff; border-radius: var(--radius-btn-primary); }
+    .btn-primary:hover { background: var(--brand-7); }
+    .btn-primary.btn-lg, .btn-primary.btn-sm { border-radius: var(--radius-btn-primary); }
+    .btn-outline { background: #fff; color: var(--brand-6); border: 1px solid var(--brand-6); }
+    .btn-text { background: transparent; color: var(--brand-6); }
+    .btn-ghost { background: var(--brand-1); color: var(--brand-6); }
+    .btn-danger { background: var(--error-6); color: #fff; }
+    .btn-disabled { background: var(--gray-3); color: var(--text-disabled); }
+    .btn-sm { height: 32px; padding: 0 12px; font-size: 12px; }
+    .btn-lg { height: 48px; padding: 0 24px; font-size: 16px; }
+    .input-demo { height: 40px; border: 1px solid var(--border); border-radius: var(--radius-m); padding: 0 12px; font-size: 14px; width: 240px; outline: none; }
+    .input-demo:focus { border-color: var(--brand-6); box-shadow: 0 0 0 2px var(--brand-2); }
+    .tag-demo { display: inline-flex; align-items: center; height: 24px; padding: 0 8px; border-radius: var(--radius-m); font-size: 12px; }
+    .tag-default { background: var(--gray-1); color: var(--text-secondary); }
+    .tag-brand-demo { background: var(--brand-1); color: var(--brand-6); }
+    .tag-success { background: var(--success-1); color: var(--success-6); }
+    .tag-warning { background: var(--warning-1); color: var(--warning-6); }
+    .tag-error { background: var(--error-1); color: var(--error-6); }
+    .alert { padding: 12px 16px; border-radius: var(--radius-m); font-size: 13px; margin: 8px 0; }
+    .alert-info { background: var(--info-1); color: var(--info-7); border-left: 3px solid var(--info-6); }
+    .alert-warn { background: var(--warning-1); color: var(--warning-7); border-left: 3px solid var(--warning-6); }
+    .phone-frame { width: var(--canvas-w); border: 10px solid #1A1A1F; border-radius: 40px; overflow: hidden; background: var(--bg-page); margin: 16px auto; box-shadow: 0 24px 80px rgba(0,0,0,.18), 0 0 0 1px rgba(0,0,0,.06); position: relative; }
+    .phone-frame--844 { height: var(--canvas-h); min-height: var(--canvas-h); max-height: var(--canvas-h); display: flex; flex-direction: column; }
+    .phone-frame::before { content: ''; position: absolute; top: 12px; left: 50%; transform: translateX(-50%); width: 100px; height: 28px; background: #1A1A1F; border-radius: 20px; z-index: 10; }
+    .phone-splash { flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 24px; background: #fff; min-height: 0; }
+    .phone-splash--pure { background: #fff; }
+    .phone-layout-stack { flex: 1; display: flex; flex-direction: column; min-height: 0; background: var(--bg-page); }
+    .phone-body--fill { flex: 1; min-height: 0; overflow: hidden; padding: 16px; }
+    .phone-splash img { width: 96px; height: 96px; object-fit: contain; margin-bottom: 20px; filter: drop-shadow(0 8px 20px rgba(243,47,65,.2)); }
+    .phone-splash .app-name { font-size: 24px; font-weight: 600; color: var(--gray-12); letter-spacing: .08em; }
+    .phone-splash .app-tagline { font-size: 13px; color: var(--text-secondary); margin-top: 8px; }
+    .canvas-badge { display: inline-flex; align-items: center; gap: 6px; background: var(--gray-12); color: #fff; font-size: 11px; padding: 5px 12px; border-radius: 4px; margin-bottom: 16px; font-weight: 500; letter-spacing: .03em; }
+    .canvas-badge::before { content: ''; width: 6px; height: 6px; background: var(--brand-6); border-radius: 50%; }
+    .icon-lib-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(108px, 1fr)); gap: 12px; margin: 12px 0; }
+    .icon-lib-item { display: flex; flex-direction: column; background: #fff; border: 1px solid var(--border); border-radius: var(--radius-l); overflow: hidden; min-height: 132px; cursor: pointer; transition: border-color .2s, box-shadow .2s, transform .22s cubic-bezier(.34,1.56,.64,1); }
+    .icon-lib-item:hover { border-color: var(--brand-4); box-shadow: 0 6px 20px rgba(243,47,65,.1); }
+    .icon-lib-item.copied { border-color: var(--success-6); box-shadow: 0 0 0 1px var(--success-6); }
+    .icon-lib-visual { flex: 0 0 84px; height: 84px; display: flex; align-items: center; justify-content: center; padding: 0 10px; background: var(--gray-1); }
+    .icon-lib-item:hover .icon-lib-visual { background: var(--brand-1); }
+    .icon-lib-item iconify-icon { font-size: 36px; width: 36px; height: 36px; color: var(--gray-9); transition: color .2s, transform .22s cubic-bezier(.34,1.56,.64,1); }
+    .icon-lib-item.is-filled iconify-icon { color: var(--brand-6); }
+    .icon-lib-item:hover iconify-icon { color: var(--brand-6); transform: scale(1.06); }
+    .icon-lib-item.is-missing iconify-icon { opacity: 0.35; }
+    .icon-lib-meta { flex: 1; display: flex; flex-direction: column; justify-content: center; min-height: 48px; padding: 6px 8px 8px; text-align: center; border-top: 1px solid var(--border); background: #fff; }
+    .icon-lib-item .icon-lib-meaning,
+    .icon-lib-item .icon-lib-scene { display: block; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+    .tap-feedback { position: relative; overflow: hidden; -webkit-tap-highlight-color: transparent; cursor: pointer; }
+    .tap-feedback { transition: transform .22s cubic-bezier(.34,1.56,.64,1), box-shadow .22s, filter .2s, border-color .2s, background .2s; }
+    .tap-feedback:active { transform: scale(0.97); }
+    .tap-feedback.tap-flash { box-shadow: 0 0 0 2px rgba(243,47,65,.25), 0 0 24px rgba(243,47,65,.2); }
+    .sidebar .tap-feedback.tap-flash { box-shadow: 0 0 0 2px rgba(243,47,65,.2), 0 0 16px rgba(243,47,65,.15); }
+    .ripple-fx { position: absolute; border-radius: 50%; pointer-events: none; transform: scale(0); animation: rippleExpand .55s ease-out forwards; }
+    @keyframes rippleExpand { to { transform: scale(2.8); opacity: 0; } }
+    .icon-lib-name { font-size: 10px; color: var(--text-secondary); font-family: Consolas, monospace; line-height: 1.3; margin: 0; opacity: .85; }
+    .icon-lib-meaning { font-size: 11px; color: var(--text-placeholder); margin-top: 3px; line-height: 1.3; font-weight: 400; }
+    .icon-lib-scene { font-size: 10px; color: var(--text-disabled); margin-top: 2px; line-height: 1.25; }
+    .icon-filter-row { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 16px; align-items: center; }
+    .icon-filter-row input { flex: 1; min-width: 200px; height: 36px; border: 1px solid var(--border); border-radius: var(--radius-m); padding: 0 12px; outline: none; font-family: "PingFang SC", sans-serif; }
+    .icon-filter-row input:focus { border-color: var(--brand-6); }
+    .filter-chip { padding: 6px 12px; border-radius: var(--radius-btn-primary); border: 1px solid var(--border); background: #fff; font-size: 12px; cursor: pointer; color: var(--text-secondary); }
+    .filter-chip.active { border-color: var(--brand-6); color: var(--brand-6); background: var(--brand-1); }
+    .comp-block { background: #fff; border: none; border-radius: 12px; margin-bottom: 24px; overflow: hidden; box-shadow: 0 1px 2px rgba(0,0,0,.04), 0 4px 20px rgba(0,0,0,.05); }
+    .comp-block-hd { padding: 14px 20px; background: linear-gradient(90deg, var(--gray-1) 0%, #fff 100%); border-bottom: 1px solid var(--border); display: flex; justify-content: space-between; align-items: center; }
+    .comp-block-hd strong { font-size: 14px; }
+    .comp-block-hd code { font-size: 11px; color: var(--brand-6); }
+    .comp-block-bd { padding: 20px 16px; }
+    .comp-preview-phone { width: var(--canvas-w); margin: 0 auto; border: 1px solid var(--border); border-radius: var(--radius-l); overflow: hidden; background: var(--bg-page); }
+    .u-navbar { height: 48px; background: #fff; display: flex; align-items: center; padding: 0 16px; border-bottom: 1px solid var(--border); font-size: 16px; font-weight: 500; }
+    .u-navbar .back { margin-right: 8px; color: var(--gray-8); }
+    .u-navbar .action { margin-left: auto; font-size: 14px; color: var(--brand-6); font-weight: 400; }
+    .u-cell { background: #fff; min-height: 56px; padding: 12px 16px; display: flex; align-items: center; border-bottom: 0.5px solid var(--gray-3); font-size: 14px; }
+    .u-cell:last-child { border-bottom: none; }
+    .u-cell .note { font-size: 12px; color: var(--text-secondary); margin-left: auto; margin-right: 4px; }
+    .u-cell-group { border-radius: var(--radius-l); overflow: hidden; margin-bottom: 12px; }
+    .u-tabs { display: flex; height: 48px; background: #fff; border-bottom: 1px solid var(--border); }
+    .u-tabs span { flex: 1; display: flex; align-items: center; justify-content: center; font-size: 14px; color: var(--text-secondary); position: relative; }
+    .u-tabs span.on { color: var(--text-primary); font-weight: 500; }
+    .u-tabs span.on::after { content: ''; position: absolute; bottom: 0; left: 50%; transform: translateX(-50%); width: 16px; height: 3px; background: var(--brand-6); border-radius: 2px; }
+    .u-tabbar { height: 56px; background: #fff; border-top: 1px solid var(--border); display: flex; }
+    .u-tabbar .tab { flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 2px; font-size: 10px; color: var(--text-secondary); }
+    .u-tabbar .tab.on { color: var(--brand-6); }
+    .u-search { height: 36px; background: var(--gray-1); border-radius: var(--radius-round); margin: 12px 16px; display: flex; align-items: center; padding: 0 12px; gap: 8px; color: var(--text-placeholder); font-size: 14px; }
+    .u-notice { height: 40px; background: var(--warning-1); color: var(--warning-7); font-size: 13px; display: flex; align-items: center; padding: 0 12px; gap: 8px; }
+    .u-steps { display: flex; padding: 16px; background: #fff; gap: 4px; }
+    .u-steps .step { flex: 1; text-align: center; font-size: 12px; color: var(--text-secondary); }
+    .u-steps .step .dot { width: 24px; height: 24px; border-radius: 50%; background: var(--gray-3); color: var(--text-secondary); display: inline-flex; align-items: center; justify-content: center; font-size: 12px; margin-bottom: 4px; }
+    .u-steps .step.done .dot { background: var(--success-6); color: #fff; }
+    .u-steps .step.cur .dot { background: var(--brand-6); color: #fff; }
+    .u-switch { width: 44px; height: 24px; background: var(--gray-4); border-radius: 12px; position: relative; }
+    .u-switch.on { background: var(--brand-6); }
+    .u-switch::after { content: ''; position: absolute; width: 20px; height: 20px; background: #fff; border-radius: 50%; top: 2px; left: 2px; box-shadow: 0 1px 3px rgba(0,0,0,.2); }
+    .u-switch.on::after { left: 22px; }
+    .u-badge { display: inline-flex; min-width: 16px; height: 16px; padding: 0 4px; background: var(--brand-6); color: #fff; font-size: 10px; border-radius: 8px; align-items: center; justify-content: center; }
+    .u-avatar { width: 40px; height: 40px; border-radius: 50%; background: var(--gray-3); display: flex; align-items: center; justify-content: center; color: var(--gray-7); }
+    .u-progress { height: 4px; background: var(--gray-2); border-radius: 2px; overflow: hidden; }
+    .u-progress i { display: block; height: 100%; width: 60%; background: var(--brand-6); border-radius: 2px; }
+    .u-fab { width: 48px; height: 48px; border-radius: 50%; background: var(--brand-6); color: #fff; display: flex; align-items: center; justify-content: center; box-shadow: var(--shadow-2); margin-left: auto; }
+    .u-bottom-bar { display: flex; gap: 12px; padding: 8px 16px; background: #fff; border-top: 1px solid var(--border); }
+    .u-bottom-bar .btn { flex: 1; }
+    .u-dialog { width: 311px; margin: 0 auto; background: #fff; border-radius: var(--radius-xl); padding: 24px 16px 16px; text-align: center; }
+    .u-dialog h5 { font-size: 16px; font-weight: 500; margin-bottom: 8px; }
+    .u-dialog p { font-size: 14px; color: var(--text-secondary); margin-bottom: 20px; }
+    .u-dialog .acts { display: flex; gap: 12px; }
+    .u-empty { text-align: center; padding: 40px 16px; color: var(--text-secondary); }
+    .u-empty iconify-icon { font-size: 64px; color: var(--gray-5); }
+    .u-skeleton { height: 16px; background: linear-gradient(90deg, var(--gray-2) 25%, var(--gray-1) 50%, var(--gray-2) 75%); background-size: 200% 100%; animation: shimmer 1.5s infinite; border-radius: 4px; margin-bottom: 8px; }
+    @keyframes shimmer { 0% { background-position: 200% 0; } 100% { background-position: -200% 0; } }
+    @keyframes spin { to { transform: rotate(360deg); } }
+    .phone-status { height: 44px; background: #fff; display: flex; align-items: center; justify-content: center; font-size: 12px; color: var(--text-secondary); }
+    .phone-nav { height: 48px; background: #fff; display: flex; align-items: center; padding: 0 16px; border-bottom: 1px solid var(--border); font-weight: 600; font-size: 16px; }
+    .phone-body { min-height: 400px; padding: 16px; }
+    .phone-tabbar { height: 56px; background: #fff; border-top: 1px solid var(--border); display: flex; }
+    .phone-tabbar span { flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: center; font-size: 10px; color: var(--text-secondary); }
+    .phone-tabbar span.active { color: var(--brand-6); }
+    .spec-block { background: linear-gradient(90deg, var(--brand-1) 0%, #fff 100%); border: 1px solid var(--brand-3); border-left: 4px solid var(--brand-6); border-radius: 8px; padding: 16px 20px; margin: 16px 0; font-size: 13px; color: var(--gray-11); }
+    .spec-block strong { color: var(--brand-8); }
+    .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+    .grid-2 .card { margin: 0; height: 100%; }
+    .token-visual-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); gap: 16px; margin: 20px 0 28px; }
+    .token-visual-card { background: #fff; border: 1px solid var(--border); border-radius: var(--radius-l); padding: 16px; text-align: center; box-shadow: var(--shadow-1); }
+    .token-visual-card .sample { margin: 0 auto 12px; background: var(--gray-1); display: flex; align-items: center; justify-content: center; }
+    .token-visual-card .label { font-size: 12px; font-weight: 600; color: var(--gray-12); }
+    .token-visual-card .val { font-size: 11px; color: var(--text-secondary); margin-top: 4px; font-family: Consolas, monospace; }
+    .radius-sample { width: 72px; height: 72px; background: #fff; border: 2px solid var(--brand-6); }
+    .radius-sample.primary-btn { width: 100%; max-width: 120px; height: 40px; background: var(--brand-6); border: none; color: #fff; font-size: 13px; font-weight: 500; }
+    .shadow-sample { width: 100%; max-width: 160px; height: 72px; background: #fff; border-radius: var(--radius-l); }
+    .shadow-sample.s1 { box-shadow: var(--shadow-1); }
+    .shadow-sample.s2 { box-shadow: var(--shadow-2); }
+    .shadow-sample.s3 { box-shadow: var(--shadow-3); }
+    .layout-phones { display: flex; flex-wrap: wrap; gap: 32px; justify-content: center; align-items: flex-start; margin: 16px 0; }
+    .layout-phone-wrap { text-align: center; }
+    .layout-phone-wrap .cap { font-size: 12px; color: var(--text-secondary); margin-top: 12px; }
+    .site-footer { margin-top: 64px; padding: 32px 0; border-top: 1px solid var(--border); display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 16px; }
+    .site-footer .foot-brand { display: flex; align-items: center; gap: 12px; }
+    .site-footer .foot-brand img { width: 36px; height: 36px; object-fit: contain; }
+    .site-footer .foot-brand span { font-size: 14px; font-weight: 600; color: var(--gray-12); }
+    .site-footer .foot-copy { font-size: 12px; color: var(--text-secondary); }
+    .color-item { transition: transform .2s, box-shadow .2s; }
+    .color-item:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(0,0,0,.08); }
+    .figma-link-card { display: flex; align-items: center; gap: 16px; padding: 16px 20px; background: linear-gradient(90deg, var(--brand-1), #fff); border: 1px solid var(--brand-3); border-radius: 10px; margin: 16px 0; text-decoration: none; color: inherit; transition: box-shadow .2s; }
+    .figma-link-card:hover { box-shadow: var(--shadow-2); }
+    .figma-link-card .icon-box { width: 48px; height: 48px; background: var(--brand-6); border-radius: 10px; display: grid; place-items: center; color: #fff; font-size: 11px; font-weight: 600; }
+    .comp-catalog { width: 100%; font-size: 12px; margin-bottom: 24px; }
+    .comp-catalog td code { font-size: 11px; }
+    .icon-cat-title { grid-column: 1 / -1; font-size: 13px; font-weight: 600; color: var(--gray-11); padding: 16px 0 4px; border-bottom: 1px solid var(--border); margin-top: 8px; }
+    .u-brand-header { height: 200px; background: linear-gradient(180deg, var(--figma-brand-start), var(--figma-brand-end)); padding: 56px 16px 16px; color: #fff; position: relative; }
+    .u-brand-header .store-row { display: flex; align-items: center; gap: 8px; font-size: 14px; margin-bottom: 20px; }
+    .u-brand-header .store-row img { width: 20px; height: 20px; border-radius: 50%; }
+    .u-quick-actions { display: flex; justify-content: space-between; padding: 0 28px; }
+    .u-quick-actions .qa { text-align: center; width: 60px; }
+    .u-quick-actions .qa iconify-icon { font-size: 30px; }
+    .u-quick-actions .qa span { display: block; font-size: 15px; font-weight: 500; margin-top: 6px; }
+    .u-glass-tabbar { height: 60px; margin: 12px 16px 24px; padding: 4px; background: rgba(255,255,255,.6); border-radius: 200px; box-shadow: var(--glass-nav-shadow); backdrop-filter: blur(20px); display: flex; align-items: center; position: relative; }
+    .u-glass-tabbar .tab { flex: 1; display: flex; flex-direction: column; align-items: center; font-size: 11px; color: var(--figma-text-primary); gap: 2px; z-index: 1; }
+    .u-glass-tabbar .tab.on { font-weight: 500; }
+    .u-glass-tabbar .tab-fab { width: 50px; height: 50px; margin-top: -20px; border-radius: 50%; background: #1a1a1a; box-shadow: inset 0 0 0 1px #999; }
+    .u-glass-tabbar .pill-active { position: absolute; left: 4px; top: 4px; width: 72px; height: 52px; background: #1a1a1a; border-radius: 100px; transition: left .2s; }
+    .u-stat-card { background: linear-gradient(180deg, var(--figma-card-pink), #fff); border-radius: 12px; padding: 12px 12px 16px; margin: 0 16px; }
+    .u-stat-card .head { display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; }
+    .u-stat-card .seg { display: flex; background: linear-gradient(180deg, #fff, transparent); border-radius: 100px; padding: 2px; font-size: 12px; }
+    .u-stat-card .seg span { padding: 4px 12px; border-radius: 100px; color: var(--figma-text-inactive); }
+    .u-stat-card .seg span.on { background: var(--figma-card-pink); color: var(--figma-text-primary); font-weight: 500; }
+    .u-stat-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px 17px; }
+    .u-stat-grid .label { font-size: 13px; color: var(--figma-text-secondary); }
+    .u-stat-grid .val { font-family: var(--font-data); font-size: 20px; font-weight: 700; color: var(--figma-text-primary); }
+    .u-stat-grid .val small { font-size: 15px; }
+    .u-alert-blue { height: 32px; margin: 12px 16px; background: var(--figma-blue-bg); border-radius: 8px; display: flex; align-items: center; padding: 0 12px; font-size: 13px; color: var(--figma-blue); gap: 8px; }
+    .u-grid-entry { display: grid; grid-template-columns: repeat(5, 1fr); gap: 8px 4px; padding: 0 16px; }
+    .u-grid-entry .item { text-align: center; padding: 8px 0; }
+    .u-grid-entry iconify-icon { font-size: 38px; color: var(--gray-8); }
+    .u-grid-entry span { display: block; font-size: 13px; color: var(--figma-text-primary); margin-top: 4px; }
+    .u-product-card { width: 175px; background: #fff; border-radius: 12px; overflow: hidden; box-shadow: var(--shadow-1); }
+    .u-product-card .thumb { aspect-ratio: 1; background: var(--gray-2); display: grid; place-items: center; }
+    .u-product-card .thumb iconify-icon { font-size: 40px; color: var(--gray-6); }
+    .u-product-card .body { padding: 8px; }
+    .u-product-card .brand { font-size: 10px; color: var(--figma-text-secondary); }
+    .u-product-card .title { font-size: 12px; font-weight: 600; line-height: 1.35; margin: 2px 0; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+    .u-product-card .price { font-size: 14px; font-weight: 700; color: var(--brand-6); }
+    .u-product-card .sub { font-size: 10px; color: var(--figma-text-secondary); }
+    .u-price-row { display: flex; gap: 16px; font-size: 12px; flex-wrap: wrap; }
+    .u-price-row .col label { display: block; font-size: 10px; color: var(--figma-text-secondary); margin-bottom: 4px; }
+    .u-price-row .col .v { font-weight: 600; color: var(--figma-text-primary); }
+    .u-price-row .col .v.retail { color: var(--brand-6); }
+    @media (max-width: 900px) {
+      .sidebar { display: none; }
+      .main { margin-left: 0; }
+      .main-inner { padding: 0 20px; }
+      .page-hero { margin: 0 -20px 32px; padding: 32px 20px; }
+      .page-hero-inner { flex-direction: column; text-align: center; }
+      .page-hero .hero-meta { justify-content: center; }
+      .brand-showcase, .brand-rules { grid-template-columns: 1fr; }
+      .grid-2 { grid-template-columns: 1fr; }
+    }
+  </style>
+  <script src="https://code.iconify.design/iconify-icon/2.1.0/iconify-icon.min.js"></script>
+</head>
+<body>
+<div class="layout">
+  <aside class="sidebar">
+    <div class="sidebar-brand">
+      <div class="logo-wrap"><img src="LOGO2.png" alt="剑琅联盟"></div>
+      <h1>剑琅联盟</h1>
+      <p class="sub">移动端设计规范</p>
+      <span class="ver">Design System v1.3</span>
+    </div>
+    <ul class="nav-list">
+      <li><a href="#brand">品牌标识</a></li>
+      <li><a href="#overview">0. 概述与 AI 指引</a></li>
+      <li><a href="#principles">1. 设计原则</a></li>
+      <li><a href="#colors">2. 色彩系统</a></li>
+      <li><a href="#typography">3. 字体排版</a></li>
+      <li><a href="#spacing">4. 间距与布局</a></li>
+      <li><a href="#radius-shadow">5. 圆角与阴影</a></li>
+      <li><a href="#icons">6. 图标库（可调用）</a></li>
+      <li><a href="#components">7. 组件库（可调用）</a></li>
+      <li><a href="#patterns">8. 页面模式</a></li>
+      <li><a href="#interaction">9. 交互与反馈</a></li>
+      <li><a href="#b2b">10. B端业务规范</a></li>
+      <li><a href="#tokens">11. Design Token JSON</a></li>
+    </ul>
+  </aside>
+
+  <main class="main">
+    <div class="main-inner">
+
+    <header class="page-hero">
+      <div class="hero-bg" aria-hidden="true">
+        <div class="hero-gradient-anim"></div>
+        <div class="hero-orb hero-orb-1"></div>
+        <div class="hero-orb hero-orb-2"></div>
+        <div class="hero-orb hero-orb-3"></div>
+        <div class="hero-grid"></div>
+        <div class="hero-particles"></div>
+        <div class="hero-scanline"></div>
+      </div>
+      <div class="page-hero-inner">
+        <div class="hero-logo"><img src="LOGO2.png" alt="剑琅联盟 Logo"></div>
+        <div>
+          <h2>剑琅联盟</h2>
+          <p class="hero-desc">B 端商务移动应用设计规范 · 基于 TDesign 体系，统一视觉语言与组件标准，支撑 AI 批量出图与 Flutter 工程落地。</p>
+          <div class="hero-meta">
+            <span class="hero-pill">画布 390 × 844（高可延展）</span>
+            <span class="hero-pill">PingFang SC</span>
+            <span class="hero-pill">主色 #F32F41</span>
+            <span class="hero-pill">主按钮圆角 4px</span>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <!-- 品牌 -->
+    <section id="brand">
+      <h2 class="section-title"><span class="num">◎</span>品牌标识 Brand</h2>
+      <div class="card">
+        <div class="card-title">剑琅联盟 · Logo 使用规范</div>
+        <p>Logo 为圆形徽章：红色底（#F32F41）+ 剑与盾金属质感图形，象征联盟、守护与专业力量。APP 内与对外物料须使用官方文件，禁止变形、改色或添加效果。</p>
+        <div class="brand-showcase">
+          <div class="brand-card brand-card--light">
+            <div class="brand-logo-stage brand-logo-stage--light">
+              <img src="LOGO2.png" alt="浅色背景 Logo">
+            </div>
+            <div class="brand-card-label">浅色背景</div>
+            <p>登录页 / 白底 Navbar / 关于我们</p>
+          </div>
+          <div class="brand-card brand-card--dark">
+            <div class="brand-logo-stage brand-logo-stage--dark">
+              <img src="LOGO2.png" alt="深色背景 Logo">
+            </div>
+            <div class="brand-card-label">深色背景</div>
+            <p>启动页 / 品牌头图区域</p>
+          </div>
+        </div>
+        <div class="brand-rules">
+          <div class="brand-rule"><strong>最小尺寸</strong>导航栏 24px · 列表 32px · 启动页 80px</div>
+          <div class="brand-rule"><strong>安全留白</strong>Logo 四周至少留 0.5× 直径空白</div>
+          <div class="brand-rule"><strong>文件路径</strong><code>LOGO2.png</code>（与规范同目录）</div>
+        </div>
+        <table style="margin-top:20px">
+          <tr><th>场景</th><th>展示方式</th><th>配套文案</th></tr>
+          <tr><td>启动页 / Splash</td><td>Logo 96px 居中 + 应用名</td><td>剑琅联盟 · 商务协作平台</td></tr>
+          <tr><td>登录页</td><td>Logo 72px + 标题 28px Medium</td><td>剑琅联盟</td></tr>
+          <tr><td>Navbar 首页</td><td>左 Logo 28px + 文字 16px（可选）</td><td>剑琅联盟</td></tr>
+          <tr><td>关于 / 设置</td><td>Logo 48px + 版本号</td><td>剑琅联盟 v{x.x.x}</td></tr>
+        </table>
+      </div>
+    </section>
+
+    <!-- 0. 概述 -->
+    <section id="overview">
+      <h2 class="section-title"><span class="num">0</span>概述与 AI 使用指引</h2>
+      <div class="card">
+        <div class="card-title"><span class="tag tag-brand">剑琅联盟</span> <span class="tag tag-ai">AI Ready</span> v1.3 · 画布 390×844（高可延展）</div>
+        <p>本规范为<strong>剑琅联盟</strong>（含 RTP 商品零售模块）专属，基于 <a href="https://tdesign.tencent.com/flutter/getting-started">TDesign Flutter</a> 与已落地主页面提取的 Token 定制。</p>
+      </div>
+      <h3>AI 批量出图必读规则</h3>
+      <div class="spec-block">
+        <strong>强制约束：</strong>所有页面必须使用本规范中的 Design Token，禁止自行发明颜色、字号、圆角。组件命名对齐 TDesign 组件名（如 Navbar、Cell、TabBar）。<strong>画布宽 390px（固定）</strong>、<strong>高默认 844px</strong>（内容超出时可向下延展，宽不变），全局字体 <strong>PingFang SC</strong>，主要按钮圆角 <strong>4px</strong>，使用 4px 间距网格。
+      </div>
+      <ol>
+        <li><strong>先选页面模式</strong>：从第 8 章选择列表页/详情页/表单页/工作台等模板。</li>
+        <li><strong>再组合组件</strong>：从第 7 章按场景选用 TDesign 组件，保持 API 与视觉一致。</li>
+        <li><strong>颜色只用 Token</strong>：主色 <code>brand-6 (#F32F41)</code>，文字/背景/边框从中性色和功能色中选取。</li>
+        <li><strong>信息层级</strong>：标题 16–20px Medium，正文 14px Regular，辅助 12px，数据数字可用 20–28px Medium。</li>
+        <li><strong>B端气质</strong>：克制装饰、强调效率；列表优先于卡片堆叠；操作路径不超过 3 层。</li>
+        <li><strong>输出格式</strong>：设计稿标注 Token 名称（如 <code>--td-brand-color</code>），而非裸 Hex 值。</li>
+        <li><strong>品牌露出</strong>：启动页、登录页、Navbar 首页须使用官方 Logo（<code>LOGO2.png</code>）与应用名「剑琅联盟」。</li>
+      </ol>
+      <h3>技术栈对齐</h3>
+      <table>
+        <tr><th>层级</th><th>引用</th><th>说明</th></tr>
+        <tr><td>设计系统</td><td>TDesign Mobile</td><td>组件结构、交互模式、Design Token 命名</td></tr>
+        <tr><td>开发组件库</td><td>tdesign_flutter (Alpha)</td><td>Flutter 实现，主题 JSON 可映射本规范 Token</td></tr>
+        <tr><td>设计稿</td><td><a href="https://www.figma.com/design/cUaUaxtcNsREKlfnQKXe1L/RTP-%E9%9B%B6%E5%94%AE%E6%A8%A1%E5%9D%97">RTP 零售模块 Figma</a></td><td>节点 72-137 · 与 HTML 原型库同步</td></tr>
+        <tr><td>设计资源</td><td>TDesign + Figma 实测</td><td>组件库 + Icon SVG + 业务图标映射表</td></tr>
+        <tr><td>设计基准</td><td>宽 390（固定）× 高 844（默认）</td><td>高可向下延展；安全区 top 44px / bottom 34px</td></tr>
+        <tr><td>全局字体</td><td>PingFang SC</td><td>禁止替换为其他字体族</td></tr>
+        <tr><td>主按钮圆角</td><td>4px</td><td>仅 Primary 实心按钮；其他组件见圆角章节</td></tr>
+      </table>
+    </section>
+
+    <!-- 1. 设计原则 -->
+    <section id="principles">
+      <h2 class="section-title"><span class="num">1</span>设计原则</h2>
+      <div class="grid-2">
+        <div class="card"><div class="card-title">高效 Efficient</div><p>减少操作步骤，常用功能 2 次点击可达。列表支持搜索、筛选、批量操作。表单支持自动填充与历史记录。</p></div>
+        <div class="card"><div class="card-title">清晰 Clear</div><p>信息层级分明，关键数据突出。状态用颜色+文字双重标识。空状态、加载态、错误态均有明确指引。</p></div>
+        <div class="card"><div class="card-title">一致 Consistent</div><p>全局统一导航、按钮、表单、反馈方式。同类业务使用相同页面结构与组件组合。</p></div>
+        <div class="card"><div class="card-title">专业 Professional</div><p>视觉克制，避免过度圆角与渐变。品牌色用于关键操作与状态强调，不作为大面积背景。</p></div>
+      </div>
+      <h3>视觉风格关键词</h3>
+      <p>商务 · 简洁 · 可信赖 · 数据驱动 · 操作明确 · 留白适度 · 白底灰底交替分区</p>
+    </section>
+
+    <!-- 2. 色彩 -->
+    <section id="colors">
+      <h2 class="section-title"><span class="num">2</span>色彩系统</h2>
+      <p>主色 <strong>#F32F41</strong>，按 TDesign 10 级色阶扩展。功能色保持 TDesign 标准语义，确保红绿色盲可辨（状态需配合图标/文字）。</p>
+
+      <h3>2.1 品牌色 Brand Color</h3>
+      <div class="color-grid">
+        <div class="color-item"><div class="color-swatch" style="background:#FEF0F1"></div><div class="color-info"><strong>brand-1</strong>#FEF0F1 · 浅色背景</div></div>
+        <div class="color-item"><div class="color-swatch" style="background:#FDD9DC"></div><div class="color-info"><strong>brand-2</strong>#FDD9DC · 悬浮背景</div></div>
+        <div class="color-item"><div class="color-swatch" style="background:#FCBDC3"></div><div class="color-info"><strong>brand-3</strong>#FCBDC3 · 选中背景</div></div>
+        <div class="color-item"><div class="color-swatch" style="background:#FB9BA3"></div><div class="color-info"><strong>brand-4</strong>#FB9BA3 · 禁用/边框</div></div>
+        <div class="color-item"><div class="color-swatch" style="background:#F97883"></div><div class="color-info"><strong>brand-5</strong>#F97883 · 悬浮态</div></div>
+        <div class="color-item"><div class="color-swatch" style="background:#F32F41"></div><div class="color-info"><strong>brand-6 ★</strong>#F32F41 · 主色</div></div>
+        <div class="color-item"><div class="color-swatch" style="background:#D92939"></div><div class="color-info"><strong>brand-7</strong>#D92939 · 点击态</div></div>
+        <div class="color-item"><div class="color-swatch" style="background:#BF2432"></div><div class="color-info"><strong>brand-8</strong>#BF2432 · 强调</div></div>
+        <div class="color-item"><div class="color-swatch" style="background:#991D28"></div><div class="color-info"><strong>brand-9</strong>#991D28 · 深色文字</div></div>
+        <div class="color-item"><div class="color-swatch" style="background:#73161E"></div><div class="color-info"><strong>brand-10</strong>#73161E · 最深</div></div>
+      </div>
+
+      <h3>2.2 功能色 Functional Colors</h3>
+      <table>
+        <tr><th>语义</th><th>浅色背景</th><th>常规色</th><th>深色/点击</th><th>使用场景</th></tr>
+        <tr><td>成功 Success</td><td>#E8F8F2</td><td>#2BA471</td><td>#008858</td><td>完成、通过、已生效</td></tr>
+        <tr><td>警告 Warning</td><td>#FEF3E6</td><td>#E37318</td><td>#BE5A00</td><td>待处理、即将到期</td></tr>
+        <tr><td>错误 Error</td><td>#FDECEE</td><td>#D54941</td><td>#AD352F</td><td>失败、驳回、异常</td></tr>
+        <tr><td>信息 Info</td><td>#ECF2FE</td><td>#0052D9</td><td>#003CAB</td><td>提示、链接、信息说明</td></tr>
+      </table>
+
+      <h3>2.3 中性色 Neutral Colors</h3>
+      <table>
+        <tr><th>Token</th><th>色值</th><th>用途</th></tr>
+        <tr><td>gray-1</td><td>#F3F3F3</td><td>页面背景 bg-page</td></tr>
+        <tr><td>gray-2</td><td>#EEEEEE</td><td>分割线、禁用背景</td></tr>
+        <tr><td>gray-3</td><td>#E7E7E7</td><td>边框 border</td></tr>
+        <tr><td>gray-4 ~ gray-8</td><td>#DCDCDC ~ #777777</td><td>图标、占位、次要元素</td></tr>
+        <tr><td>gray-9 ~ gray-12</td><td>#5E5E5E ~ #2C2C2C</td><td>深色文字、深色模式基础</td></tr>
+      </table>
+
+      <h3>2.4 文字色 Text Colors（Figma 主页面实测 ★）</h3>
+      <table>
+        <tr><th>Token</th><th>色值</th><th>用途</th></tr>
+        <tr><td>text-primary ★</td><td>#333333</td><td>标题、正文、导航文字（优先于 rgba 黑）</td></tr>
+        <tr><td>text-secondary ★</td><td>#929292</td><td>描述、数据标签、次要信息</td></tr>
+        <tr><td>text-muted</td><td>#B8B8B8</td><td>日期 Tab 未选中、弱提示</td></tr>
+        <tr><td>text-inactive</td><td>#D7D7D5</td><td>分段器未选中（如实业绩）</td></tr>
+        <tr><td>text-placeholder</td><td>rgba(0,0,0,0.4)</td><td>输入框占位符（表单页）</td></tr>
+        <tr><td>text-disabled</td><td>rgba(0,0,0,0.26)</td><td>禁用文字</td></tr>
+        <tr><td>text-brand</td><td>#F32F41</td><td>品牌强调、可点击文字</td></tr>
+        <tr><td>text-link</td><td>#0052D9</td><td>超链接（区别于品牌色）</td></tr>
+        <tr><td>text-anti</td><td>#FFFFFF</td><td>深色/品牌色背景上的文字</td></tr>
+      </table>
+
+      <h3>2.5 场景色（Figma 扩展）</h3>
+      <table>
+        <tr><th>Token</th><th>色值</th><th>用途</th></tr>
+        <tr><td>brand-gradient</td><td>#F32F41 → #DD2D38</td><td>首页顶栏、品牌头图 200px 高</td></tr>
+        <tr><td>accent-blue</td><td>#1A70FE</td><td>提醒条文字、可点击「查看」</td></tr>
+        <tr><td>accent-blue-bg</td><td>#E7F1FF</td><td>异常/重要提醒条背景</td></tr>
+        <tr><td>accent-orange</td><td>#F77357</td><td>营销副标题、活动强调</td></tr>
+        <tr><td>card-pink-gradient</td><td>#FFF2F2 → #FFFFFF</td><td>业绩卡、浅色数据卡背景</td></tr>
+        <tr><td>promo-card-border</td><td>rgba(249,117,107,0.2)</td><td>获客/推客营销卡片描边</td></tr>
+      </table>
+
+      <h3>2.6 背景与边框</h3>
+      <table>
+        <tr><th>Token</th><th>色值</th><th>用途</th></tr>
+        <tr><td>bg-page</td><td>#F3F3F3</td><td>页面底色</td></tr>
+        <tr><td>bg-container</td><td>#FFFFFF</td><td>卡片、Cell、弹窗</td></tr>
+        <tr><td>bg-secondary</td><td>#FAFAFA</td><td>次级容器、表头</td></tr>
+        <tr><td>bg-brand-light</td><td>#FFF2F2</td><td>品牌浅色区块（同 Figma card-pink）</td></tr>
+        <tr><td>border</td><td>#E7E7E7</td><td>默认边框</td></tr>
+        <tr><td>border-focus</td><td>#F32F41</td><td>输入框聚焦边框</td></tr>
+      </table>
+
+      <h3>2.7 色彩使用比例（B端）</h3>
+      <ul>
+        <li>页面 70% 中性色（白/灰背景）+ 25% 文字色 + 5% 品牌/功能色点缀</li>
+        <li>主按钮、Tab 选中、关键链接：brand-6</li>
+        <li>大面积禁止使用 brand-6 作为背景（除 Navbar 品牌头图等特殊场景）</li>
+        <li>状态色仅用于 Tag、Badge、NoticeBar，不做按钮主色（除 Danger 操作）</li>
+      </ul>
+    </section>
+
+    <!-- 3. 字体 -->
+    <section id="typography">
+      <h2 class="section-title"><span class="num">3</span>字体排版</h2>
+      <h3>3.1 字体家族</h3>
+      <table>
+        <tr><th>用途</th><th>字体</th></tr>
+        <tr><td>全局唯一字体 ★</td><td><strong>PingFang SC</strong>（设计稿、HTML 原型、Flutter 均统一）</td></tr>
+        <tr><td>字重 Regular</td><td>font-weight: 400 · 正文、描述</td></tr>
+        <tr><td>字重 Medium</td><td>font-weight: 500 · 标题、按钮、强调</td></tr>
+        <tr><td>字重 Semibold</td><td>font-weight: 600 · 核心数据数字</td></tr>
+        <tr><td>数据字体 ★</td><td><strong>D-DIN-Bold</strong>（DIN Alternate 回退）· 业绩金额、统计数字</td></tr>
+      </table>
+
+      <h3>3.2 字号阶梯（390px 画布，单位 px）</h3>
+      <table>
+        <tr><th>Token</th><th>字号</th><th>行高</th><th>字重</th><th>场景</th></tr>
+        <tr><td>font-xs</td><td>10</td><td>16</td><td>400</td><td>TabBar 文字、极小标签</td></tr>
+        <tr><td>font-s</td><td>12</td><td>20</td><td>400</td><td>辅助说明、时间戳、Badge</td></tr>
+        <tr><td>font-base ★</td><td>14</td><td>22</td><td>400</td><td>正文、Cell 标题、表单标签</td></tr>
+        <tr><td>font-m</td><td>16</td><td>24</td><td>400/500</td><td>Navbar 标题、列表主标题</td></tr>
+        <tr><td>font-l</td><td>20</td><td>28</td><td>500</td><td>区块标题、关键数据</td></tr>
+        <tr><td>font-xl</td><td>24</td><td>32</td><td>500</td><td>页面大标题、统计数字</td></tr>
+        <tr><td>font-xxl</td><td>28</td><td>36</td><td>500</td><td>登录页标题、空状态标题</td></tr>
+        <tr><td>font-data ★</td><td>20</td><td>22</td><td>700 (D-DIN)</td><td>业绩卡数字（Figma 实测 20px）</td></tr>
+        <tr><td>font-data-lg</td><td>32</td><td>40</td><td>700</td><td>仪表盘大指标</td></tr>
+        <tr><td>font-nav-label</td><td>11</td><td>15</td><td>400</td><td>磨砂底栏 Tab 文案</td></tr>
+        <tr><td>font-grid-label</td><td>13</td><td>18</td><td>400</td><td>店务宫格入口（价目表等）</td></tr>
+      </table>
+
+      <h3>3.3 排版规则</h3>
+      <ul>
+        <li>单行文字超出使用省略号 <code>text-overflow: ellipsis</code></li>
+        <li>多行描述最多 2 行，超出截断</li>
+        <li>数字金额右对齐，使用千分位；日期格式 YYYY-MM-DD HH:mm</li>
+        <li>中英文混排时英文与中文之间无需额外空格（中文产品惯例）</li>
+        <li>禁止低于 10px 的可读文字（除 TabBar 图标下 10px 标签）</li>
+      </ul>
+    </section>
+
+    <!-- 4. 间距与布局 -->
+    <section id="spacing">
+      <h2 class="section-title"><span class="num">4</span>间距与布局</h2>
+      <h3>4.1 间距 Token（4px 基准网格）</h3>
+      <table>
+        <tr><th>Token</th><th>值</th><th>用途</th></tr>
+        <tr><td>size-1</td><td>4px</td><td>图标与文字间距、紧凑内边距</td></tr>
+        <tr><td>size-2</td><td>8px</td><td>Tag 内边距、小间距</td></tr>
+        <tr><td>size-3</td><td>12px</td><td>Cell 内部间距、表单字段间距</td></tr>
+        <tr><td>size-4 ★</td><td>16px</td><td>页面左右边距、卡片内边距</td></tr>
+        <tr><td>size-5</td><td>20px</td><td>区块间距</td></tr>
+        <tr><td>size-6</td><td>24px</td><td>大区块间距、Section 分隔</td></tr>
+        <tr><td>size-8</td><td>32px</td><td>页面顶部留白</td></tr>
+        <tr><td>size-10</td><td>40px</td><td>大按钮高度、输入框高度（large）</td></tr>
+        <tr><td>size-12</td><td>48px</td><td>Navbar 高度、Bottom Bar 按钮区</td></tr>
+      </table>
+
+      <h3>4.2 页面布局常量</h3>
+      <div class="spec-block">
+        <strong>画布尺寸规则 ★</strong><br>
+        · <strong>宽度</strong>：固定 <code>390px</code>，所有页面设计、HTML 原型与 AI 出图不得改变宽度，禁止横向扩展画布。<br>
+        · <strong>高度</strong>：默认 <code>844px</code>（常见全面屏逻辑高度基准）；当显示内容超出默认画布可视区域时，<strong>画布高度可向下延长</strong>，以完整呈现可滚动内容，宽度仍为 390px。
+      </div>
+      <table>
+        <tr><th>元素</th><th>尺寸</th><th>说明</th></tr>
+        <tr><td>画布宽度 ★</td><td>390 px（固定）</td><td>全站统一，禁止加宽</td></tr>
+        <tr><td>画布高度（默认）</td><td>844 px</td><td>首屏/短页基准；AI 出图默认从此高度起稿</td></tr>
+        <tr><td>画布高度（延展）</td><td>≥ 844 px，按内容向下增高</td><td>长列表、多段表单、长详情等；仅纵向扩展</td></tr>
+        <tr><td>Flutter 2x</td><td>宽 780 · 高 1688 起</td><td>逻辑宽 390 固定；高度 2x 随设计稿延展</td></tr>
+        <tr><td>页面水平边距</td><td>16px</td><td>内容区距屏幕边缘</td></tr>
+        <tr><td>Navbar 高度</td><td>48px</td><td>不含状态栏</td></tr>
+        <tr><td>TabBar 高度</td><td>56px</td><td>含安全区 bottom padding</td></tr>
+        <tr><td>状态栏</td><td>44px (iOS)</td><td>Android 24px，使用 safe-area</td></tr>
+        <tr><td>底部安全区</td><td>34px</td><td>iPhone 全面屏</td></tr>
+        <tr><td>Cell 行高</td><td>56px</td><td>标准单行 Cell</td></tr>
+        <tr><td>Cell 行高（多行）</td><td>≥72px</td><td>含描述文字</td></tr>
+        <tr><td>Bottom Action Bar</td><td>56px + safe-bottom</td><td>固定底部操作栏</td></tr>
+      </table>
+
+      <h3>4.3 布局结构示意</h3>
+      <span class="canvas-badge">剑琅联盟 · 390 × 844</span>
+      <div class="layout-phones">
+        <div class="layout-phone-wrap">
+          <div class="phone-frame phone-frame--844">
+            <div class="phone-status">9:41</div>
+            <div class="phone-splash phone-splash--pure">
+              <img src="LOGO2.png" alt="剑琅联盟">
+              <div class="app-name">剑琅联盟</div>
+              <div class="app-tagline">商务协作 · 高效共赢</div>
+            </div>
+          </div>
+          <p class="cap">启动页 · 390×844 · 纯白底</p>
+        </div>
+        <div class="layout-phone-wrap">
+          <div class="phone-frame phone-frame--844">
+            <div class="phone-status">9:41</div>
+            <div class="phone-layout-stack">
+              <div class="phone-nav" style="display:flex;align-items:center;gap:8px;flex-shrink:0"><img src="LOGO2.png" alt="" style="width:28px;height:28px;object-fit:contain">剑琅联盟</div>
+              <div class="phone-body phone-body--fill">
+                <div style="background:#fff;border-radius:9px;padding:16px;margin-bottom:12px">
+                  <div style="font-size:16px;font-weight:500;margin-bottom:4px">内容卡片</div>
+                  <div style="font-size:12px;color:var(--text-secondary)">左右边距 16px · 卡片圆角 9px</div>
+                </div>
+                <div style="background:#fff;border-radius:9px;height:56px;display:flex;align-items:center;padding:0 16px;font-size:14px">Cell 列表项 · 高度 56px</div>
+              </div>
+              <div class="phone-tabbar" style="flex-shrink:0">
+                <span class="active">● 首页</span><span>● 工作台</span><span>● 消息</span><span>● 我的</span>
+              </div>
+            </div>
+          </div>
+          <p class="cap">标准内页 · 390×844</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- 5. 圆角与阴影 -->
+    <section id="radius-shadow">
+      <h2 class="section-title"><span class="num">5</span>圆角与阴影</h2>
+      <h3>5.1 圆角</h3>
+      <table>
+        <tr><th>Token</th><th>值</th><th>用途</th></tr>
+        <tr><td>radius-small</td><td>3px</td><td>Tag、Badge、小元素</td></tr>
+        <tr><td>radius-btn-primary ★</td><td>4px</td><td>主要按钮（Primary）专用</td></tr>
+        <tr><td>radius-default</td><td>6px</td><td>次要按钮、Input、Toast</td></tr>
+        <tr><td>radius-large</td><td>9px</td><td>Card、Popup 顶部、Cell 组</td></tr>
+        <tr><td>radius-extraLarge</td><td>12px</td><td>Dialog、Bottom Sheet</td></tr>
+        <tr><td>radius-round</td><td>999px</td><td>胶囊按钮、Search 框</td></tr>
+        <tr><td>radius-circle</td><td>50%</td><td>Avatar、Fab</td></tr>
+      </table>
+      <p>B端建议：默认使用 6px/9px，避免过大圆角（&gt;12px）以保持商务感。</p>
+      <h4>圆角可视化示例</h4>
+      <div class="token-visual-grid">
+        <div class="token-visual-card"><div class="sample radius-sample" style="border-radius:3px"></div><div class="label">radius-small</div><div class="val">3px · Tag</div></div>
+        <div class="token-visual-card"><div class="sample radius-sample primary-btn" style="border-radius:4px">主要按钮</div><div class="label">radius-btn-primary ★</div><div class="val">4px · Primary</div></div>
+        <div class="token-visual-card"><div class="sample radius-sample" style="border-radius:6px"></div><div class="label">radius-default</div><div class="val">6px · Input</div></div>
+        <div class="token-visual-card"><div class="sample radius-sample" style="border-radius:9px"></div><div class="label">radius-large</div><div class="val">9px · Card</div></div>
+        <div class="token-visual-card"><div class="sample radius-sample" style="border-radius:12px"></div><div class="label">radius-extraLarge</div><div class="val">12px · Dialog</div></div>
+        <div class="token-visual-card"><div class="sample radius-sample" style="border-radius:999px;width:96px"></div><div class="label">radius-round</div><div class="val">999px · Search</div></div>
+        <div class="token-visual-card"><div class="sample radius-sample" style="border-radius:50%"></div><div class="label">radius-circle</div><div class="val">50% · Avatar</div></div>
+      </div>
+
+      <h3>5.2 阴影 Elevation</h3>
+      <table>
+        <tr><th>层级</th><th>值</th><th>用途</th></tr>
+        <tr><td>shadow-1</td><td>0 1px 10px rgba(0,0,0,0.05)</td><td>卡片、Fab</td></tr>
+        <tr><td>shadow-2</td><td>0 3px 14px rgba(0,0,0,0.08)</td><td>Dropdown、Popover</td></tr>
+        <tr><td>shadow-3</td><td>0 6px 30px rgba(0,0,0,0.12)</td><td>Dialog、ActionSheet</td></tr>
+      </table>
+      <h4>阴影可视化示例</h4>
+      <div class="token-visual-grid">
+        <div class="token-visual-card"><div class="sample shadow-sample s1"></div><div class="label">shadow-1</div><div class="val">卡片 · Fab</div></div>
+        <div class="token-visual-card"><div class="sample shadow-sample s2"></div><div class="label">shadow-2</div><div class="val">Dropdown</div></div>
+        <div class="token-visual-card"><div class="sample shadow-sample s3"></div><div class="label">shadow-3</div><div class="val">Dialog</div></div>
+      </div>
+    </section>
+
+    <!-- 6. 图标库 -->
+    <section id="icons">
+      <h2 class="section-title"><span class="num">6</span>图标库（可直接调用）</h2>
+      <p>图标来源 <a href="https://www.figma.com/design/67W6shkKwqkQfOHDEFlNWJ/TDesign-Icon-SVG-File--Community-">TDesign Icon SVG</a>。已按<strong>通用 / 美业店务 / 零售商城 / 订单财务</strong>整理；设计稿中的「开单/开卡」等为定制 SVG，下表给出 TDesign 等价替代。</p>
+      <h3>6.0 设计稿功能 → 图标映射（剑琅管家 / RTP）</h3>
+      <table>
+        <tr><th>设计稿文案</th><th>TDesign 图标名</th><th>分类</th><th>说明</th></tr>
+        <tr><td>开单</td><td><code>file-add</code> 或 <code>edit-1</code></td><td>美业</td><td>顶栏快捷区，可用定制 SVG</td></tr>
+        <tr><td>开卡</td><td><code>creditcard</code></td><td>美业</td><td>会员卡开卡</td></tr>
+        <tr><td>验券</td><td><code>coupon</code></td><td>美业</td><td>核销验券</td></tr>
+        <tr><td>结算</td><td><code>wallet</code></td><td>美业</td><td>收银结算</td></tr>
+        <tr><td>价目表</td><td><code>view-list</code></td><td>美业</td><td>宫格 38px 区</td></tr>
+        <tr><td>会员卡</td><td><code>creditcard</code></td><td>美业</td><td>会员管理入口</td></tr>
+        <tr><td>会员管理</td><td><code>usergroup</code></td><td>美业</td><td>—</td></tr>
+        <tr><td>员工管理</td><td><code>member</code></td><td>美业</td><td>—</td></tr>
+        <tr><td>预约</td><td><code>calendar</code></td><td>美业</td><td>—</td></tr>
+        <tr><td>经营分析</td><td><code>chart</code></td><td>美业</td><td>—</td></tr>
+        <tr><td>业绩排行</td><td><code>chart-bar</code></td><td>美业</td><td>—</td></tr>
+        <tr><td>联盟广场</td><td><code>shop</code></td><td>零售</td><td>RTP 内容入口</td></tr>
+        <tr><td>首页 Tab</td><td><code>home</code></td><td>导航</td><td>磨砂底栏选中黑底</td></tr>
+        <tr><td>客户 Tab</td><td><code>user</code></td><td>导航</td><td>—</td></tr>
+        <tr><td>业绩 Tab</td><td><code>chart-line</code></td><td>导航</td><td>—</td></tr>
+        <tr><td>工作台 Tab</td><td><code>app</code></td><td>导航</td><td>—</td></tr>
+        <tr><td>上架到店</td><td><code>add</code></td><td>零售</td><td>选品卡片主按钮</td></tr>
+        <tr><td>购物车</td><td><code>cart</code></td><td>零售</td><td>底栏 Badge 数量</td></tr>
+        <tr><td>供货价/零售价</td><td><code>money</code></td><td>零售</td><td>价格三档表单</td></tr>
+        <tr><td>物流</td><td><code>undertake-delivery</code> 或 <code>map</code></td><td>订单</td><td>—</td></tr>
+      </table>
+      <div class="spec-block"><strong>调用方式：</strong>HTML 原型 <code>&lt;iconify-icon icon="tdesign:search"&gt;&lt;/iconify-icon&gt;</code> · Figma 搜索图标名 · AI 出图标注 <code>icon:search</code></div>
+      <table>
+        <tr><th>尺寸</th><th>px</th><th>用途</th></tr>
+        <tr><td>icon-xs</td><td>16</td><td>Tag 内、表格操作</td></tr>
+        <tr><td>icon-s</td><td>20</td><td>Cell 箭头、输入框前缀</td></tr>
+        <tr><td>icon-base ★</td><td>24</td><td>Navbar、列表、按钮内</td></tr>
+        <tr><td>icon-l</td><td>28</td><td>TabBar</td></tr>
+        <tr><td>icon-xl / xxl / xxxl</td><td>32 / 48 / 64</td><td>空状态、结果页</td></tr>
+      </table>
+      <h3>图标颜色</h3>
+      <ul>
+        <li>默认 gray-8 · 选中 brand-6 · 禁用 gray-5 · 反色 #FFF</li>
+      </ul>
+      <h3>浏览与检索</h3>
+      <div class="icon-filter-row">
+        <input type="text" id="icon-search" placeholder="搜索图标名或含义，如：审批、上传、返回">
+        <button type="button" class="filter-chip active" data-cat="all">全部</button>
+        <button type="button" class="filter-chip" data-cat="nav">导航</button>
+        <button type="button" class="filter-chip" data-cat="action">操作</button>
+        <button type="button" class="filter-chip" data-cat="form">表单</button>
+        <button type="button" class="filter-chip" data-cat="data">数据</button>
+        <button type="button" class="filter-chip" data-cat="biz">业务</button>
+        <button type="button" class="filter-chip" data-cat="file">文件</button>
+        <button type="button" class="filter-chip" data-cat="comm">通讯</button>
+        <button type="button" class="filter-chip" data-cat="status">状态</button>
+        <button type="button" class="filter-chip" data-cat="user">用户</button>
+        <button type="button" class="filter-chip" data-cat="sys">系统</button>
+        <button type="button" class="filter-chip" data-cat="meiye">美业店务</button>
+        <button type="button" class="filter-chip" data-cat="retail">零售商城</button>
+        <button type="button" class="filter-chip" data-cat="order">订单财务</button>
+        <button type="button" class="filter-chip" data-cat="filled">面性图标</button>
+      </div>
+      <p style="font-size:12px;color:var(--text-secondary);margin-bottom:12px">线性与面性（<code>-filled</code> 后缀）均可调用，适用于 Tab 选中、状态强调等场景。</p>
+      <div id="icon-lib-root" class="icon-lib-grid"></div>
+      <p id="icon-lib-count" style="font-size:12px;color:var(--text-secondary)"></p>
+    </section>
+
+    <!-- 7. 组件库（可调用） -->
+    <section id="components">
+      <h2 class="section-title"><span class="num">7</span>组件库（可调用）</h2>
+      <p>对齐 <a href="https://tdesign.tencent.com/flutter/overview">TDesign Flutter</a> 与已落地页面。AI 出图须标注 <code>组件名 + 变体</code>。</p>
+      <table class="comp-catalog">
+        <tr><th>分类</th><th>组件 ID</th><th>名称</th><th>场景</th></tr>
+        <tr><td>导航</td><td>TabBar</td><td>标准底栏</td><td>子模块 3–4 Tab</td></tr>
+        <tr><td>入口</td><td>QuickEntryGrid</td><td>店务宫格</td><td>5×2 · 70×70</td></tr>
+        <tr><td>反馈</td><td>AlertBanner</td><td>蓝色提醒条</td><td>异常信息</td></tr>
+        <tr><td>营销</td><td>PromoCard</td><td>渐变营销卡</td><td>获客/推客</td></tr>
+        <tr><td>零售</td><td>ProductCard</td><td>商品双列卡</td><td>选品上架</td></tr>
+        <tr><td>零售</td><td>PriceRow</td><td>价格三档行</td><td>原价/零售/供货</td></tr>
+        <tr><td>零售</td><td>CartBar</td><td>商品底栏</td><td>店铺/客服/加购/购买</td></tr>
+        <tr><td>基础</td><td>Button / Cell / …</td><td>TDesign 基础件</td><td>见下方预览</td></tr>
+      </table>
+
+      <div class="comp-block" id="comp-grid-entry">
+        <div class="comp-block-hd"><strong>QuickEntryGrid 店务宫格</strong><code>5 列 · 图标 38px</code></div>
+        <div class="comp-block-bd">
+          <div class="u-grid-entry">
+            <div class="item"><iconify-icon icon="tdesign:view-list"></iconify-icon><span>价目表</span></div>
+            <div class="item"><iconify-icon icon="tdesign:creditcard"></iconify-icon><span>会员卡</span></div>
+            <div class="item"><iconify-icon icon="tdesign:usergroup"></iconify-icon><span>会员管理</span></div>
+            <div class="item"><iconify-icon icon="tdesign:member"></iconify-icon><span>员工管理</span></div>
+            <div class="item"><iconify-icon icon="tdesign:calendar"></iconify-icon><span>预约</span></div>
+            <div class="item"><iconify-icon icon="tdesign:chart"></iconify-icon><span>经营分析</span></div>
+            <div class="item"><iconify-icon icon="tdesign:chart-bar"></iconify-icon><span>业绩排行</span></div>
+            <div class="item"><iconify-icon icon="tdesign:shop"></iconify-icon><span>联盟广场</span></div>
+            <div class="item"><iconify-icon icon="tdesign:desktop"></iconify-icon><span>设备管理</span></div>
+            <div class="item"><iconify-icon icon="tdesign:ellipsis"></iconify-icon><span>更多</span></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="comp-block" id="comp-product-card">
+        <div class="comp-block-hd"><strong>ProductCard 商品卡</strong><code>RTP 选品 · 双列 grid</code></div>
+        <div class="comp-block-bd">
+          <div class="demo-row">
+            <div class="u-product-card">
+              <div class="thumb"><iconify-icon icon="tdesign:image" aria-label="商品图"></iconify-icon></div>
+              <div class="body">
+                <div class="brand">馥绿德雅</div>
+                <div class="title">复合精油按摩护理油 100ml</div>
+                <div class="price">¥128</div>
+                <div class="sub">建议售 ¥298 · 毛利 ¥170</div>
+                <button class="btn btn-primary btn-sm" style="width:100%;margin-top:8px;border-radius:4px">上架到店</button>
+              </div>
+            </div>
+            <div class="u-product-card">
+              <div class="thumb"><iconify-icon icon="tdesign:image" aria-label="商品图"></iconify-icon></div>
+              <div class="body">
+                <div class="brand">馥绿德雅</div>
+                <div class="title">头皮深层洁净洗发露 200ml</div>
+                <div class="price">¥86</div>
+                <div class="sub">已上架 · 销 32 件</div>
+                <button class="btn btn-outline btn-sm" style="width:100%;margin-top:8px">编辑</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="comp-block" id="comp-price-row">
+        <div class="comp-block-hd"><strong>PriceRow 价格三档</strong><code>PRD-214 · list/retail/supply</code></div>
+        <div class="comp-block-bd">
+          <div class="u-price-row">
+            <div class="col"><label>原价（划线）</label><div class="v">¥298</div></div>
+            <div class="col"><label>零售价</label><div class="v retail">¥168</div></div>
+            <div class="col"><label>供货价</label><div class="v">¥128</div></div>
+            <div class="col"><label>渠道价</label><div class="v">¥118</div></div>
+          </div>
+          <p style="margin-top:12px;font-size:12px;color:var(--text-secondary)">编辑页表格：规格 × 原价/零售价/供货价/库存 · 分销默认渠道价=供货价</p>
+        </div>
+      </div>
+
+      <div class="comp-block" id="comp-login">
+        <div class="comp-block-hd"><strong>登录页品牌区</strong><code>剑琅联盟 · Splash / Login</code></div>
+        <div class="comp-block-bd">
+          <div class="comp-preview-phone" style="background:#fff;padding:48px 24px;text-align:center">
+            <img src="LOGO2.png" alt="剑琅联盟" style="width:72px;height:72px;object-fit:contain;margin-bottom:16px">
+            <div style="font-size:28px;font-weight:600;letter-spacing:.06em;margin-bottom:24px">剑琅联盟</div>
+            <input class="input-demo" placeholder="请输入手机号" style="width:100%;max-width:none;margin-bottom:12px">
+            <button class="btn btn-primary btn-lg" style="width:100%;border-radius:4px;margin-top:8px">登录</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="comp-block" id="comp-button">
+        <div class="comp-block-hd"><strong>Button 按钮</strong><code>TButton · theme=primary|radius=4px</code></div>
+        <div class="comp-block-bd">
+          <div class="demo-row">
+            <button class="btn btn-primary">主要按钮</button>
+            <button class="btn btn-primary btn-lg">大号主要</button>
+            <button class="btn btn-primary btn-sm">小号主要</button>
+            <button class="btn btn-outline">描边按钮</button>
+            <button class="btn btn-ghost">浅底按钮</button>
+            <button class="btn btn-text">文字按钮</button>
+            <button class="btn btn-danger">危险按钮</button>
+            <button class="btn btn-primary btn-disabled">禁用</button>
+          </div>
+          <table>
+            <tr><th>变体</th><th>规格</th></tr>
+            <tr><td>Primary ★</td><td>高 40/48/32px · 圆角 <strong>4px</strong> · bg brand-6 · 字 #FFF · 点击 brand-7</td></tr>
+            <tr><td>Outline</td><td>圆角 6px · 描边 brand-6 · 字 brand-6</td></tr>
+            <tr><td>Ghost</td><td>圆角 6px · bg brand-1 · 字 brand-6</td></tr>
+            <tr><td>Block</td><td>宽度 100%（表单提交、登录）</td></tr>
+            <tr><td>BottomBar</td><td>双按钮：左 Outline + 右 Primary，间距 12px</td></tr>
+          </table>
+        </div>
+      </div>
+
+      <div class="comp-block" id="comp-navbar">
+        <div class="comp-block-hd"><strong>Navbar 导航栏</strong><code>TNavbar · height=48</code></div>
+        <div class="comp-block-bd">
+          <div class="comp-preview-phone">
+            <div class="u-navbar"><iconify-icon class="back" icon="tdesign:chevron-left"></iconify-icon><img src="LOGO2.png" alt="" style="width:24px;height:24px;object-fit:contain;margin-right:6px">订单详情<span class="action">分享</span></div>
+          </div>
+          <table><tr><th>属性</th><th>值</th></tr>
+            <tr><td>高度</td><td>48px + 状态栏 44px</td></tr>
+            <tr><td>标题</td><td>16px Medium PingFang SC</td></tr>
+            <tr><td>返回</td><td>chevron-left · 24px · 距左 16px</td></tr>
+            <tr><td>右侧</td><td>最多 2 项 · 14px brand-6</td></tr>
+          </table>
+        </div>
+      </div>
+
+      <div class="comp-block" id="comp-tabbar">
+        <div class="comp-block-hd"><strong>TabBar 标准底栏</strong><code>子模块页 · 非首页</code></div>
+        <div class="comp-block-bd">
+          <div class="comp-preview-phone">
+            <div class="u-tabbar">
+              <div class="tab on"><iconify-icon icon="tdesign:home"></iconify-icon>首页</div>
+              <div class="tab"><iconify-icon icon="tdesign:shop"></iconify-icon>商城</div>
+              <div class="tab"><iconify-icon icon="tdesign:cart"></iconify-icon>购物车</div>
+              <div class="tab"><iconify-icon icon="tdesign:user"></iconify-icon>我的</div>
+            </div>
+          </div>
+          <p>高度 56px + 安全区 · 白底 · 选中 brand-6 · 用于商城/订单等子模块</p>
+        </div>
+      </div>
+
+      <div class="comp-block" id="comp-tabs">
+        <div class="comp-block-hd"><strong>Tabs 选项卡</strong><code>TTabs</code></div>
+        <div class="comp-block-bd">
+          <div class="comp-preview-phone">
+            <div class="u-tabs"><span class="on">全部</span><span>待审批</span><span>已完成</span></div>
+          </div>
+          <p>高 48px · 指示器 3×16px brand-6 · ≤4 项等分</p>
+        </div>
+      </div>
+
+      <div class="comp-block" id="comp-search">
+        <div class="comp-block-hd"><strong>Search 搜索框</strong><code>TSearch</code></div>
+        <div class="comp-block-bd">
+          <div class="comp-preview-phone">
+            <div class="u-search"><iconify-icon icon="tdesign:search"></iconify-icon>搜索订单、客户</div>
+          </div>
+          <p>高 36px · bg gray-1 · 圆角 capsule · 图标 search 20px</p>
+        </div>
+      </div>
+
+      <div class="comp-block" id="comp-input">
+        <div class="comp-block-hd"><strong>Input / Textarea 输入</strong><code>TInput · TTextarea</code></div>
+        <div class="comp-block-bd">
+          <div class="demo-row">
+            <input class="input-demo" placeholder="请输入">
+            <input class="input-demo" value="已填写内容" style="border-color:var(--brand-6)">
+          </div>
+          <div style="border:1px solid var(--border);border-radius:6px;padding:10px 12px;min-height:80px;color:var(--text-placeholder);font-size:14px;width:100%;max-width:360px">多行文本输入…<div style="text-align:right;font-size:12px;margin-top:8px">0/200</div></div>
+          <p style="margin-top:8px">Input 高 40px · 圆角 6px · 聚焦 border brand-6 · 必填标签前红色 *</p>
+        </div>
+      </div>
+
+      <div class="comp-block" id="comp-cell">
+        <div class="comp-block-hd"><strong>Cell 单元格</strong><code>TCell</code></div>
+        <div class="comp-block-bd">
+          <div class="comp-preview-phone">
+            <div class="u-cell-group">
+              <div class="u-cell">客户名称<span class="note">华东分公司</span><iconify-icon icon="tdesign:chevron-right" style="color:var(--gray-6)"></iconify-icon></div>
+              <div class="u-cell" style="flex-direction:column;align-items:flex-start;gap:4px">合同金额<div style="font-size:12px;color:var(--text-secondary)">更新于 2026-05-27</div></div>
+              <div class="u-cell">审批状态<span class="note"><span class="tag-demo tag-brand-demo">待审批</span></span></div>
+            </div>
+          </div>
+          <p>单行高 56px · 左右 padding 16px · 组圆角 9px · 分割线左边距 16px</p>
+        </div>
+      </div>
+
+      <div class="comp-block" id="comp-tag">
+        <div class="comp-block-hd"><strong>Tag / Badge 标签与徽标</strong><code>TTag · TBadge</code></div>
+        <div class="comp-block-bd">
+          <div class="demo-row">
+            <span class="tag-demo tag-default">草稿</span>
+            <span class="tag-demo tag-brand-demo">待审批</span>
+            <span class="tag-demo tag-success">已通过</span>
+            <span class="tag-demo tag-warning">即将到期</span>
+            <span class="tag-demo tag-error">已驳回</span>
+            <span style="position:relative;display:inline-block;padding-right:8px">消息 <span class="u-badge">8</span></span>
+            <span style="width:8px;height:8px;background:var(--brand-6);border-radius:50%;display:inline-block" title="红点"></span>
+          </div>
+        </div>
+      </div>
+
+      <div class="comp-block" id="comp-form-controls">
+        <div class="comp-block-hd"><strong>Switch / CheckBox / Radio</strong><code>TSwitch · TCheckbox · TRadio</code></div>
+        <div class="comp-block-bd">
+          <div class="demo-row" style="gap:24px">
+            <div class="u-switch on"></div>
+            <div class="u-switch"></div>
+            <label style="display:flex;align-items:center;gap:8px;font-size:14px"><span style="width:20px;height:20px;border-radius:4px;background:var(--brand-6);color:#fff;display:inline-flex;align-items:center;justify-content:center;font-size:12px">✓</span>记住账号</label>
+            <label style="display:flex;align-items:center;gap:8px;font-size:14px"><span style="width:20px;height:20px;border:1px solid var(--brand-6);border-radius:50%;display:inline-flex;align-items:center;justify-content:center"><span style="width:10px;height:10px;background:var(--brand-6);border-radius:50%"></span></span>选项 A</label>
+          </div>
+        </div>
+      </div>
+
+      <div class="comp-block" id="comp-steps">
+        <div class="comp-block-hd"><strong>Steps 步骤条</strong><code>TSteps</code></div>
+        <div class="comp-block-bd">
+          <div class="comp-preview-phone">
+            <div class="u-steps">
+              <div class="step done"><div class="dot">✓</div>提交</div>
+              <div class="step cur"><div class="dot">2</div>审批</div>
+              <div class="step"><div class="dot">3</div>完成</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="comp-block" id="comp-notice">
+        <div class="comp-block-hd"><strong>NoticeBar 公告条</strong><code>TNoticeBar</code></div>
+        <div class="comp-block-bd">
+          <div class="comp-preview-phone">
+            <div class="u-notice"><iconify-icon icon="tdesign:info-circle"></iconify-icon>您有 3 条待审批事项请及时处理</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="comp-block" id="comp-dialog">
+        <div class="comp-block-hd"><strong>Dialog / Toast 对话框与轻提示</strong><code>TDialog · TToast</code></div>
+        <div class="comp-block-bd">
+          <div class="u-dialog">
+            <h5>确认驳回？</h5>
+            <p>驳回后需重新提交审批，是否继续？</p>
+            <div class="acts"><button class="btn btn-outline" style="flex:1">取消</button><button class="btn btn-primary" style="flex:1;border-radius:4px;background:#F32F41">确认驳回</button></div>
+          </div>
+          <div style="margin-top:16px;text-align:center"><span style="display:inline-block;background:rgba(0,0,0,.8);color:#fff;padding:10px 20px;border-radius:6px;font-size:14px">操作成功</span></div>
+        </div>
+      </div>
+
+      <div class="comp-block" id="comp-empty">
+        <div class="comp-block-hd"><strong>Empty / Result 空状态与结果页</strong><code>TEmpty · TResult</code></div>
+        <div class="comp-block-bd">
+          <div class="u-empty">
+            <iconify-icon icon="tdesign:file"></iconify-icon>
+            <p style="margin-top:12px;font-size:14px;color:var(--text-primary)">暂无订单数据</p>
+            <p style="font-size:12px">点击下方按钮创建第一笔订单</p>
+            <button class="btn btn-primary" style="margin-top:16px;border-radius:4px">新建订单</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="comp-block" id="comp-avatar">
+        <div class="comp-block-hd"><strong>Avatar 头像</strong><code>TAvatar</code></div>
+        <div class="comp-block-bd">
+          <div class="demo-row">
+            <div class="u-avatar" style="width:32px;height:32px"><iconify-icon icon="tdesign:user"></iconify-icon></div>
+            <div class="u-avatar"><iconify-icon icon="tdesign:user"></iconify-icon></div>
+            <div class="u-avatar" style="width:48px;height:48px"><iconify-icon icon="tdesign:user" style="font-size:24px"></iconify-icon></div>
+          </div>
+          <p>尺寸 32 / 40 / 48px · 圆形 · 默认 gray-3 底</p>
+        </div>
+      </div>
+
+      <div class="comp-block" id="comp-progress">
+        <div class="comp-block-hd"><strong>Progress / Loading 进度与加载</strong><code>TProgress · TLoading</code></div>
+        <div class="comp-block-bd">
+          <div class="u-progress" style="max-width:280px;margin-bottom:12px"><i></i></div>
+          <div class="demo-row" style="color:var(--brand-6);font-size:14px"><span style="display:inline-block;width:20px;height:20px;border:2px solid var(--brand-6);border-top-color:transparent;border-radius:50%;animation:spin .8s linear infinite"></span>加载中…</div>
+        </div>
+      </div>
+
+      <div class="comp-block" id="comp-fab">
+        <div class="comp-block-hd"><strong>Fab 悬浮按钮</strong><code>TFab</code></div>
+        <div class="comp-block-bd">
+          <div class="demo-row"><div class="u-fab"><iconify-icon icon="tdesign:add" style="font-size:24px"></iconify-icon></div></div>
+          <p>48×48 圆形 · brand-6 · shadow-2 · 列表页「新建」</p>
+        </div>
+      </div>
+
+      <div class="comp-block" id="comp-upload">
+        <div class="comp-block-hd"><strong>Upload 上传</strong><code>TUpload</code></div>
+        <div class="comp-block-bd">
+          <div style="width:80px;height:80px;border:1px dashed var(--gray-4);border-radius:6px;display:flex;flex-direction:column;align-items:center;justify-content:center;color:var(--text-secondary);font-size:12px;gap:4px">
+            <iconify-icon icon="tdesign:add" style="font-size:24px"></iconify-icon>上传
+          </div>
+          <p style="margin-top:8px">虚线框 80×80 · 支持图片/PDF · 表单附件区</p>
+        </div>
+      </div>
+
+      <div class="comp-block" id="comp-skeleton">
+        <div class="comp-block-hd"><strong>Skeleton 骨架屏</strong><code>TSkeleton</code></div>
+        <div class="comp-block-bd" style="max-width:320px">
+          <div class="u-skeleton" style="width:60%"></div>
+          <div class="u-skeleton"></div>
+          <div class="u-skeleton" style="width:80%"></div>
+        </div>
+      </div>
+
+      <div class="comp-block" id="comp-bottombar">
+        <div class="comp-block-hd"><strong>Bottom Action Bar 底部操作栏</strong><code>固定底栏</code></div>
+        <div class="comp-block-bd">
+          <div class="comp-preview-phone">
+            <div class="u-bottom-bar">
+              <button class="btn btn-outline" style="flex:1">保存草稿</button>
+              <button class="btn btn-primary" style="flex:1">提交审批</button>
+            </div>
+          </div>
+          <p>高 56px + safe-bottom · 主按钮圆角 4px</p>
+        </div>
+      </div>
+
+      <div class="comp-block" id="comp-divider">
+        <div class="comp-block-hd"><strong>Divider 分割线</strong><code>TDivider</code></div>
+        <div class="comp-block-bd">
+          <p>水平 0.5px gray-3 · 可带文字「以下为审批记录」font-s text-secondary</p>
+          <hr style="border:none;border-top:0.5px solid var(--gray-3);margin:12px 0">
+        </div>
+      </div>
+
+      <div class="comp-block" id="comp-dropdown">
+        <div class="comp-block-hd"><strong>DropdownMenu 筛选菜单</strong><code>TDropdownMenu</code></div>
+        <div class="comp-block-bd">
+          <div style="display:flex;height:48px;background:#fff;border:1px solid var(--border);border-radius:9px;overflow:hidden">
+            <span style="flex:1;display:flex;align-items:center;justify-content:center;font-size:14px;color:var(--brand-6);font-weight:500">全部状态 ▾</span>
+            <span style="flex:1;display:flex;align-items:center;justify-content:center;font-size:14px;color:var(--text-secondary);border-left:1px solid var(--border)">时间排序 ▾</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="comp-block" id="comp-card">
+        <div class="comp-block-hd"><strong>Card 业务卡片</strong><code>组合组件</code></div>
+        <div class="comp-block-bd">
+          <div style="background:#fff;border-radius:9px;padding:16px;max-width:360px;box-shadow:var(--shadow-1)">
+            <div style="display:flex;justify-content:space-between;margin-bottom:12px"><span style="font-weight:500">本月销售额</span><iconify-icon icon="tdesign:chevron-right" style="color:var(--gray-6)"></iconify-icon></div>
+            <div style="font-size:28px;font-weight:600">¥ 1,286,400</div>
+            <div style="font-size:12px;color:var(--success-6);margin-top:4px">↑ 12.5% 较上月</div>
+          </div>
+          <p style="margin-top:8px">白底 · 圆角 9px · padding 16px · 用于工作台数据概览</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- 8. 页面模式 -->
+    <section id="patterns">
+      <h2 class="section-title"><span class="num">8</span>页面模式模板</h2>
+      <p>AI 出图时先声明模式 ID，再填充具体内容。</p>
+
+      <h3>P-H01 剑琅首页（Figma 主页面 ★）</h3>
+      <div class="card">
+        <strong>结构：</strong>BrandHeader(渐变+开单/开卡/验券/结算) → QuickEntryGrid(5×2) → StatCard(虚/实+日期) → AlertBanner(蓝) → PromoCard×2 → 内容卡 → GlassTabBar(5)<br>
+        <strong>Token：</strong>品牌渐变 · 文字 #333/#929 · 业绩数字 D-DIN 20px · 底栏磨砂胶囊<br>
+        <strong>参考：</strong><a href="https://www.figma.com/design/cUaUaxtcNsREKlfnQKXe1L/RTP-%E9%9B%B6%E5%94%AE%E6%A8%A1%E5%9D%97?node-id=72-137">Figma 72-137</a>
+      </div>
+
+      <h3>P-R01 RTP 选品上架（店主端）</h3>
+      <div class="card">
+        <strong>结构：</strong>Navbar → 供货商条 → Tabs(全部/已上架) → Search+筛选 → ProductCard 双列网格<br>
+        <strong>按钮：</strong>「上架到店」Primary 4px · 「已上架」Tag success
+      </div>
+
+      <h3>P-R02 商品详情（消费者/店主预览）</h3>
+      <div class="card">
+        <strong>结构：</strong>大图 → 价格区(零售价+划线原价) → 规格行 → 优惠/配送 → 门店条 → 评价 → CartBar 固定底<br>
+        <strong>底栏：</strong>店铺/客服/购物车(带 Badge) + 加购 Ghost + 购买 Primary
+      </div>
+
+      <h3>P-R03 价格编辑（供应商）</h3>
+      <div class="card">
+        <strong>结构：</strong>Navbar → PriceRow 表格(原价/零售价/供货价/库存) → 分销渠道价折叠 → BottomBar 保存<br>
+        <strong>规则：</strong>retail ≥ supply · 无上游零售指导价（PRD-214）
+      </div>
+
+      <h3>P-01 工作台首页（通用 B 端）</h3>
+      <div class="card">
+        <strong>结构：</strong>Navbar → 数据概览卡 → 快捷入口 → 待办 Cell → TabBar<br>
+        <strong>适用：</strong>非美业首页的通用工作台变体
+      </div>
+
+      <h3>P-02 列表页（通用）</h3>
+      <div class="card">
+        <strong>结构：</strong>Navbar(返回+标题+筛选) → Search → DropdownMenu(可选) → 列表(Cell/SwipeCell) → 浮动 Fab 或 Bottom Bar「新建」<br>
+        <strong>列表项：</strong>左标题+Tag 状态 · 右时间/金额 · 底部分割线<br>
+        <strong>空状态：</strong>Empty + 「暂无数据」
+      </div>
+
+      <h3>P-03 详情页</h3>
+      <div class="card">
+        <strong>结构：</strong>Navbar → 状态头(Tag+标题+元信息) → Collapse 分组(Cell 只读) → 时间线(Steps/自定义) → Bottom Bar(操作按钮)<br>
+        <strong>状态头：</strong>brand-1 或 gray-1 背景 · 审批状态用大 Tag
+      </div>
+
+      <h3>P-04 表单页</h3>
+      <div class="card">
+        <strong>结构：</strong>Navbar → Form(Cell 嵌 Input/Picker/Upload) → Bottom Bar「提交」<br>
+        <strong>规则：</strong>必填 * 号 · 实时校验 · 提交后 Toast + 返回<br>
+        <strong>分组：</strong>组标题 font-s text-secondary 上间距 24px 下间距 8px
+      </div>
+
+      <h3>P-05 审批流程页</h3>
+      <div class="card">
+        <strong>结构：</strong>Navbar → 申请信息卡 → Steps 审批进度 → 审批意见列表 → Bottom Bar「通过」「驳回」<br>
+        <strong>驳回：</strong>danger outline · 通过：primary · 需二次 Dialog 确认
+      </div>
+
+      <h3>P-06 登录 / 企业认证</h3>
+      <div class="card">
+        <strong>结构：</strong>剑琅联盟 Logo 72px + 标题「剑琅联盟」font-xxl → Input 组 → primary block 按钮（圆角 4px）→ 协议链接 font-s<br>
+        <strong>背景：</strong>white 或顶部 brand 渐变 · Logo 必须使用官方 <code>LOGO2.png</code>
+      </div>
+
+      <h3>P-07 消息中心</h3>
+      <div class="card">
+        <strong>结构：</strong>Navbar → Tabs(全部/系统/审批) → 消息 Cell(未读 bold + 红点) → 下拉刷新<br>
+        <strong>未读：</strong>标题 font-base Medium · 已读 text-secondary Regular
+      </div>
+
+      <h3>P-08 个人中心</h3>
+      <div class="card">
+        <strong>结构：</strong>头部(Avatar 48 + 姓名 font-l + 部门 font-s) → Cell 组(设置/关于/退出) → TabBar<br>
+        <strong>退出：</strong>Cell 文字 error-6，无箭头
+      </div>
+    </section>
+
+    <!-- 9. 交互 -->
+    <section id="interaction">
+      <h2 class="section-title"><span class="num">9</span>交互与反馈规范</h2>
+      <h3>9.1 动效</h3>
+      <table>
+        <tr><th>场景</th><th>时长</th><th>曲线</th></tr>
+        <tr><td>页面转场</td><td>300ms</td><td>ease-in-out</td></tr>
+        <tr><td>Popup/BottomSheet 弹出</td><td>240ms</td><td>cubic-bezier(0.38, 0, 0.24, 1)</td></tr>
+        <tr><td>按钮点击</td><td>100ms</td><td>opacity 0.7 或背景色变深</td></tr>
+        <tr><td>Toast 显隐</td><td>200ms</td><td>fade</td></tr>
+        <tr><td>列表加载</td><td>Skeleton  shimmer 1.5s 循环</td><td>—</td></tr>
+      </table>
+
+      <h3>9.2 反馈规则</h3>
+      <div class="alert alert-info">信息提示 → Toast（轻量）或 Message（需手动关闭）</div>
+      <div class="alert alert-warn">警告/待办 → NoticeBar 或 Dialog 确认</div>
+      <ul>
+        <li>操作成功：Toast「操作成功」2s 自动消失</li>
+        <li>操作失败：Toast 或 Dialog 展示具体原因</li>
+        <li>网络错误：Result 页 + 「重试」按钮</li>
+        <li>删除/驳回：Dialog 二次确认，确认按钮 danger</li>
+        <li>表单提交：按钮 Loading 态，防重复点击</li>
+        <li>列表加载更多：底部 Loading + 「没有更多了」font-s text-placeholder</li>
+      </ul>
+
+      <h3>9.3 手势</h3>
+      <ul>
+        <li>右滑/返回按钮：返回上一页</li>
+        <li>下拉：PullDownRefresh 刷新列表</li>
+        <li>左滑 Cell：露出快捷操作（SwipeCell）</li>
+        <li>长按：批量选择模式（列表页）</li>
+      </ul>
+    </section>
+
+    <!-- 10. B端 -->
+    <section id="b2b">
+      <h2 class="section-title"><span class="num">10</span>B端业务专项规范</h2>
+      <h3>10.1 状态色映射（通用）</h3>
+      <table>
+        <tr><th>业务状态</th><th>Tag 类型</th><th>颜色</th></tr>
+        <tr><td>草稿 / 未提交</td><td>default</td><td>gray-1 / text-secondary</td></tr>
+        <tr><td>待审批 / 进行中</td><td>brand</td><td>brand-1 / brand-6</td></tr>
+        <tr><td>已通过 / 已完成</td><td>success</td><td>success-1 / success-6</td></tr>
+        <tr><td>已驳回 / 已取消</td><td>error</td><td>error-1 / error-6</td></tr>
+        <tr><td>即将到期 / 待补充</td><td>warning</td><td>warning-1 / warning-6</td></tr>
+        <tr><td>已归档 / 只读</td><td>default</td><td>gray-2 / gray-8</td></tr>
+      </table>
+
+      <h3>10.2 数据展示</h3>
+      <ul>
+        <li>金额：¥ 前缀 + 千分位 + 2 位小数，font-m Medium，正数 text-primary，负数 error-6</li>
+        <li>百分比：保留 1 位小数 + % 后缀</li>
+        <li>日期：YYYY-MM-DD；时间：HH:mm；完整 YYYY-MM-DD HH:mm</li>
+        <li>ID/编号：font-s text-secondary，可复制，点击 Toast「已复制」</li>
+        <li>大数字概览：font-data + 单位 font-s text-secondary</li>
+      </ul>
+
+      <h3>10.3 权限与空状态</h3>
+      <ul>
+        <li>无权限：Result 页 + lock 图标 + 「暂无访问权限」+ 联系管理员</li>
+        <li>无数据：Empty + 引导创建按钮</li>
+        <li>搜索无结果：Empty + 「未找到相关内容」</li>
+        <li>维护中：NoticeBar + 全页 Result</li>
+      </ul>
+
+      <h3>10.4 表单 B 端规则</h3>
+      <ul>
+        <li>字段分组：基础信息 / 业务信息 / 附件</li>
+        <li>长表单：分步 Steps 或锚点 Tabs</li>
+        <li>只读模式：Cell 样式，值 text-secondary，无 Input 边框</li>
+        <li>审批意见：Textarea 必填，最少 5 字</li>
+      </ul>
+    </section>
+
+    <!-- 11. Tokens JSON -->
+    <section id="tokens">
+      <h2 class="section-title"><span class="num">11</span>Design Token JSON</h2>
+      <p>可复制到 Flutter <code>TDThemeData.fromJson</code> 或设计工具 Token 插件。</p>
+      <pre id="token-json">{
+  "appName": "剑琅联盟",
+  "appLogo": "LOGO2.png",
+  "figmaFile": "RTP-零售模块",
+  "figmaNode": "72-137",
+  "brandTheme": {
+    "color": {
+      "textPrimary": "#333333",
+      "textSecondary": "#929292",
+      "textMuted": "#B8B8B8",
+      "accentBlue": "#1A70FE",
+      "accentOrange": "#F77357",
+      "brandNormalColor": "#F32F41",
+      "brandLightColor": "#FEF0F1",
+      "brandFocusColor": "#FDD9DC",
+      "brandActiveColor": "#D92939",
+      "brandDisabledColor": "#FB9BA3",
+      "successNormalColor": "#2BA471",
+      "warningNormalColor": "#E37318",
+      "errorNormalColor": "#D54941",
+      "bgColorPage": "#F3F3F3",
+      "bgColorContainer": "#FFFFFF",
+      "textPrimaryColor": "rgba(0,0,0,0.9)",
+      "textSecondaryColor": "rgba(0,0,0,0.6)",
+      "textPlaceholderColor": "rgba(0,0,0,0.4)",
+      "textDisabledColor": "rgba(0,0,0,0.26)",
+      "textAntiColor": "#FFFFFF",
+      "borderColor": "#E7E7E7"
+    },
+    "font": {
+      "fontXs": { "size": 20, "lineHeight": 32 },
+      "fontS": { "size": 24, "lineHeight": 40 },
+      "fontBase": { "size": 28, "lineHeight": 44 },
+      "fontM": { "size": 32, "lineHeight": 48 },
+      "fontL": { "size": 40, "lineHeight": 56 },
+      "fontXl": { "size": 48, "lineHeight": 64 }
+    },
+    "radius": {
+      "radiusSmall": 6,
+      "radiusDefault": 12,
+      "radiusLarge": 18,
+      "radiusExtraLarge": 24,
+      "radiusRound": 999
+    },
+    "spacer": {
+      "spacer1": 8, "spacer2": 16, "spacer3": 24, "spacer4": 32,
+      "spacer5": 40, "spacer6": 48, "spacer8": 64
+    },
+    "layout": {
+      "navBarHeight": 96,
+      "tabBarHeight": 112,
+      "cellHeight": 112,
+      "pagePaddingH": 32,
+      "designWidth": 780,
+      "designHeightDefault": 1688,
+      "designHeightMin": 1688,
+      "designHeightExtendable": true,
+      "canvasWidthFixed": 390,
+      "canvasHeightDefault": 844,
+      "radiusBtnPrimary": 8
+    }
+  }
+}</pre>
+      <p style="font-size:12px;color:var(--text-secondary)">注：画布宽 390 固定、高默认 844（可向下延展）；Flutter 2x 宽 780 固定、高默认 1688 起随内容增加；主按钮圆角 2x=8px（逻辑 4px）。</p>
+
+      <h3>AI Prompt 模板</h3>
+      <pre>请按照《剑琅联盟 移动端设计规范 v1.3》设计 [页面名称]：
+- 产品：剑琅联盟 · RTP 零售模块 · Logo: LOGO2.png
+- 设计稿：https://www.figma.com/design/cUaUaxtcNsREKlfnQKXe1L/RTP-零售模块
+- 画布：宽390固定，高默认844，内容超出可向下延展 · 字体 PingFang SC · 数字 D-DIN-Bold
+- 文字色：#333 / #929292 / #b8b8b8
+- 页面模式：P-H01 首页 或 P-R01 选品 等（见第8章）
+- 主色 #F32F41 · 主按钮圆角 4px
+- 首页底栏：GlassTabBar（5项磨砂）· 子页：标准 TabBar
+- 图标：第6章库 + 业务映射表，禁止自创图标
+- 组件：第7章组件目录（BrandHeader/StatCard/ProductCard…）
+- 内容：[具体业务字段]</pre>
+    </section>
+
+    <footer class="site-footer">
+      <div class="foot-brand">
+        <img src="LOGO2.png" alt="剑琅联盟">
+        <span>剑琅联盟 · 设计规范</span>
+      </div>
+      <div class="foot-copy">v1.3 · 对齐 Figma RTP 零售模块 · 390×844 · © 剑琅联盟</div>
+    </footer>
+
+    </div><!-- .main-inner -->
+  </main>
+</div>
+
+<script>
+  const ICON_LIBRARY = [
+    { name: 'chevron-left', cat: 'nav', meaning: '返回上一页', scene: 'Navbar 左侧、详情返回' },
+    { name: 'chevron-right', cat: 'nav', meaning: '进入下一级', scene: 'Cell 右侧、列表跳转' },
+    { name: 'chevron-down', cat: 'nav', meaning: '展开下拉', scene: '筛选、折叠、Picker' },
+    { name: 'chevron-up', cat: 'nav', meaning: '收起', scene: 'Collapse 展开态' },
+    { name: 'arrow-left', cat: 'nav', meaning: '返回（线型）', scene: '备用返回箭头' },
+    { name: 'close', cat: 'nav', meaning: '关闭', scene: '弹窗、标签页、搜索清除' },
+    { name: 'home', cat: 'nav', meaning: '首页', scene: 'TabBar 首页' },
+    { name: 'app', cat: 'nav', meaning: '工作台/应用', scene: 'TabBar 工作台' },
+    { name: 'menu', cat: 'nav', meaning: '菜单', scene: '侧边栏入口、更多导航' },
+    { name: 'jump', cat: 'nav', meaning: '外链跳转', scene: '打开 H5、外部系统' },
+    { name: 'search', cat: 'action', meaning: '搜索', scene: 'Search 框、列表搜索入口' },
+    { name: 'filter', cat: 'action', meaning: '筛选', scene: 'Navbar 筛选、列表过滤' },
+    { name: 'filter-clear', cat: 'action', meaning: '清除筛选', scene: '重置筛选条件' },
+    { name: 'add', cat: 'action', meaning: '新增', scene: 'Fab、上传区、添加行' },
+    { name: 'add-circle', cat: 'action', meaning: '新增（强调）', scene: '空状态引导创建' },
+    { name: 'edit', cat: 'action', meaning: '编辑', scene: 'SwipeCell、详情编辑' },
+    { name: 'delete', cat: 'action', meaning: '删除', scene: 'SwipeCell 删除、批量删除' },
+    { name: 'check', cat: 'action', meaning: '确认/勾选', scene: '多选列表、完成操作' },
+    { name: 'close-circle', cat: 'action', meaning: '取消/清除', scene: '输入清除、移除标签' },
+    { name: 'more', cat: 'action', meaning: '更多操作', scene: 'Navbar 右侧、卡片菜单' },
+    { name: 'ellipsis', cat: 'action', meaning: '省略/更多', scene: '横向更多按钮' },
+    { name: 'refresh', cat: 'action', meaning: '刷新', scene: '下拉刷新、重新加载' },
+    { name: 'rollback', cat: 'action', meaning: '撤销/回退', scene: '审批撤回、版本回退' },
+    { name: 'share', cat: 'action', meaning: '分享', scene: '详情分享、转发同事' },
+    { name: 'copy', cat: 'action', meaning: '复制', scene: '单号、链接、账号复制' },
+    { name: 'scan', cat: 'action', meaning: '扫码', scene: '登录扫码、资产盘点' },
+    { name: 'qrcode', cat: 'action', meaning: '二维码', scene: '展示收款码、邀请码' },
+    { name: 'print', cat: 'action', meaning: '打印', scene: '订单/合同打印' },
+    { name: 'download', cat: 'action', meaning: '下载', scene: '附件、报表导出' },
+    { name: 'upload', cat: 'action', meaning: '上传', scene: 'Upload 组件、导入文件' },
+    { name: 'calendar', cat: 'form', meaning: '日期', scene: 'DatePicker、日程选择' },
+    { name: 'time', cat: 'form', meaning: '时间', scene: 'TimePicker、打卡时间' },
+    { name: 'location', cat: 'form', meaning: '位置/地址', scene: '门店地址、外勤定位' },
+    { name: 'browse', cat: 'form', meaning: '查看', scene: '密码可见、预览' },
+    { name: 'browse-off', cat: 'form', meaning: '隐藏', scene: '密码不可见' },
+    { name: 'lock-on', cat: 'form', meaning: '锁定/安全', scene: '权限、加密字段' },
+    { name: 'lock-off', cat: 'form', meaning: '解锁', scene: '解除锁定' },
+    { name: 'secured', cat: 'form', meaning: '已认证/安全', scene: '企业认证、合规标识' },
+    { name: 'chart', cat: 'data', meaning: '图表', scene: '数据报表入口' },
+    { name: 'chart-bar', cat: 'data', meaning: '柱状图', scene: '销售统计、对比分析' },
+    { name: 'chart-line', cat: 'data', meaning: '折线图', scene: '趋势分析' },
+    { name: 'chart-pie', cat: 'data', meaning: '饼图', scene: '占比分布' },
+    { name: 'table', cat: 'data', meaning: '表格', scene: '明细列表、数据表格' },
+    { name: 'view-list', cat: 'data', meaning: '列表视图', scene: '切换列表/卡片视图' },
+    { name: 'view-module', cat: 'data', meaning: '卡片视图', scene: '宫格、模块视图' },
+    { name: 'order-adjustment-column', cat: 'data', meaning: '排序', scene: '列排序、调整顺序' },
+    { name: 'task', cat: 'biz', meaning: '任务/待办', scene: '待办列表、工单' },
+    { name: 'assignment', cat: 'biz', meaning: '指派/分配', scene: '工单分配、责任人' },
+    { name: 'check-circle', cat: 'biz', meaning: '审批通过', scene: 'Result 成功、流程完成' },
+    { name: 'close-circle-filled', cat: 'biz', meaning: '审批驳回', scene: 'Result 失败、已拒绝' },
+    { name: 'time-filled', cat: 'biz', meaning: '待处理/计时', scene: '超时提醒、待办' },
+    { name: 'certificate', cat: 'biz', meaning: '证书/资质', scene: '企业资质、认证' },
+    { name: 'money', cat: 'biz', meaning: '金额/财务', scene: '订单金额、财务模块' },
+    { name: 'wallet', cat: 'biz', meaning: '钱包/账户', scene: '账户余额、充值' },
+    { name: 'shop', cat: 'biz', meaning: '门店/商户', scene: '客户门店、渠道' },
+    { name: 'cart', cat: 'biz', meaning: '采购/订单', scene: '采购单、购物车式下单' },
+    { name: 'file', cat: 'file', meaning: '文件', scene: '附件列表、文档' },
+    { name: 'file-paste', cat: 'file', meaning: '粘贴/文档', scene: '合同、报告' },
+    { name: 'folder', cat: 'file', meaning: '文件夹', scene: '资料库、分类目录' },
+    { name: 'image', cat: 'file', meaning: '图片', scene: '图片上传、相册' },
+    { name: 'camera', cat: 'file', meaning: '拍照', scene: '现场拍照、证件上传' },
+    { name: 'video', cat: 'file', meaning: '视频', scene: '视频附件、监控' },
+    { name: 'link', cat: 'file', meaning: '链接', scene: '超链接、关联单据' },
+    { name: 'mail', cat: 'comm', meaning: '邮件/站内信', scene: '消息中心、邮件通知' },
+    { name: 'notification', cat: 'comm', meaning: '通知', scene: 'TabBar 消息、系统通知' },
+    { name: 'chat', cat: 'comm', meaning: '聊天/沟通', scene: '在线客服、同事沟通' },
+    { name: 'call', cat: 'comm', meaning: '电话', scene: '联系客户、一键拨号' },
+    { name: 'user', cat: 'user', meaning: '用户/个人', scene: 'TabBar 我的、个人中心' },
+    { name: 'user-add', cat: 'user', meaning: '添加用户', scene: '邀请成员、新增联系人' },
+    { name: 'usergroup', cat: 'user', meaning: '团队/组织', scene: '部门、用户组' },
+    { name: 'member', cat: 'user', meaning: '成员', scene: '项目成员、参会人' },
+    { name: 'personal-information', cat: 'user', meaning: '个人资料', scene: '账号信息编辑' },
+    { name: 'info-circle', cat: 'status', meaning: '信息提示', scene: 'NoticeBar、说明' },
+    { name: 'help-circle', cat: 'status', meaning: '帮助', scene: '字段说明、帮助中心' },
+    { name: 'error-circle', cat: 'status', meaning: '错误', scene: '表单错误、异常状态' },
+    { name: 'check-circle-filled', cat: 'status', meaning: '成功', scene: 'Toast 成功、完成' },
+    { name: 'error-triangle', cat: 'status', meaning: '警告', scene: '风险提醒、注意事项' },
+    { name: 'loading', cat: 'status', meaning: '加载中', scene: 'Loading、提交中' },
+    { name: 'setting', cat: 'sys', meaning: '设置', scene: '个人中心设置、系统配置' },
+    { name: 'tools', cat: 'sys', meaning: '工具', scene: '工具箱、高级功能' },
+    { name: 'poweroff', cat: 'sys', meaning: '退出登录', scene: '账号退出' },
+    { name: 'login', cat: 'sys', meaning: '登录', scene: '登录页、重新登录' },
+    { name: 'logout', cat: 'sys', meaning: '登出', scene: '退出确认' },
+    { name: 'wifi', cat: 'sys', meaning: '网络', scene: '网络状态、离线提示' },
+    { name: 'history', cat: 'sys', meaning: '历史记录', scene: '操作日志、浏览历史' },
+    { name: 'bookmark', cat: 'sys', meaning: '收藏', scene: '收藏单据、常用' },
+    { name: 'flag', cat: 'sys', meaning: '标记/旗标', scene: '重点跟进、标记客户' },
+    { name: 'star', cat: 'sys', meaning: '星标/收藏', scene: '重要客户、评分' },
+    { name: 'heart', cat: 'sys', meaning: '关注', scene: '关注动态（少用）' },
+    { name: 'map', cat: 'biz', meaning: '地图', scene: '外勤轨迹、门店地图' },
+    { name: 'layers', cat: 'biz', meaning: '层级/组织', scene: '组织架构、多级审批' },
+    { name: 'root-list', cat: 'biz', meaning: '根目录/总览', scene: '全部业务入口' },
+    { name: 'control-platform', cat: 'biz', meaning: '控制台', scene: '管理后台入口' },
+    { name: 'desktop', cat: 'biz', meaning: '桌面端', scene: '跳转 PC 管理端' },
+    { name: 'mobile', cat: 'biz', meaning: '移动端', scene: '设备标识' },
+    { name: 'cloud', cat: 'file', meaning: '云存储', scene: '云端附件、同步' },
+    { name: 'cloud-upload', cat: 'file', meaning: '云上传', scene: '备份上传' },
+    { name: 'attach', cat: 'file', meaning: '附件', scene: '单据附件数量' },
+    { name: 'sound', cat: 'comm', meaning: '语音', scene: '语音消息、播报' },
+    { name: 'discount', cat: 'biz', meaning: '优惠/折扣', scene: '促销、优惠券' },
+    { name: 'gift', cat: 'biz', meaning: '礼品/福利', scene: '营销活动' },
+    { name: 'precise-monitor', cat: 'data', meaning: '监控', scene: '业务监控、大屏' },
+    { name: 'fork', cat: 'action', meaning: '分支/对比', scene: '版本对比（少用）' },
+    { name: 'pin', cat: 'action', meaning: '置顶', scene: '置顶公告、置顶客户' },
+    { name: 'backtop', cat: 'action', meaning: '取消置顶', scene: '取消置顶' },
+    { name: 'zoom-in', cat: 'action', meaning: '放大', scene: '图片预览放大' },
+    { name: 'zoom-out', cat: 'action', meaning: '缩小', scene: '图片预览缩小' },
+    { name: 'fullscreen', cat: 'action', meaning: '全屏', scene: '图表全屏、视频全屏' },
+    { name: 'play-circle', cat: 'file', meaning: '播放', scene: '视频播放、培训' },
+    { name: 'pause-circle', cat: 'file', meaning: '暂停', scene: '音视频暂停' }
+  ];
+
+  const ICON_LIBRARY_EXTRA = [
+    { name: 'creditcard', cat: 'meiye', meaning: '会员卡/开卡', scene: '顶栏开卡、会员卡入口' },
+    { name: 'coupon', cat: 'meiye', meaning: '验券/优惠券', scene: '顶栏验券、券核销' },
+    { name: 'file-add', cat: 'meiye', meaning: '开单', scene: '顶栏开单快捷' },
+    { name: 'undertake-delivery', cat: 'order', meaning: '配送/发货', scene: '物流、订货配送' },
+    { name: 'cart', cat: 'retail', meaning: '购物车', scene: '商城 Tab、商品底栏' },
+    { name: 'shop', cat: 'retail', meaning: '店铺/商城', scene: '联盟广场、进店' },
+    { name: 'store', cat: 'retail', meaning: '门店', scene: '门店绑定、多店' },
+    { name: 'barcode', cat: 'retail', meaning: '条码', scene: 'SKU、盘点扫码' },
+    { name: 'ticket', cat: 'retail', meaning: '票券', scene: '优惠券、活动券' },
+    { name: 'gift', cat: 'retail', meaning: '礼品/赠品', scene: '满赠、营销' },
+    { name: 'thumb-up', cat: 'retail', meaning: '好评', scene: '评价、推荐' },
+    { name: 'thumb-down', cat: 'retail', meaning: '差评', scene: '售后反馈' },
+    { name: 'logo-wechat', cat: 'retail', meaning: '微信', scene: '微信支付、分享' },
+    { name: 'logo-wechatpay', cat: 'order', meaning: '微信支付', scene: '收银台' },
+    { name: 'order-adjustment-column', cat: 'order', meaning: '订单列表', scene: '订单管理' },
+    { name: 'bill', cat: 'order', meaning: '账单/结算单', scene: '结算、对账' },
+    { name: 'chart-bubble', cat: 'order', meaning: '财务/资产', scene: '账户余额' },
+    { name: 'swap', cat: 'order', meaning: '换货/调换', scene: '售后换货' },
+    { name: 'enter', cat: 'nav', meaning: '进入', scene: '列表进入详情' },
+    { name: 'logout', cat: 'sys', meaning: '退出', scene: '退出登录' },
+    { name: 'user-circle', cat: 'user', meaning: '个人中心', scene: '我的 Tab' },
+    { name: 'service', cat: 'comm', meaning: '客服', scene: '商品详情底栏' },
+    { name: 'call-1', cat: 'comm', meaning: '电话', scene: '联系门店' },
+    { name: 'image', cat: 'file', meaning: '图片', scene: '商品主图、相册' },
+    { name: 'remove', cat: 'action', meaning: '减少', scene: '数量 Stepper' },
+    { name: 'add-rectangle', cat: 'action', meaning: '添加项', scene: '规格、附件' },
+    { name: 'minus-circle', cat: 'action', meaning: '移除', scene: '删除规格' },
+    { name: 'check-rectangle', cat: 'action', meaning: '已选', scene: '多选列表' },
+    { name: 'close-rectangle', cat: 'action', meaning: '未选', scene: '多选列表' },
+    { name: 'discount', cat: 'retail', meaning: '折扣', scene: '促销标签' },
+    { name: 'hourglass', cat: 'status', meaning: '待处理', scene: '订单待发货' },
+    { name: 'queue', cat: 'status', meaning: '排队/待办', scene: '待审批队列' }
+  ];
+
+  const ICON_FILLED = [
+    { name: 'home-filled', cat: 'filled', meaning: '首页（面性）', scene: 'Tab 选中、主导航激活' },
+    { name: 'app-filled', cat: 'filled', meaning: '工作台（面性）', scene: 'Tab 选中' },
+    { name: 'user-filled', cat: 'filled', meaning: '用户/我的（面性）', scene: '个人中心 Tab 选中' },
+    { name: 'shop-filled', cat: 'filled', meaning: '店铺（面性）', scene: '商城、门店入口强调' },
+    { name: 'cart-filled', cat: 'filled', meaning: '购物车（面性）', scene: '购物车有商品、底栏强调' },
+    { name: 'wallet-filled', cat: 'filled', meaning: '钱包（面性）', scene: '结算、账户' },
+    { name: 'creditcard-filled', cat: 'filled', meaning: '会员卡（面性）', scene: '支付、会员卡' },
+    { name: 'calendar-filled', cat: 'filled', meaning: '日历（面性）', scene: '预约、日程选中' },
+    { name: 'chart-filled', cat: 'filled', meaning: '图表（面性）', scene: '数据模块入口' },
+    { name: 'chart-bar-filled', cat: 'filled', meaning: '柱状图（面性）', scene: '业绩排行' },
+    { name: 'chart-pie-filled', cat: 'filled', meaning: '饼图（面性）', scene: '占比分析' },
+    { name: 'notification-filled', cat: 'filled', meaning: '通知（面性）', scene: '消息 Tab、强提醒' },
+    { name: 'mail-filled', cat: 'filled', meaning: '邮件（面性）', scene: '站内信' },
+    { name: 'chat-filled', cat: 'filled', meaning: '聊天（面性）', scene: '客服、沟通' },
+    { name: 'call-filled', cat: 'filled', meaning: '电话（面性）', scene: '一键拨号' },
+    { name: 'search-filled', cat: 'filled', meaning: '搜索（面性）', scene: '搜索框激活' },
+    { name: 'filter-filled', cat: 'filled', meaning: '筛选（面性）', scene: '筛选已启用' },
+    { name: 'setting-filled', cat: 'filled', meaning: '设置（面性）', scene: '设置页入口' },
+    { name: 'add-circle-filled', cat: 'filled', meaning: '添加（面性）', scene: '新建强调' },
+    { name: 'edit-filled', cat: 'filled', meaning: '编辑（面性）', scene: '编辑态' },
+    { name: 'delete-filled', cat: 'filled', meaning: '删除（面性）', scene: '删除强调' },
+    { name: 'check-circle-filled', cat: 'filled', meaning: '成功（面性）', scene: '完成、通过' },
+    { name: 'close-circle-filled', cat: 'filled', meaning: '失败/关闭（面性）', scene: '驳回、关闭' },
+    { name: 'error-circle-filled', cat: 'filled', meaning: '错误（面性）', scene: '表单错误' },
+    { name: 'info-circle-filled', cat: 'filled', meaning: '信息（面性）', scene: '提示说明' },
+    { name: 'help-circle-filled', cat: 'filled', meaning: '帮助（面性）', scene: '帮助中心' },
+    { name: 'error-triangle-filled', cat: 'filled', meaning: '警告（面性）', scene: '风险警示' },
+    { name: 'time-filled', cat: 'filled', meaning: '时间/待办（面性）', scene: '待处理、计时' },
+    { name: 'star-filled', cat: 'filled', meaning: '星标（面性）', scene: '收藏、评分' },
+    { name: 'heart-filled', cat: 'filled', meaning: '喜欢（面性）', scene: '关注、收藏' },
+    { name: 'thumb-up-filled', cat: 'filled', meaning: '赞（面性）', scene: '好评' },
+    { name: 'thumb-down-filled', cat: 'filled', meaning: '踩（面性）', scene: '差评' },
+    { name: 'file-filled', cat: 'filled', meaning: '文件（面性）', scene: '文档、附件' },
+    { name: 'folder-filled', cat: 'filled', meaning: '文件夹（面性）', scene: '资料库' },
+    { name: 'image-filled', cat: 'filled', meaning: '图片（面性）', scene: '相册、主图' },
+    { name: 'camera-filled', cat: 'filled', meaning: '相机（面性）', scene: '拍照上传' },
+    { name: 'location-filled', cat: 'filled', meaning: '定位（面性）', scene: '门店地址' },
+    { name: 'map-filled', cat: 'filled', meaning: '地图（面性）', scene: '轨迹、门店分布' },
+    { name: 'lock-on-filled', cat: 'filled', meaning: '锁定（面性）', scene: '安全、权限' },
+    { name: 'secured-filled', cat: 'filled', meaning: '安全认证', scene: '企业认证' },
+    { name: 'gift-filled', cat: 'filled', meaning: '礼品', scene: '营销活动' },
+    { name: 'discount-filled', cat: 'filled', meaning: '折扣', scene: '促销标签' },
+    { name: 'ticket-filled', cat: 'filled', meaning: '票券', scene: '优惠券、活动券' },
+    { name: 'coupon-filled', cat: 'filled', meaning: '优惠券', scene: '券包、验券' },
+    { name: 'member-filled', cat: 'filled', meaning: '成员', scene: '员工、参会人' },
+    { name: 'usergroup-filled', cat: 'filled', meaning: '团队', scene: '组织、会员管理' },
+    { name: 'money-filled', cat: 'filled', meaning: '金额', scene: '财务、订单金额' },
+    { name: 'bill-filled', cat: 'filled', meaning: '账单', scene: '结算单' },
+    { name: 'play-circle-filled', cat: 'filled', meaning: '播放（面性）', scene: '视频、培训' },
+    { name: 'pause-circle-filled', cat: 'filled', meaning: '暂停（面性）', scene: '音视频暂停' },
+    { name: 'sound-filled', cat: 'filled', meaning: '音量（面性）', scene: '语音消息' },
+    { name: 'cloud-filled', cat: 'filled', meaning: '云（面性）', scene: '云同步' },
+    { name: 'cloud-upload', cat: 'filled', meaning: '云上传', scene: '备份' },
+    { name: 'attach', cat: 'filled', meaning: '附件', scene: '单据附件' },
+    { name: 'layers-filled', cat: 'filled', meaning: '层级（面性）', scene: '组织层级' },
+    { name: 'view-module-filled', cat: 'filled', meaning: '宫格（面性）', scene: '卡片视图' },
+    { name: 'list', cat: 'filled', meaning: '列表', scene: '列表视图、清单、价目表' },
+    { name: 'pin-filled', cat: 'filled', meaning: '置顶（面性）', scene: '置顶状态' },
+    { name: 'bookmark-filled', cat: 'filled', meaning: '书签（面性）', scene: '已收藏' },
+    { name: 'flag-filled', cat: 'filled', meaning: '标记（面性）', scene: '重点跟进' },
+    { name: 'certificate-filled', cat: 'filled', meaning: '证书', scene: '资质认证' },
+    { name: 'task-filled', cat: 'filled', meaning: '任务', scene: '待办选中' },
+    { name: 'assignment-filled', cat: 'filled', meaning: '分配', scene: '工单分配' },
+    { name: 'logo-wechat', cat: 'filled', meaning: '微信', scene: '微信支付、分享' },
+    { name: 'mobile-filled', cat: 'filled', meaning: '手机', scene: '移动端' },
+    { name: 'desktop-filled', cat: 'filled', meaning: '电脑', scene: 'PC 端' },
+    { name: 'root-list-filled', cat: 'filled', meaning: '总览', scene: '全部入口' },
+    { name: 'control-platform-filled', cat: 'filled', meaning: '控制台', scene: '管理后台' },
+    { name: 'hourglass-filled', cat: 'filled', meaning: '等待', scene: '待发货' }
+  ];
+
+  /** Iconify 无对应资源时的展示用别名（卡片仍显示库内 name） */
+  const ICON_RESOLVE = {
+    'attach-filled': 'file-filled',
+    'cloud-upload-filled': 'cloud-upload',
+    'logo-wechat-filled': 'logo-wechat',
+    'view-list-filled': 'view-list'
+  };
+
+  function resolveIconSlug(catalogName) {
+    return ICON_RESOLVE[catalogName] || catalogName;
+  }
+
+  function wireIconElement(el, catalogName) {
+    const slugs = [resolveIconSlug(catalogName)];
+    if (catalogName.endsWith('-filled') && !slugs.includes(catalogName.replace(/-filled$/, ''))) {
+      slugs.push(catalogName.replace(/-filled$/, ''));
+    }
+    let idx = 0;
+    const apply = () => {
+      el.setAttribute('icon', 'tdesign:' + slugs[idx]);
+    };
+    apply();
+    el.addEventListener('load', () => el.closest('.icon-lib-item')?.classList.remove('is-missing'));
+    el.addEventListener('error', () => {
+      idx += 1;
+      if (idx < slugs.length) apply();
+      else el.closest('.icon-lib-item')?.classList.add('is-missing');
+    });
+  }
+
+  const ALL_ICONS = [...ICON_LIBRARY, ...ICON_LIBRARY_EXTRA, ...ICON_FILLED].filter((item, i, arr) => arr.findIndex(x => x.name === item.name) === i);
+  const CAT_LABELS = { nav:'导航', action:'操作', form:'表单', data:'数据', biz:'业务', file:'文件', comm:'通讯', status:'状态', user:'用户', sys:'系统', meiye:'美业店务', retail:'零售商城', order:'订单财务', filled:'面性图标' };
+
+  let iconCat = 'all';
+  let iconQuery = '';
+
+  function renderIconLib() {
+    const root = document.getElementById('icon-lib-root');
+    const q = iconQuery.trim().toLowerCase();
+    const list = ALL_ICONS.filter(i => {
+      if (iconCat !== 'all' && i.cat !== iconCat) return false;
+      if (!q) return true;
+      const hay = (i.name + i.meaning + i.scene + i.cat).toLowerCase();
+      return hay.includes(q);
+    });
+    const fmtMeaning = m => String(m).replace(/（面性）/g, '').trim();
+    const isFilled = i => i.cat === 'filled' || i.name.endsWith('-filled');
+    const itemHtml = i => `
+      <div class="icon-lib-item tap-feedback${isFilled(i) ? ' is-filled' : ''}" data-name="${i.name}" title="点击复制：${i.name}&#10;${fmtMeaning(i.meaning)} · ${i.scene}">
+        <div class="icon-lib-visual">
+          <iconify-icon data-catalog="${i.name}" icon="tdesign:${resolveIconSlug(i.name)}" aria-label="${fmtMeaning(i.meaning)}"></iconify-icon>
+        </div>
+        <div class="icon-lib-meta">
+          <div class="icon-lib-name">${i.name}</div>
+          <div class="icon-lib-meaning">${fmtMeaning(i.meaning)}</div>
+          <div class="icon-lib-scene">${i.scene}</div>
+        </div>
+      </div>`;
+    if (iconCat === 'all' && !q) {
+      const groups = {};
+      list.forEach(i => { (groups[i.cat] = groups[i.cat] || []).push(i); });
+      const order = ['filled','meiye','retail','order','nav','action','form','data','biz','file','comm','status','user','sys'];
+      root.innerHTML = order.filter(c => groups[c]).map(c =>
+        `<div class="icon-cat-title">${CAT_LABELS[c] || c}（${groups[c].length}）</div>` + groups[c].map(itemHtml).join('')
+      ).join('');
+    } else {
+      root.innerHTML = list.map(itemHtml).join('');
+    }
+    document.getElementById('icon-lib-count').textContent = `显示 ${list.length} 个 · 库内共 ${ALL_ICONS.length} 个 · 点击复制图标名`;
+    root.querySelectorAll('.icon-lib-item').forEach(el => {
+      el.addEventListener('click', () => {
+        const name = el.dataset.name;
+        navigator.clipboard.writeText(name).then(() => {
+          el.classList.add('copied');
+          setTimeout(() => el.classList.remove('copied'), 1200);
+        });
+      });
+    });
+    root.querySelectorAll('iconify-icon[data-catalog]').forEach(el => wireIconElement(el, el.dataset.catalog));
+    initTapFeedback(root);
+  }
+
+  document.getElementById('icon-search').addEventListener('input', e => {
+    iconQuery = e.target.value;
+    renderIconLib();
+  });
+  document.querySelectorAll('.filter-chip').forEach(chip => {
+    chip.addEventListener('click', () => {
+      document.querySelectorAll('.filter-chip').forEach(c => c.classList.remove('active'));
+      chip.classList.add('active');
+      iconCat = chip.dataset.cat;
+      renderIconLib();
+    });
+  });
+  renderIconLib();
+
+  document.querySelectorAll('.nav-list a').forEach(a => {
+    a.addEventListener('click', () => {
+      document.querySelectorAll('.nav-list a').forEach(x => x.classList.remove('active'));
+      a.classList.add('active');
+    });
+  });
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        const id = e.target.id;
+        document.querySelectorAll('.nav-list a').forEach(a => {
+          a.classList.toggle('active', a.getAttribute('href') === '#' + id);
+        });
+      }
+    });
+  }, { rootMargin: '-20% 0px -70% 0px' });
+  document.querySelectorAll('section[id]').forEach(s => observer.observe(s));
+
+  function spawnRipple(el, e) {
+    const rect = el.getBoundingClientRect();
+    const size = Math.max(rect.width, rect.height) * 1.2;
+    const x = (e.clientX || rect.left + rect.width / 2) - rect.left - size / 2;
+    const y = (e.clientY || rect.top + rect.height / 2) - rect.top - size / 2;
+    const ripple = document.createElement('span');
+    ripple.className = 'ripple-fx';
+    ripple.style.width = ripple.style.height = size + 'px';
+    ripple.style.left = x + 'px';
+    ripple.style.top = y + 'px';
+    ripple.style.background = 'radial-gradient(circle, rgba(243,47,65,0.38) 0%, transparent 70%)';
+    el.appendChild(ripple);
+    ripple.addEventListener('animationend', () => ripple.remove());
+  }
+
+  function initTapFeedback(scope) {
+    const root = scope || document;
+    const sel = '.btn, .nav-list a, .filter-chip, .icon-lib-item, .card, .figma-link-card, .color-item, .comp-block, .tag, .hero-pill';
+    root.querySelectorAll(sel).forEach(el => {
+      if (el.classList.contains('btn-disabled') || el.dataset.tapBound) return;
+      el.dataset.tapBound = '1';
+      el.classList.add('tap-feedback');
+      el.addEventListener('click', function (e) {
+        spawnRipple(this, e);
+        this.classList.add('tap-flash');
+        setTimeout(() => this.classList.remove('tap-flash'), 280);
+      }, { passive: true });
+    });
+  }
+  initTapFeedback(document.querySelector('.main'));
+</script>
+</body>
+</html>
