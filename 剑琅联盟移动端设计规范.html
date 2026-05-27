@@ -180,10 +180,14 @@
     .icon-lib-item.copied { border-color: var(--success-6); box-shadow: 0 0 0 1px var(--success-6); }
     .icon-lib-visual { flex: 0 0 84px; height: 84px; display: flex; align-items: center; justify-content: center; padding: 0 10px; background: var(--gray-1); }
     .icon-lib-item:hover .icon-lib-visual { background: var(--brand-1); }
-    .icon-lib-item iconify-icon { font-size: 36px; width: 36px; height: 36px; color: var(--gray-9); transition: color .2s, transform .22s cubic-bezier(.34,1.56,.64,1); }
-    .icon-lib-item.is-filled iconify-icon { color: var(--brand-6); }
-    .icon-lib-item:hover iconify-icon { color: var(--brand-6); transform: scale(1.06); }
-    .icon-lib-item.is-missing iconify-icon { opacity: 0.35; }
+    .s-icon { display: inline-flex; align-items: center; justify-content: center; width: 1em; height: 1em; flex-shrink: 0; vertical-align: -0.125em; color: inherit; line-height: 0; }
+    .s-icon svg { width: 100%; height: 100%; display: block; }
+    .s-icon.is-missing { opacity: 0.35; }
+    .icon-lib-item .s-icon { font-size: 36px; width: 36px; height: 36px; color: var(--gray-9); transition: color .2s, transform .22s cubic-bezier(.34,1.56,.64,1); }
+    .icon-lib-item.is-filled .s-icon,
+    .icon-lib-item .s-icon.s-icon--filled { color: var(--gray-9); }
+    .icon-lib-item:hover .s-icon { color: var(--brand-6); transform: scale(1.06); }
+    .icon-lib-item.is-missing .s-icon { opacity: 0.35; }
     .icon-lib-meta { flex: 1; display: flex; flex-direction: column; justify-content: center; min-height: 48px; padding: 6px 8px 8px; text-align: center; border-top: 1px solid var(--border); background: #fff; }
     .icon-lib-item .icon-lib-meaning,
     .icon-lib-item .icon-lib-scene { display: block; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
@@ -245,7 +249,7 @@
     .u-dialog p { font-size: 14px; color: var(--text-secondary); margin-bottom: 20px; }
     .u-dialog .acts { display: flex; gap: 12px; }
     .u-empty { text-align: center; padding: 40px 16px; color: var(--text-secondary); }
-    .u-empty iconify-icon { font-size: 64px; color: var(--gray-5); }
+    .u-empty .s-icon { font-size: 64px; color: var(--gray-5); }
     .u-skeleton { height: 16px; background: linear-gradient(90deg, var(--gray-2) 25%, var(--gray-1) 50%, var(--gray-2) 75%); background-size: 200% 100%; animation: shimmer 1.5s infinite; border-radius: 4px; margin-bottom: 8px; }
     @keyframes shimmer { 0% { background-position: 200% 0; } 100% { background-position: -200% 0; } }
     @keyframes spin { to { transform: rotate(360deg); } }
@@ -291,7 +295,7 @@
     .u-brand-header .store-row img { width: 20px; height: 20px; border-radius: 50%; }
     .u-quick-actions { display: flex; justify-content: space-between; padding: 0 28px; }
     .u-quick-actions .qa { text-align: center; width: 60px; }
-    .u-quick-actions .qa iconify-icon { font-size: 30px; }
+    .u-quick-actions .qa .s-icon { font-size: 30px; }
     .u-quick-actions .qa span { display: block; font-size: 15px; font-weight: 500; margin-top: 6px; }
     .u-glass-tabbar { height: 60px; margin: 12px 16px 24px; padding: 4px; background: rgba(255,255,255,.6); border-radius: 200px; box-shadow: var(--glass-nav-shadow); backdrop-filter: blur(20px); display: flex; align-items: center; position: relative; }
     .u-glass-tabbar .tab { flex: 1; display: flex; flex-direction: column; align-items: center; font-size: 11px; color: var(--figma-text-primary); gap: 2px; z-index: 1; }
@@ -310,11 +314,11 @@
     .u-alert-blue { height: 32px; margin: 12px 16px; background: var(--figma-blue-bg); border-radius: 8px; display: flex; align-items: center; padding: 0 12px; font-size: 13px; color: var(--figma-blue); gap: 8px; }
     .u-grid-entry { display: grid; grid-template-columns: repeat(5, 1fr); gap: 8px 4px; padding: 0 16px; }
     .u-grid-entry .item { text-align: center; padding: 8px 0; }
-    .u-grid-entry iconify-icon { font-size: 38px; color: var(--gray-8); }
+    .u-grid-entry .s-icon { font-size: 38px; color: var(--gray-8); }
     .u-grid-entry span { display: block; font-size: 13px; color: var(--figma-text-primary); margin-top: 4px; }
     .u-product-card { width: 175px; background: #fff; border-radius: 12px; overflow: hidden; box-shadow: var(--shadow-1); }
     .u-product-card .thumb { aspect-ratio: 1; background: var(--gray-2); display: grid; place-items: center; }
-    .u-product-card .thumb iconify-icon { font-size: 40px; color: var(--gray-6); }
+    .u-product-card .thumb .s-icon { font-size: 40px; color: var(--gray-6); }
     .u-product-card .body { padding: 8px; }
     .u-product-card .brand { font-size: 10px; color: var(--figma-text-secondary); }
     .u-product-card .title { font-size: 12px; font-weight: 600; line-height: 1.35; margin: 2px 0; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
@@ -324,6 +328,125 @@
     .u-price-row .col label { display: block; font-size: 10px; color: var(--figma-text-secondary); margin-bottom: 4px; }
     .u-price-row .col .v { font-weight: 600; color: var(--figma-text-primary); }
     .u-price-row .col .v.retail { color: var(--brand-6); }
+    /* MemberCard — Figma ysexRTHn8Qt0DVOvROJBrX（详卡 + 列表条 · 实测色值） */
+    .u-member-card {
+      --mc-start: #C8D9F7;
+      --mc-end: #DBD6F4;
+      --mc-cta: #BDD5ED;
+      --mc-compact-start: #D3DAF7;
+      --mc-compact-end: #E8E4F8;
+      width: 100%;
+      max-width: 358px;
+      border-radius: 12px;
+      overflow: hidden;
+      background: #fff;
+      box-shadow: 0 2px 10px rgba(0,0,0,.06);
+    }
+    .u-member-card__head {
+      padding: 14px 14px 12px;
+      background: linear-gradient(135deg, var(--mc-start) 0%, var(--mc-end) 100%);
+      color: var(--figma-text-primary);
+    }
+    .u-member-card__type { font-size: 17px; font-weight: 600; line-height: 1.25; margin-bottom: 10px; }
+    .u-member-card__metrics { display: flex; justify-content: space-between; align-items: flex-end; gap: 12px; }
+    .u-member-card__metrics .metric { min-width: 0; }
+    .u-member-card__metrics .metric--end { text-align: right; flex-shrink: 0; }
+    .u-member-card__metrics .metric__label { display: block; font-size: 11px; color: var(--figma-text-secondary); line-height: 1.3; margin-bottom: 2px; }
+    .u-member-card__metrics .metric__value { font-size: 14px; font-weight: 600; line-height: 1.35; }
+    .u-member-card__metrics .metric__price { font-family: var(--font-data); font-size: 20px; font-weight: 700; letter-spacing: -.02em; }
+    .u-member-card__inset {
+      margin-top: 10px;
+      padding: 8px 10px;
+      background: #fff;
+      border-radius: 8px;
+      font-size: 11px;
+      line-height: 1.55;
+      color: var(--figma-text-secondary);
+    }
+    .u-member-card__inset p + p { margin-top: 4px; }
+    .u-member-card__foot {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      padding: 10px 14px 14px;
+      background: #fff;
+    }
+    .u-member-card__foot .s-icon { font-size: 18px; width: 18px; height: 18px; color: var(--gray-8); flex-shrink: 0; }
+    .u-member-card__links {
+      flex: 1;
+      display: flex;
+      justify-content: flex-end;
+      align-items: center;
+      gap: 12px;
+      font-size: 12px;
+      color: var(--figma-text-primary);
+      min-width: 0;
+    }
+    .u-member-card__links a { color: inherit; text-decoration: none; white-space: nowrap; }
+    .u-member-card__cta {
+      flex-shrink: 0;
+      height: 30px;
+      padding: 0 18px;
+      border: none;
+      border-radius: 100px;
+      background: var(--mc-cta);
+      color: var(--figma-text-primary);
+      font-size: 13px;
+      font-weight: 500;
+      line-height: 30px;
+    }
+    .u-member-card--stored { --mc-start: #C8D9F7; --mc-end: #DBD6F4; --mc-cta: #BDD5ED; --mc-compact-start: #D3DAF7; --mc-compact-end: #E8E4F8; }
+    .u-member-card--times { --mc-start: #C0DAE7; --mc-end: #C7DEE6; --mc-cta: #B9D4DD; --mc-compact-start: #D4EBF2; --mc-compact-end: #E4F3F7; }
+    .u-member-card--discount { --mc-start: #E1C989; --mc-end: #F3D8A1; --mc-cta: #E1C789; --mc-compact-start: #F5E6C8; --mc-compact-end: #FBF0DC; }
+    .u-member-card--period { --mc-start: #F5CEBF; --mc-end: #F6D6CB; --mc-cta: #E3BFB3; --mc-compact-start: #FBE4DC; --mc-compact-end: #FFF0EB; }
+    .u-member-card--package { --mc-start: #D4BEA6; --mc-end: #E7D7C0; --mc-cta: #D7C3A8; --mc-compact-start: #EDE3D4; --mc-compact-end: #F7F0E6; }
+    .u-member-card--compact {
+      max-width: 358px;
+      height: 40px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 0 12px 0 10px;
+      border-radius: 8px;
+      background: linear-gradient(90deg, var(--mc-compact-start) 0%, var(--mc-compact-end) 100%);
+      box-shadow: none;
+      position: relative;
+      overflow: hidden;
+    }
+    .u-member-card--compact .u-member-card__badge {
+      flex-shrink: 0;
+      min-width: 40px;
+      height: 22px;
+      padding: 0 6px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 11px;
+      font-weight: 500;
+      border-radius: 4px;
+      background: rgba(255,255,255,.45);
+      color: var(--figma-text-primary);
+    }
+    .u-member-card--compact .u-member-card__name {
+      flex: 1;
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--figma-text-primary);
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    .member-card-stack { display: flex; flex-direction: column; gap: 8px; max-width: 358px; }
+    .member-card-figma-ref { margin: 16px 0; border: 1px solid var(--border); border-radius: 8px; overflow: hidden; max-width: 100%; }
+    .member-card-figma-ref img { display: block; width: 100%; height: auto; }
+    .member-card-figma-ref figcaption { font-size: 11px; color: var(--text-secondary); padding: 8px 12px; background: var(--gray-1); }
+    .member-card-showcase { display: flex; gap: 12px; overflow-x: auto; padding-bottom: 8px; margin: 16px 0; -webkit-overflow-scrolling: touch; }
+    .member-card-showcase .u-member-card { flex: 0 0 258px; max-width: 258px; }
+    .member-card-showcase .u-member-card__type { font-size: 15px; }
+    .member-card-showcase .u-member-card__metrics .metric__price { font-size: 17px; }
+    .member-card-showcase .u-member-card__foot { padding: 8px 10px 10px; }
+    .member-card-showcase .u-member-card__links { gap: 8px; font-size: 11px; }
+    .member-card-showcase .u-member-card__cta { height: 26px; line-height: 26px; padding: 0 12px; font-size: 12px; }
     @media (max-width: 900px) {
       .sidebar { display: none; }
       .main { margin-left: 0; }
@@ -335,7 +458,8 @@
       .grid-2 { grid-template-columns: 1fr; }
     }
   </style>
-  <script src="https://code.iconify.design/iconify-icon/2.1.0/iconify-icon.min.js"></script>
+  <script src="icons/stratis-map.js"></script>
+  <script src="icons/stratis-filled-map.js"></script>
 </head>
 <body>
 <div class="layout">
@@ -715,10 +839,10 @@
     <!-- 6. 图标库 -->
     <section id="icons">
       <h2 class="section-title"><span class="num">6</span>图标库（可直接调用）</h2>
-      <p>图标来源 <a href="https://www.figma.com/design/67W6shkKwqkQfOHDEFlNWJ/TDesign-Icon-SVG-File--Community-">TDesign Icon SVG</a>。已按<strong>通用 / 美业店务 / 零售商城 / 订单财务</strong>整理；设计稿中的「开单/开卡」等为定制 SVG，下表给出 TDesign 等价替代。</p>
+      <p>线性图标来源 <a href="https://www.figma.com/design/0lZMESxiHe6rxzVUG3hMIT/Stratis-UI-Icons---1000--Free-Figma-icons--Community-">Stratis UI Icons</a>（outline 风格，本地 SVG 资源 <code>icons/stratis/</code>）。面性图标仍使用 TDesign Iconify。已按<strong>通用 / 美业店务 / 零售商城 / 订单财务</strong>整理；设计稿中的「开单/开卡」等为定制 SVG，下表给出规范库内等价图标名。</p>
       <h3>6.0 设计稿功能 → 图标映射（剑琅管家 / RTP）</h3>
       <table>
-        <tr><th>设计稿文案</th><th>TDesign 图标名</th><th>分类</th><th>说明</th></tr>
+        <tr><th>设计稿文案</th><th>图标名</th><th>分类</th><th>说明</th></tr>
         <tr><td>开单</td><td><code>file-add</code> 或 <code>edit-1</code></td><td>美业</td><td>顶栏快捷区，可用定制 SVG</td></tr>
         <tr><td>开卡</td><td><code>creditcard</code></td><td>美业</td><td>会员卡开卡</td></tr>
         <tr><td>验券</td><td><code>coupon</code></td><td>美业</td><td>核销验券</td></tr>
@@ -740,7 +864,7 @@
         <tr><td>供货价/零售价</td><td><code>money</code></td><td>零售</td><td>价格三档表单</td></tr>
         <tr><td>物流</td><td><code>undertake-delivery</code> 或 <code>map</code></td><td>订单</td><td>—</td></tr>
       </table>
-      <div class="spec-block"><strong>调用方式：</strong>HTML 原型 <code>&lt;iconify-icon icon="tdesign:search"&gt;&lt;/iconify-icon&gt;</code> · Figma 搜索图标名 · AI 出图标注 <code>icon:search</code></div>
+      <div class="spec-block"><strong>调用方式：</strong>线性 <code>&lt;span class="s-icon" data-icon="search"&gt;&lt;/span&gt;</code> · 面性 <code>&lt;span class="s-icon s-icon--filled" data-icon="home-filled"&gt;&lt;/span&gt;</code> · Figma <a href="https://www.figma.com/design/0lZMESxiHe6rxzVUG3hMIT/Stratis-UI-Icons---1000--Free-Figma-icons--Community-">Stratis UI Icons</a> · AI 标注 <code>icon:search</code> / <code>icon:home-filled</code></div>
       <table>
         <tr><th>尺寸</th><th>px</th><th>用途</th></tr>
         <tr><td>icon-xs</td><td>16</td><td>Tag 内、表格操作</td></tr>
@@ -772,7 +896,7 @@
         <button type="button" class="filter-chip" data-cat="order">订单财务</button>
         <button type="button" class="filter-chip" data-cat="filled">面性图标</button>
       </div>
-      <p style="font-size:12px;color:var(--text-secondary);margin-bottom:12px">线性与面性（<code>-filled</code> 后缀）均可调用，适用于 Tab 选中、状态强调等场景。</p>
+      <p style="font-size:12px;color:var(--text-secondary);margin-bottom:12px">线性与面性均为 Stratis UI Icons（outline / filled），圆角风格一致；面性（<code>-filled</code> 后缀）适用于 Tab 选中、状态强调等场景。</p>
       <div id="icon-lib-root" class="icon-lib-grid"></div>
       <p id="icon-lib-count" style="font-size:12px;color:var(--text-secondary)"></p>
     </section>
@@ -789,6 +913,7 @@
         <tr><td>营销</td><td>PromoCard</td><td>渐变营销卡</td><td>获客/推客</td></tr>
         <tr><td>零售</td><td>ProductCard</td><td>商品双列卡</td><td>选品上架</td></tr>
         <tr><td>零售</td><td>PriceRow</td><td>价格三档行</td><td>原价/零售/供货</td></tr>
+        <tr><td>美业</td><td>MemberCard</td><td>会员卡</td><td>详卡 · 列表条 · 五类卡面主题</td></tr>
         <tr><td>零售</td><td>CartBar</td><td>商品底栏</td><td>店铺/客服/加购/购买</td></tr>
         <tr><td>基础</td><td>Button / Cell / …</td><td>TDesign 基础件</td><td>见下方预览</td></tr>
       </table>
@@ -797,16 +922,16 @@
         <div class="comp-block-hd"><strong>QuickEntryGrid 店务宫格</strong><code>5 列 · 图标 38px</code></div>
         <div class="comp-block-bd">
           <div class="u-grid-entry">
-            <div class="item"><iconify-icon icon="tdesign:view-list"></iconify-icon><span>价目表</span></div>
-            <div class="item"><iconify-icon icon="tdesign:creditcard"></iconify-icon><span>会员卡</span></div>
-            <div class="item"><iconify-icon icon="tdesign:usergroup"></iconify-icon><span>会员管理</span></div>
-            <div class="item"><iconify-icon icon="tdesign:member"></iconify-icon><span>员工管理</span></div>
-            <div class="item"><iconify-icon icon="tdesign:calendar"></iconify-icon><span>预约</span></div>
-            <div class="item"><iconify-icon icon="tdesign:chart"></iconify-icon><span>经营分析</span></div>
-            <div class="item"><iconify-icon icon="tdesign:chart-bar"></iconify-icon><span>业绩排行</span></div>
-            <div class="item"><iconify-icon icon="tdesign:shop"></iconify-icon><span>联盟广场</span></div>
-            <div class="item"><iconify-icon icon="tdesign:desktop"></iconify-icon><span>设备管理</span></div>
-            <div class="item"><iconify-icon icon="tdesign:ellipsis"></iconify-icon><span>更多</span></div>
+            <div class="item"><span class="s-icon" data-icon="view-list"></span><span>价目表</span></div>
+            <div class="item"><span class="s-icon" data-icon="creditcard"></span><span>会员卡</span></div>
+            <div class="item"><span class="s-icon" data-icon="usergroup"></span><span>会员管理</span></div>
+            <div class="item"><span class="s-icon" data-icon="member"></span><span>员工管理</span></div>
+            <div class="item"><span class="s-icon" data-icon="calendar"></span><span>预约</span></div>
+            <div class="item"><span class="s-icon" data-icon="chart"></span><span>经营分析</span></div>
+            <div class="item"><span class="s-icon" data-icon="chart-bar"></span><span>业绩排行</span></div>
+            <div class="item"><span class="s-icon" data-icon="shop"></span><span>联盟广场</span></div>
+            <div class="item"><span class="s-icon" data-icon="desktop"></span><span>设备管理</span></div>
+            <div class="item"><span class="s-icon" data-icon="ellipsis"></span><span>更多</span></div>
           </div>
         </div>
       </div>
@@ -816,7 +941,7 @@
         <div class="comp-block-bd">
           <div class="demo-row">
             <div class="u-product-card">
-              <div class="thumb"><iconify-icon icon="tdesign:image" aria-label="商品图"></iconify-icon></div>
+              <div class="thumb"><span class="s-icon" data-icon="image" aria-label="商品图"></span></div>
               <div class="body">
                 <div class="brand">馥绿德雅</div>
                 <div class="title">复合精油按摩护理油 100ml</div>
@@ -826,7 +951,7 @@
               </div>
             </div>
             <div class="u-product-card">
-              <div class="thumb"><iconify-icon icon="tdesign:image" aria-label="商品图"></iconify-icon></div>
+              <div class="thumb"><span class="s-icon" data-icon="image" aria-label="商品图"></span></div>
               <div class="body">
                 <div class="brand">馥绿德雅</div>
                 <div class="title">头皮深层洁净洗发露 200ml</div>
@@ -849,6 +974,123 @@
             <div class="col"><label>渠道价</label><div class="v">¥118</div></div>
           </div>
           <p style="margin-top:12px;font-size:12px;color:var(--text-secondary)">编辑页表格：规格 × 原价/零售价/供货价/库存 · 分销默认渠道价=供货价</p>
+        </div>
+      </div>
+
+      <div class="comp-block" id="comp-member-card">
+        <div class="comp-block-hd"><strong>MemberCard 会员卡</strong><code>Figma ysexRTH · 详卡 + 列表条</code></div>
+        <div class="comp-block-bd">
+          <p style="font-size:12px;color:var(--text-secondary);margin-bottom:12px">来源 <a href="https://www.figma.com/design/ysexRTHn8Qt0DVOvROJBrX/Untitled?node-id=0-1">Figma 会员卡组件</a>（file <code>ysexRTHn8Qt0DVOvROJBrX</code>）。AI 标注：<code>MemberCard/detail + --stored</code> 或 <code>MemberCard/compact + --times</code>。</p>
+          <figure class="member-card-figma-ref">
+            <img src="assets/figma-member-cards-ref.jpg" alt="Figma 会员卡组件设计稿对照" width="800" height="434" loading="lazy">
+            <figcaption>设计稿对照（自 Figma 导出缩略图）· 实现须与上图视觉一致</figcaption>
+          </figure>
+          <h4 style="margin:0 0 10px;font-size:14px">形态一 · 详卡 MemberCard/detail</h4>
+          <p style="font-size:12px;color:var(--text-secondary);margin-bottom:12px">渐变头区 + 内嵌白底说明 + 底栏操作；标题/金额用 <code>#333</code>，标签用 <code>#929292</code>；主按钮文案为<strong>开单</strong>（浅色胶囊 + 深色字）。</p>
+          <article class="u-member-card u-member-card--stored" aria-label="储值卡详卡">
+            <div class="u-member-card__head">
+              <div class="u-member-card__type">储值卡</div>
+              <div class="u-member-card__metrics">
+                <div class="metric">
+                  <span class="metric__label">零售折扣</span>
+                  <span class="metric__value">所有项目8折</span>
+                </div>
+                <div class="metric metric--end">
+                  <span class="metric__label">卡内余额</span>
+                  <span class="metric__value metric__price">¥2000.99</span>
+                </div>
+              </div>
+              <div class="u-member-card__inset">
+                <p>适用范围：全店通用</p>
+                <p>使用须知：不可退款，请在有效期内使用</p>
+              </div>
+            </div>
+            <div class="u-member-card__foot">
+              <span class="s-icon" data-icon="jump" aria-hidden="true"></span>
+              <nav class="u-member-card__links" aria-label="卡操作">
+                <a href="#">退卡</a>
+                <a href="#">升降级</a>
+                <a href="#">充值</a>
+              </nav>
+              <button type="button" class="u-member-card__cta">开单</button>
+            </div>
+          </article>
+          <h4 style="margin:20px 0 10px;font-size:14px">五类详卡（横向对照）</h4>
+          <div class="member-card-showcase">
+            <article class="u-member-card u-member-card--stored">
+              <div class="u-member-card__head">
+                <div class="u-member-card__type">储值卡</div>
+                <div class="u-member-card__metrics">
+                  <div class="metric"><span class="metric__label">零售折扣</span><span class="metric__value">所有项目8折</span></div>
+                  <div class="metric metric--end"><span class="metric__label">卡内余额</span><span class="metric__value metric__price">¥2000.99</span></div>
+                </div>
+                <div class="u-member-card__inset"><p>适用范围：全店通用</p></div>
+              </div>
+              <div class="u-member-card__foot"><span class="s-icon" data-icon="jump"></span><nav class="u-member-card__links"><a href="#">退卡</a><a href="#">升降级</a><a href="#">充值</a></nav><button type="button" class="u-member-card__cta">开单</button></div>
+            </article>
+            <article class="u-member-card u-member-card--times">
+              <div class="u-member-card__head">
+                <div class="u-member-card__type">计次卡</div>
+                <div class="u-member-card__metrics">
+                  <div class="metric"><span class="metric__label">剩余次数</span><span class="metric__value">5次</span></div>
+                  <div class="metric metric--end"><span class="metric__label">卡内余额</span><span class="metric__value metric__price">¥0.00</span></div>
+                </div>
+                <div class="u-member-card__inset"><p>适用范围：指定项目</p></div>
+              </div>
+              <div class="u-member-card__foot"><span class="s-icon" data-icon="jump"></span><nav class="u-member-card__links"><a href="#">退卡</a><a href="#">升降级</a><a href="#">充值</a></nav><button type="button" class="u-member-card__cta">开单</button></div>
+            </article>
+            <article class="u-member-card u-member-card--discount">
+              <div class="u-member-card__head">
+                <div class="u-member-card__type">折扣卡</div>
+                <div class="u-member-card__metrics">
+                  <div class="metric"><span class="metric__label">零售折扣</span><span class="metric__value">所有项目8折</span></div>
+                  <div class="metric metric--end"><span class="metric__label">卡内余额</span><span class="metric__value metric__price">¥2000.99</span></div>
+                </div>
+                <div class="u-member-card__inset"><p>适用范围：全店通用</p></div>
+              </div>
+              <div class="u-member-card__foot"><span class="s-icon" data-icon="jump"></span><nav class="u-member-card__links"><a href="#">退卡</a><a href="#">升降级</a><a href="#">充值</a></nav><button type="button" class="u-member-card__cta">开单</button></div>
+            </article>
+            <article class="u-member-card u-member-card--period">
+              <div class="u-member-card__head">
+                <div class="u-member-card__type">周期卡</div>
+                <div class="u-member-card__metrics">
+                  <div class="metric"><span class="metric__label">有效期</span><span class="metric__value">30天</span></div>
+                  <div class="metric metric--end"><span class="metric__label">卡内余额</span><span class="metric__value metric__price">¥2000.99</span></div>
+                </div>
+                <div class="u-member-card__inset"><p>适用范围：全店通用</p></div>
+              </div>
+              <div class="u-member-card__foot"><span class="s-icon" data-icon="jump"></span><nav class="u-member-card__links"><a href="#">退卡</a><a href="#">升降级</a><a href="#">充值</a></nav><button type="button" class="u-member-card__cta">开单</button></div>
+            </article>
+            <article class="u-member-card u-member-card--package">
+              <div class="u-member-card__head">
+                <div class="u-member-card__type">套餐卡</div>
+                <div class="u-member-card__metrics">
+                  <div class="metric"><span class="metric__label">套餐内容</span><span class="metric__value">5次护理</span></div>
+                  <div class="metric metric--end"><span class="metric__label">卡内余额</span><span class="metric__value metric__price">¥2000.99</span></div>
+                </div>
+                <div class="u-member-card__inset"><p>适用范围：全店通用</p></div>
+              </div>
+              <div class="u-member-card__foot"><span class="s-icon" data-icon="jump"></span><nav class="u-member-card__links"><a href="#">退卡</a><a href="#">升降级</a><a href="#">充值</a></nav><button type="button" class="u-member-card__cta">开单</button></div>
+            </article>
+          </div>
+          <h4 style="margin:24px 0 10px;font-size:14px">形态二 · 列表条 MemberCard/compact</h4>
+          <p style="font-size:12px;color:var(--text-secondary);margin-bottom:12px">高度 40px · 圆角 8px · 浅色横渐变 · 左侧类型徽标 + 卡名称。</p>
+          <div class="member-card-stack">
+            <div class="u-member-card u-member-card--compact u-member-card--stored"><span class="u-member-card__badge">储值</span><span class="u-member-card__name">储值3000元</span></div>
+            <div class="u-member-card u-member-card--compact u-member-card--times"><span class="u-member-card__badge">次卡</span><span class="u-member-card__name">基础5次卡</span></div>
+            <div class="u-member-card u-member-card--compact u-member-card--discount"><span class="u-member-card__badge">折扣</span><span class="u-member-card__name">灵动5折卡</span></div>
+            <div class="u-member-card u-member-card--compact u-member-card--period"><span class="u-member-card__badge">周期</span><span class="u-member-card__name">月卡30天</span></div>
+            <div class="u-member-card u-member-card--compact u-member-card--package"><span class="u-member-card__badge">套餐</span><span class="u-member-card__name">套餐5次卡</span></div>
+          </div>
+          <table style="width:100%;font-size:12px;margin-top:20px;border-collapse:collapse">
+            <tr style="background:var(--gray-1)"><th style="text-align:left;padding:8px">修饰符</th><th style="text-align:left;padding:8px">详卡渐变</th><th style="text-align:left;padding:8px">开单按钮</th><th style="text-align:left;padding:8px">列表条渐变</th></tr>
+            <tr><td style="padding:8px"><code>--stored</code></td><td style="padding:8px">#C8D9F7 → #DBD6F4</td><td style="padding:8px">#BDD5ED</td><td style="padding:8px">#D3DAF7 → #E8E4F8</td></tr>
+            <tr><td style="padding:8px"><code>--times</code></td><td style="padding:8px">#C0DAE7 → #C7DEE6</td><td style="padding:8px">#B9D4DD</td><td style="padding:8px">#D4EBF2 → #E4F3F7</td></tr>
+            <tr><td style="padding:8px"><code>--discount</code></td><td style="padding:8px">#E1C989 → #F3D8A1</td><td style="padding:8px">#E1C789</td><td style="padding:8px">#F5E6C8 → #FBF0DC</td></tr>
+            <tr><td style="padding:8px"><code>--period</code></td><td style="padding:8px">#F5CEBF → #F6D6CB</td><td style="padding:8px">#E3BFB3</td><td style="padding:8px">#FBE4DC → #FFF0EB</td></tr>
+            <tr><td style="padding:8px"><code>--package</code></td><td style="padding:8px">#D4BEA6 → #E7D7C0</td><td style="padding:8px">#D7C3A8</td><td style="padding:8px">#EDE3D4 → #F7F0E6</td></tr>
+          </table>
+          <p style="margin-top:12px;font-size:12px;color:var(--text-secondary)">详卡宽 358（画布 390 左右边距 16）· 头区内边距 14 · 说明区内嵌白底圆角 8 · 金额 <code>20px D-DIN</code> · 底栏右对齐文字链 + 「开单」胶囊。</p>
         </div>
       </div>
 
@@ -892,7 +1134,7 @@
         <div class="comp-block-hd"><strong>Navbar 导航栏</strong><code>TNavbar · height=48</code></div>
         <div class="comp-block-bd">
           <div class="comp-preview-phone">
-            <div class="u-navbar"><iconify-icon class="back" icon="tdesign:chevron-left"></iconify-icon><img src="LOGO2.png" alt="" style="width:24px;height:24px;object-fit:contain;margin-right:6px">订单详情<span class="action">分享</span></div>
+            <div class="u-navbar"><span class="s-icon back" data-icon="chevron-left"></span><img src="LOGO2.png" alt="" style="width:24px;height:24px;object-fit:contain;margin-right:6px">订单详情<span class="action">分享</span></div>
           </div>
           <table><tr><th>属性</th><th>值</th></tr>
             <tr><td>高度</td><td>48px + 状态栏 44px</td></tr>
@@ -908,10 +1150,10 @@
         <div class="comp-block-bd">
           <div class="comp-preview-phone">
             <div class="u-tabbar">
-              <div class="tab on"><iconify-icon icon="tdesign:home"></iconify-icon>首页</div>
-              <div class="tab"><iconify-icon icon="tdesign:shop"></iconify-icon>商城</div>
-              <div class="tab"><iconify-icon icon="tdesign:cart"></iconify-icon>购物车</div>
-              <div class="tab"><iconify-icon icon="tdesign:user"></iconify-icon>我的</div>
+              <div class="tab on"><span class="s-icon" data-icon="home"></span>首页</div>
+              <div class="tab"><span class="s-icon" data-icon="shop"></span>商城</div>
+              <div class="tab"><span class="s-icon" data-icon="cart"></span>购物车</div>
+              <div class="tab"><span class="s-icon" data-icon="user"></span>我的</div>
             </div>
           </div>
           <p>高度 56px + 安全区 · 白底 · 选中 brand-6 · 用于商城/订单等子模块</p>
@@ -932,7 +1174,7 @@
         <div class="comp-block-hd"><strong>Search 搜索框</strong><code>TSearch</code></div>
         <div class="comp-block-bd">
           <div class="comp-preview-phone">
-            <div class="u-search"><iconify-icon icon="tdesign:search"></iconify-icon>搜索订单、客户</div>
+            <div class="u-search"><span class="s-icon" data-icon="search"></span>搜索订单、客户</div>
           </div>
           <p>高 36px · bg gray-1 · 圆角 capsule · 图标 search 20px</p>
         </div>
@@ -955,7 +1197,7 @@
         <div class="comp-block-bd">
           <div class="comp-preview-phone">
             <div class="u-cell-group">
-              <div class="u-cell">客户名称<span class="note">华东分公司</span><iconify-icon icon="tdesign:chevron-right" style="color:var(--gray-6)"></iconify-icon></div>
+              <div class="u-cell">客户名称<span class="note">华东分公司</span><span class="s-icon" data-icon="chevron-right" style="color:var(--gray-6)"></span></div>
               <div class="u-cell" style="flex-direction:column;align-items:flex-start;gap:4px">合同金额<div style="font-size:12px;color:var(--text-secondary)">更新于 2026-05-27</div></div>
               <div class="u-cell">审批状态<span class="note"><span class="tag-demo tag-brand-demo">待审批</span></span></div>
             </div>
@@ -1008,7 +1250,7 @@
         <div class="comp-block-hd"><strong>NoticeBar 公告条</strong><code>TNoticeBar</code></div>
         <div class="comp-block-bd">
           <div class="comp-preview-phone">
-            <div class="u-notice"><iconify-icon icon="tdesign:info-circle"></iconify-icon>您有 3 条待审批事项请及时处理</div>
+            <div class="u-notice"><span class="s-icon" data-icon="info-circle"></span>您有 3 条待审批事项请及时处理</div>
           </div>
         </div>
       </div>
@@ -1029,7 +1271,7 @@
         <div class="comp-block-hd"><strong>Empty / Result 空状态与结果页</strong><code>TEmpty · TResult</code></div>
         <div class="comp-block-bd">
           <div class="u-empty">
-            <iconify-icon icon="tdesign:file"></iconify-icon>
+            <span class="s-icon" data-icon="file"></span>
             <p style="margin-top:12px;font-size:14px;color:var(--text-primary)">暂无订单数据</p>
             <p style="font-size:12px">点击下方按钮创建第一笔订单</p>
             <button class="btn btn-primary" style="margin-top:16px;border-radius:4px">新建订单</button>
@@ -1041,9 +1283,9 @@
         <div class="comp-block-hd"><strong>Avatar 头像</strong><code>TAvatar</code></div>
         <div class="comp-block-bd">
           <div class="demo-row">
-            <div class="u-avatar" style="width:32px;height:32px"><iconify-icon icon="tdesign:user"></iconify-icon></div>
-            <div class="u-avatar"><iconify-icon icon="tdesign:user"></iconify-icon></div>
-            <div class="u-avatar" style="width:48px;height:48px"><iconify-icon icon="tdesign:user" style="font-size:24px"></iconify-icon></div>
+            <div class="u-avatar" style="width:32px;height:32px"><span class="s-icon" data-icon="user"></span></div>
+            <div class="u-avatar"><span class="s-icon" data-icon="user"></span></div>
+            <div class="u-avatar" style="width:48px;height:48px"><span class="s-icon" data-icon="user" style="font-size:24px"></span></div>
           </div>
           <p>尺寸 32 / 40 / 48px · 圆形 · 默认 gray-3 底</p>
         </div>
@@ -1060,7 +1302,7 @@
       <div class="comp-block" id="comp-fab">
         <div class="comp-block-hd"><strong>Fab 悬浮按钮</strong><code>TFab</code></div>
         <div class="comp-block-bd">
-          <div class="demo-row"><div class="u-fab"><iconify-icon icon="tdesign:add" style="font-size:24px"></iconify-icon></div></div>
+          <div class="demo-row"><div class="u-fab"><span class="s-icon" data-icon="add" style="font-size:24px"></span></div></div>
           <p>48×48 圆形 · brand-6 · shadow-2 · 列表页「新建」</p>
         </div>
       </div>
@@ -1069,7 +1311,7 @@
         <div class="comp-block-hd"><strong>Upload 上传</strong><code>TUpload</code></div>
         <div class="comp-block-bd">
           <div style="width:80px;height:80px;border:1px dashed var(--gray-4);border-radius:6px;display:flex;flex-direction:column;align-items:center;justify-content:center;color:var(--text-secondary);font-size:12px;gap:4px">
-            <iconify-icon icon="tdesign:add" style="font-size:24px"></iconify-icon>上传
+            <span class="s-icon" data-icon="add" style="font-size:24px"></span>上传
           </div>
           <p style="margin-top:8px">虚线框 80×80 · 支持图片/PDF · 表单附件区</p>
         </div>
@@ -1119,7 +1361,7 @@
         <div class="comp-block-hd"><strong>Card 业务卡片</strong><code>组合组件</code></div>
         <div class="comp-block-bd">
           <div style="background:#fff;border-radius:9px;padding:16px;max-width:360px;box-shadow:var(--shadow-1)">
-            <div style="display:flex;justify-content:space-between;margin-bottom:12px"><span style="font-weight:500">本月销售额</span><iconify-icon icon="tdesign:chevron-right" style="color:var(--gray-6)"></iconify-icon></div>
+            <div style="display:flex;justify-content:space-between;margin-bottom:12px"><span style="font-weight:500">本月销售额</span><span class="s-icon" data-icon="chevron-right" style="color:var(--gray-6)"></span></div>
             <div style="font-size:28px;font-weight:600">¥ 1,286,400</div>
             <div style="font-size:12px;color:var(--success-6);margin-top:4px">↑ 12.5% 较上月</div>
           </div>
@@ -1362,7 +1604,7 @@
 - 主色 #F32F41 · 主按钮圆角 4px
 - 首页底栏：GlassTabBar（5项磨砂）· 子页：标准 TabBar
 - 图标：第6章库 + 业务映射表，禁止自创图标
-- 组件：第7章组件目录（BrandHeader/StatCard/ProductCard…）
+- 组件：第7章组件目录（MemberCard/BrandHeader/StatCard/ProductCard…）
 - 内容：[具体业务字段]</pre>
     </section>
 
@@ -1599,34 +1841,76 @@
     { name: 'hourglass-filled', cat: 'filled', meaning: '等待', scene: '待发货' }
   ];
 
-  /** Iconify 无对应资源时的展示用别名（卡片仍显示库内 name） */
+  /** Stratis 资源别名（卡片仍显示库内 name） */
   const ICON_RESOLVE = {
     'attach-filled': 'file-filled',
     'cloud-upload-filled': 'cloud-upload',
     'logo-wechat-filled': 'logo-wechat',
-    'view-list-filled': 'view-list'
+    'view-list-filled': 'list'
   };
 
   function resolveIconSlug(catalogName) {
     return ICON_RESOLVE[catalogName] || catalogName;
   }
 
-  function wireIconElement(el, catalogName) {
-    const slugs = [resolveIconSlug(catalogName)];
-    if (catalogName.endsWith('-filled') && !slugs.includes(catalogName.replace(/-filled$/, ''))) {
-      slugs.push(catalogName.replace(/-filled$/, ''));
+  function isFilledIcon(name, cat) {
+    return cat === 'filled' || name.endsWith('-filled');
+  }
+
+  function stratisIconAsset(catalogName, cat) {
+    const slug = resolveIconSlug(catalogName);
+    const filled = isFilledIcon(catalogName, cat);
+    const map = filled
+      ? (typeof STRATIS_FILLED_ICON_MAP !== 'undefined' ? STRATIS_FILLED_ICON_MAP : null)
+      : (typeof STRATIS_ICON_MAP !== 'undefined' ? STRATIS_ICON_MAP : null);
+    const file = map ? map[slug] : null;
+    if (!file) return null;
+    return (filled ? 'icons/stratis-filled/' : 'icons/stratis/') + file;
+  }
+
+  const _stratisSvgCache = {};
+
+  function iconMarkup(catalogName, cat, extraAttrs) {
+    const attrs = extraAttrs || '';
+    const filled = isFilledIcon(catalogName, cat);
+    const cls = 's-icon' + (filled ? ' s-icon--filled' : '');
+    if (stratisIconAsset(catalogName, cat)) {
+      return `<span class="${cls}" data-catalog="${catalogName}" data-icon="${catalogName}" data-filled="${filled ? '1' : '0'}" ${attrs}></span>`;
     }
-    let idx = 0;
-    const apply = () => {
-      el.setAttribute('icon', 'tdesign:' + slugs[idx]);
-    };
-    apply();
-    el.addEventListener('load', () => el.closest('.icon-lib-item')?.classList.remove('is-missing'));
-    el.addEventListener('error', () => {
-      idx += 1;
-      if (idx < slugs.length) apply();
-      else el.closest('.icon-lib-item')?.classList.add('is-missing');
-    });
+    return `<span class="${cls} is-missing" data-catalog="${catalogName}" data-icon="${catalogName}" data-filled="${filled ? '1' : '0'}" ${attrs}></span>`;
+  }
+
+  async function hydrateStratisIcons(root) {
+    const scope = root || document;
+    const pending = [...scope.querySelectorAll('.s-icon[data-icon]:not([data-hydrated])')];
+    await Promise.all(pending.map(async el => {
+      const slug = resolveIconSlug(el.dataset.icon);
+      const filled = el.dataset.filled === '1';
+      const map = filled
+        ? (typeof STRATIS_FILLED_ICON_MAP !== 'undefined' ? STRATIS_FILLED_ICON_MAP : null)
+        : (typeof STRATIS_ICON_MAP !== 'undefined' ? STRATIS_ICON_MAP : null);
+      const file = map ? map[slug] : null;
+      if (!file) {
+        el.classList.add('is-missing');
+        el.closest('.icon-lib-item')?.classList.add('is-missing');
+        return;
+      }
+      const url = (filled ? 'icons/stratis-filled/' : 'icons/stratis/') + file;
+      try {
+        if (!_stratisSvgCache[url]) {
+          const res = await fetch(url);
+          if (!res.ok) throw new Error(String(res.status));
+          _stratisSvgCache[url] = await res.text();
+        }
+        el.innerHTML = _stratisSvgCache[url];
+        el.dataset.hydrated = '1';
+        el.classList.remove('is-missing');
+        el.closest('.icon-lib-item')?.classList.remove('is-missing');
+      } catch {
+        el.classList.add('is-missing');
+        el.closest('.icon-lib-item')?.classList.add('is-missing');
+      }
+    }));
   }
 
   const ALL_ICONS = [...ICON_LIBRARY, ...ICON_LIBRARY_EXTRA, ...ICON_FILLED].filter((item, i, arr) => arr.findIndex(x => x.name === item.name) === i);
@@ -1649,7 +1933,7 @@
     const itemHtml = i => `
       <div class="icon-lib-item tap-feedback${isFilled(i) ? ' is-filled' : ''}" data-name="${i.name}" title="点击复制：${i.name}&#10;${fmtMeaning(i.meaning)} · ${i.scene}">
         <div class="icon-lib-visual">
-          <iconify-icon data-catalog="${i.name}" icon="tdesign:${resolveIconSlug(i.name)}" aria-label="${fmtMeaning(i.meaning)}"></iconify-icon>
+          ${iconMarkup(i.name, i.cat, `aria-label="${fmtMeaning(i.meaning)}"`)}
         </div>
         <div class="icon-lib-meta">
           <div class="icon-lib-name">${i.name}</div>
@@ -1677,7 +1961,7 @@
         });
       });
     });
-    root.querySelectorAll('iconify-icon[data-catalog]').forEach(el => wireIconElement(el, el.dataset.catalog));
+    void hydrateStratisIcons(root);
     initTapFeedback(root);
   }
 
@@ -1694,6 +1978,7 @@
     });
   });
   renderIconLib();
+  void hydrateStratisIcons(document);
 
   document.querySelectorAll('.nav-list a').forEach(a => {
     a.addEventListener('click', () => {
