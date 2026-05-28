@@ -6,6 +6,27 @@
   <title>剑琅联盟移动端设计规范</title>
   <link rel="icon" href="LOGO2.png" type="image/png">
   <style>
+    @font-face {
+      font-family: "TCloudNumber";
+      src: url("assets/fonts/TCloudNumber/TCloudNumber-Bold.ttf") format("truetype");
+      font-weight: 700;
+      font-style: normal;
+      font-display: swap;
+    }
+    @font-face {
+      font-family: "TCloudNumber";
+      src: url("assets/fonts/TCloudNumber/TCloudNumber-Regular.ttf") format("truetype");
+      font-weight: 400;
+      font-style: normal;
+      font-display: swap;
+    }
+    @font-face {
+      font-family: "TCloudNumber";
+      src: url("assets/fonts/TCloudNumber/TCloudNumber-Light.ttf") format("truetype");
+      font-weight: 300;
+      font-style: normal;
+      font-display: swap;
+    }
     :root {
       --sidebar-bg: #FFFFFF;
       --sidebar-surface: #F5F6F8;
@@ -62,7 +83,7 @@
       --figma-orange: #F77357;
       --figma-card-pink: #FFF2F2;
       --figma-promo-border: rgba(249, 117, 107, 0.2);
-      --font-data: "DIN Alternate", "D-DIN-Bold", Roboto, sans-serif;
+      --font-data: "TCloudNumber", "PingFang SC", sans-serif;
       --glass-nav-shadow: none;
     }
     * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -145,10 +166,14 @@
     .btn.btn--r8 { border-radius: var(--radius-btn-8); }
     .btn.btn--r12 { border-radius: var(--radius-btn-12); }
     .btn.btn--r16 { border-radius: var(--radius-btn-16); }
-    .btn-primary { background: var(--brand-6); color: #fff; }
-    .btn-primary:hover { background: var(--brand-7); }
+    .btn-primary { background: var(--brand-6); color: #fff; border: 1px solid var(--brand-6); }
+    .btn-primary:hover { background: var(--brand-7); border-color: var(--brand-7); }
     .btn-primary.btn-lg, .btn-primary.btn-sm { height: 48px; }
     .btn-outline { background: #fff; color: var(--brand-6); border: 1px solid var(--brand-6); }
+    .u-dialog .acts .btn-primary,
+    .u-bottom-bar .btn-primary { background: var(--brand-6); color: #fff; border: 1px solid var(--brand-6); }
+    .u-dialog .acts .btn-outline,
+    .u-bottom-bar .btn-outline { background: #fff; color: var(--brand-6); border: 1px solid var(--brand-6); }
     .btn-text { background: transparent; color: var(--brand-6); }
     .btn-ghost { background: var(--brand-aux-2); color: var(--brand-6); }
     .btn-danger { background: var(--error-6); color: #fff; }
@@ -326,9 +351,56 @@
     .u-tabs span { flex: 1; display: flex; align-items: center; justify-content: center; font-size: 14px; color: var(--text-secondary); position: relative; }
     .u-tabs span.on { color: var(--text-primary); font-weight: 500; }
     .u-tabs span.on::after { content: ''; position: absolute; bottom: 0; left: 50%; transform: translateX(-50%); width: 16px; height: 3px; background: var(--brand-6); border-radius: 2px; }
-    .u-tabbar { height: 56px; background: #fff; border-top: 1px solid var(--border); display: flex; }
-    .u-tabbar .tab { flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 2px; font-size: 10px; color: var(--text-secondary); }
+    .u-tabbar { height: 56px; background: #fff; border-top: 1px solid var(--border); display: flex; box-sizing: border-box; }
+    .u-tabbar .tab {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 2px;
+      font-size: 11px;
+      line-height: 15px;
+      color: var(--text-secondary);
+    }
     .u-tabbar .tab.on { color: var(--brand-6); }
+    .u-tabbar .s-icon {
+      font-size: var(--icon-size);
+      width: var(--icon-size);
+      height: var(--icon-size);
+      color: var(--icon-color-default);
+    }
+    .u-tabbar .tab.on .s-icon { color: var(--brand-6); }
+    .u-tabbar .s-icon:not(.s-icon--filled):not([data-filled="1"]) svg [stroke] {
+      stroke-width: 1.5 !important;
+    }
+    .font-download-panel { margin: var(--space-module) 0; }
+    .font-download-actions { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 12px; }
+    .font-download-btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 36px;
+      padding: 0 14px;
+      border-radius: var(--radius-input);
+      border: 1px solid var(--brand-6);
+      background: #fff;
+      color: var(--brand-6);
+      font-size: 13px;
+      font-weight: 500;
+      text-decoration: none;
+    }
+    .font-download-btn:hover { background: var(--brand-1); }
+    .font-data-sample {
+      display: flex;
+      align-items: baseline;
+      gap: var(--price-gap);
+      font-size: 20px;
+      color: var(--text-primary);
+      margin-top: 10px;
+    }
+    .font-data-sample .yen { font-family: "PingFang SC", sans-serif; font-weight: 500; }
+    .font-data-sample .num { font-family: var(--font-data); font-weight: 700; letter-spacing: -.02em; }
     .u-search { height: 36px; background: var(--bg-disabled); border-radius: var(--radius-input); margin: var(--space-list-y) var(--space-page); display: flex; align-items: center; padding: 0 12px; gap: var(--space-icon-text); color: var(--text-secondary); font-size: 14px; border: 1px solid var(--border); box-shadow: none; }
     .u-notice,
     .u-alert-blue,
@@ -711,7 +783,7 @@
         <div class="hero-logo"><img src="LOGO2.png" alt="剑琅联盟 Logo"></div>
         <div>
           <h2>剑琅联盟移动端设计规范</h2>
-          <p class="hero-desc">移动端设计规范 · 统一视觉语言与组件标准，支撑 AI 批量出图。本站视觉已按 <a href="#global-ui">全局强制 UI</a> 落地（#F7F7F7 页面底、无阴影无渐变、苹方 + DIN）。</p>
+          <p class="hero-desc">移动端设计规范 · 统一视觉语言与组件标准，支撑 AI 批量出图。本站视觉已按 <a href="#global-ui">全局强制 UI</a> 落地（#F7F7F7 页面底、无阴影无渐变、苹方 + TCloudNumber）。</p>
           <div class="hero-meta">
             <span class="hero-pill">390 × 844</span>
             <span class="hero-pill">#F7F7F7 页面底</span>
@@ -756,7 +828,7 @@
           <li><strong>字体规范</strong>
             <ul>
               <li>常规文案：<strong>苹方 PingFang SC</strong></li>
-              <li>金额<strong>纯数字 + 小数点</strong>：<strong>DIN</strong> 字体（<code>DIN Alternate</code> / <code>D-DIN-Bold</code>）</li>
+              <li>金额<strong>纯数字 + 小数点</strong>：<strong>TCloudNumber</strong>（v1.010 · Bold）· 见第 3 章字体下载</li>
               <li>硬性规则：<code>¥</code> 符号、价格描述文字（应付 / 实付 / 小计）统一用苹方；<code>¥</code> 与数字间距固定 <strong>4px</strong></li>
             </ul>
             <div class="price-row-demo">
@@ -909,7 +981,7 @@
       <ol>
         <li><strong>组合组件</strong>：从第 7 章按场景选用组件，API 与交互对齐 TDesign。</li>
         <li><strong>颜色 / 圆角 / 间距</strong>：仅使用全局章与第 2–5 章 Token；按钮圆角四档择一且同类型一致；禁止投影与渐变背景。</li>
-        <li><strong>金额排版</strong>：数字 DIN；<code>¥</code> 与「应付/实付」等用苹方，<code>¥</code> 与数字间距 4px。</li>
+        <li><strong>金额排版</strong>：数字 TCloudNumber Bold；<code>¥</code> 与「应付/实付」等用苹方，<code>¥</code> 与数字间距 4px。</li>
         <li><strong>品牌露出</strong>：启动/登录/首页 Navbar 使用 <code>LOGO2.png</code> 与「剑琅联盟」。</li>
         <li><strong>硬性约束</strong>：无 emoji · Tab/卡片不叠压 · 图片位灰底白 icon · 内容不横向溢出 · 按钮宽 ≤370px · 顶 Tab 390 居中 · 状态栏白块 · 卡片不溢出 · 提示 icon 首行底对齐 · 空状态垂直居中 · <code>PageTitleBar</code> 见 Figma 6-623。</li>
       </ol>
@@ -1032,23 +1104,37 @@
         <tr><td>字重 Regular</td><td>font-weight: 400 · 正文、描述</td></tr>
         <tr><td>字重 Medium</td><td>font-weight: 500 · 标题、按钮、强调</td></tr>
         <tr><td>字重 Semibold</td><td>font-weight: 600 · 核心数据数字</td></tr>
-        <tr><td>数据字体 ★</td><td><strong>DIN</strong>（DIN Alternate / D-DIN-Bold）· 仅纯数字与小数点</td></tr>
+        <tr><td>数据字体 ★</td><td><strong>TCloudNumber</strong> v1.010（Bold · 金额数字）· 仅纯数字与小数点</td></tr>
         <tr><td>金额混排 ★</td><td><code>¥</code>、应付/实付/小计 → 苹方；<code>¥</code> 与数字间距 4px</td></tr>
       </table>
+
+      <h3>3.1.1 TCloudNumber 字体包（v1.010）</h3>
+      <div class="card font-download-panel">
+        <p style="margin-bottom:8px;font-size:13px;color:var(--text-secondary)">官方数据字体，用于替换原 <code>D-DIN-Bold</code>。设计稿、HTML 原型与 Flutter 金额数字统一使用 <strong>TCloudNumber-Bold</strong>。</p>
+        <div class="font-data-sample"><span class="yen">¥</span><span class="num">1,286.40</span></div>
+        <div class="font-download-actions">
+          <a class="font-download-btn" href="assets/fonts/TCloudNumber/TCloudNumber-Bold.ttf" download="TCloudNumber-Bold.ttf">下载 Bold</a>
+          <a class="font-download-btn" href="assets/fonts/TCloudNumber/TCloudNumber-Regular.ttf" download="TCloudNumber-Regular.ttf">下载 Regular</a>
+          <a class="font-download-btn" href="assets/fonts/TCloudNumber/TCloudNumber-Light.ttf" download="TCloudNumber-Light.ttf">下载 Light</a>
+          <a class="font-download-btn" href="assets/fonts/TCloudNumber/TCloudNumberVF.ttf" download="TCloudNumberVF.ttf">下载 VF 可变</a>
+        </div>
+        <p style="margin-top:12px;font-size:12px;color:var(--text-secondary)">Flutter：<code>fontFamily: 'TCloudNumber'</code> · 将 ttf 放入 <code>assets/fonts/</code> 并在 <code>pubspec.yaml</code> 声明。</p>
+      </div>
 
       <h3>3.2 字号阶梯（390px 画布，单位 px）</h3>
       <table>
         <tr><th>Token</th><th>字号</th><th>行高</th><th>字重</th><th>场景</th></tr>
-        <tr><td>font-xs</td><td>10</td><td>16</td><td>400</td><td>TabBar 文字、极小标签</td></tr>
+        <tr><td>font-xs</td><td>10</td><td>16</td><td>400</td><td>极小标签</td></tr>
+        <tr><td>font-tabbar ★</td><td>11</td><td>15</td><td>400</td><td>标准底栏 Tab 文案</td></tr>
         <tr><td>font-s</td><td>12</td><td>20</td><td>400</td><td>辅助说明、时间戳、Badge</td></tr>
         <tr><td>font-base ★</td><td>14</td><td>22</td><td>400</td><td>正文、Cell 标题、表单标签</td></tr>
         <tr><td>font-m</td><td>16</td><td>24</td><td>400/500</td><td>Navbar 标题、列表主标题</td></tr>
         <tr><td>font-l</td><td>20</td><td>28</td><td>500</td><td>区块标题、关键数据</td></tr>
         <tr><td>font-xl</td><td>24</td><td>32</td><td>500</td><td>页面大标题、统计数字</td></tr>
         <tr><td>font-xxl</td><td>28</td><td>36</td><td>500</td><td>登录页标题、空状态标题</td></tr>
-        <tr><td>font-data ★</td><td>20</td><td>22</td><td>700 (D-DIN)</td><td>业绩卡数字（Figma 实测 20px）</td></tr>
+        <tr><td>font-data ★</td><td>20</td><td>22</td><td>700 (TCloudNumber-Bold)</td><td>业绩卡数字（Figma 实测 20px）</td></tr>
         <tr><td>font-data-lg</td><td>32</td><td>40</td><td>700</td><td>仪表盘大指标</td></tr>
-        <tr><td>font-nav-label</td><td>11</td><td>15</td><td>400</td><td>磨砂底栏 Tab 文案</td></tr>
+        <tr><td>font-nav-label</td><td>11</td><td>15</td><td>400</td><td>标准底栏 Tab 文案（同 font-tabbar）</td></tr>
         <tr><td>font-grid-label</td><td>13</td><td>18</td><td>400</td><td>店务宫格入口（价目表等）</td></tr>
       </table>
 
@@ -1058,7 +1144,7 @@
         <li>多行描述最多 2 行，超出截断</li>
         <li>数字金额右对齐，使用千分位；日期格式 YYYY-MM-DD HH:mm</li>
         <li>中英文混排时英文与中文之间无需额外空格（中文产品惯例）</li>
-        <li>禁止低于 10px 的可读文字（除 TabBar 图标下 10px 标签）</li>
+        <li>禁止低于 10px 的可读文字（标准底栏 Tab 文案为 11px）</li>
       </ul>
     </section>
 
@@ -1432,7 +1518,7 @@
             <tr><td style="padding:8px"><code>--period</code></td><td style="padding:8px">#F6D6CB</td><td style="padding:8px">#E3BFB3</td><td style="padding:8px">#FFF0EB</td></tr>
             <tr><td style="padding:8px"><code>--package</code></td><td style="padding:8px">#E7D7C0</td><td style="padding:8px">#D7C3A8</td><td style="padding:8px">#F7F0E6</td></tr>
           </table>
-          <p style="margin-top:12px;font-size:12px;color:var(--text-secondary)">详卡宽 358（画布 390 左右边距 16）· 头区内边距 14 · 说明区内嵌白底圆角 8 · 金额 <code>20px D-DIN</code> · 底栏右对齐文字链 + 「开单」胶囊。</p>
+          <p style="margin-top:12px;font-size:12px;color:var(--text-secondary)">详卡宽 358（画布 390 左右边距 16）· 头区内边距 14 · 说明区内嵌白底圆角 8 · 金额 <code>20px TCloudNumber-Bold</code> · 底栏右对齐文字链 + 「开单」胶囊。</p>
         </div>
       </div>
 
@@ -1470,6 +1556,7 @@
             <tr><td>最大宽度 ★</td><td>370px（通栏亦同，左右各约 10px 留白）</td></tr>
             <tr><td>Block</td><td>宽度 100%，且 max-width 370px</td></tr>
             <tr><td>BottomBar</td><td>双按钮：左 Outline + 右 Primary，间距 12px</td></tr>
+            <tr><td>填充 / 描边 ★</td><td>填充：红底白字 · 描边：白底红字红边（对话框、底栏同规）</td></tr>
           </table>
         </div>
       </div>
@@ -1523,13 +1610,19 @@
         <div class="comp-block-bd">
           <div class="comp-preview-phone">
             <div class="u-tabbar">
-              <div class="tab on"><span class="s-icon" data-icon="home"></span>首页</div>
-              <div class="tab"><span class="s-icon" data-icon="shop"></span>商城</div>
-              <div class="tab"><span class="s-icon" data-icon="cart"></span>购物车</div>
-              <div class="tab"><span class="s-icon" data-icon="user"></span>我的</div>
+              <div class="tab on"><span class="s-icon s-icon--filled" data-icon="home-filled" data-filled="1"></span>首页</div>
+              <div class="tab"><span class="s-icon" data-icon="shop" data-filled="0"></span>商城</div>
+              <div class="tab"><span class="s-icon" data-icon="cart" data-filled="0"></span>购物车</div>
+              <div class="tab"><span class="s-icon" data-icon="user" data-filled="0"></span>我的</div>
             </div>
           </div>
-          <p>高度 56px + 安全区 · 白底 · 选中 brand-6 · 用于商城/订单等子模块</p>
+          <table style="margin-top:12px">
+            <tr><th>属性</th><th>值</th></tr>
+            <tr><td>图标 ★</td><td>24×24 · 未选中线性 · stroke-width 1.5</td></tr>
+            <tr><td>选中态 ★</td><td>切换为品牌色 <strong>面性</strong>图标（<code>-filled</code>）· 文案 #F32F41</td></tr>
+            <tr><td>文案</td><td>11px · 未选中 #929292</td></tr>
+            <tr><td>栏高</td><td>56px + 安全区 · 白底 · 顶部分割线</td></tr>
+          </table>
         </div>
       </div>
 
@@ -1644,6 +1737,11 @@
             <div class="acts"><button class="btn btn-outline btn--r12" style="flex:1">取消</button><button class="btn btn-primary btn--r12" style="flex:1">确认驳回</button></div>
           </div>
           <div style="margin-top:16px;text-align:center"><span style="display:inline-block;background:rgba(0,0,0,.8);color:#fff;padding:10px 20px;border-radius:6px;font-size:14px">操作成功</span></div>
+          <table style="margin-top:16px">
+            <tr><th>按钮</th><th>规格</th></tr>
+            <tr><td>填充按钮 ★</td><td>红底 <code>#F32F41</code> + 白字</td></tr>
+            <tr><td>描边按钮 ★</td><td>白底 + 红字 + 红描边 1px</td></tr>
+          </table>
         </div>
       </div>
 
@@ -1724,7 +1822,12 @@
               <button class="btn btn-primary btn--r16" style="flex:1">提交审批</button>
             </div>
           </div>
-          <p>高 56px + safe-bottom · 底栏主/次按钮圆角须同档（建议 16px 或 12px）</p>
+          <table>
+            <tr><th>按钮</th><th>规格</th></tr>
+            <tr><td>主操作（填充）★</td><td>红底白字 · brand-6</td></tr>
+            <tr><td>次操作（描边）★</td><td>白底红字红描边</td></tr>
+            <tr><td>布局</td><td>高 56px + safe-bottom · 双按钮间距 12px · 圆角同档（建议 16px）</td></tr>
+          </table>
         </div>
       </div>
 
@@ -1887,7 +1990,7 @@
       <pre>请按照《剑琅联盟 移动端设计规范 v1.4》设计 [页面名称]：
 - 最高优先级：★ 全局强制 UI — 390×844、#F7F7F7 底、无阴影无渐变；按钮高 48px、圆角仅 4/8/12/16 且同类型一致
 - 产品：剑琅联盟 · Logo: LOGO2.png
-- 字体：PingFang SC；金额数字 DIN；¥ 与「应付/实付」用苹方，¥ 与数字间距 4px
+- 字体：PingFang SC；金额数字 TCloudNumber-Bold；¥ 与「应付/实付」用苹方，¥ 与数字间距 4px
 - 文字：#333 / #929292 · 边框 #D7D7D5 · 主色 #F32F41
 - 图标：24px（安全 20）/ 16px 小箭头 · Stratis 库 · 颜色 #F32F41 / #333 / #929
 - 硬性：无 emoji；Tab/卡片不遮挡；图片位 #EDEDED+白 image icon；不横向溢出；按钮 max 370px；顶 Tab 390 居中；状态栏 390×44 白块；卡片内容不溢出；提示 icon 与首行底对齐；空状态内容区垂直居中；PageTitleBar 对齐 Figma RTS-AI 6-623
@@ -2385,6 +2488,12 @@
     });
   }
   initTapFeedback(document.querySelector('.main'));
+
+  if (typeof specAssetUrl === 'function') {
+    document.querySelectorAll('.font-download-btn[href]').forEach(a => {
+      a.href = specAssetUrl(a.getAttribute('href'));
+    });
+  }
 </script>
 </body>
 </html>
