@@ -172,7 +172,25 @@
     .color-info { padding: 8px 10px; background: #fff; font-size: 12px; }
     .color-info strong { display: block; font-size: 13px; }
     .demo-row { display: flex; flex-wrap: wrap; gap: 12px; align-items: center; margin: 12px 0; }
-    .btn { display: inline-flex; align-items: center; justify-content: center; height: 48px; max-width: var(--btn-max-width); padding: 0 20px; border-radius: var(--radius-btn); font-size: 14px; font-weight: 500; border: none; cursor: default; font-family: var(--font-ui); box-shadow: none; background-image: none; box-sizing: border-box; }
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      height: 48px;
+      max-width: var(--btn-max-width);
+      padding: 0 20px;
+      border-radius: var(--radius-btn);
+      font-size: 14px;
+      font-weight: 500;
+      line-height: 1.2;
+      text-align: center;
+      border: none;
+      cursor: default;
+      font-family: var(--font-ui);
+      box-shadow: none;
+      background-image: none;
+      box-sizing: border-box;
+    }
     .btn-block { width: 100%; max-width: var(--btn-max-width); }
     .btn.btn--r4 { border-radius: var(--radius-btn-4); }
     .btn.btn--r8 { border-radius: var(--radius-btn-8); }
@@ -927,7 +945,7 @@
           </li>
           <li><strong>分割线</strong>：1px <code>#D7D7D5</code></li>
           <li><strong>顶部导航 / 标题栏</strong>：内页统一使用组件库 <code>PageTitleBar</code>（页面标题栏）；固定高 <strong>44px</strong>、白底、<strong>主体无描边</strong>；返回图标区垂直居中，<strong>标题与右侧操作文案底部水平对齐</strong>（不含系统状态栏）。</li>
-          <li><strong>全局按钮</strong>：统一高 <strong>48px</strong>、<strong>最大宽度 370px</strong>（含通栏主按钮与底栏按钮，不得超出）；无阴影无渐变；圆角仅在 <strong>4 / 8 / 12 / 16px</strong> 四档中选择，<strong>同一按钮类型</strong>在全站须使用<strong>同一圆角值</strong>。变体：<strong>填充按钮</strong> 品牌红底 <code>#F32F41</code> + <strong>白字</strong>；<strong>描边按钮</strong> 白底 + 红字 + 红描边 1px；<strong>禁用</strong> 灰底 <code>#EDEDED</code>。</li>
+          <li><strong>全局按钮</strong>：统一高 <strong>48px</strong>、<strong>最大宽度 370px</strong>（含通栏主按钮与底栏按钮，不得超出）；无阴影无渐变；圆角仅在 <strong>4 / 8 / 12 / 16px</strong> 四档中选择，<strong>同一按钮类型</strong>在全站须使用<strong>同一圆角值</strong>。变体：<strong>填充按钮</strong> 品牌红底 <code>#F32F41</code> + <strong>白字</strong>；<strong>描边按钮</strong> 白底 + 红字 + 红描边 1px；<strong>禁用</strong> 灰底 <code>#EDEDED</code>。<strong>按钮内文案须在按钮区域内水平、垂直双向居中</strong>，禁止贴顶、贴底或偏左/偏右。</li>
         </ol>
 
         <h3 style="margin-top:28px">页面与组件硬性约束</h3>
@@ -977,6 +995,7 @@
           <li><strong>页面标题栏</strong>：所有<strong>设计页 / 原型 / AI 出图</strong>的内页顶栏须调用组件库 <code>PageTitleBar</code>（页面标题栏），禁止自定义 Navbar 样式；与 <a href="https://www.figma.com/design/44P9g5yKcQEyXdHCayIrMn/RTS-AI%E8%AF%BB%E5%8F%96?node-id=6-623" target="_blank" rel="noopener">RTS-AI 读稿 · Figma node 6-623</a> 一致（见第 7 章）。</li>
           <li><strong>标题栏文案底对齐</strong>：<code>PageTitleBar</code> 居中标题（16px）与右侧操作（14px）须<strong>文字底部在同一水平线</strong>对齐；返回区仍为 44×44 垂直居中。</li>
           <li><strong>勾号用图标</strong>：组件内表示确认、已选、步骤完成时<strong>禁止</strong>文字 <code>√</code>/<code>✓</code>；使用 <code>check</code> 或 <code>check-circle-filled</code>（见第 6、7 章）。</li>
+          <li><strong>按钮文案居中</strong>：<code>Button</code>、对话框底栏、底栏操作条等一切带文字按钮，文案在按钮可点击区域内<strong>水平居中且垂直居中</strong>（单行、双行均适用；双行时整体居中）。</li>
         </ol>
 
         <div class="spec-block">
@@ -1046,7 +1065,7 @@
         <li><strong>字体按设备</strong>：苹果 → PingFang SC；Windows → 思源黑体 Source Han Sans SC（勿在 Windows 稿中用 PingFang SC）。</li>
         <li><strong>勾号</strong>：确认/正确态只用图标 <code>check</code>，禁止文字 √。</li>
         <li><strong>品牌露出</strong>：启动/登录/首页 Navbar 使用 <code>LOGO2.png</code> 与「剑琅联盟」。</li>
-        <li><strong>硬性约束</strong>：无 emoji · 无文字勾号 √/✓ · Tab/卡片不叠压 · 内页顶栏必用 <code>PageTitleBar</code> · 标题与右侧文案底对齐 · 标题栏/Tab 主体无描边 · 图片位灰底白 icon · 内容不横向溢出 · 按钮宽 ≤370px · 顶 Tab 390 居中 · 状态栏白块 · 卡片不溢出 · 提示 icon 首行底对齐 · 空状态垂直居中。</li>
+        <li><strong>硬性约束</strong>：无 emoji · 无文字勾号 √/✓ · 按钮文案水平垂直居中 · Tab/卡片不叠压 · 内页顶栏必用 <code>PageTitleBar</code> · 标题与右侧文案底对齐 · 标题栏/Tab 主体无描边 · 图片位灰底白 icon · 内容不横向溢出 · 按钮宽 ≤370px · 顶 Tab 390 居中 · 状态栏白块 · 卡片不溢出 · 提示 icon 首行底对齐 · 空状态垂直居中。</li>
       </ol>
       <h3>技术栈对齐</h3>
       <table>
@@ -1655,6 +1674,7 @@
           <table>
             <tr><th>变体</th><th>规格</th></tr>
             <tr><td>Primary ★</td><td>高 48px · 圆角四档择一 · 红底 #F32F41 + <strong>白字</strong> · 无投影</td></tr>
+            <tr><td>文案对齐 ★</td><td>按钮内文字<strong>水平 + 垂直居中</strong>（flex 居中或等价实现；禁止偏上/偏下/单侧留白不均）</td></tr>
             <tr><td>Outline ★</td><td>白底 + 红字 + 红描边 1px · 与同级 Primary <strong>相同圆角</strong></td></tr>
             <tr><td>Ghost / Text</td><td>浅底或透明样式，非主流程；主流程仅用填充/描边</td></tr>
             <tr><td>Disabled</td><td>圆角与同页主按钮一致 · bg #EDEDED</td></tr>
@@ -2108,7 +2128,7 @@
 - 勾号：仅用图标 check / check-circle-filled，禁止文字 √ 或 ✓
 - 文字：#333 / #929292 · 边框 #D7D7D5 · 主色 #F32F41
 - 图标：24px（安全 20）/ 16px 小箭头 · Stratis 库 · 颜色 #F32F41 / #333 / #929
-- 硬性：无 emoji；Tab/卡片不遮挡；内页顶栏必用 PageTitleBar（页面标题栏）；标题与右侧文案底对齐；PageTitleBar/PageTabs/TabBar 主体无描边；图片位 #EDEDED+白 image icon；不横向溢出；按钮 max 370px；顶 Tab 390 居中；状态栏 390×44 白块；卡片内容不溢出；提示 icon 与首行底对齐；空状态内容区垂直居中；PageTitleBar 对齐 Figma RTS-AI 6-623
+- 硬性：无 emoji；按钮文案在按钮内水平垂直居中；Tab/卡片不遮挡；内页顶栏必用 PageTitleBar（页面标题栏）；标题与右侧文案底对齐；PageTitleBar/PageTabs/TabBar 主体无描边；图片位 #EDEDED+白 image icon；不横向溢出；按钮 max 370px；顶 Tab 390 居中；状态栏 390×44 白块；卡片内容不溢出；提示 icon 与首行底对齐；空状态内容区垂直居中；PageTitleBar 对齐 Figma RTS-AI 6-623
 - 组件：第7章组件目录
 - 内容：[具体业务字段]</pre>
     </section>
