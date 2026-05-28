@@ -33,9 +33,11 @@
       --bg-disabled: #EDEDED;
       --brand-aux-1: #FFD5D9; --brand-aux-2: #FFF2F2;
       --border: #D7D7D5; --border-focus: #F32F41;
-      --radius-tag: 4px; --radius-input: 8px; --radius-card: 12px; --radius-btn: 16px;
+      --radius-tag: 4px; --radius-input: 8px; --radius-card: 12px;
+      --radius-btn-4: 4px; --radius-btn-8: 8px; --radius-btn-12: 12px; --radius-btn-16: 16px;
+      --radius-btn: var(--radius-btn-12);
       --radius-s: 4px; --radius-m: 8px; --radius-l: 12px; --radius-xl: 12px; --radius-round: 999px;
-      --radius-btn-primary: 16px;
+      --radius-btn-primary: var(--radius-btn-12);
       --shadow-1: none; --shadow-2: none; --shadow-3: none;
       --nav-h: 44px; --tabbar-h: 56px; --safe-top: 44px; --safe-bottom: 34px;
       --space-page: 16px; --space-module: 16px; --space-card: 16px;
@@ -150,12 +152,16 @@
     .color-info strong { display: block; font-size: 13px; }
     .demo-row { display: flex; flex-wrap: wrap; gap: 12px; align-items: center; margin: 12px 0; }
     .btn { display: inline-flex; align-items: center; justify-content: center; height: 48px; padding: 0 20px; border-radius: var(--radius-btn); font-size: 14px; font-weight: 500; border: none; cursor: default; font-family: "PingFang SC", sans-serif; box-shadow: none; background-image: none; }
-    .btn-primary { background: var(--brand-6); color: #fff; border-radius: var(--radius-btn); }
+    .btn.btn--r4 { border-radius: var(--radius-btn-4); }
+    .btn.btn--r8 { border-radius: var(--radius-btn-8); }
+    .btn.btn--r12 { border-radius: var(--radius-btn-12); }
+    .btn.btn--r16 { border-radius: var(--radius-btn-16); }
+    .btn-primary { background: var(--brand-6); color: #fff; }
     .btn-primary:hover { background: var(--brand-7); }
-    .btn-primary.btn-lg, .btn-primary.btn-sm { border-radius: var(--radius-btn); height: 48px; }
-    .btn-outline { background: #fff; color: var(--brand-6); border: 1px solid var(--brand-6); border-radius: var(--radius-btn); }
-    .btn-text { background: transparent; color: var(--brand-6); border-radius: var(--radius-btn); }
-    .btn-ghost { background: var(--brand-aux-2); color: var(--brand-6); border-radius: var(--radius-btn); }
+    .btn-primary.btn-lg, .btn-primary.btn-sm { height: 48px; }
+    .btn-outline { background: #fff; color: var(--brand-6); border: 1px solid var(--brand-6); }
+    .btn-text { background: transparent; color: var(--brand-6); }
+    .btn-ghost { background: var(--brand-aux-2); color: var(--brand-6); }
     .btn-danger { background: var(--error-6); color: #fff; }
     .btn-disabled { background: var(--gray-3); color: var(--text-disabled); }
     .btn-sm { height: 48px; padding: 0 16px; font-size: 14px; }
@@ -226,7 +232,7 @@
     .icon-filter-row { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 16px; align-items: center; }
     .icon-filter-row input { flex: 1; min-width: 200px; height: 36px; border: 1px solid var(--border); border-radius: var(--radius-m); padding: 0 12px; outline: none; font-family: "PingFang SC", sans-serif; }
     .icon-filter-row input:focus { border-color: var(--brand-6); }
-    .filter-chip { padding: 6px 12px; border-radius: var(--radius-btn-primary); border: 1px solid var(--border); background: #fff; font-size: 12px; cursor: pointer; color: var(--text-secondary); }
+    .filter-chip { padding: 6px 12px; border-radius: var(--radius-btn-4); border: 1px solid var(--border); background: #fff; font-size: 12px; cursor: pointer; color: var(--text-secondary); }
     .filter-chip.active { border-color: var(--brand-6); color: var(--brand-6); background: var(--brand-1); }
     .comp-block { background: #fff; border: 1px solid var(--border); border-radius: 12px; margin-bottom: 24px; overflow: hidden; box-shadow: none; }
     .comp-block-hd { padding: 14px 20px; background: var(--bg-page); border-bottom: 1px solid var(--border); display: flex; justify-content: space-between; align-items: center; }
@@ -585,7 +591,7 @@
             <span class="hero-pill">390 × 844 · 1× 画布</span>
             <span class="hero-pill">页面底 #F7F7F7</span>
             <span class="hero-pill">无阴影 · 无渐变</span>
-            <span class="hero-pill">按钮 48×16 圆角</span>
+            <span class="hero-pill">按钮圆角 4/8/12/16</span>
           </div>
         </div>
       </div>
@@ -659,14 +665,14 @@
           <li><strong>圆角规范</strong>
             <ul>
               <li>全局卡片：12px</li>
-              <li>按钮：16px</li>
+              <li>文字按钮：在 <strong>4 / 8 / 12 / 16px</strong> 四档中按场景选用（见下条）</li>
               <li>标签 / 角标：4px</li>
               <li>输入框 / 小模块：8px</li>
             </ul>
           </li>
           <li><strong>分割线</strong>：1px <code>#D7D7D5</code></li>
           <li><strong>顶部导航</strong>：固定高 <strong>44px</strong>、白底、底部分割线 1px <code>#D7D7D5</code>，元素垂直居中（不含系统状态栏）。</li>
-          <li><strong>全局按钮</strong>：统一高 <strong>48px</strong>、圆角 <strong>16px</strong>、无阴影无渐变；分<strong>主按钮</strong>（实心 #F32F41）/ <strong>边框按钮</strong> / <strong>置灰禁用</strong>（#EDEDED 底）。</li>
+          <li><strong>全局按钮</strong>：统一高 <strong>48px</strong>、无阴影无渐变；圆角仅在 <strong>4 / 8 / 12 / 16px</strong> 四档中选择，<strong>同一按钮类型</strong>（如底栏主按钮、表单提交、列表内操作）在全站须使用<strong>同一圆角值</strong>。变体：<strong>主按钮</strong>（#F32F41）/ <strong>边框按钮</strong> / <strong>置灰禁用</strong>（#EDEDED）。</li>
         </ol>
 
         <h3 style="margin-top:28px">页面与组件硬性约束</h3>
@@ -769,7 +775,7 @@
       </div>
       <ol>
         <li><strong>组合组件</strong>：从第 7 章按场景选用组件，API 与交互对齐 TDesign。</li>
-        <li><strong>颜色 / 圆角 / 间距</strong>：仅使用全局章与第 2–5 章 Token，禁止 4px 主按钮圆角、禁止投影与渐变背景。</li>
+        <li><strong>颜色 / 圆角 / 间距</strong>：仅使用全局章与第 2–5 章 Token；按钮圆角四档择一且同类型一致；禁止投影与渐变背景。</li>
         <li><strong>金额排版</strong>：数字 DIN；<code>¥</code> 与「应付/实付」等用苹方，<code>¥</code> 与数字间距 4px。</li>
         <li><strong>品牌露出</strong>：启动/登录/首页 Navbar 使用 <code>LOGO2.png</code> 与「剑琅联盟」。</li>
         <li><strong>硬性约束</strong>：无 emoji · Tab/卡片不叠压 · 图片位灰底白 icon · 内容不横向溢出 · 图标按钮见全局章第 14 条。</li>
@@ -784,7 +790,7 @@
         <tr><td>设计基准</td><td>宽 390（固定）× 高 844（默认）</td><td>高可向下延展；安全区 top 44px / bottom 34px</td></tr>
         <tr><td>全局字体</td><td>PingFang SC</td><td>禁止替换为其他字体族</td></tr>
         <tr><td>全局 UI</td><td><a href="#global-ui">★ 强制章节</a></td><td>高于本章与 Figma 历史稿</td></tr>
-        <tr><td>主按钮</td><td>高 48px · 圆角 16px</td><td>见全局章</td></tr>
+        <tr><td>主按钮</td><td>高 48px · 圆角 4/8/12/16 择档</td><td>见全局章 · 同类型一致</td></tr>
       </table>
     </section>
 
@@ -1009,18 +1015,36 @@
         <tr><td>radius-tag ★</td><td>4px</td><td>标签、角标</td></tr>
         <tr><td>radius-input ★</td><td>8px</td><td>输入框、小模块、搜索框</td></tr>
         <tr><td>radius-card ★</td><td>12px</td><td>全局卡片、弹层顶角</td></tr>
-        <tr><td>radius-btn ★</td><td>16px</td><td>全局按钮、AI 悬浮钮</td></tr>
+        <tr><td>radius-btn-4</td><td>4px</td><td>紧凑按钮、表格内操作</td></tr>
+        <tr><td>radius-btn-8</td><td>8px</td><td>卡片内次要按钮、并排双钮</td></tr>
+        <tr><td>radius-btn-12 ★</td><td>12px</td><td>表单提交、页内主操作（推荐默认档）</td></tr>
+        <tr><td>radius-btn-16</td><td>16px</td><td>底部栏主按钮、强强调 CTA</td></tr>
         <tr><td>radius-circle</td><td>50%</td><td>Avatar、圆形图标底</td></tr>
       </table>
+      <h3>5.2 按钮圆角选用（同类型须一致）</h3>
+      <table>
+        <tr><th>按钮类型</th><th>建议圆角</th><th>说明</th></tr>
+        <tr><td>底部栏主按钮 / 次按钮</td><td>16px 或 12px</td><td>同一 App 底栏两套按钮须同值；与卡片圆角可不同</td></tr>
+        <tr><td>表单页「提交」「保存」</td><td>12px 或 8px</td><td>与登录页主钮保持同档</td></tr>
+        <tr><td>列表 / 弹窗内描边、幽灵钮</td><td>8px 或 4px</td><td>与同级列表操作钮一致</td></tr>
+        <tr><td>品牌图标方形钮</td><td>8px</td><td>属图标按钮，非文字按钮；见全局第 14 条</td></tr>
+      </table>
+      <p style="font-size:13px;color:var(--text-secondary)">禁止在同一类型混用两种圆角（例如底栏左「取消」8px、右「确定」16px）。选定后写入设计 Token / 组件变体名（如 <code>Button/r16</code>）。</p>
       <h4>圆角可视化</h4>
       <div class="token-visual-grid">
         <div class="token-visual-card"><div class="sample radius-sample" style="border-radius:4px"></div><div class="label">radius-tag</div><div class="val">4px</div></div>
         <div class="token-visual-card"><div class="sample radius-sample" style="border-radius:8px"></div><div class="label">radius-input</div><div class="val">8px</div></div>
         <div class="token-visual-card"><div class="sample radius-sample" style="border-radius:12px"></div><div class="label">radius-card</div><div class="val">12px</div></div>
-        <div class="token-visual-card"><div class="sample radius-sample primary-btn" style="border-radius:16px;height:48px;width:100%;max-width:120px">按钮</div><div class="label">radius-btn</div><div class="val">16px · 高 48</div></div>
+      </div>
+      <h4>按钮圆角四档（高 48px）</h4>
+      <div class="demo-row" style="margin:12px 0 20px">
+        <button type="button" class="btn btn-primary btn--r4">4px</button>
+        <button type="button" class="btn btn-primary btn--r8">8px</button>
+        <button type="button" class="btn btn-primary btn--r12">12px</button>
+        <button type="button" class="btn btn-primary btn--r16">16px</button>
       </div>
 
-      <h3>5.2 阴影（全局禁用）</h3>
+      <h3>5.3 阴影（全局禁用）</h3>
       <p>剑琅联盟移动端<strong>不使用</strong>投影层级（<code>--shadow-1/2/3</code> 均为 <code>none</code>）。卡片、弹层、底栏、Fab 等通过<strong>白底/灰底、1px 边框（<code>--border</code>）、圆角与间距</strong>区分层次；磨砂底栏仅保留 <code>backdrop-filter</code>，不加外投影。</p>
     </section>
 
@@ -1117,7 +1141,7 @@
                 <div class="title">复合精油按摩护理油 100ml</div>
                 <div class="price">¥128</div>
                 <div class="sub">建议售 ¥298 · 毛利 ¥170</div>
-                <button class="btn btn-primary btn-sm" style="width:100%;margin-top:8px">上架到店</button>
+                <button class="btn btn-primary btn-sm btn--r8" style="width:100%;margin-top:8px">上架到店</button>
               </div>
             </div>
             <div class="u-product-card">
@@ -1127,7 +1151,7 @@
                 <div class="title">头皮深层洁净洗发露 200ml</div>
                 <div class="price">¥86</div>
                 <div class="sub">已上架 · 销 32 件</div>
-                <button class="btn btn-outline btn-sm" style="width:100%;margin-top:8px">编辑</button>
+                <button class="btn btn-outline btn-sm btn--r8" style="width:100%;margin-top:8px">编辑</button>
               </div>
             </div>
           </div>
@@ -1271,7 +1295,7 @@
             <img src="LOGO2.png" alt="剑琅联盟" style="width:72px;height:72px;object-fit:contain;margin-bottom:16px">
             <div style="font-size:28px;font-weight:600;letter-spacing:.06em;margin-bottom:24px">剑琅联盟</div>
             <input class="input-demo" placeholder="请输入手机号" style="width:100%;max-width:none;margin-bottom:12px">
-            <button class="btn btn-primary btn-lg" style="width:100%;margin-top:8px">登录</button>
+            <button class="btn btn-primary btn-lg btn--r12" style="width:100%;margin-top:8px">登录</button>
           </div>
         </div>
       </div>
@@ -1280,20 +1304,21 @@
         <div class="comp-block-hd"><strong>Button 按钮</strong><code>TButton · theme=primary|radius=4px</code></div>
         <div class="comp-block-bd">
           <div class="demo-row">
-            <button class="btn btn-primary">主要按钮</button>
-            <button class="btn btn-primary btn-lg">大号主要</button>
-            <button class="btn btn-primary btn-sm">小号主要</button>
-            <button class="btn btn-outline">描边按钮</button>
-            <button class="btn btn-ghost">浅底按钮</button>
-            <button class="btn btn-text">文字按钮</button>
-            <button class="btn btn-danger">危险按钮</button>
-            <button class="btn btn-primary btn-disabled">禁用</button>
+            <button class="btn btn-primary btn--r12">主要按钮</button>
+            <button class="btn btn-primary btn-lg btn--r12">大号主要</button>
+            <button class="btn btn-primary btn-sm btn--r12">小号主要</button>
+            <button class="btn btn-outline btn--r12">描边按钮</button>
+            <button class="btn btn-ghost btn--r12">浅底按钮</button>
+            <button class="btn btn-text btn--r8">文字按钮</button>
+            <button class="btn btn-danger btn--r12">危险按钮</button>
+            <button class="btn btn-primary btn-disabled btn--r12">禁用</button>
           </div>
           <table>
             <tr><th>变体</th><th>规格</th></tr>
-            <tr><td>Primary ★</td><td>高 <strong>48px</strong> · 圆角 <strong>16px</strong> · bg #F32F41 · 字 #FFF · 无投影</td></tr>
-            <tr><td>Outline</td><td>高 48px · 圆角 16px · 1px 描边 #F32F41 · 白底</td></tr>
-            <tr><td>Disabled</td><td>高 48px · 圆角 16px · bg #EDEDED · 字 #929292</td></tr>
+            <tr><td>Primary ★</td><td>高 48px · 圆角 <strong>4/8/12/16 择一档</strong>（同类型一致）· bg #F32F41 · 无投影</td></tr>
+            <tr><td>Outline / Ghost</td><td>与同级 Primary 使用<strong>相同圆角</strong></td></tr>
+            <tr><td>Disabled</td><td>圆角与同页主按钮一致 · bg #EDEDED</td></tr>
+            <tr><td>BottomBar 示例</td><td>取消 Outline <code>btn--r16</code> + 确定 Primary <code>btn--r16</code></td></tr>
             <tr><td>Block</td><td>宽度 100%（表单提交、登录）</td></tr>
             <tr><td>BottomBar</td><td>双按钮：左 Outline + 右 Primary，间距 12px</td></tr>
           </table>
@@ -1431,7 +1456,7 @@
           <div class="u-dialog">
             <h5>确认驳回？</h5>
             <p>驳回后需重新提交审批，是否继续？</p>
-            <div class="acts"><button class="btn btn-outline" style="flex:1">取消</button><button class="btn btn-primary" style="flex:1">确认驳回</button></div>
+            <div class="acts"><button class="btn btn-outline btn--r12" style="flex:1">取消</button><button class="btn btn-primary btn--r12" style="flex:1">确认驳回</button></div>
           </div>
           <div style="margin-top:16px;text-align:center"><span style="display:inline-block;background:rgba(0,0,0,.8);color:#fff;padding:10px 20px;border-radius:6px;font-size:14px">操作成功</span></div>
         </div>
@@ -1444,7 +1469,7 @@
             <span class="s-icon" data-icon="file"></span>
             <p style="margin-top:12px;font-size:14px;color:var(--text-primary)">暂无订单数据</p>
             <p style="font-size:12px">点击下方按钮创建第一笔订单</p>
-            <button class="btn btn-primary" style="margin-top:16px">新建订单</button>
+            <button class="btn btn-primary btn--r12" style="margin-top:16px">新建订单</button>
           </div>
         </div>
       </div>
@@ -1501,11 +1526,11 @@
         <div class="comp-block-bd">
           <div class="comp-preview-phone">
             <div class="u-bottom-bar">
-              <button class="btn btn-outline" style="flex:1">保存草稿</button>
-              <button class="btn btn-primary" style="flex:1">提交审批</button>
+              <button class="btn btn-outline btn--r16" style="flex:1">保存草稿</button>
+              <button class="btn btn-primary btn--r16" style="flex:1">提交审批</button>
             </div>
           </div>
-          <p>高 56px + safe-bottom · 主按钮圆角 4px</p>
+          <p>高 56px + safe-bottom · 底栏主/次按钮圆角须同档（建议 16px 或 12px）</p>
         </div>
       </div>
 
@@ -1631,7 +1656,10 @@
       "radiusTag": 8,
       "radiusInput": 16,
       "radiusCard": 24,
-      "radiusBtn": 32
+      "radiusBtn4": 8,
+      "radiusBtn8": 16,
+      "radiusBtn12": 24,
+      "radiusBtn16": 32
     },
     "spacer": {
       "spacer1": 8, "spacer2": 16, "spacer3": 24, "spacer4": 32,
@@ -1649,16 +1677,17 @@
       "designHeightExtendable": true,
       "canvasWidthFixed": 390,
       "canvasHeightDefault": 844,
-      "radiusBtnPrimary": 32,
+      "radiusBtnPrimary": 24,
+      "radiusBtnPrimaryNote": "同类型按钮须统一使用 radiusBtn4|8|12|16 之一",
       "globalUIMandate": "#global-ui"
     }
   }
 }</pre>
-      <p style="font-size:12px;color:var(--text-secondary)">注：画布 390×844；Flutter 2x 逻辑值见 JSON；按钮高 48px、圆角 16px；导航 44px；须先遵守 ★ 全局强制 UI。</p>
+      <p style="font-size:12px;color:var(--text-secondary)">注：画布 390×844；按钮高 48px、圆角四档 4/8/12/16（2x 为 8/16/24/32）；同类型按钮圆角须一致；导航 44px。</p>
 
       <h3>AI Prompt 模板</h3>
       <pre>请按照《剑琅联盟 移动端设计规范 v1.4》设计 [页面名称]：
-- 最高优先级：★ 全局强制 UI（#global-ui）— 390×844、页面底 #F7F7F7、无阴影无渐变、色板/间距/圆角/44px 导航/48px×16px 按钮
+- 最高优先级：★ 全局强制 UI — 390×844、#F7F7F7 底、无阴影无渐变；按钮高 48px、圆角仅 4/8/12/16 且同类型一致
 - 产品：剑琅联盟 · Logo: LOGO2.png
 - 字体：PingFang SC；金额数字 DIN；¥ 与「应付/实付」用苹方，¥ 与数字间距 4px
 - 文字：#333 / #929292 · 边框 #D7D7D5 · 主色 #F32F41
