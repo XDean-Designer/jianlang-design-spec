@@ -1,0 +1,25 @@
+{
+  "figma": "https://www.figma.com/design/UqA4U4cmf68pkXynOIhPHU/Le-Wagon-%E5%BE%AE%E4%BF%A1-UX-%E5%B7%A5%E5%85%B7%E5%BA%93-WeChat-UX-Kit--Community-",
+  "icons": [
+    { "slug": "wx-search", "variant": "outline", "url": "https://www.figma.com/api/mcp/asset/c2a3c33b-25de-42e5-aabd-ef93569d850d" },
+    { "slug": "wx-search", "variant": "filled", "url": "https://www.figma.com/api/mcp/asset/0740bca2-e337-4c7e-b1df-1899b04e87b7" },
+    { "slug": "wx-moments", "variant": "outline", "url": "https://www.figma.com/api/mcp/asset/5da68f07-51b6-4395-a261-5c5a321c1941" },
+    { "slug": "wx-moments", "variant": "filled", "url": "https://www.figma.com/api/mcp/asset/4808db65-0fc6-40e5-8a42-68dc7df667af" },
+    { "slug": "wx-shake", "variant": "filled", "url": "https://www.figma.com/api/mcp/asset/9ece9cb6-4b3a-4a26-bf8f-c337dded65df" },
+    { "slug": "wx-miniprogram", "variant": "outline", "url": "https://www.figma.com/api/mcp/asset/16df74dd-6bd8-4190-a46c-ce74e161ec08" },
+    { "slug": "wx-miniprogram", "variant": "filled", "url": "https://www.figma.com/api/mcp/asset/b8615601-4982-484b-be7d-483b9b40a9f8" },
+    { "slug": "wx-official-account", "variant": "filled", "url": "https://www.figma.com/api/mcp/asset/4e38a83f-2584-45f6-bc79-3698e046e8d7" },
+    { "slug": "wx-pay-code", "variant": "filled", "url": "https://www.figma.com/api/mcp/asset/e5bcdad1-2127-4df1-8d6e-360a8efd6c2e" },
+    { "slug": "wx-transfer", "variant": "filled", "url": "https://www.figma.com/api/mcp/asset/9661bbda-7010-4c76-9255-4d78e42d704f" },
+    { "slug": "wx-sticker", "variant": "filled", "url": "https://www.figma.com/api/mcp/asset/5e1259d0-0b23-41dc-b09c-22b7f8fc17be" },
+    { "slug": "wx-discover", "variant": "filled", "url": "https://www.figma.com/api/mcp/asset/4d619c8e-aaa0-4247-87b7-bcd80cc27d98" },
+    { "slug": "wx-add-friend", "variant": "filled", "url": "https://www.figma.com/api/mcp/asset/140305b5-f472-4d82-9d82-259165d25cb9" },
+    { "slug": "wx-radar", "variant": "filled", "url": "https://www.figma.com/api/mcp/asset/a6ebc751-0071-4cd0-b111-685ef8a45049" },
+    { "slug": "wx-coupon-wallet", "variant": "filled", "url": "https://www.figma.com/api/mcp/asset/56d54e35-f227-4b41-9989-e4d1ea1b44d5" },
+    { "slug": "wx-scan", "variant": "filled", "url": "https://www.figma.com/api/mcp/asset/bb93f751-c692-4efa-b07b-a07920618c67" },
+    { "slug": "wx-float-open", "variant": "filled", "url": "https://www.figma.com/api/mcp/asset/033b48fb-b36d-454a-aaba-41fea3e88828" },
+    { "slug": "wx-nearby", "variant": "filled", "url": "https://www.figma.com/api/mcp/asset/a037786c-ad24-486c-8bdf-a84c733bae76" },
+    { "slug": "wx-group", "variant": "filled", "url": "https://www.figma.com/api/mcp/asset/bd07a1aa-3989-40c9-97b8-0d5529550a2d" },
+    { "slug": "wx-pay", "variant": "filled", "url": "https://www.figma.com/api/mcp/asset/b2c842f9-b16b-4c75-87c6-51cdb863440c" }
+  ]
+}

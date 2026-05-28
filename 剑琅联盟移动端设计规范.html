@@ -251,6 +251,7 @@
     @keyframes rippleExpand { to { transform: scale(2.8); opacity: 0; } }
     .icon-lib-name { font-size: 10px; color: var(--text-secondary); font-family: Consolas, monospace; line-height: 1.3; margin: 0; opacity: .85; }
     .icon-lib-src { display: inline-block; margin-left: 4px; padding: 0 4px; font-size: 9px; font-family: inherit; color: var(--brand-6); background: var(--brand-1); border: 1px solid var(--brand-3); border-radius: var(--radius-tag); vertical-align: middle; }
+    .icon-lib-src--wechat { color: #07C160; background: #E8F8EF; border-color: #B8E6CF; }
     .icon-lib-meaning { font-size: 11px; color: var(--text-placeholder); margin-top: 3px; line-height: 1.3; font-weight: 400; }
     .icon-lib-scene { font-size: 10px; color: var(--text-disabled); margin-top: 2px; line-height: 1.25; }
     .icon-filter-row { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 16px; align-items: center; }
@@ -459,6 +460,11 @@
     .u-switch.on { background: var(--brand-6); }
     .u-switch::after { content: ''; position: absolute; width: 20px; height: 20px; background: #fff; border-radius: 50%; top: 2px; left: 2px; border: 1px solid var(--border); box-shadow: none; }
     .u-switch.on::after { left: 22px; }
+    .u-action-sheet { max-width: var(--canvas-w); margin: 0 auto; background: var(--bg-page); border-radius: var(--radius-card) var(--radius-card) 0 0; overflow: hidden; }
+    .u-action-sheet .sheet-item { display: block; width: 100%; padding: 16px; text-align: center; font-size: 16px; color: var(--text-primary); background: #fff; border: none; border-bottom: 1px solid var(--border); cursor: pointer; }
+    .u-action-sheet .sheet-item--cancel { margin-top: 8px; font-weight: 500; }
+    .u-search-bar { max-width: var(--canvas-w); height: 36px; margin: 0 auto; padding: 0 12px; display: flex; align-items: center; gap: 8px; background: var(--bg-page); border-radius: var(--radius-input); font-size: 14px; color: var(--text-secondary); }
+    .u-search-bar .s-icon { flex-shrink: 0; color: var(--text-secondary); }
     .u-badge { display: inline-flex; min-width: 16px; height: 16px; padding: 0 4px; background: var(--brand-6); color: #fff; font-size: 10px; border-radius: 8px; align-items: center; justify-content: center; }
     .u-avatar { width: 40px; height: 40px; border-radius: 50%; background: var(--gray-3); display: flex; align-items: center; justify-content: center; color: var(--gray-7); }
     .u-progress { height: 4px; background: var(--gray-2); border-radius: 2px; overflow: hidden; }
@@ -765,6 +771,10 @@
   <script src="icons/iconex-map.js"></script>
   <script src="icons/iconex-filled-map.js"></script>
   <script src="icons/iconex-catalog.js"></script>
+  <script src="icons/wechat-map.js"></script>
+  <script src="icons/wechat-filled-map.js"></script>
+  <script src="icons/wechat-ux-catalog.js"></script>
+  <script src="icons/wechat-ux-components.js"></script>
 </head>
 <body class="spec-site">
 <div class="layout">
@@ -1297,7 +1307,7 @@
     <!-- 6. 图标库 -->
     <section id="icons">
       <h2 class="section-title"><span class="num">6</span>图标库（可直接调用）</h2>
-      <p><strong>尺寸与颜色以 <a href="#global-ui">★ 全局强制 UI</a> 为准。</strong>图标库由两套 Figma 资源构成：<a href="https://www.figma.com/design/0lZMESxiHe6rxzVUG3hMIT/Stratis-UI-Icons---1000--Free-Figma-icons--Community-?node-id=101-3505">Stratis UI Icons</a>（主库，<code>icons/stratis/</code>、<code>icons/stratis-filled/</code>）与 <a href="https://www.figma.com/design/uXSogFY3f1EEJsK1iDPf9h/Iconex---Freebie-icons--Community-?node-id=0-1">Iconex Freebie</a>（补充库，<code>icons/iconex/</code>、<code>icons/iconex-filled/</code>，构建见 <code>scripts/build-iconex-icons.js</code>）。同名时优先 Stratis；Iconex 卡片标注 <code>Iconex</code>。已按<strong>通用 / 美业店务 / 零售商城 / 订单财务 / 面性</strong>分类；设计稿定制图形时，下表给出规范库内等价图标名。</p>
+      <p><strong>尺寸与颜色以 <a href="#global-ui">★ 全局强制 UI</a> 为准。</strong>图标库由三套 Figma 资源构成：<a href="https://www.figma.com/design/0lZMESxiHe6rxzVUG3hMIT/Stratis-UI-Icons---1000--Free-Figma-icons--Community-?node-id=101-3505">Stratis UI Icons</a>（主库）· <a href="https://www.figma.com/design/uXSogFY3f1EEJsK1iDPf9h/Iconex---Freebie-icons--Community-?node-id=0-1">Iconex Freebie</a>（补充）· <a href="https://www.figma.com/design/UqA4U4cmf68pkXynOIhPHU/Le-Wagon-%E5%BE%AE%E4%BF%A1-UX-%E5%B7%A5%E5%85%B7%E5%BA%93-WeChat-UX-Kit--Community-?node-id=0-1">WeChat UX Kit</a>（微信场景精选，<code>icons/wechat/</code>、<code>icons/wechat-filled/</code>，构建见 <code>scripts/build-wechat-ux-icons.js</code>）。解析顺序：<strong>Stratis → Iconex → WeChat</strong>；卡片分别标注 <code>Iconex</code> / <code>WeChat</code>。微信专属语义优先用 <code>wx-*</code> 命名；可与 Stratis 等价的项在目录中带 <code>alias</code> 仍显示 Stratis 资源。</p>
       <a class="figma-link-card" href="https://www.figma.com/design/0lZMESxiHe6rxzVUG3hMIT/Stratis-UI-Icons---1000--Free-Figma-icons--Community-?node-id=101-3505" target="_blank" rel="noopener">
         <span class="icon-box">ST</span>
         <div><strong>Stratis UI Icons · 1000+ 免费图标</strong><br><span style="font-size:12px;color:var(--text-secondary)">Figma Community · 主图标库（线性 / 面性）</span></div>
@@ -1305,6 +1315,10 @@
       <a class="figma-link-card" href="https://www.figma.com/design/uXSogFY3f1EEJsK1iDPf9h/Iconex---Freebie-icons--Community-?node-id=0-1" target="_blank" rel="noopener">
         <span class="icon-box">IX</span>
         <div><strong>Iconex · Freebie icons</strong><br><span style="font-size:12px;color:var(--text-secondary)">Figma Community · 补充促销、媒体、分类、包裹等场景（本规范已精选 115 个）</span></div>
+      </a>
+      <a class="figma-link-card" href="https://www.figma.com/design/UqA4U4cmf68pkXynOIhPHU/Le-Wagon-%E5%BE%AE%E4%BF%A1-UX-%E5%B7%A5%E5%85%B7%E5%BA%93-WeChat-UX-Kit--Community-?node-id=0-1" target="_blank" rel="noopener">
+        <span class="icon-box" style="background:#E8F8EF;color:#07C160;border-color:#B8E6CF">WX</span>
+        <div><strong>WeChat UX Kit · Le Wagon</strong><br><span style="font-size:12px;color:var(--text-secondary)">微信生态组件与图标 · 本规范已精选 30 个图标 + 组件映射表（见 <a href="#wechat-ux-components">7.0</a>）</span></div>
       </a>
       <h3>6.0 设计稿功能 → 图标映射（剑琅管家 / RTP）</h3>
       <table>
@@ -1334,6 +1348,13 @@
         <tr><td>领券</td><td><code>coupon-badge</code> / <code>sale-tag-filled</code></td><td>零售</td><td>Iconex</td></tr>
         <tr><td>计时/服务时长</td><td><code>timer</code> / <code>timer-filled</code></td><td>美业</td><td>Iconex</td></tr>
         <tr><td>语音/客服</td><td><code>microphone</code> / <code>headphones-filled</code></td><td>通讯</td><td>Iconex</td></tr>
+        <tr><td>朋友圈</td><td><code>wx-moments</code></td><td>社交</td><td>WeChat</td></tr>
+        <tr><td>小程序</td><td><code>wx-miniprogram</code></td><td>系统</td><td>WeChat</td></tr>
+        <tr><td>付款码</td><td><code>wx-pay-code</code></td><td>订单</td><td>WeChat</td></tr>
+        <tr><td>卡券包</td><td><code>wx-coupon-wallet</code></td><td>零售</td><td>WeChat</td></tr>
+        <tr><td>扫一扫</td><td><code>wx-scan</code> 或 <code>scan</code></td><td>操作</td><td>WeChat / Stratis</td></tr>
+        <tr><td>转账</td><td><code>wx-transfer</code></td><td>订单</td><td>WeChat</td></tr>
+        <tr><td>公众号</td><td><code>wx-official-account</code></td><td>通讯</td><td>WeChat</td></tr>
       </table>
       <div class="spec-block"><strong>调用方式：</strong>线性 <code>&lt;span class="s-icon" data-icon="search"&gt;&lt;/span&gt;</code> · 面性 <code>&lt;span class="s-icon s-icon--filled" data-icon="home-filled"&gt;&lt;/span&gt;</code> · Figma <a href="https://www.figma.com/design/0lZMESxiHe6rxzVUG3hMIT/Stratis-UI-Icons---1000--Free-Figma-icons--Community-">Stratis UI Icons</a> · AI 标注 <code>icon:search</code> / <code>icon:home-filled</code></div>
       <table>
@@ -1363,8 +1384,9 @@
         <button type="button" class="filter-chip" data-cat="retail">零售商城</button>
         <button type="button" class="filter-chip" data-cat="order">订单财务</button>
         <button type="button" class="filter-chip" data-cat="filled">面性图标</button>
+        <button type="button" class="filter-chip" data-cat="wechat">WeChat 精选</button>
       </div>
-      <p style="font-size:12px;color:var(--text-secondary);margin-bottom:12px">线性优先 Stratis outline，面性为 <code>-filled</code> 后缀（Stratis / Iconex）；Iconex 补充图标在名称下方显示 <code>Iconex</code> 标签。面性适用于 Tab 选中、状态强调等场景。</p>
+      <p style="font-size:12px;color:var(--text-secondary);margin-bottom:12px">线性优先 Stratis；面性为 <code>-filled</code> 后缀；<code>wx-*</code> 为 WeChat UX Kit 精选（构建脚本导出 SVG）。Iconex / WeChat 卡片有来源标签。面性适用于 Tab 选中、状态强调。</p>
       <div id="icon-lib-root" class="icon-lib-grid"></div>
       <p id="icon-lib-count" style="font-size:12px;color:var(--text-secondary)"></p>
     </section>
@@ -1372,13 +1394,41 @@
     <!-- 7. 组件库（可调用） -->
     <section id="components">
       <h2 class="section-title"><span class="num">7</span>组件库（可调用）</h2>
-      <p>以下为剑琅联盟移动端可调用组件。AI 出图须标注 <code>组件名 + 变体</code>，视觉遵循 <a href="#global-ui">★ 全局强制 UI</a>。</p>
+      <p>以下为剑琅联盟移动端可调用组件。AI 出图须标注 <code>组件名 + 变体</code>，视觉遵循 <a href="#global-ui">★ 全局强制 UI</a>。微信生态页面可参考 <a href="https://www.figma.com/design/UqA4U4cmf68pkXynOIhPHU/Le-Wagon-%E5%BE%AE%E4%BF%A1-UX-%E5%B7%A5%E5%85%B7%E5%BA%93-WeChat-UX-Kit--Community-?node-id=0-1" target="_blank" rel="noopener">WeChat UX Kit</a> 结构，但<strong>颜色、圆角、按钮、无阴影</strong>仍以本规范为准。</p>
+
+      <div class="comp-block" id="wechat-ux-components">
+        <div class="comp-block-hd"><strong>7.0 WeChat UX Kit 组件映射</strong><code>Le Wagon · 精选</code></div>
+        <div class="comp-block-bd">
+          <p style="font-size:12px;color:var(--text-secondary);margin-bottom:12px">左列为 Figma 源组件名，右列为剑琅规范内应标注的组件 ID。落地时视觉不得使用微信绿顶栏/投影，须套入全局 Token。</p>
+          <table>
+            <tr><th>WeChat UX Kit</th><th>规范组件 ID</th><th>名称</th><th>说明</th></tr>
+          </table>
+          <div class="demo-row" style="margin-top:16px;flex-wrap:wrap;gap:16px;align-items:flex-start">
+            <div style="width:280px">
+              <div style="font-size:12px;color:var(--text-secondary);margin-bottom:8px">SearchBar 搜索栏</div>
+              <div class="u-search-bar"><span class="s-icon s-icon--16" data-icon="wx-search"></span>搜索订单、客户</div>
+            </div>
+            <div style="width:280px">
+              <div style="font-size:12px;color:var(--text-secondary);margin-bottom:8px">ActionSheet 动作面板</div>
+              <div class="u-action-sheet" style="border:1px solid var(--border);border-radius:var(--radius-card)">
+                <button type="button" class="sheet-item">转发给同事</button>
+                <button type="button" class="sheet-item">保存图片</button>
+                <button type="button" class="sheet-item sheet-item--cancel">取消</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
       <table class="comp-catalog">
         <tr><th>分类</th><th>组件 ID</th><th>名称</th><th>场景</th></tr>
         <tr><td>导航</td><td>PageTitleBar</td><td>页面标题栏</td><td>设计页内页顶栏必用 · 标题/右侧文案底对齐 · <a href="https://www.figma.com/design/44P9g5yKcQEyXdHCayIrMn/RTS-AI%E8%AF%BB%E5%8F%96?node-id=6-623">Figma 6-623</a></td></tr>
         <tr><td>导航</td><td>PageTabs</td><td>顶部 Tab 条</td><td>宽 390 居中 · 页面级分段</td></tr>
         <tr><td>导航</td><td>TabBar</td><td>标准底栏</td><td>子模块 3–4 Tab</td></tr>
         <tr><td>反馈</td><td>AlertBanner</td><td>提示信息栏</td><td>图标与首行文案底对齐</td></tr>
+        <tr><td>反馈</td><td>ActionSheet</td><td>动作面板</td><td>WeChat UX · 底出菜单 · 见 <a href="#wechat-ux-components">7.0</a></td></tr>
+        <tr><td>表单</td><td>SearchBar</td><td>搜索栏</td><td>WeChat UX · 圆角 8px 灰底</td></tr>
+        <tr><td>通讯</td><td>ChatBubble</td><td>聊天气泡</td><td>WeChat UX · 客服/IM</td></tr>
         <tr><td>营销</td><td>PromoCard</td><td>营销卡（纯色底）</td><td>获客/推客 · 无渐变</td></tr>
         <tr><td>零售</td><td>ProductCard</td><td>商品双列卡</td><td>选品上架</td></tr>
         <tr><td>零售</td><td>PriceRow</td><td>价格三档行</td><td>原价/零售/供货</td></tr>
@@ -2289,20 +2339,39 @@
     return cat === 'filled' || name.endsWith('-filled');
   }
 
+  function wechatIconAlias(slug) {
+    if (typeof ICON_WECHAT_ALIAS !== 'undefined' && ICON_WECHAT_ALIAS[slug]) return ICON_WECHAT_ALIAS[slug];
+    if (typeof ICON_LIBRARY_WECHAT !== 'undefined') {
+      const row = ICON_LIBRARY_WECHAT.find(i => i.name === slug && i.alias);
+      if (row) return row.alias;
+    }
+    return null;
+  }
+
   function catalogIconPack(catalogName, cat) {
     const slug = resolveIconSlug(catalogName);
     const filled = isFilledIcon(catalogName, cat);
+    const alias = wechatIconAlias(slug);
+    const assetSlug = alias ? resolveIconSlug(alias) : slug;
     const stratisMap = filled
       ? (typeof STRATIS_FILLED_ICON_MAP !== 'undefined' ? STRATIS_FILLED_ICON_MAP : null)
       : (typeof STRATIS_ICON_MAP !== 'undefined' ? STRATIS_ICON_MAP : null);
-    if (stratisMap && stratisMap[slug]) {
-      return { dir: filled ? 'icons/stratis-filled/' : 'icons/stratis/', file: stratisMap[slug] };
+    if (stratisMap && stratisMap[assetSlug]) {
+      return { dir: filled ? 'icons/stratis-filled/' : 'icons/stratis/', file: stratisMap[assetSlug] };
     }
     const iconexMap = filled
       ? (typeof ICONEX_FILLED_ICON_MAP !== 'undefined' ? ICONEX_FILLED_ICON_MAP : null)
       : (typeof ICONEX_ICON_MAP !== 'undefined' ? ICONEX_ICON_MAP : null);
-    if (iconexMap && iconexMap[slug]) {
-      return { dir: filled ? 'icons/iconex-filled/' : 'icons/iconex/', file: iconexMap[slug] };
+    if (iconexMap && iconexMap[assetSlug]) {
+      return { dir: filled ? 'icons/iconex-filled/' : 'icons/iconex/', file: iconexMap[assetSlug] };
+    }
+    if (!alias) {
+      const wechatMap = filled
+        ? (typeof WECHAT_FILLED_ICON_MAP !== 'undefined' ? WECHAT_FILLED_ICON_MAP : null)
+        : (typeof WECHAT_ICON_MAP !== 'undefined' ? WECHAT_ICON_MAP : null);
+      if (wechatMap && wechatMap[slug]) {
+        return { dir: filled ? 'icons/wechat-filled/' : 'icons/wechat/', file: wechatMap[slug] };
+      }
     }
     return null;
   }
@@ -2399,8 +2468,9 @@
   }
 
   const _iconexLib = typeof ICON_LIBRARY_ICONEX !== 'undefined' ? ICON_LIBRARY_ICONEX : [];
-  const ALL_ICONS = [...ICON_LIBRARY, ...ICON_LIBRARY_EXTRA, ...ICON_FILLED, ..._iconexLib].filter((item, i, arr) => arr.findIndex(x => x.name === item.name) === i);
-  const CAT_LABELS = { nav:'导航', action:'操作', form:'表单', data:'数据', biz:'业务', file:'文件', comm:'通讯', status:'状态', user:'用户', sys:'系统', meiye:'美业店务', retail:'零售商城', order:'订单财务', filled:'面性图标' };
+  const _wechatLib = typeof ICON_LIBRARY_WECHAT !== 'undefined' ? ICON_LIBRARY_WECHAT : [];
+  const ALL_ICONS = [...ICON_LIBRARY, ...ICON_LIBRARY_EXTRA, ...ICON_FILLED, ..._iconexLib, ..._wechatLib].filter((item, i, arr) => arr.findIndex(x => x.name === item.name) === i);
+  const CAT_LABELS = { nav:'导航', action:'操作', form:'表单', data:'数据', biz:'业务', file:'文件', comm:'通讯', status:'状态', user:'用户', sys:'系统', meiye:'美业店务', retail:'零售商城', order:'订单财务', filled:'面性图标', wechat:'WeChat 精选' };
 
   let iconCat = 'all';
   let iconQuery = '';
@@ -2409,6 +2479,7 @@
     const root = document.getElementById('icon-lib-root');
     const q = iconQuery.trim().toLowerCase();
     const list = ALL_ICONS.filter(i => {
+      if (iconCat === 'wechat') return i.source === 'wechat';
       if (iconCat !== 'all' && i.cat !== iconCat) return false;
       if (!q) return true;
       const hay = (i.name + i.meaning + i.scene + i.cat).toLowerCase();
@@ -2422,7 +2493,7 @@
           ${iconMarkup(i.name, i.cat, `aria-label="${fmtMeaning(i.meaning)}"`)}
         </div>
         <div class="icon-lib-meta">
-          <div class="icon-lib-name">${i.name}${i.source === 'iconex' ? '<span class="icon-lib-src">Iconex</span>' : ''}</div>
+          <div class="icon-lib-name">${i.name}${i.source === 'iconex' ? '<span class="icon-lib-src">Iconex</span>' : ''}${i.source === 'wechat' ? '<span class="icon-lib-src icon-lib-src--wechat">WeChat</span>' : ''}</div>
           <div class="icon-lib-meaning">${fmtMeaning(i.meaning)}</div>
           <div class="icon-lib-scene">${i.scene}</div>
         </div>
@@ -2450,6 +2521,16 @@
     void hydrateStratisIcons(root);
     initTapFeedback(root);
   }
+
+  (function renderWechatUxComponentTable() {
+    const table = document.querySelector('#wechat-ux-components table');
+    if (!table || typeof WECHAT_UX_COMPONENTS === 'undefined') return;
+    WECHAT_UX_COMPONENTS.forEach(row => {
+      const tr = document.createElement('tr');
+      tr.innerHTML = `<td>${row.wechat}</td><td><code>${row.id}</code></td><td>${row.name}</td><td>${row.note}</td>`;
+      table.appendChild(tr);
+    });
+  })();
 
   document.getElementById('icon-search').addEventListener('input', e => {
     iconQuery = e.target.value;
