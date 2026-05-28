@@ -227,6 +227,7 @@
     .ripple-fx { position: absolute; border-radius: 50%; pointer-events: none; transform: scale(0); animation: rippleExpand .55s ease-out forwards; }
     @keyframes rippleExpand { to { transform: scale(2.8); opacity: 0; } }
     .icon-lib-name { font-size: 10px; color: var(--text-secondary); font-family: Consolas, monospace; line-height: 1.3; margin: 0; opacity: .85; }
+    .icon-lib-src { display: inline-block; margin-left: 4px; padding: 0 4px; font-size: 9px; font-family: inherit; color: var(--brand); background: rgba(243,47,65,.08); border-radius: 2px; vertical-align: middle; }
     .icon-lib-meaning { font-size: 11px; color: var(--text-placeholder); margin-top: 3px; line-height: 1.3; font-weight: 400; }
     .icon-lib-scene { font-size: 10px; color: var(--text-disabled); margin-top: 2px; line-height: 1.25; }
     .icon-filter-row { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 16px; align-items: center; }
@@ -543,6 +544,9 @@
   </script>
   <script src="icons/stratis-map.js"></script>
   <script src="icons/stratis-filled-map.js"></script>
+  <script src="icons/iconex-map.js"></script>
+  <script src="icons/iconex-filled-map.js"></script>
+  <script src="icons/iconex-catalog.js"></script>
 </head>
 <body>
 <div class="layout">
@@ -1051,10 +1055,14 @@
     <!-- 6. 图标库 -->
     <section id="icons">
       <h2 class="section-title"><span class="num">6</span>图标库（可直接调用）</h2>
-      <p><strong>尺寸与颜色以 <a href="#global-ui">★ 全局强制 UI</a> 为准。</strong>图标库对齐 <a href="https://www.figma.com/design/0lZMESxiHe6rxzVUG3hMIT/Stratis-UI-Icons---1000--Free-Figma-icons--Community-?node-id=101-3505">Stratis UI Icons（Figma · node 101-3505）</a>：<strong>线性</strong>为 outline SVG（<code>icons/stratis/</code>），<strong>面性</strong>为 filled SVG（<code>icons/stratis-filled/</code>），构建脚本见 <code>scripts/build-stratis-icons.js</code>。已按<strong>通用 / 美业店务 / 零售商城 / 订单财务</strong>整理；设计稿中的「开单/开卡」等为定制 SVG 时，下表给出规范库内等价图标名。</p>
+      <p><strong>尺寸与颜色以 <a href="#global-ui">★ 全局强制 UI</a> 为准。</strong>图标库由两套 Figma 资源构成：<a href="https://www.figma.com/design/0lZMESxiHe6rxzVUG3hMIT/Stratis-UI-Icons---1000--Free-Figma-icons--Community-?node-id=101-3505">Stratis UI Icons</a>（主库，<code>icons/stratis/</code>、<code>icons/stratis-filled/</code>）与 <a href="https://www.figma.com/design/uXSogFY3f1EEJsK1iDPf9h/Iconex---Freebie-icons--Community-?node-id=0-1">Iconex Freebie</a>（补充库，<code>icons/iconex/</code>、<code>icons/iconex-filled/</code>，构建见 <code>scripts/build-iconex-icons.js</code>）。同名时优先 Stratis；Iconex 卡片标注 <code>Iconex</code>。已按<strong>通用 / 美业店务 / 零售商城 / 订单财务 / 面性</strong>分类；设计稿定制图形时，下表给出规范库内等价图标名。</p>
       <a class="figma-link-card" href="https://www.figma.com/design/0lZMESxiHe6rxzVUG3hMIT/Stratis-UI-Icons---1000--Free-Figma-icons--Community-?node-id=101-3505" target="_blank" rel="noopener">
         <span style="font-size:28px">◇</span>
-        <div><strong>Stratis UI Icons · 1000+ 免费图标</strong><br><span style="font-size:12px;color:var(--text-secondary)">Figma Community · 与本规范线性/面性资源同步扩展</span></div>
+        <div><strong>Stratis UI Icons · 1000+ 免费图标</strong><br><span style="font-size:12px;color:var(--text-secondary)">Figma Community · 主图标库（线性 / 面性）</span></div>
+      </a>
+      <a class="figma-link-card" href="https://www.figma.com/design/uXSogFY3f1EEJsK1iDPf9h/Iconex---Freebie-icons--Community-?node-id=0-1" target="_blank" rel="noopener" style="margin-top:8px">
+        <span style="font-size:28px">◆</span>
+        <div><strong>Iconex · Freebie icons</strong><br><span style="font-size:12px;color:var(--text-secondary)">Figma Community · 补充促销、媒体、分类、包裹等场景（本规范已精选 115 个）</span></div>
       </a>
       <h3>6.0 设计稿功能 → 图标映射（剑琅管家 / RTP）</h3>
       <table>
@@ -1078,7 +1086,12 @@
         <tr><td>上架到店</td><td><code>add</code></td><td>零售</td><td>选品卡片主按钮</td></tr>
         <tr><td>购物车</td><td><code>cart</code></td><td>零售</td><td>底栏 Badge 数量</td></tr>
         <tr><td>供货价/零售价</td><td><code>money</code></td><td>零售</td><td>价格三档表单</td></tr>
-        <tr><td>物流</td><td><code>undertake-delivery</code> 或 <code>map</code></td><td>订单</td><td>—</td></tr>
+        <tr><td>物流</td><td><code>undertake-delivery</code> 或 <code>box-package</code></td><td>订单</td><td>Iconex 包裹</td></tr>
+        <tr><td>促销/特卖</td><td><code>sale</code> / <code>sale-filled</code></td><td>零售</td><td>Iconex</td></tr>
+        <tr><td>商品分类</td><td><code>category</code> / <code>category-filled</code></td><td>零售</td><td>Iconex</td></tr>
+        <tr><td>领券</td><td><code>coupon-badge</code> / <code>sale-tag-filled</code></td><td>零售</td><td>Iconex</td></tr>
+        <tr><td>计时/服务时长</td><td><code>timer</code> / <code>timer-filled</code></td><td>美业</td><td>Iconex</td></tr>
+        <tr><td>语音/客服</td><td><code>microphone</code> / <code>headphones-filled</code></td><td>通讯</td><td>Iconex</td></tr>
       </table>
       <div class="spec-block"><strong>调用方式：</strong>线性 <code>&lt;span class="s-icon" data-icon="search"&gt;&lt;/span&gt;</code> · 面性 <code>&lt;span class="s-icon s-icon--filled" data-icon="home-filled"&gt;&lt;/span&gt;</code> · Figma <a href="https://www.figma.com/design/0lZMESxiHe6rxzVUG3hMIT/Stratis-UI-Icons---1000--Free-Figma-icons--Community-">Stratis UI Icons</a> · AI 标注 <code>icon:search</code> / <code>icon:home-filled</code></div>
       <table>
@@ -1109,7 +1122,7 @@
         <button type="button" class="filter-chip" data-cat="order">订单财务</button>
         <button type="button" class="filter-chip" data-cat="filled">面性图标</button>
       </div>
-      <p style="font-size:12px;color:var(--text-secondary);margin-bottom:12px">线性与面性均为 Stratis UI Icons（outline / filled），圆角风格一致；面性（<code>-filled</code> 后缀）适用于 Tab 选中、状态强调等场景。</p>
+      <p style="font-size:12px;color:var(--text-secondary);margin-bottom:12px">线性优先 Stratis outline，面性为 <code>-filled</code> 后缀（Stratis / Iconex）；Iconex 补充图标在名称下方显示 <code>Iconex</code> 标签。面性适用于 Tab 选中、状态强调等场景。</p>
       <div id="icon-lib-root" class="icon-lib-grid"></div>
       <p id="icon-lib-count" style="font-size:12px;color:var(--text-secondary)"></p>
     </section>
@@ -1962,15 +1975,28 @@
     return cat === 'filled' || name.endsWith('-filled');
   }
 
-  function stratisIconAsset(catalogName, cat) {
+  function catalogIconPack(catalogName, cat) {
     const slug = resolveIconSlug(catalogName);
     const filled = isFilledIcon(catalogName, cat);
-    const map = filled
+    const stratisMap = filled
       ? (typeof STRATIS_FILLED_ICON_MAP !== 'undefined' ? STRATIS_FILLED_ICON_MAP : null)
       : (typeof STRATIS_ICON_MAP !== 'undefined' ? STRATIS_ICON_MAP : null);
-    const file = map ? map[slug] : null;
-    if (!file) return null;
-    const rel = (filled ? 'icons/stratis-filled/' : 'icons/stratis/') + file;
+    if (stratisMap && stratisMap[slug]) {
+      return { dir: filled ? 'icons/stratis-filled/' : 'icons/stratis/', file: stratisMap[slug] };
+    }
+    const iconexMap = filled
+      ? (typeof ICONEX_FILLED_ICON_MAP !== 'undefined' ? ICONEX_FILLED_ICON_MAP : null)
+      : (typeof ICONEX_ICON_MAP !== 'undefined' ? ICONEX_ICON_MAP : null);
+    if (iconexMap && iconexMap[slug]) {
+      return { dir: filled ? 'icons/iconex-filled/' : 'icons/iconex/', file: iconexMap[slug] };
+    }
+    return null;
+  }
+
+  function catalogIconAsset(catalogName, cat) {
+    const pack = catalogIconPack(catalogName, cat);
+    if (!pack) return null;
+    const rel = pack.dir + pack.file;
     return typeof specAssetUrl === 'function' ? specAssetUrl(rel) : rel;
   }
 
@@ -2018,7 +2044,7 @@
     const attrs = extraAttrs || '';
     const filled = isFilledIcon(catalogName, cat);
     const cls = 's-icon' + (filled ? ' s-icon--filled' : '');
-    if (stratisIconAsset(catalogName, cat)) {
+    if (catalogIconAsset(catalogName, cat)) {
       return `<span class="${cls}" data-catalog="${catalogName}" data-icon="${catalogName}" data-filled="${filled ? '1' : '0'}" ${attrs}></span>`;
     }
     return `<span class="${cls} is-missing" data-catalog="${catalogName}" data-icon="${catalogName}" data-filled="${filled ? '1' : '0'}" ${attrs}></span>`;
@@ -2030,16 +2056,13 @@
     await Promise.all(pending.map(async el => {
       const slug = resolveIconSlug(el.dataset.icon);
       const filled = el.dataset.filled === '1';
-      const map = filled
-        ? (typeof STRATIS_FILLED_ICON_MAP !== 'undefined' ? STRATIS_FILLED_ICON_MAP : null)
-        : (typeof STRATIS_ICON_MAP !== 'undefined' ? STRATIS_ICON_MAP : null);
-      const file = map ? map[slug] : null;
-      if (!file) {
+      const pack = catalogIconPack(slug, filled ? 'filled' : '');
+      if (!pack) {
         el.classList.add('is-missing');
         el.closest('.icon-lib-item')?.classList.add('is-missing');
         return;
       }
-      const rel = (filled ? 'icons/stratis-filled/' : 'icons/stratis/') + file;
+      const rel = pack.dir + pack.file;
       const url = typeof specAssetUrl === 'function' ? specAssetUrl(rel) : rel;
       try {
         if (!_stratisSvgCache[url]) {
@@ -2061,7 +2084,8 @@
     }));
   }
 
-  const ALL_ICONS = [...ICON_LIBRARY, ...ICON_LIBRARY_EXTRA, ...ICON_FILLED].filter((item, i, arr) => arr.findIndex(x => x.name === item.name) === i);
+  const _iconexLib = typeof ICON_LIBRARY_ICONEX !== 'undefined' ? ICON_LIBRARY_ICONEX : [];
+  const ALL_ICONS = [...ICON_LIBRARY, ...ICON_LIBRARY_EXTRA, ...ICON_FILLED, ..._iconexLib].filter((item, i, arr) => arr.findIndex(x => x.name === item.name) === i);
   const CAT_LABELS = { nav:'导航', action:'操作', form:'表单', data:'数据', biz:'业务', file:'文件', comm:'通讯', status:'状态', user:'用户', sys:'系统', meiye:'美业店务', retail:'零售商城', order:'订单财务', filled:'面性图标' };
 
   let iconCat = 'all';
@@ -2084,7 +2108,7 @@
           ${iconMarkup(i.name, i.cat, `aria-label="${fmtMeaning(i.meaning)}"`)}
         </div>
         <div class="icon-lib-meta">
-          <div class="icon-lib-name">${i.name}</div>
+          <div class="icon-lib-name">${i.name}${i.source === 'iconex' ? '<span class="icon-lib-src">Iconex</span>' : ''}</div>
           <div class="icon-lib-meaning">${fmtMeaning(i.meaning)}</div>
           <div class="icon-lib-scene">${i.scene}</div>
         </div>
