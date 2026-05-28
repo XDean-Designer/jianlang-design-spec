@@ -5,6 +5,14 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>剑琅联盟移动端设计规范</title>
   <link rel="icon" href="LOGO2.png" type="image/png">
+  <script>
+    (function () {
+      var ua = navigator.userAgent || '';
+      var platform = navigator.platform || '';
+      var isWindows = /Win/i.test(ua) || /Win/i.test(platform);
+      document.documentElement.classList.add(isWindows ? 'platform-windows' : 'platform-apple');
+    })();
+  </script>
   <style>
     @font-face {
       font-family: "TCloudNumber";
@@ -83,12 +91,16 @@
       --figma-orange: #F77357;
       --figma-card-pink: #FFF2F2;
       --figma-promo-border: rgba(249, 117, 107, 0.2);
-      --font-data: "TCloudNumber", "PingFang SC", sans-serif;
+      --font-ui: "PingFang SC", -apple-system, "Helvetica Neue", sans-serif;
+      --font-data: "TCloudNumber", var(--font-ui), sans-serif;
       --glass-nav-shadow: none;
     }
     * { box-sizing: border-box; margin: 0; padding: 0; }
     html { scroll-behavior: smooth; }
-    body.spec-site, body.spec-site button, body.spec-site input, body.spec-site textarea, body.spec-site select { font-family: "PingFang SC", -apple-system, sans-serif; font-size: 14px; line-height: 1.6; color: var(--text-primary); background: var(--bg-page); -webkit-font-smoothing: antialiased; }
+    html.platform-windows {
+      --font-ui: "Source Han Sans SC", "Source Han Sans CN", "Noto Sans SC", "Microsoft YaHei", sans-serif;
+    }
+    body.spec-site, body.spec-site button, body.spec-site input, body.spec-site textarea, body.spec-site select { font-family: var(--font-ui); font-size: 14px; line-height: 1.6; color: var(--text-primary); background: var(--bg-page); -webkit-font-smoothing: antialiased; }
     a { color: var(--brand-6); text-decoration: none; transition: opacity .15s; }
     a:hover { opacity: .85; }
     .layout { display: flex; min-height: 100vh; }
@@ -160,7 +172,7 @@
     .color-info { padding: 8px 10px; background: #fff; font-size: 12px; }
     .color-info strong { display: block; font-size: 13px; }
     .demo-row { display: flex; flex-wrap: wrap; gap: 12px; align-items: center; margin: 12px 0; }
-    .btn { display: inline-flex; align-items: center; justify-content: center; height: 48px; max-width: var(--btn-max-width); padding: 0 20px; border-radius: var(--radius-btn); font-size: 14px; font-weight: 500; border: none; cursor: default; font-family: "PingFang SC", sans-serif; box-shadow: none; background-image: none; box-sizing: border-box; }
+    .btn { display: inline-flex; align-items: center; justify-content: center; height: 48px; max-width: var(--btn-max-width); padding: 0 20px; border-radius: var(--radius-btn); font-size: 14px; font-weight: 500; border: none; cursor: default; font-family: var(--font-ui); box-shadow: none; background-image: none; box-sizing: border-box; }
     .btn-block { width: 100%; max-width: var(--btn-max-width); }
     .btn.btn--r4 { border-radius: var(--radius-btn-4); }
     .btn.btn--r8 { border-radius: var(--radius-btn-8); }
@@ -255,7 +267,7 @@
     .icon-lib-meaning { font-size: 11px; color: var(--text-placeholder); margin-top: 3px; line-height: 1.3; font-weight: 400; }
     .icon-lib-scene { font-size: 10px; color: var(--text-disabled); margin-top: 2px; line-height: 1.25; }
     .icon-filter-row { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 16px; align-items: center; }
-    .icon-filter-row input { flex: 1; min-width: 200px; height: var(--nav-h); border: 1px solid var(--border); border-radius: var(--radius-input); padding: 0 12px; outline: none; font-family: "PingFang SC", sans-serif; background: var(--bg-container); font-size: 14px; }
+    .icon-filter-row input { flex: 1; min-width: 200px; height: var(--nav-h); border: 1px solid var(--border); border-radius: var(--radius-input); padding: 0 12px; outline: none; font-family: var(--font-ui); background: var(--bg-container); font-size: 14px; }
     .icon-filter-row input:focus { border-color: var(--brand-6); }
     .filter-chip { min-height: 32px; padding: var(--space-tag-y) 12px; border-radius: var(--radius-btn-4); border: 1px solid var(--border); background: var(--bg-container); font-size: 12px; cursor: pointer; color: var(--text-secondary); font-family: inherit; }
     .filter-chip.active { border-color: var(--brand-6); color: var(--brand-6); background: var(--brand-1); }
@@ -421,7 +433,7 @@
       color: var(--text-primary);
       margin-top: 10px;
     }
-    .font-data-sample .yen { font-family: "PingFang SC", sans-serif; font-weight: 500; }
+    .font-data-sample .yen { font-family: var(--font-ui); font-weight: 500; }
     .font-data-sample .num { font-family: var(--font-data); font-weight: 700; letter-spacing: -.02em; }
     .u-search { height: 36px; background: var(--bg-disabled); border-radius: var(--radius-input); margin: var(--space-list-y) var(--space-page); display: flex; align-items: center; padding: 0 12px; gap: var(--space-icon-text); color: var(--text-secondary); font-size: 14px; border: 1px solid var(--border); box-shadow: none; }
     .u-notice,
@@ -454,8 +466,20 @@
     .u-steps { display: flex; padding: 16px; background: #fff; gap: 4px; }
     .u-steps .step { flex: 1; text-align: center; font-size: 12px; color: var(--text-secondary); }
     .u-steps .step .dot { width: 24px; height: 24px; border-radius: 50%; background: var(--gray-3); color: var(--text-secondary); display: inline-flex; align-items: center; justify-content: center; font-size: 12px; margin-bottom: 4px; }
-    .u-steps .step.done .dot { background: var(--success-6); color: #fff; }
+    .u-steps .step.done .dot { background: var(--success-6); color: #fff; font-size: 0; }
     .u-steps .step.cur .dot { background: var(--brand-6); color: #fff; }
+    .u-checkbox-mark {
+      width: 20px;
+      height: 20px;
+      border-radius: 4px;
+      background: var(--brand-6);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+    .u-checkbox-mark .s-icon { width: 14px; height: 14px; font-size: 14px; color: #fff; }
+    .u-steps .step.done .dot .s-icon { width: 14px; height: 14px; font-size: 14px; color: #fff; }
     .u-switch { width: 44px; height: 24px; background: var(--gray-4); border-radius: 12px; position: relative; }
     .u-switch.on { background: var(--brand-6); }
     .u-switch::after { content: ''; position: absolute; width: 20px; height: 20px; background: #fff; border-radius: 50%; top: 2px; left: 2px; border: 1px solid var(--border); box-shadow: none; }
@@ -524,9 +548,9 @@
     .global-swatch { display: inline-flex; align-items: center; gap: 8px; padding: 6px 10px; border: 1px solid var(--border); border-radius: var(--radius-tag); font-size: 12px; background: #fff; }
     .global-swatch i { width: 20px; height: 20px; border-radius: 4px; flex-shrink: 0; border: 1px solid rgba(0,0,0,.06); }
     .price-row-demo { display: flex; align-items: baseline; gap: var(--price-gap); font-size: 20px; margin: 12px 0; }
-    .price-row-demo .yen { font-family: "PingFang SC", sans-serif; font-weight: 500; color: var(--text-primary); }
+    .price-row-demo .yen { font-family: var(--font-ui); font-weight: 500; color: var(--text-primary); }
     .price-row-demo .num { font-family: var(--font-data); font-weight: 700; color: var(--text-primary); }
-    .price-row-demo .label { font-family: "PingFang SC", sans-serif; font-size: 14px; color: var(--text-secondary); margin-right: 8px; }
+    .price-row-demo .label { font-family: var(--font-ui); font-size: 14px; color: var(--text-secondary); margin-right: 8px; }
     .s-icon--24 { font-size: var(--icon-size); width: var(--icon-size); height: var(--icon-size); color: var(--icon-color-default); }
     .s-icon--16 { font-size: var(--icon-size-sm); width: var(--icon-size-sm); height: var(--icon-size-sm); color: var(--icon-color-secondary); }
     .s-icon--brand { color: var(--icon-color-primary); }
@@ -856,12 +880,14 @@
               <span class="global-swatch"><i style="background:#fff;border:1px solid #D7D7D5"></i>卡片</span>
             </div>
           </li>
-          <li><strong>字体规范</strong>
+          <li id="font-platform"><strong>字体规范（按设备）</strong>
             <ul>
-              <li>常规文案：<strong>苹方 PingFang SC</strong></li>
-              <li>金额<strong>纯数字 + 小数点</strong>：<strong>TCloudNumber</strong>（v1.010 · Bold）· 见第 3 章字体下载</li>
-              <li>硬性规则：<code>¥</code> 符号、价格描述文字（应付 / 实付 / 小计）统一用苹方；<code>¥</code> 与数字间距固定 <strong>4px</strong></li>
+              <li><strong>Apple 设备（macOS / iOS / iPadOS）</strong>：常规文案使用 <strong>PingFang SC（苹方）</strong>，与现有规则一致。</li>
+              <li><strong>Windows 设备</strong>：凡本规范中的 <strong>PingFang SC</strong> 一律改用 <strong>思源黑体 Source Han Sans SC</strong>（<code>Source Han Sans CN</code> 作备选）。原因：Windows 上 PingFang SC 在 AI 识图与标注时易误判，思源黑体更稳定。</li>
+              <li><strong>两平台不变</strong>：金额<strong>纯数字 + 小数点</strong>仍用 <strong>TCloudNumber</strong>（v1.010 · Bold）；色板、字号、间距、圆角等 Token 不变。</li>
+              <li>混排：<code>¥</code> 与「应付 / 实付 / 小计」等文字符号随<strong>当前平台的 UI 字体</strong>（苹果=苹方，Windows=思源黑体）；<code>¥</code> 与数字间距固定 <strong>4px</strong>。</li>
             </ul>
+            <p style="font-size:12px;color:var(--text-secondary);margin-top:8px">本规范站预览：当前为 <strong id="font-platform-label">—</strong> · 设计稿与 Flutter 须在交付说明中标注目标平台字体。</p>
             <div class="price-row-demo">
               <span class="label">实付</span><span class="yen">¥</span><span class="num">1,286.40</span>
             </div>
@@ -872,6 +898,7 @@
               <li>小箭头 / 辅助图标：16×16px</li>
               <li>颜色：重要操作 <code>#F32F41</code> · 常规 <code>#333333</code> · 次要 <code>#929292</code></li>
               <li>风格：线性简约、统一圆角倒角；复用第 6 章 Stratis 组件库，禁止自创</li>
+              <li><strong>确认 / 正确态勾号 ★</strong>：勾选、步骤完成、成功反馈等<strong>禁止</strong>使用字符 <code>√</code>、<code>✓</code> 或手写「勾」字；须用图标 <code>check</code>（16px 线性）或 <code>check-circle-filled</code>（面性成功），见第 7 章表单控件。</li>
             </ul>
             <div class="demo-row" style="margin-top:10px">
               <span class="s-icon s-icon--24 s-icon--brand" data-icon="add-circle"></span>
@@ -949,6 +976,7 @@
           <li><strong>空状态垂直居中</strong>：空状态页在<strong>可滚动内容区</strong>（扣除状态栏、标题栏、底栏后的区域）内，图标 + 主副文案作为一组<strong>垂直居中</strong>；禁止贴顶或仅留顶部留白。</li>
           <li><strong>页面标题栏</strong>：所有<strong>设计页 / 原型 / AI 出图</strong>的内页顶栏须调用组件库 <code>PageTitleBar</code>（页面标题栏），禁止自定义 Navbar 样式；与 <a href="https://www.figma.com/design/44P9g5yKcQEyXdHCayIrMn/RTS-AI%E8%AF%BB%E5%8F%96?node-id=6-623" target="_blank" rel="noopener">RTS-AI 读稿 · Figma node 6-623</a> 一致（见第 7 章）。</li>
           <li><strong>标题栏文案底对齐</strong>：<code>PageTitleBar</code> 居中标题（16px）与右侧操作（14px）须<strong>文字底部在同一水平线</strong>对齐；返回区仍为 44×44 垂直居中。</li>
+          <li><strong>勾号用图标</strong>：组件内表示确认、已选、步骤完成时<strong>禁止</strong>文字 <code>√</code>/<code>✓</code>；使用 <code>check</code> 或 <code>check-circle-filled</code>（见第 6、7 章）。</li>
         </ol>
 
         <div class="spec-block">
@@ -1014,9 +1042,11 @@
       <ol>
         <li><strong>组合组件</strong>：从第 7 章按场景选用组件，交互与布局遵循本规范。</li>
         <li><strong>颜色 / 圆角 / 间距</strong>：仅使用全局章与第 2–5 章 Token；按钮圆角四档择一且同类型一致；禁止投影与渐变背景。</li>
-        <li><strong>金额排版</strong>：数字 TCloudNumber Bold；<code>¥</code> 与「应付/实付」等用苹方，<code>¥</code> 与数字间距 4px。</li>
+        <li><strong>金额排版</strong>：数字 TCloudNumber Bold；<code>¥</code> 与「应付/实付」等用 UI 字体（苹果 PingFang SC / Windows 思源黑体），<code>¥</code> 与数字间距 4px。</li>
+        <li><strong>字体按设备</strong>：苹果 → PingFang SC；Windows → 思源黑体 Source Han Sans SC（勿在 Windows 稿中用 PingFang SC）。</li>
+        <li><strong>勾号</strong>：确认/正确态只用图标 <code>check</code>，禁止文字 √。</li>
         <li><strong>品牌露出</strong>：启动/登录/首页 Navbar 使用 <code>LOGO2.png</code> 与「剑琅联盟」。</li>
-        <li><strong>硬性约束</strong>：无 emoji · Tab/卡片不叠压 · 内页顶栏必用 <code>PageTitleBar</code> · 标题与右侧文案底对齐 · 标题栏/Tab 主体无描边 · 图片位灰底白 icon · 内容不横向溢出 · 按钮宽 ≤370px · 顶 Tab 390 居中 · 状态栏白块 · 卡片不溢出 · 提示 icon 首行底对齐 · 空状态垂直居中。</li>
+        <li><strong>硬性约束</strong>：无 emoji · 无文字勾号 √/✓ · Tab/卡片不叠压 · 内页顶栏必用 <code>PageTitleBar</code> · 标题与右侧文案底对齐 · 标题栏/Tab 主体无描边 · 图片位灰底白 icon · 内容不横向溢出 · 按钮宽 ≤370px · 顶 Tab 390 居中 · 状态栏白块 · 卡片不溢出 · 提示 icon 首行底对齐 · 空状态垂直居中。</li>
       </ol>
       <h3>技术栈对齐</h3>
       <table>
@@ -1026,7 +1056,7 @@
         <tr><td>设计稿</td><td><a href="https://www.figma.com/design/cUaUaxtcNsREKlfnQKXe1L/RTP-%E9%9B%B6%E5%94%AE%E6%A8%A1%E5%9D%97">RTP 零售模块 Figma</a></td><td>节点 72-137 · 与 HTML 原型库同步</td></tr>
         <tr><td>设计资源</td><td>Figma 实测 + 图标库</td><td>Stratis / Iconex SVG · 业务图标映射表</td></tr>
         <tr><td>设计基准</td><td>宽 390（固定）× 高 844（默认）</td><td>高可向下延展；安全区 top 44px / bottom 34px</td></tr>
-        <tr><td>全局字体</td><td>PingFang SC</td><td>禁止替换为其他字体族</td></tr>
+        <tr><td>UI 字体</td><td>苹果 PingFang SC · Windows 思源黑体</td><td>见 <a href="#font-platform">全局字体按设备</a>；金额仍 TCloudNumber</td></tr>
         <tr><td>全局 UI</td><td><a href="#global-ui">★ 强制章节</a></td><td>高于本章与 Figma 历史稿</td></tr>
         <tr><td>主按钮</td><td>高 48px · 圆角 4/8/12/16 择档</td><td>见全局章 · 同类型一致</td></tr>
       </table>
@@ -1131,14 +1161,16 @@
     <section id="typography">
       <h2 class="section-title"><span class="num">3</span>字体排版</h2>
       <h3>3.1 字体家族</h3>
+      <p style="font-size:13px;color:var(--text-secondary);margin-bottom:12px">UI 正文字体<strong>按目标设备二选一</strong>，勿混用。完整说明见 <a href="#font-platform">★ 全局强制 UI · 字体规范</a>。</p>
       <table>
-        <tr><th>用途</th><th>字体</th></tr>
-        <tr><td>全局唯一字体 ★</td><td><strong>PingFang SC</strong>（设计稿、HTML 原型、Flutter 均统一）</td></tr>
-        <tr><td>字重 Regular</td><td>font-weight: 400 · 正文、描述</td></tr>
-        <tr><td>字重 Medium</td><td>font-weight: 500 · 标题、按钮、强调</td></tr>
-        <tr><td>字重 Semibold</td><td>font-weight: 600 · 核心数据数字</td></tr>
-        <tr><td>数据字体 ★</td><td><strong>TCloudNumber</strong> v1.010（Bold · 金额数字）· 仅纯数字与小数点</td></tr>
-        <tr><td>金额混排 ★</td><td><code>¥</code>、应付/实付/小计 → 苹方；<code>¥</code> 与数字间距 4px</td></tr>
+        <tr><th>用途</th><th>字体</th><th>说明</th></tr>
+        <tr><td>UI 字体 · Apple ★</td><td><strong>PingFang SC</strong></td><td>macOS / iOS / iPadOS 设计稿与实现</td></tr>
+        <tr><td>UI 字体 · Windows ★</td><td><strong>Source Han Sans SC</strong>（思源黑体）</td><td>替代 PingFang SC；避免 AI 识图误判</td></tr>
+        <tr><td>字重 Regular</td><td>400</td><td>正文、描述</td></tr>
+        <tr><td>字重 Medium</td><td>500</td><td>标题、按钮、强调</td></tr>
+        <tr><td>字重 Semibold</td><td>600</td><td>核心数据数字（非 TCloudNumber 时）</td></tr>
+        <tr><td>数据字体 ★</td><td><strong>TCloudNumber</strong> v1.010 Bold</td><td>仅金额纯数字与小数点；两平台相同</td></tr>
+        <tr><td>金额混排 ★</td><td><code>¥</code>、应付/实付/小计 → UI 字体</td><td><code>¥</code> 与数字间距 4px</td></tr>
       </table>
 
       <h3>3.1.1 TCloudNumber 字体包（v1.010）</h3>
@@ -1151,7 +1183,7 @@
           <a class="font-download-btn" href="assets/fonts/TCloudNumber/TCloudNumber-Light.ttf" download="TCloudNumber-Light.ttf">下载 Light</a>
           <a class="font-download-btn" href="assets/fonts/TCloudNumber/TCloudNumberVF.ttf" download="TCloudNumberVF.ttf">下载 VF 可变</a>
         </div>
-        <p style="margin-top:12px;font-size:12px;color:var(--text-secondary)">Flutter：<code>fontFamily: 'TCloudNumber'</code> · 将 ttf 放入 <code>assets/fonts/</code> 并在 <code>pubspec.yaml</code> 声明。</p>
+        <p style="margin-top:12px;font-size:12px;color:var(--text-secondary)">Flutter UI 字体：苹果 <code>PingFang SC</code> · Windows / 安卓可配 <code>Source Han Sans SC</code>（思源黑体）。金额：<code>fontFamily: 'TCloudNumber'</code> · ttf 放入 <code>assets/fonts/</code> 并在 <code>pubspec.yaml</code> 声明。</p>
       </div>
 
       <h3>3.2 字号阶梯（390px 画布，单位 px）</h3>
@@ -1178,8 +1210,8 @@
         <li>数字金额右对齐，使用千分位；日期格式 YYYY-MM-DD HH:mm</li>
         <li>中英文混排时英文与中文之间无需额外空格（中文产品惯例）</li>
         <li>禁止低于 10px 的可读文字（标准底栏 Tab 文案为 11px）</li>
+        <li>确认、勾选、步骤完成等<strong>不得使用文字勾号</strong>（<code>√</code> / <code>✓</code>），须用第 6 章 <code>check</code> 或 <code>check-circle-filled</code> 图标</li>
       </ul>
-    </section>
 
     <!-- 4. 间距与布局 -->
     <section id="spacing">
@@ -1769,9 +1801,15 @@
           <div class="demo-row" style="gap:24px">
             <div class="u-switch on"></div>
             <div class="u-switch"></div>
-            <label style="display:flex;align-items:center;gap:8px;font-size:14px"><span style="width:20px;height:20px;border-radius:4px;background:var(--brand-6);color:#fff;display:inline-flex;align-items:center;justify-content:center;font-size:12px">✓</span>记住账号</label>
+            <label style="display:flex;align-items:center;gap:8px;font-size:14px"><span class="u-checkbox-mark" aria-hidden="true"><span class="s-icon s-icon--on-brand" data-icon="check"></span></span>记住账号</label>
             <label style="display:flex;align-items:center;gap:8px;font-size:14px"><span style="width:20px;height:20px;border:1px solid var(--brand-6);border-radius:50%;display:inline-flex;align-items:center;justify-content:center"><span style="width:10px;height:10px;background:var(--brand-6);border-radius:50%"></span></span>选项 A</label>
           </div>
+          <table style="margin-top:16px">
+            <tr><th>勾号 ★</th><th>规格</th></tr>
+            <tr><td>禁止</td><td>字符 <code>√</code>、<code>✓</code>、Unicode 勾形文字</td></tr>
+            <tr><td>多选已选</td><td><code>check</code> · 16px · 白 icon 于品牌色 20×20 方底</td></tr>
+            <tr><td>步骤完成 / 成功</td><td><code>check</code> 于成功色圆底，或 <code>check-circle-filled</code> 16px</td></tr>
+          </table>
         </div>
       </div>
 
@@ -1780,7 +1818,7 @@
         <div class="comp-block-bd">
           <div class="comp-preview-phone">
             <div class="u-steps">
-              <div class="step done"><div class="dot">✓</div>提交</div>
+              <div class="step done"><div class="dot"><span class="s-icon" data-icon="check" aria-hidden="true"></span></div>提交</div>
               <div class="step cur"><div class="dot">2</div>审批</div>
               <div class="step"><div class="dot">3</div>完成</div>
             </div>
@@ -2066,7 +2104,8 @@
       <pre>请按照《剑琅联盟 移动端设计规范 v1.4》设计 [页面名称]：
 - 最高优先级：★ 全局强制 UI — 390×844、#F7F7F7 底、无阴影无渐变；按钮高 48px、圆角仅 4/8/12/16 且同类型一致
 - 产品：剑琅联盟 · Logo: LOGO2.png
-- 字体：PingFang SC；金额数字 TCloudNumber-Bold；¥ 与「应付/实付」用苹方，¥ 与数字间距 4px
+- 字体：苹果 PingFang SC / Windows 思源黑体 Source Han Sans SC（Windows 禁止 PingFang SC）；金额 TCloudNumber-Bold；¥ 与「应付/实付」用 UI 字体，¥ 与数字间距 4px
+- 勾号：仅用图标 check / check-circle-filled，禁止文字 √ 或 ✓
 - 文字：#333 / #929292 · 边框 #D7D7D5 · 主色 #F32F41
 - 图标：24px（安全 20）/ 16px 小箭头 · Stratis 库 · 颜色 #F32F41 / #333 / #929
 - 硬性：无 emoji；Tab/卡片不遮挡；内页顶栏必用 PageTitleBar（页面标题栏）；标题与右侧文案底对齐；PageTitleBar/PageTabs/TabBar 主体无描边；图片位 #EDEDED+白 image icon；不横向溢出；按钮 max 370px；顶 Tab 390 居中；状态栏 390×44 白块；卡片内容不溢出；提示 icon 与首行底对齐；空状态内容区垂直居中；PageTitleBar 对齐 Figma RTS-AI 6-623
@@ -2546,6 +2585,15 @@
   });
   renderIconLib();
   void hydrateStratisIcons(document);
+
+  (function updateFontPlatformLabel() {
+    const el = document.getElementById('font-platform-label');
+    if (!el) return;
+    const onWindows = document.documentElement.classList.contains('platform-windows');
+    el.textContent = onWindows
+      ? 'Windows · 思源黑体 Source Han Sans SC'
+      : 'Apple · 苹方 PingFang SC';
+  })();
 
   document.querySelectorAll('.nav-list a').forEach(a => {
     a.addEventListener('click', () => {
