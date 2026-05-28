@@ -166,14 +166,23 @@
     .btn.btn--r8 { border-radius: var(--radius-btn-8); }
     .btn.btn--r12 { border-radius: var(--radius-btn-12); }
     .btn.btn--r16 { border-radius: var(--radius-btn-16); }
-    .btn-primary { background: var(--brand-6); color: #fff; border: 1px solid var(--brand-6); }
-    .btn-primary:hover { background: var(--brand-7); border-color: var(--brand-7); }
+    .btn-primary,
+    .btn.btn-primary {
+      background: var(--brand-6);
+      color: #fff;
+      border: 1px solid var(--brand-6);
+    }
+    .btn-primary:hover,
+    .btn.btn-primary:hover { background: var(--brand-7); border-color: var(--brand-7); color: #fff; }
     .btn-primary.btn-lg, .btn-primary.btn-sm { height: 48px; }
-    .btn-outline { background: #fff; color: var(--brand-6); border: 1px solid var(--brand-6); }
-    .u-dialog .acts .btn-primary,
-    .u-bottom-bar .btn-primary { background: var(--brand-6); color: #fff; border: 1px solid var(--brand-6); }
-    .u-dialog .acts .btn-outline,
-    .u-bottom-bar .btn-outline { background: #fff; color: var(--brand-6); border: 1px solid var(--brand-6); }
+    .btn-outline,
+    .btn.btn-outline {
+      background: #fff;
+      color: var(--brand-6);
+      border: 1px solid var(--brand-6);
+    }
+    .btn-outline:hover,
+    .btn.btn-outline:hover { background: #fff; color: var(--brand-6); border-color: var(--brand-6); }
     .btn-text { background: transparent; color: var(--brand-6); }
     .btn-ghost { background: var(--brand-aux-2); color: var(--brand-6); }
     .btn-danger { background: var(--error-6); color: #fff; }
@@ -869,7 +878,7 @@
           </li>
           <li><strong>分割线</strong>：1px <code>#D7D7D5</code></li>
           <li><strong>顶部导航</strong>：固定高 <strong>44px</strong>、白底、底部分割线 1px <code>#D7D7D5</code>，元素垂直居中（不含系统状态栏）。</li>
-          <li><strong>全局按钮</strong>：统一高 <strong>48px</strong>、<strong>最大宽度 370px</strong>（含通栏主按钮与底栏按钮，不得超出）；无阴影无渐变；圆角仅在 <strong>4 / 8 / 12 / 16px</strong> 四档中选择，<strong>同一按钮类型</strong>在全站须使用<strong>同一圆角值</strong>。变体：<strong>主按钮</strong>（#F32F41）/ <strong>边框按钮</strong> / <strong>置灰禁用</strong>（#EDEDED）。</li>
+          <li><strong>全局按钮</strong>：统一高 <strong>48px</strong>、<strong>最大宽度 370px</strong>（含通栏主按钮与底栏按钮，不得超出）；无阴影无渐变；圆角仅在 <strong>4 / 8 / 12 / 16px</strong> 四档中选择，<strong>同一按钮类型</strong>在全站须使用<strong>同一圆角值</strong>。变体：<strong>填充按钮</strong> 品牌红底 <code>#F32F41</code> + <strong>白字</strong>；<strong>描边按钮</strong> 白底 + 红字 + 红描边 1px；<strong>禁用</strong> 灰底 <code>#EDEDED</code>。</li>
         </ol>
 
         <h3 style="margin-top:28px">页面与组件硬性约束</h3>
@@ -972,14 +981,14 @@
       <h2 class="section-title"><span class="num">0</span>概述与 AI 使用指引</h2>
       <div class="card">
         <div class="card-title"><span class="tag tag-brand">剑琅联盟</span> <span class="tag tag-ai">AI Ready</span> v1.4 · 390×844</div>
-        <p>本规范为<strong>剑琅联盟</strong>（含 RTP 商品零售模块）专属。请先阅读并遵守 <a href="#global-ui"><strong>★ 全局强制 UI</strong></a>，再使用下方 TDesign 组件与 Token 章节。</p>
+        <p>本规范为<strong>剑琅联盟</strong>（含 RTP 商品零售模块）专属。请先阅读并遵守 <a href="#global-ui"><strong>★ 全局强制 UI</strong></a>，再使用下方组件库与 Token 章节。</p>
       </div>
       <h3>AI 批量出图必读规则</h3>
       <div class="spec-block">
-        <strong>第一优先级：</strong>完整执行 <a href="#global-ui">★ 全局强制 UI</a>（画布、#F7F7F7 底、无阴影无渐变、色板、字体、图标尺寸、间距、圆角、44px 导航、48px 按钮）。组件命名可对齐 TDesign（Navbar、Cell、TabBar），但视觉不得违背全局章。
+        <strong>第一优先级：</strong>完整执行 <a href="#global-ui">★ 全局强制 UI</a>（画布、#F7F7F7 底、无阴影无渐变、色板、字体、图标尺寸、间距、圆角、44px 导航、48px 按钮）。组件使用第 7 章命名（如 PageTitleBar、Cell、TabBar），视觉不得违背全局章。
       </div>
       <ol>
-        <li><strong>组合组件</strong>：从第 7 章按场景选用组件，API 与交互对齐 TDesign。</li>
+        <li><strong>组合组件</strong>：从第 7 章按场景选用组件，交互与布局遵循本规范。</li>
         <li><strong>颜色 / 圆角 / 间距</strong>：仅使用全局章与第 2–5 章 Token；按钮圆角四档择一且同类型一致；禁止投影与渐变背景。</li>
         <li><strong>金额排版</strong>：数字 TCloudNumber Bold；<code>¥</code> 与「应付/实付」等用苹方，<code>¥</code> 与数字间距 4px。</li>
         <li><strong>品牌露出</strong>：启动/登录/首页 Navbar 使用 <code>LOGO2.png</code> 与「剑琅联盟」。</li>
@@ -988,10 +997,10 @@
       <h3>技术栈对齐</h3>
       <table>
         <tr><th>层级</th><th>引用</th><th>说明</th></tr>
-        <tr><td>设计系统</td><td>TDesign Mobile</td><td>组件结构、交互模式、Design Token 命名</td></tr>
-        <tr><td>开发组件库</td><td>tdesign_flutter (Alpha)</td><td>Flutter 实现，主题 JSON 可映射本规范 Token</td></tr>
+        <tr><td>组件库</td><td>第 7 章 · 剑琅联盟</td><td>页面组件命名、预览与调用说明</td></tr>
+        <tr><td>开发落地</td><td>Flutter</td><td>主题 JSON 可映射本规范 Design Token</td></tr>
         <tr><td>设计稿</td><td><a href="https://www.figma.com/design/cUaUaxtcNsREKlfnQKXe1L/RTP-%E9%9B%B6%E5%94%AE%E6%A8%A1%E5%9D%97">RTP 零售模块 Figma</a></td><td>节点 72-137 · 与 HTML 原型库同步</td></tr>
-        <tr><td>设计资源</td><td>TDesign + Figma 实测</td><td>组件库 + Icon SVG + 业务图标映射表</td></tr>
+        <tr><td>设计资源</td><td>Figma 实测 + 图标库</td><td>Stratis / Iconex SVG · 业务图标映射表</td></tr>
         <tr><td>设计基准</td><td>宽 390（固定）× 高 844（默认）</td><td>高可向下延展；安全区 top 44px / bottom 34px</td></tr>
         <tr><td>全局字体</td><td>PingFang SC</td><td>禁止替换为其他字体族</td></tr>
         <tr><td>全局 UI</td><td><a href="#global-ui">★ 强制章节</a></td><td>高于本章与 Figma 历史稿</td></tr>
@@ -1015,7 +1024,7 @@
     <!-- 2. 色彩 -->
     <section id="colors">
       <h2 class="section-title"><span class="num">2</span>色彩系统</h2>
-      <p><strong>色值以 <a href="#global-ui">★ 全局强制 UI</a> 为准。</strong>下表为 Token 映射；10 级品牌色阶供按下态/禁用推导，日常界面优先使用全局章固定色板。功能色保持 TDesign 语义（状态须配合图标/文字）。</p>
+      <p><strong>色值以 <a href="#global-ui">★ 全局强制 UI</a> 为准。</strong>下表为 Token 映射；10 级品牌色阶供按下态/禁用推导，日常界面优先使用全局章固定色板。功能色用于状态标识，须配合图标与文字说明。</p>
 
       <h3>2.1 品牌色 Brand Color</h3>
       <div class="color-grid">
@@ -1110,7 +1119,7 @@
 
       <h3>3.1.1 TCloudNumber 字体包（v1.010）</h3>
       <div class="card font-download-panel">
-        <p style="margin-bottom:8px;font-size:13px;color:var(--text-secondary)">官方数据字体，用于替换原 <code>D-DIN-Bold</code>。设计稿、HTML 原型与 Flutter 金额数字统一使用 <strong>TCloudNumber-Bold</strong>。</p>
+        <p style="margin-bottom:8px;font-size:13px;color:var(--text-secondary)">官方数据字体。设计稿、HTML 原型与 Flutter 金额数字统一使用 <strong>TCloudNumber-Bold</strong>。</p>
         <div class="font-data-sample"><span class="yen">¥</span><span class="num">1,286.40</span></div>
         <div class="font-download-actions">
           <a class="font-download-btn" href="assets/fonts/TCloudNumber/TCloudNumber-Bold.ttf" download="TCloudNumber-Bold.ttf">下载 Bold</a>
@@ -1349,7 +1358,7 @@
     <!-- 7. 组件库（可调用） -->
     <section id="components">
       <h2 class="section-title"><span class="num">7</span>组件库（可调用）</h2>
-      <p>对齐 <a href="https://tdesign.tencent.com/flutter/overview">TDesign Flutter</a> 与已落地页面。AI 出图须标注 <code>组件名 + 变体</code>。</p>
+      <p>以下为剑琅联盟移动端可调用组件。AI 出图须标注 <code>组件名 + 变体</code>，视觉遵循 <a href="#global-ui">★ 全局强制 UI</a>。</p>
       <table class="comp-catalog">
         <tr><th>分类</th><th>组件 ID</th><th>名称</th><th>场景</th></tr>
         <tr><td>导航</td><td>PageTitleBar</td><td>页面标题栏</td><td>内页顶栏 · 对齐 <a href="https://www.figma.com/design/44P9g5yKcQEyXdHCayIrMn/RTS-AI%E8%AF%BB%E5%8F%96?node-id=6-623">Figma 6-623</a></td></tr>
@@ -1361,7 +1370,7 @@
         <tr><td>零售</td><td>PriceRow</td><td>价格三档行</td><td>原价/零售/供货</td></tr>
         <tr><td>美业</td><td>MemberCard</td><td>会员卡</td><td>详卡 · 列表条 · 五类卡面主题</td></tr>
         <tr><td>零售</td><td>CartBar</td><td>商品底栏</td><td>店铺/客服/加购/购买</td></tr>
-        <tr><td>基础</td><td>Button / Cell / …</td><td>TDesign 基础件</td><td>见下方预览</td></tr>
+        <tr><td>基础</td><td>Button / Cell / …</td><td>通用基础组件</td><td>见下方预览</td></tr>
       </table>
 
       <div class="comp-block" id="comp-product-card">
@@ -1535,7 +1544,7 @@
       </div>
 
       <div class="comp-block" id="comp-button">
-        <div class="comp-block-hd"><strong>Button 按钮</strong><code>TButton · theme=primary|radius=4px</code></div>
+        <div class="comp-block-hd"><strong>Button 按钮</strong><code>Button · primary · radius 4px</code></div>
         <div class="comp-block-bd">
           <div class="demo-row">
             <button class="btn btn-primary btn--r12">主要按钮</button>
@@ -1549,8 +1558,9 @@
           </div>
           <table>
             <tr><th>变体</th><th>规格</th></tr>
-            <tr><td>Primary ★</td><td>高 48px · 圆角 <strong>4/8/12/16 择一档</strong>（同类型一致）· bg #F32F41 · 无投影</td></tr>
-            <tr><td>Outline / Ghost</td><td>与同级 Primary 使用<strong>相同圆角</strong></td></tr>
+            <tr><td>Primary ★</td><td>高 48px · 圆角四档择一 · 红底 #F32F41 + <strong>白字</strong> · 无投影</td></tr>
+            <tr><td>Outline ★</td><td>白底 + 红字 + 红描边 1px · 与同级 Primary <strong>相同圆角</strong></td></tr>
+            <tr><td>Ghost / Text</td><td>浅底或透明样式，非主流程；主流程仅用填充/描边</td></tr>
             <tr><td>Disabled</td><td>圆角与同页主按钮一致 · bg #EDEDED</td></tr>
             <tr><td>BottomBar 示例</td><td>取消 Outline <code>btn--r16</code> + 确定 Primary <code>btn--r16</code></td></tr>
             <tr><td>最大宽度 ★</td><td>370px（通栏亦同，左右各约 10px 留白）</td></tr>
@@ -1627,7 +1637,7 @@
       </div>
 
       <div class="comp-block" id="comp-tabs">
-        <div class="comp-block-hd"><strong>Tabs 选项卡</strong><code>TTabs</code></div>
+        <div class="comp-block-hd"><strong>Tabs 选项卡</strong><code>Tabs</code></div>
         <div class="comp-block-bd">
           <div class="comp-preview-phone">
             <div class="u-tabs"><span class="on">全部</span><span>待审批</span><span>已完成</span></div>
@@ -1637,7 +1647,7 @@
       </div>
 
       <div class="comp-block" id="comp-search">
-        <div class="comp-block-hd"><strong>Search 搜索框</strong><code>TSearch</code></div>
+        <div class="comp-block-hd"><strong>Search 搜索框</strong><code>Search</code></div>
         <div class="comp-block-bd">
           <div class="comp-preview-phone">
             <div class="u-search"><span class="s-icon" data-icon="search"></span>搜索订单、客户</div>
@@ -1647,7 +1657,7 @@
       </div>
 
       <div class="comp-block" id="comp-input">
-        <div class="comp-block-hd"><strong>Input / Textarea 输入</strong><code>TInput · TTextarea</code></div>
+        <div class="comp-block-hd"><strong>Input / Textarea 输入</strong><code>Input · Textarea</code></div>
         <div class="comp-block-bd">
           <div class="demo-row">
             <input class="input-demo" placeholder="请输入">
@@ -1659,7 +1669,7 @@
       </div>
 
       <div class="comp-block" id="comp-cell">
-        <div class="comp-block-hd"><strong>Cell 单元格</strong><code>TCell</code></div>
+        <div class="comp-block-hd"><strong>Cell 单元格</strong><code>Cell</code></div>
         <div class="comp-block-bd">
           <div class="comp-preview-phone">
             <div class="u-cell-group">
@@ -1673,7 +1683,7 @@
       </div>
 
       <div class="comp-block" id="comp-tag">
-        <div class="comp-block-hd"><strong>Tag / Badge 标签与徽标</strong><code>TTag · TBadge</code></div>
+        <div class="comp-block-hd"><strong>Tag / Badge 标签与徽标</strong><code>Tag · Badge</code></div>
         <div class="comp-block-bd">
           <div class="demo-row">
             <span class="tag-demo tag-default">草稿</span>
@@ -1688,7 +1698,7 @@
       </div>
 
       <div class="comp-block" id="comp-form-controls">
-        <div class="comp-block-hd"><strong>Switch / CheckBox / Radio</strong><code>TSwitch · TCheckbox · TRadio</code></div>
+        <div class="comp-block-hd"><strong>Switch / CheckBox / Radio</strong><code>Switch · CheckBox · Radio</code></div>
         <div class="comp-block-bd">
           <div class="demo-row" style="gap:24px">
             <div class="u-switch on"></div>
@@ -1700,7 +1710,7 @@
       </div>
 
       <div class="comp-block" id="comp-steps">
-        <div class="comp-block-hd"><strong>Steps 步骤条</strong><code>TSteps</code></div>
+        <div class="comp-block-hd"><strong>Steps 步骤条</strong><code>Steps</code></div>
         <div class="comp-block-bd">
           <div class="comp-preview-phone">
             <div class="u-steps">
@@ -1729,7 +1739,7 @@
       </div>
 
       <div class="comp-block" id="comp-dialog">
-        <div class="comp-block-hd"><strong>Dialog / Toast 对话框与轻提示</strong><code>TDialog · TToast</code></div>
+        <div class="comp-block-hd"><strong>Dialog / Toast 对话框与轻提示</strong><code>Dialog · Toast</code></div>
         <div class="comp-block-bd">
           <div class="u-dialog">
             <h5>确认驳回？</h5>
@@ -1746,7 +1756,7 @@
       </div>
 
       <div class="comp-block" id="comp-empty">
-        <div class="comp-block-hd"><strong>Empty / Result 空状态与结果页</strong><code>TEmpty · TResult</code></div>
+        <div class="comp-block-hd"><strong>Empty / Result 空状态与结果页</strong><code>Empty · Result</code></div>
         <div class="comp-block-bd">
           <div class="comp-preview-phone phone-frame--844" style="height:420px;display:flex;flex-direction:column;background:var(--bg-page)">
             <div class="phone-status-bar" aria-hidden="true"></div>
@@ -1767,7 +1777,7 @@
       </div>
 
       <div class="comp-block" id="comp-avatar">
-        <div class="comp-block-hd"><strong>Avatar 头像</strong><code>TAvatar</code></div>
+        <div class="comp-block-hd"><strong>Avatar 头像</strong><code>Avatar</code></div>
         <div class="comp-block-bd">
           <div class="demo-row">
             <div class="u-avatar" style="width:32px;height:32px"><span class="s-icon" data-icon="user"></span></div>
@@ -1779,7 +1789,7 @@
       </div>
 
       <div class="comp-block" id="comp-progress">
-        <div class="comp-block-hd"><strong>Progress / Loading 进度与加载</strong><code>TProgress · TLoading</code></div>
+        <div class="comp-block-hd"><strong>Progress / Loading 进度与加载</strong><code>Progress · Loading</code></div>
         <div class="comp-block-bd">
           <div class="u-progress" style="max-width:280px;margin-bottom:12px"><i></i></div>
           <div class="demo-row" style="color:var(--brand-6);font-size:14px"><span style="display:inline-block;width:20px;height:20px;border:2px solid var(--brand-6);border-top-color:transparent;border-radius:50%;animation:spin .8s linear infinite"></span>加载中…</div>
@@ -1787,7 +1797,7 @@
       </div>
 
       <div class="comp-block" id="comp-fab">
-        <div class="comp-block-hd"><strong>Fab 悬浮按钮</strong><code>TFab</code></div>
+        <div class="comp-block-hd"><strong>Fab 悬浮按钮</strong><code>Fab</code></div>
         <div class="comp-block-bd">
           <div class="demo-row"><div class="u-fab"><span class="s-icon" data-icon="add" style="font-size:24px"></span></div></div>
           <p>48×48 圆形 · brand-6 · 无投影 · 列表页「新建」</p>
@@ -1795,7 +1805,7 @@
       </div>
 
       <div class="comp-block" id="comp-upload">
-        <div class="comp-block-hd"><strong>Upload 上传</strong><code>TUpload</code></div>
+        <div class="comp-block-hd"><strong>Upload 上传</strong><code>Upload</code></div>
         <div class="comp-block-bd">
           <div style="width:80px;height:80px;border:1px dashed var(--gray-4);border-radius:6px;display:flex;flex-direction:column;align-items:center;justify-content:center;color:var(--text-secondary);font-size:12px;gap:4px">
             <span class="s-icon" data-icon="add" style="font-size:24px"></span>上传
@@ -1805,7 +1815,7 @@
       </div>
 
       <div class="comp-block" id="comp-skeleton">
-        <div class="comp-block-hd"><strong>Skeleton 骨架屏</strong><code>TSkeleton</code></div>
+        <div class="comp-block-hd"><strong>Skeleton 骨架屏</strong><code>Skeleton</code></div>
         <div class="comp-block-bd" style="max-width:320px">
           <div class="u-skeleton" style="width:60%"></div>
           <div class="u-skeleton"></div>
@@ -1832,7 +1842,7 @@
       </div>
 
       <div class="comp-block" id="comp-divider">
-        <div class="comp-block-hd"><strong>Divider 分割线</strong><code>TDivider</code></div>
+        <div class="comp-block-hd"><strong>Divider 分割线</strong><code>Divider</code></div>
         <div class="comp-block-bd">
           <p>水平 0.5px gray-3 · 可带文字「以下为审批记录」font-s text-secondary</p>
           <hr style="border:none;border-top:0.5px solid var(--gray-3);margin:12px 0">
@@ -1840,7 +1850,7 @@
       </div>
 
       <div class="comp-block" id="comp-dropdown">
-        <div class="comp-block-hd"><strong>DropdownMenu 筛选菜单</strong><code>TDropdownMenu</code></div>
+        <div class="comp-block-hd"><strong>DropdownMenu 筛选菜单</strong><code>DropdownMenu</code></div>
         <div class="comp-block-bd">
           <div style="display:flex;height:48px;background:#fff;border:1px solid var(--border);border-radius:9px;overflow:hidden">
             <span style="flex:1;display:flex;align-items:center;justify-content:center;font-size:14px;color:var(--brand-6);font-weight:500">全部状态 ▾</span>
@@ -1905,7 +1915,7 @@
     <!-- 9. Tokens JSON -->
     <section id="tokens">
       <h2 class="section-title"><span class="num">9</span>Design Token JSON</h2>
-      <p>可复制到 Flutter <code>TDThemeData.fromJson</code> 或设计工具 Token 插件。</p>
+      <p>可复制到 Flutter <code>ThemeData</code> / JSON 主题配置，或导入设计工具 Token 插件。</p>
       <pre id="token-json">{
   "appName": "剑琅联盟",
   "appLogo": "LOGO2.png",
