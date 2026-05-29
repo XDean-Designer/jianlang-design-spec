@@ -84,8 +84,6 @@
       --figma-text-secondary: #929292;
       --figma-text-muted: #b8b8b8;
       --figma-text-inactive: #d7d7d5;
-      --figma-brand-start: #F32F41;
-      --figma-brand-end: #DD2D38;
       --figma-blue: #1A70FE;
       --figma-blue-bg: #E7F1FF;
       --figma-orange: #F77357;
@@ -93,7 +91,6 @@
       --figma-promo-border: rgba(249, 117, 107, 0.2);
       --font-ui: "PingFang SC", -apple-system, "Helvetica Neue", sans-serif;
       --font-data: "TCloudNumber", var(--font-ui), sans-serif;
-      --glass-nav-shadow: none;
     }
     * { box-sizing: border-box; margin: 0; padding: 0; }
     html { scroll-behavior: smooth; }
@@ -213,9 +210,6 @@
     }
     .btn-outline:hover,
     .btn.btn-outline:hover { background: #fff; color: var(--brand-6); border-color: var(--brand-6); }
-    .btn-text { background: transparent; color: var(--brand-6); }
-    .btn-ghost { background: var(--brand-aux-2); color: var(--brand-6); }
-    .btn-danger { background: var(--error-6); color: #fff; }
     .btn-disabled { background: var(--gray-3); color: var(--text-disabled); }
     .btn-sm { height: 48px; padding: 0 16px; font-size: 14px; }
     .btn-lg { height: 48px; padding: 0 24px; font-size: 16px; }
@@ -1155,8 +1149,6 @@
         <tr><td>accent-blue-bg</td><td>#E7F1FF</td><td>异常/重要提醒条背景</td></tr>
         <tr><td>accent-orange</td><td>#F77357</td><td>营销副标题、活动强调</td></tr>
       </table>
-      <p class="alert alert-warn" style="margin-top:12px">已废弃：品牌渐变顶栏、卡片渐变底。顶栏可用纯色 <code>#F32F41</code> 或白底 + 品牌字色，见组件示例。</p>
-
       <h3>2.6 背景与边框</h3>
       <table>
         <tr><th>Token</th><th>色值</th><th>用途</th></tr>
@@ -1666,9 +1658,6 @@
             <button class="btn btn-primary btn-lg btn--r12">大号主要</button>
             <button class="btn btn-primary btn-sm btn--r12">小号主要</button>
             <button class="btn btn-outline btn--r12">描边按钮</button>
-            <button class="btn btn-ghost btn--r12">浅底按钮</button>
-            <button class="btn btn-text btn--r8">文字按钮</button>
-            <button class="btn btn-danger btn--r12">危险按钮</button>
             <button class="btn btn-primary btn-disabled btn--r12">禁用</button>
           </div>
           <table>
@@ -1676,7 +1665,6 @@
             <tr><td>Primary ★</td><td>高 48px · 圆角四档择一 · 红底 #F32F41 + <strong>白字</strong> · 无投影</td></tr>
             <tr><td>文案对齐 ★</td><td>按钮内文字<strong>水平 + 垂直居中</strong>（flex 居中或等价实现；禁止偏上/偏下/单侧留白不均）</td></tr>
             <tr><td>Outline ★</td><td>白底 + 红字 + 红描边 1px · 与同级 Primary <strong>相同圆角</strong></td></tr>
-            <tr><td>Ghost / Text</td><td>浅底或透明样式，非主流程；主流程仅用填充/描边</td></tr>
             <tr><td>Disabled</td><td>圆角与同页主按钮一致 · bg #EDEDED</td></tr>
             <tr><td>BottomBar 示例</td><td>取消 Outline <code>btn--r16</code> + 确定 Primary <code>btn--r16</code></td></tr>
             <tr><td>最大宽度 ★</td><td>370px（通栏亦同，左右各约 10px 留白）</td></tr>
@@ -2407,30 +2395,41 @@
     return null;
   }
 
+  function wechatLocalAsset(slug, preferFilled) {
+    const outline = typeof WECHAT_ICON_MAP !== 'undefined' ? WECHAT_ICON_MAP : null;
+    const filledMap = typeof WECHAT_FILLED_ICON_MAP !== 'undefined' ? WECHAT_FILLED_ICON_MAP : null;
+    const hasOutline = outline && outline[slug];
+    const hasFilled = filledMap && filledMap[slug];
+    if (preferFilled) {
+      if (hasFilled) return { dir: 'icons/wechat-filled/', file: filledMap[slug], filled: true };
+      if (hasOutline) return { dir: 'icons/wechat/', file: outline[slug], filled: false };
+    } else {
+      if (hasOutline) return { dir: 'icons/wechat/', file: outline[slug], filled: false };
+      if (hasFilled) return { dir: 'icons/wechat-filled/', file: filledMap[slug], filled: true };
+    }
+    return null;
+  }
+
   function catalogIconPack(catalogName, cat) {
     const slug = resolveIconSlug(catalogName);
-    const filled = isFilledIcon(catalogName, cat);
+    const preferFilled = isFilledIcon(catalogName, cat);
     const alias = wechatIconAlias(slug);
     const assetSlug = alias ? resolveIconSlug(alias) : slug;
-    const stratisMap = filled
+    const stratisMap = preferFilled
       ? (typeof STRATIS_FILLED_ICON_MAP !== 'undefined' ? STRATIS_FILLED_ICON_MAP : null)
       : (typeof STRATIS_ICON_MAP !== 'undefined' ? STRATIS_ICON_MAP : null);
     if (stratisMap && stratisMap[assetSlug]) {
-      return { dir: filled ? 'icons/stratis-filled/' : 'icons/stratis/', file: stratisMap[assetSlug] };
+      return { dir: preferFilled ? 'icons/stratis-filled/' : 'icons/stratis/', file: stratisMap[assetSlug], filled: preferFilled };
     }
-    const iconexMap = filled
+    const iconexMap = preferFilled
       ? (typeof ICONEX_FILLED_ICON_MAP !== 'undefined' ? ICONEX_FILLED_ICON_MAP : null)
       : (typeof ICONEX_ICON_MAP !== 'undefined' ? ICONEX_ICON_MAP : null);
     if (iconexMap && iconexMap[assetSlug]) {
-      return { dir: filled ? 'icons/iconex-filled/' : 'icons/iconex/', file: iconexMap[assetSlug] };
+      return { dir: preferFilled ? 'icons/iconex-filled/' : 'icons/iconex/', file: iconexMap[assetSlug], filled: preferFilled };
     }
     if (!alias) {
-      const wechatMap = filled
-        ? (typeof WECHAT_FILLED_ICON_MAP !== 'undefined' ? WECHAT_FILLED_ICON_MAP : null)
-        : (typeof WECHAT_ICON_MAP !== 'undefined' ? WECHAT_ICON_MAP : null);
-      if (wechatMap && wechatMap[slug]) {
-        return { dir: filled ? 'icons/wechat-filled/' : 'icons/wechat/', file: wechatMap[slug] };
-      }
+      const wechat = wechatLocalAsset(slug, preferFilled);
+      if (wechat) return wechat;
     }
     return null;
   }
@@ -2484,9 +2483,10 @@
 
   function iconMarkup(catalogName, cat, extraAttrs) {
     const attrs = extraAttrs || '';
-    const filled = isFilledIcon(catalogName, cat);
+    const pack = catalogIconPack(catalogName, cat);
+    const filled = pack ? pack.filled : isFilledIcon(catalogName, cat);
     const cls = 's-icon' + (filled ? ' s-icon--filled' : '');
-    if (catalogIconAsset(catalogName, cat)) {
+    if (pack) {
       return `<span class="${cls}" data-catalog="${catalogName}" data-icon="${catalogName}" data-filled="${filled ? '1' : '0'}" ${attrs}></span>`;
     }
     return `<span class="${cls} is-missing" data-catalog="${catalogName}" data-icon="${catalogName}" data-filled="${filled ? '1' : '0'}" ${attrs}></span>`;
@@ -2496,9 +2496,9 @@
     const scope = root || document;
     const pending = [...scope.querySelectorAll('.s-icon[data-icon]:not([data-hydrated])')];
     await Promise.all(pending.map(async el => {
-      const slug = resolveIconSlug(el.dataset.icon);
-      const filled = el.dataset.filled === '1';
-      const pack = catalogIconPack(slug, filled ? 'filled' : '');
+      const catalogName = el.dataset.catalog || el.dataset.icon;
+      const pack = catalogIconPack(catalogName, el.dataset.filled === '1' ? 'filled' : '');
+      const filled = pack ? pack.filled : el.dataset.filled === '1';
       if (!pack) {
         el.classList.add('is-missing');
         el.closest('.icon-lib-item')?.classList.add('is-missing');
@@ -2545,7 +2545,13 @@
       return hay.includes(q);
     });
     const fmtMeaning = m => String(m).replace(/（面性）/g, '').trim();
-    const isFilled = i => i.cat === 'filled' || i.name.endsWith('-filled');
+    const isFilled = i => {
+      if (i.cat === 'filled' || i.name.endsWith('-filled')) return true;
+      if (i.source !== 'wechat' || wechatIconAlias(i.name)) return false;
+      const o = typeof WECHAT_ICON_MAP !== 'undefined' && WECHAT_ICON_MAP[i.name];
+      const f = typeof WECHAT_FILLED_ICON_MAP !== 'undefined' && WECHAT_FILLED_ICON_MAP[i.name];
+      return !!f && !o;
+    };
     const itemHtml = i => `
       <div class="icon-lib-item tap-feedback${isFilled(i) ? ' is-filled' : ''}" data-name="${i.name}" title="点击复制：${i.name}&#10;${fmtMeaning(i.meaning)} · ${i.scene}">
         <div class="icon-lib-visual">
