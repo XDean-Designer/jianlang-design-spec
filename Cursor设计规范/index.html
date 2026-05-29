@@ -404,10 +404,6 @@
     .u-navbar { height: var(--nav-h); background: #fff; display: flex; align-items: center; padding: 0 var(--space-page); border-bottom: 1px solid var(--border); font-size: 16px; font-weight: 500; box-shadow: none; }
     .u-navbar .back { margin-right: 8px; color: var(--gray-8); }
     .u-navbar .action { margin-left: auto; font-size: 14px; color: var(--brand-6); font-weight: 400; }
-    .u-cell { background: #fff; min-height: 56px; padding: var(--space-list-y) var(--space-page); display: flex; align-items: center; border-bottom: 1px solid var(--border); font-size: 14px; }
-    .u-cell:last-child { border-bottom: none; }
-    .u-cell .note { font-size: 12px; color: var(--text-secondary); margin-left: auto; margin-right: 4px; }
-    .u-cell-group { border-radius: var(--radius-l); overflow: hidden; margin-bottom: 12px; }
     .u-tabs { display: flex; height: 48px; background: #fff; border: none; }
     .u-tabs span { flex: 1; display: flex; align-items: center; justify-content: center; font-size: 14px; color: var(--text-secondary); position: relative; }
     .u-tabs span.on { color: var(--text-primary); font-weight: 500; }
@@ -893,6 +889,7 @@
           <li><strong>画布基准</strong>：390×844px 移动端 1 倍设计稿（宽固定 390；高默认 844，内容超出可向下延展）。
             <ul>
               <li><strong>画布外框 ★</strong>：Figma / AI 出图画布为<strong>直角矩形</strong>，<strong>禁止</strong>给画板加圆角、外描边、投影或设备外壳装饰；规范站内 <code>phone-frame</code> 机模仅为本站预览，非交付稿样式。</li>
+              <li><strong>Figma 自动布局 ★</strong>：设计稿中<strong>所有 Frame（容器）</strong>须启用<strong>自动布局（Auto Layout）</strong>；禁止仅用绝对定位手工摆放。根画板、页面主容器、标题栏、卡片、按钮、列表行等一律用 Auto Layout 纵向或横向排布，间距遵循 4px 模数。</li>
             </ul>
           </li>
           <li><strong>页面背景色</strong>：<code>#F7F7F7</code>（<code>--bg-page</code>）。
@@ -1081,7 +1078,7 @@
       </div>
       <h3>AI 批量出图必读规则</h3>
       <div class="spec-block">
-        <strong>第一优先级：</strong>完整执行 <a href="#global-ui">★ 全局强制 UI</a>（直角画板、#F7F7F7 底、无阴影无渐变、顶/底白块占位、色板、字体、图标尺寸、间距、圆角、44px 导航、48px 按钮、返回 chevron-left 矢量图标）。组件使用第 7 章命名（如 PageTitleBar、Cell、TabBar），视觉不得违背全局章。
+        <strong>第一优先级：</strong>完整执行 <a href="#global-ui">★ 全局强制 UI</a>（直角画板、所有 Frame 自动布局、#F7F7F7 底、无阴影无渐变、顶/底白块占位、色板、字体、图标尺寸、间距、圆角、44px 导航、48px 按钮、返回 chevron-left 矢量图标）。组件使用第 7 章命名（如 PageTitleBar、TabBar），视觉不得违背全局章。
       </div>
       <ol>
         <li><strong>组合组件</strong>：从第 7 章按场景选用组件，交互与布局遵循本规范。</li>
@@ -1090,7 +1087,7 @@
         <li><strong>字体按设备</strong>：苹果 → PingFang SC；Windows → 思源黑体 Source Han Sans SC（勿在 Windows 稿中用 PingFang SC）。</li>
         <li><strong>勾号</strong>：确认/正确态只用图标 <code>check</code>，禁止文字 √。</li>
         <li><strong>品牌露出</strong>：启动/登录/首页 Navbar 使用 <code>LOGO2.png</code> 与「剑琅联盟」。</li>
-        <li><strong>硬性约束</strong>：画布无圆角/无阴影/无描边 · 底栏占位 390×39 白块 · 返回用 chevron-left 矢量图标 · 白底内容卡片无描边 · 无 emoji · 无文字勾号 √/✓ · 按钮文案水平垂直居中 · Tab/卡片不叠压 · 内页顶栏必用 <code>PageTitleBar</code> · 标题与右侧文案底对齐 · 标题栏/Tab 主体无描边 · 图片位灰底白 icon · 内容不横向溢出 · 按钮宽 ≤370px · 顶 Tab 390 居中 · 状态栏白块 · 卡片不溢出 · 提示 icon 首行底对齐 · 空状态垂直居中。</li>
+        <li><strong>硬性约束</strong>：画布无圆角/无阴影/无描边 · 所有 Frame 自动布局 · 底栏占位 390×39 白块 · 返回用 chevron-left 矢量图标 · 白底内容卡片无描边 · 无 emoji · 无文字勾号 √/✓ · 按钮文案水平垂直居中 · Tab/卡片不叠压 · 内页顶栏必用 <code>PageTitleBar</code> · 标题与右侧文案底对齐 · 标题栏/Tab 主体无描边 · 图片位灰底白 icon · 内容不横向溢出 · 按钮宽 ≤370px · 顶 Tab 390 居中 · 状态栏白块 · 卡片不溢出 · 提示 icon 首行底对齐 · 空状态垂直居中。</li>
       </ol>
       <h3>技术栈对齐</h3>
       <table>
@@ -1287,14 +1284,15 @@
         <tr><td>画布高度（延展）</td><td>≥ 844 px，按内容向下增高</td><td>长列表、多段表单、长详情等；仅纵向扩展</td></tr>
         <tr><td>Flutter 2x</td><td>宽 780 · 高 1688 起</td><td>逻辑宽 390 固定；高度 2x 随设计稿延展</td></tr>
         <tr><td>画布外框 ★</td><td>直角矩形</td><td>画板禁止圆角 / 投影 / 外描边</td></tr>
+        <tr><td>Figma 自动布局 ★</td><td>全部 Frame</td><td>须启用 Auto Layout，禁止纯绝对定位摆版</td></tr>
         <tr><td>页面水平边距</td><td>16px</td><td>内容区距屏幕边缘</td></tr>
         <tr><td>PageTitleBar ★</td><td>44px</td><td>内页顶栏 · 组件库「页面标题栏」· 白底 · 主体无描边</td></tr>
         <tr><td>TabBar 高度</td><td>56px</td><td>含安全区 bottom padding</td></tr>
         <tr><td>状态栏占位 ★</td><td>390×44px 纯白块</td><td>设计稿不画系统状态 UI；开发用 safe-area</td></tr>
         <tr><td>底部占位区 ★</td><td>390×39px 纯白块</td><td>页面最底部预留；无阴影、无描边、无圆角</td></tr>
         <tr><td>底部安全区（开发）</td><td>34px</td><td>Flutter safe-area 参考</td></tr>
-        <tr><td>Cell 行高</td><td>56px</td><td>标准单行 Cell</td></tr>
-        <tr><td>Cell 行高（多行）</td><td>≥72px</td><td>含描述文字</td></tr>
+        <tr><td>列表行高</td><td>56px</td><td>标准单行列表</td></tr>
+        <tr><td>列表行高（多行）</td><td>≥72px</td><td>含描述文字</td></tr>
         <tr><td>Bottom Action Bar</td><td>56px + safe-bottom</td><td>固定底部操作栏</td></tr>
       </table>
 
@@ -1327,7 +1325,7 @@
                   <div style="font-size:16px;font-weight:500;margin-bottom:4px;color:#333">内容卡片</div>
                   <div style="font-size:12px;color:var(--text-secondary)">左右 16px · 模块间距 16px · 圆角 12px · 无描边</div>
                 </div>
-                <div style="background:#fff;border-radius:9px;height:56px;display:flex;align-items:center;padding:0 16px;font-size:14px">Cell 列表项 · 高度 56px</div>
+                <div style="background:#fff;border-radius:9px;height:56px;display:flex;align-items:center;padding:0 16px;font-size:14px">列表行 · 高度 56px</div>
               </div>
               <div class="phone-tabbar" style="flex-shrink:0">
                 <span class="active">● 首页</span><span>● 工作台</span><span>● 消息</span><span>● 我的</span>
@@ -1513,7 +1511,7 @@
         <tr><td>零售</td><td>PriceRow</td><td>价格三档行</td><td>原价/零售/供货</td></tr>
         <tr><td>美业</td><td>MemberCard</td><td>会员卡</td><td>详卡 · 列表条 · 五类卡面主题</td></tr>
         <tr><td>零售</td><td>CartBar</td><td>商品底栏</td><td>店铺/客服/加购/购买</td></tr>
-        <tr><td>基础</td><td>Button / Cell / …</td><td>通用基础组件</td><td>见下方预览</td></tr>
+        <tr><td>基础</td><td>Button / Input / Tag / …</td><td>通用基础组件</td><td>见下方预览</td></tr>
       </table>
 
       <div class="comp-block" id="comp-product-card">
@@ -1811,20 +1809,6 @@
         </div>
       </div>
 
-      <div class="comp-block" id="comp-cell">
-        <div class="comp-block-hd"><strong>Cell 单元格</strong><code>Cell</code></div>
-        <div class="comp-block-bd">
-          <div class="comp-preview-phone">
-            <div class="u-cell-group">
-              <div class="u-cell">客户名称<span class="note">华东分公司</span><span class="s-icon" data-icon="chevron-right" style="color:var(--gray-6)"></span></div>
-              <div class="u-cell" style="flex-direction:column;align-items:flex-start;gap:4px">合同金额<div style="font-size:12px;color:var(--text-secondary)">更新于 2026-05-27</div></div>
-              <div class="u-cell">审批状态<span class="note"><span class="tag-demo tag-brand-demo">待审批</span></span></div>
-            </div>
-          </div>
-          <p>单行高 56px · 左右 padding 16px · 组圆角 9px · 分割线左边距 16px</p>
-        </div>
-      </div>
-
       <div class="comp-block" id="comp-tag">
         <div class="comp-block-hd"><strong>Tag / Badge 标签与徽标</strong><code>Tag · Badge</code></div>
         <div class="comp-block-bd">
@@ -2057,7 +2041,7 @@
       <ul>
         <li>字段分组：基础信息 / 业务信息 / 附件</li>
         <li>长表单：分步 Steps 或锚点 Tabs</li>
-        <li>只读模式：Cell 样式，值 text-secondary，无 Input 边框</li>
+        <li>只读模式：列表行样式，值 text-secondary，无 Input 边框</li>
         <li>审批意见：Textarea 必填，最少 5 字</li>
       </ul>
     </section>
@@ -2139,6 +2123,7 @@
       "statusBarPlaceholder": { "width": 390, "height": 44, "fill": "#FFFFFF" },
       "bottomPlaceholder": { "width": 390, "height": 39, "fill": "#FFFFFF", "noShadow": true, "noBorder": true, "noRadius": true },
       "canvasFrame": { "noRadius": true, "noShadow": true, "noBorder": true },
+      "figmaAutoLayout": { "allFrames": true },
       "contentCardWhite": { "fill": "#FFFFFF", "noBorder": true },
       "pageTitleBarBackIcon": "chevron-left",
       "pageTitleBarFigma": "https://www.figma.com/design/44P9g5yKcQEyXdHCayIrMn/RTS-AI读稿?node-id=6-623",
@@ -2152,14 +2137,14 @@
 
       <h3>AI Prompt 模板</h3>
       <pre>请按照《剑琅联盟 移动端设计规范 v1.4》设计 [页面名称]：
-- 最高优先级：★ 全局强制 UI — 390×844 直角画板（无圆角/无阴影/无描边）、#F7F7F7 底、无阴影无渐变；按钮高 48px、圆角仅 4/8/12/16 且同类型一致
+- 最高优先级：★ 全局强制 UI — 390×844 直角画板（无圆角/无阴影/无描边）、所有 Frame 自动布局、#F7F7F7 底、无阴影无渐变；按钮高 48px、圆角仅 4/8/12/16 且同类型一致
 - 产品：剑琅联盟 · Logo: LOGO2.png
 - 字体：苹果 PingFang SC / Windows 思源黑体 Source Han Sans SC（Windows 禁止 PingFang SC）；金额 TCloudNumber-Bold；¥ 与「应付/实付」用 UI 字体，¥ 与数字间距 4px
 - 勾号：仅用图标 check / check-circle-filled，禁止文字 √ 或 ✓
 - 文字：#333 / #929292 · 边框 #D7D7D5 · 主色 #F32F41
 - 图标：24px（安全 20）/ 16px 小箭头 · Stratis 库 · 颜色 #F32F41 / #333 / #929
 - 占位：状态栏 390×44 白块；页面最底 390×39 白块（无阴影/描边/圆角）
-- 硬性：无 emoji；返回用 chevron-left 矢量图标（禁止文字 &lt;）；白底内容卡片无描边；按钮文案在按钮内水平垂直居中；Tab/卡片不遮挡；内页顶栏必用 PageTitleBar（页面标题栏）；标题与右侧文案底对齐；PageTitleBar/PageTabs/TabBar 主体无描边；图片位 #EDEDED+白 image icon；不横向溢出；按钮 max 370px；顶 Tab 390 居中；卡片内容不溢出；提示 icon 与首行底对齐；空状态内容区垂直居中；PageTitleBar 对齐 Figma RTS-AI 6-623
+- 硬性：无 emoji；Figma 所有 Frame 须 Auto Layout；返回用 chevron-left 矢量图标（禁止文字 &lt;）；白底内容卡片无描边；按钮文案在按钮内水平垂直居中；Tab/卡片不遮挡；内页顶栏必用 PageTitleBar（页面标题栏）；标题与右侧文案底对齐；PageTitleBar/PageTabs/TabBar 主体无描边；图片位 #EDEDED+白 image icon；不横向溢出；按钮 max 370px；顶 Tab 390 居中；卡片内容不溢出；提示 icon 与首行底对齐；空状态内容区垂直居中；PageTitleBar 对齐 Figma RTS-AI 6-623
 - 组件：第7章组件目录
 - 内容：[具体业务字段]</pre>
     </section>
