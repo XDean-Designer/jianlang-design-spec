@@ -541,6 +541,14 @@
     }
     .u-card-inner-safe { overflow: hidden; min-width: 0; }
     .u-card-inner-safe .s-icon { flex-shrink: 0; }
+    .u-content-card {
+      background: var(--bg-container);
+      border-radius: var(--radius-card);
+      padding: var(--space-card);
+      border: none;
+      box-shadow: none;
+      overflow: hidden;
+    }
     .u-skeleton { height: 16px; background: var(--bg-disabled); border-radius: var(--radius-tag); margin-bottom: 8px; border: 1px solid var(--border); }
     @keyframes spin { to { transform: rotate(360deg); } }
     .phone-status,
@@ -604,7 +612,7 @@
     .global-layout-demo .demo-tabs { height: 44px; background: #fff; border: none; display: flex; align-items: stretch; }
     .global-layout-demo .demo-tabs span { flex: 1; display: flex; align-items: center; justify-content: center; font-size: 14px; color: var(--text-secondary); }
     .global-layout-demo .demo-tabs span.on { color: var(--brand-6); font-weight: 500; box-shadow: inset 0 -2px 0 var(--brand-6); }
-    .global-layout-demo .demo-card { margin: 16px; padding: 16px; background: #fff; border: 1px solid var(--border); border-radius: var(--radius-card); font-size: 13px; color: var(--text-primary); }
+    .global-layout-demo .demo-card { margin: 16px; padding: 16px; background: #fff; border: none; border-radius: var(--radius-card); font-size: 13px; color: var(--text-primary); overflow: hidden; }
     .spec-block strong { color: var(--text-primary); font-weight: 600; }
     .spec-block code { color: var(--text-primary); }
     .spec-block a { color: var(--brand-6); font-weight: 500; }
@@ -1005,6 +1013,7 @@
           <li><strong>状态栏占位</strong>：设计稿与 HTML 原型中，系统状态栏区域用与状态栏<strong>同尺寸（390×44px）</strong>的<strong>纯白块</strong>占位，不绘制时间、电量、信号等系统 UI。</li>
           <li><strong>底部占位区 ★</strong>：每页设计稿<strong>最底部</strong>预留 <strong>390×39px</strong> 纯白矩形（<code>#FFFFFF</code>）；<strong>无阴影、无描边、无圆角</strong>，不绘制 Home Indicator 等系统 UI；页面内容与底栏不得侵入此区域。</li>
           <li><strong>卡片内容裁切</strong>：卡片容器须设置 <code>overflow: hidden</code>（或等价裁切）；内部图标、标题、标签、按钮<strong>不得溢出</strong>到卡片圆角外，长文案须截断或换行。</li>
+          <li><strong>白底内容卡片无描边 ★</strong>：填充色为纯白（<code>#FFFFFF</code> / <code>--bg-container</code>）的<strong>内容卡片</strong><strong>禁止</strong>四周边框或 1px 描边；与 <code>#F7F7F7</code> 页面底通过<strong>底色对比 + 圆角 + 间距</strong>区分。有色浅底卡（如 <code>#FFF2F2</code> 业绩卡）及输入框、描边按钮等<strong>不适用</strong>本条。</li>
           <li><strong>提示信息栏图标对齐</strong>：Notice / Alert 等提示条中，前置图标与<strong>第一行文案的基线（底部对齐）</strong>对齐；多行时图标仍对齐首行，不垂直居中整段文字。</li>
           <li><strong>空状态垂直居中</strong>：空状态页在<strong>可滚动内容区</strong>（扣除状态栏、标题栏、底栏后的区域）内，图标 + 主副文案作为一组<strong>垂直居中</strong>；禁止贴顶或仅留顶部留白。</li>
           <li><strong>页面标题栏</strong>：所有<strong>设计页 / 原型 / AI 出图</strong>的内页顶栏须调用组件库 <code>PageTitleBar</code>（页面标题栏），禁止自定义 Navbar 样式；与 <a href="https://www.figma.com/design/44P9g5yKcQEyXdHCayIrMn/RTS-AI%E8%AF%BB%E5%8F%96?node-id=6-623" target="_blank" rel="noopener">RTS-AI 读稿 · Figma node 6-623</a> 一致（见第 7 章）。</li>
@@ -1081,7 +1090,7 @@
         <li><strong>字体按设备</strong>：苹果 → PingFang SC；Windows → 思源黑体 Source Han Sans SC（勿在 Windows 稿中用 PingFang SC）。</li>
         <li><strong>勾号</strong>：确认/正确态只用图标 <code>check</code>，禁止文字 √。</li>
         <li><strong>品牌露出</strong>：启动/登录/首页 Navbar 使用 <code>LOGO2.png</code> 与「剑琅联盟」。</li>
-        <li><strong>硬性约束</strong>：画布无圆角/无阴影/无描边 · 底栏占位 390×39 白块 · 返回用 chevron-left 矢量图标 · 无 emoji · 无文字勾号 √/✓ · 按钮文案水平垂直居中 · Tab/卡片不叠压 · 内页顶栏必用 <code>PageTitleBar</code> · 标题与右侧文案底对齐 · 标题栏/Tab 主体无描边 · 图片位灰底白 icon · 内容不横向溢出 · 按钮宽 ≤370px · 顶 Tab 390 居中 · 状态栏白块 · 卡片不溢出 · 提示 icon 首行底对齐 · 空状态垂直居中。</li>
+        <li><strong>硬性约束</strong>：画布无圆角/无阴影/无描边 · 底栏占位 390×39 白块 · 返回用 chevron-left 矢量图标 · 白底内容卡片无描边 · 无 emoji · 无文字勾号 √/✓ · 按钮文案水平垂直居中 · Tab/卡片不叠压 · 内页顶栏必用 <code>PageTitleBar</code> · 标题与右侧文案底对齐 · 标题栏/Tab 主体无描边 · 图片位灰底白 icon · 内容不横向溢出 · 按钮宽 ≤370px · 顶 Tab 390 居中 · 状态栏白块 · 卡片不溢出 · 提示 icon 首行底对齐 · 空状态垂直居中。</li>
       </ol>
       <h3>技术栈对齐</h3>
       <table>
@@ -1314,9 +1323,9 @@
                 <span class="action">分享</span>
               </div>
               <div class="phone-body phone-body--fill">
-                <div style="background:#fff;border-radius:12px;padding:16px;margin-bottom:16px;border:1px solid var(--border)">
+                <div class="u-content-card" style="margin-bottom:16px">
                   <div style="font-size:16px;font-weight:500;margin-bottom:4px;color:#333">内容卡片</div>
-                  <div style="font-size:12px;color:var(--text-secondary)">左右 16px · 模块间距 16px · 圆角 12px</div>
+                  <div style="font-size:12px;color:var(--text-secondary)">左右 16px · 模块间距 16px · 圆角 12px · 无描边</div>
                 </div>
                 <div style="background:#fff;border-radius:9px;height:56px;display:flex;align-items:center;padding:0 16px;font-size:14px">Cell 列表项 · 高度 56px</div>
               </div>
@@ -1738,7 +1747,7 @@
             <div class="u-page-tabs-wrap">
               <div class="u-page-tabs"><span class="on">全部</span><span>待处理</span><span>已完成</span></div>
             </div>
-            <div style="margin:16px;padding:16px;background:#fff;border:1px solid var(--border);border-radius:12px;font-size:13px;color:var(--text-secondary)">内容区 · Tab 与卡片上下排列，间距 16px</div>
+            <div class="u-content-card" style="margin:16px;font-size:13px;color:var(--text-secondary)">内容区 · Tab 与卡片上下排列，间距 16px · 白底无描边</div>
           </div>
           <table>
             <tr><th>属性</th><th>值</th></tr>
@@ -2003,12 +2012,12 @@
       <div class="comp-block" id="comp-card">
         <div class="comp-block-hd"><strong>Card 业务卡片</strong><code>组合组件</code></div>
         <div class="comp-block-bd">
-          <div style="background:#fff;border-radius:9px;padding:16px;max-width:360px;border:1px solid var(--border)">
+          <div class="u-content-card" style="max-width:360px">
             <div style="display:flex;justify-content:space-between;margin-bottom:12px"><span style="font-weight:500">本月销售额</span><span class="s-icon" data-icon="chevron-right" style="color:var(--gray-6)"></span></div>
             <div style="font-size:28px;font-weight:600">¥ 1,286,400</div>
             <div style="font-size:12px;color:var(--success-6);margin-top:4px">↑ 12.5% 较上月</div>
           </div>
-          <p style="margin-top:8px">白底 · 圆角 9px · padding 16px · 用于工作台数据概览</p>
+          <p style="margin-top:8px">白底 <code>#FFFFFF</code> · 圆角 12px · padding 16px · <strong>无描边</strong> · 用于工作台数据概览</p>
         </div>
       </div>
     </section>
@@ -2130,6 +2139,7 @@
       "statusBarPlaceholder": { "width": 390, "height": 44, "fill": "#FFFFFF" },
       "bottomPlaceholder": { "width": 390, "height": 39, "fill": "#FFFFFF", "noShadow": true, "noBorder": true, "noRadius": true },
       "canvasFrame": { "noRadius": true, "noShadow": true, "noBorder": true },
+      "contentCardWhite": { "fill": "#FFFFFF", "noBorder": true },
       "pageTitleBarBackIcon": "chevron-left",
       "pageTitleBarFigma": "https://www.figma.com/design/44P9g5yKcQEyXdHCayIrMn/RTS-AI读稿?node-id=6-623",
       "radiusBtnPrimary": 24,
@@ -2149,7 +2159,7 @@
 - 文字：#333 / #929292 · 边框 #D7D7D5 · 主色 #F32F41
 - 图标：24px（安全 20）/ 16px 小箭头 · Stratis 库 · 颜色 #F32F41 / #333 / #929
 - 占位：状态栏 390×44 白块；页面最底 390×39 白块（无阴影/描边/圆角）
-- 硬性：无 emoji；返回用 chevron-left 矢量图标（禁止文字 &lt;）；按钮文案在按钮内水平垂直居中；Tab/卡片不遮挡；内页顶栏必用 PageTitleBar（页面标题栏）；标题与右侧文案底对齐；PageTitleBar/PageTabs/TabBar 主体无描边；图片位 #EDEDED+白 image icon；不横向溢出；按钮 max 370px；顶 Tab 390 居中；卡片内容不溢出；提示 icon 与首行底对齐；空状态内容区垂直居中；PageTitleBar 对齐 Figma RTS-AI 6-623
+- 硬性：无 emoji；返回用 chevron-left 矢量图标（禁止文字 &lt;）；白底内容卡片无描边；按钮文案在按钮内水平垂直居中；Tab/卡片不遮挡；内页顶栏必用 PageTitleBar（页面标题栏）；标题与右侧文案底对齐；PageTitleBar/PageTabs/TabBar 主体无描边；图片位 #EDEDED+白 image icon；不横向溢出；按钮 max 370px；顶 Tab 390 居中；卡片内容不溢出；提示 icon 与首行底对齐；空状态内容区垂直居中；PageTitleBar 对齐 Figma RTS-AI 6-623
 - 组件：第7章组件目录
 - 内容：[具体业务字段]</pre>
     </section>
