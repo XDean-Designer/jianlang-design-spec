@@ -68,7 +68,7 @@
       --radius-s: 4px; --radius-m: 8px; --radius-l: 12px; --radius-xl: 12px; --radius-round: 999px;
       --radius-btn-primary: var(--radius-btn-12);
       --shadow-1: none; --shadow-2: none; --shadow-3: none;
-      --nav-h: 44px; --tabbar-h: 56px; --safe-top: 44px; --safe-bottom: 34px;
+      --nav-h: 44px; --tabbar-h: 56px; --safe-top: 44px; --safe-bottom: 34px; --bottom-placeholder: 39px;
       --space-page: 16px; --space-module: 16px; --space-card: 16px;
       --space-icon-text: 8px; --space-list-y: 12px; --space-tag-y: 4px; --space-tag-x: 8px; --space-divider-y: 12px;
       --icon-size: 24px; --icon-safe: 20px; --icon-size-sm: 16px;
@@ -354,6 +354,21 @@
       background: #fff;
       flex-shrink: 0;
       box-sizing: border-box;
+      border: none;
+      border-radius: 0;
+      box-shadow: none;
+    }
+    .phone-bottom-safe {
+      width: 100%;
+      max-width: var(--canvas-w);
+      height: var(--bottom-placeholder);
+      margin: 0 auto;
+      background: #fff;
+      flex-shrink: 0;
+      box-sizing: border-box;
+      border: none;
+      border-radius: 0;
+      box-shadow: none;
     }
     .u-page-tabs-wrap { width: var(--page-tab-width); max-width: 100%; margin: 0 auto; box-sizing: border-box; }
     .u-page-tabs {
@@ -867,7 +882,11 @@
       <div class="card global-mandate">
         <p class="mandate-lead">以下条款为<strong>剑琅联盟移动端</strong>最高优先级约束，优先于本规范其他章节及历史 Figma 样稿。AI 出图、设计评审与 Flutter 落地均须先满足本章；冲突时以本章为准。</p>
         <ol>
-          <li><strong>画布基准</strong>：390×844px 移动端 1 倍设计稿（宽固定 390；高默认 844，内容超出可向下延展）。</li>
+          <li><strong>画布基准</strong>：390×844px 移动端 1 倍设计稿（宽固定 390；高默认 844，内容超出可向下延展）。
+            <ul>
+              <li><strong>画布外框 ★</strong>：Figma / AI 出图画布为<strong>直角矩形</strong>，<strong>禁止</strong>给画板加圆角、外描边、投影或设备外壳装饰；规范站内 <code>phone-frame</code> 机模仅为本站预览，非交付稿样式。</li>
+            </ul>
+          </li>
           <li><strong>页面背景色</strong>：<code>#F7F7F7</code>（<code>--bg-page</code>）。
             <div class="global-swatch-row"><span class="global-swatch"><i style="background:#F7F7F7"></i>#F7F7F7</span></div>
           </li>
@@ -911,6 +930,7 @@
               <li>颜色：重要操作 <code>#F32F41</code> · 常规 <code>#333333</code> · 次要 <code>#929292</code></li>
               <li>风格：线性简约、统一圆角倒角；复用第 6 章 Stratis 组件库，禁止自创</li>
               <li><strong>确认 / 正确态勾号 ★</strong>：勾选、步骤完成、成功反馈等<strong>禁止</strong>使用字符 <code>√</code>、<code>✓</code> 或手写「勾」字；须用图标 <code>check</code>（16px 线性）或 <code>check-circle-filled</code>（面性成功），见第 7 章表单控件。</li>
+              <li><strong>顶栏返回 ★</strong>：<code>PageTitleBar</code> 返回须用 <code>chevron-left</code> 矢量图标，<strong>禁止</strong>文字 <code>&lt;</code> / <code>＜</code>。</li>
             </ul>
             <div class="demo-row" style="margin-top:10px">
               <span class="s-icon s-icon--24 s-icon--brand" data-icon="add-circle"></span>
@@ -938,7 +958,7 @@
             </ul>
           </li>
           <li><strong>分割线</strong>：1px <code>#D7D7D5</code></li>
-          <li><strong>顶部导航 / 标题栏</strong>：内页统一使用组件库 <code>PageTitleBar</code>（页面标题栏）；固定高 <strong>44px</strong>、白底、<strong>主体无描边</strong>；返回图标区垂直居中，<strong>标题与右侧操作文案底部水平对齐</strong>（不含系统状态栏）。</li>
+          <li><strong>顶部导航 / 标题栏</strong>：内页统一使用组件库 <code>PageTitleBar</code>（页面标题栏）；固定高 <strong>44px</strong>、白底、<strong>主体无描边</strong>；返回区为 <code>chevron-left</code> 矢量图标（24px），<strong>禁止</strong>文字 <code>&lt;</code> / <code>＜</code>；返回图标区垂直居中，<strong>标题与右侧操作文案底部水平对齐</strong>（不含系统状态栏）。</li>
           <li><strong>全局按钮</strong>：统一高 <strong>48px</strong>、<strong>最大宽度 370px</strong>（含通栏主按钮与底栏按钮，不得超出）；无阴影无渐变；圆角仅在 <strong>4 / 8 / 12 / 16px</strong> 四档中选择，<strong>同一按钮类型</strong>在全站须使用<strong>同一圆角值</strong>。变体：<strong>填充按钮</strong> 品牌红底 <code>#F32F41</code> + <strong>白字</strong>；<strong>描边按钮</strong> 白底 + 红字 + 红描边 1px；<strong>禁用</strong> 灰底 <code>#EDEDED</code>。<strong>按钮内文案须在按钮区域内水平、垂直双向居中</strong>，禁止贴顶、贴底或偏左/偏右。</li>
         </ol>
 
@@ -983,11 +1003,13 @@
           <li><strong>顶部 Tab 条</strong>：页面级 Tab / 分段器容器宽度固定 <strong>390px</strong>，在画布内<strong>水平居中</strong>；<strong>Tab 主体无描边</strong>；单项等分，选中仅用底部指示条（见 <code>PageTabs</code>）。</li>
           <li><strong>标题栏与 Tab 主体无描边</strong>：<code>PageTitleBar</code>、<code>PageTabs</code>、<code>TabBar</code>、页内 <code>Tabs</code> 的容器<strong>禁止</strong>四周边框或 1px 描边包裹；与内容区通过<strong>底色、间距、选中指示条</strong>区分（指示条不属于容器描边）。</li>
           <li><strong>状态栏占位</strong>：设计稿与 HTML 原型中，系统状态栏区域用与状态栏<strong>同尺寸（390×44px）</strong>的<strong>纯白块</strong>占位，不绘制时间、电量、信号等系统 UI。</li>
+          <li><strong>底部占位区 ★</strong>：每页设计稿<strong>最底部</strong>预留 <strong>390×39px</strong> 纯白矩形（<code>#FFFFFF</code>）；<strong>无阴影、无描边、无圆角</strong>，不绘制 Home Indicator 等系统 UI；页面内容与底栏不得侵入此区域。</li>
           <li><strong>卡片内容裁切</strong>：卡片容器须设置 <code>overflow: hidden</code>（或等价裁切）；内部图标、标题、标签、按钮<strong>不得溢出</strong>到卡片圆角外，长文案须截断或换行。</li>
           <li><strong>提示信息栏图标对齐</strong>：Notice / Alert 等提示条中，前置图标与<strong>第一行文案的基线（底部对齐）</strong>对齐；多行时图标仍对齐首行，不垂直居中整段文字。</li>
           <li><strong>空状态垂直居中</strong>：空状态页在<strong>可滚动内容区</strong>（扣除状态栏、标题栏、底栏后的区域）内，图标 + 主副文案作为一组<strong>垂直居中</strong>；禁止贴顶或仅留顶部留白。</li>
           <li><strong>页面标题栏</strong>：所有<strong>设计页 / 原型 / AI 出图</strong>的内页顶栏须调用组件库 <code>PageTitleBar</code>（页面标题栏），禁止自定义 Navbar 样式；与 <a href="https://www.figma.com/design/44P9g5yKcQEyXdHCayIrMn/RTS-AI%E8%AF%BB%E5%8F%96?node-id=6-623" target="_blank" rel="noopener">RTS-AI 读稿 · Figma node 6-623</a> 一致（见第 7 章）。</li>
           <li><strong>标题栏文案底对齐</strong>：<code>PageTitleBar</code> 居中标题（16px）与右侧操作（14px）须<strong>文字底部在同一水平线</strong>对齐；返回区仍为 44×44 垂直居中。</li>
+          <li><strong>返回须用矢量图标 ★</strong>：<code>PageTitleBar</code> 左侧返回<strong>禁止</strong>使用文字符号 <code>&lt;</code>、<code>＜</code>、<code>‹</code> 等；须调用图标 <code>chevron-left</code>（24px · #333），见第 6 章。</li>
           <li><strong>勾号用图标</strong>：组件内表示确认、已选、步骤完成时<strong>禁止</strong>文字 <code>√</code>/<code>✓</code>；使用 <code>check</code> 或 <code>check-circle-filled</code>（见第 6、7 章）。</li>
           <li><strong>按钮文案居中</strong>：<code>Button</code>、对话框底栏、底栏操作条等一切带文字按钮，文案在按钮可点击区域内<strong>水平居中且垂直居中</strong>（单行、双行均适用；双行时整体居中）。</li>
         </ol>
@@ -1050,7 +1072,7 @@
       </div>
       <h3>AI 批量出图必读规则</h3>
       <div class="spec-block">
-        <strong>第一优先级：</strong>完整执行 <a href="#global-ui">★ 全局强制 UI</a>（画布、#F7F7F7 底、无阴影无渐变、色板、字体、图标尺寸、间距、圆角、44px 导航、48px 按钮）。组件使用第 7 章命名（如 PageTitleBar、Cell、TabBar），视觉不得违背全局章。
+        <strong>第一优先级：</strong>完整执行 <a href="#global-ui">★ 全局强制 UI</a>（直角画板、#F7F7F7 底、无阴影无渐变、顶/底白块占位、色板、字体、图标尺寸、间距、圆角、44px 导航、48px 按钮、返回 chevron-left 矢量图标）。组件使用第 7 章命名（如 PageTitleBar、Cell、TabBar），视觉不得违背全局章。
       </div>
       <ol>
         <li><strong>组合组件</strong>：从第 7 章按场景选用组件，交互与布局遵循本规范。</li>
@@ -1059,7 +1081,7 @@
         <li><strong>字体按设备</strong>：苹果 → PingFang SC；Windows → 思源黑体 Source Han Sans SC（勿在 Windows 稿中用 PingFang SC）。</li>
         <li><strong>勾号</strong>：确认/正确态只用图标 <code>check</code>，禁止文字 √。</li>
         <li><strong>品牌露出</strong>：启动/登录/首页 Navbar 使用 <code>LOGO2.png</code> 与「剑琅联盟」。</li>
-        <li><strong>硬性约束</strong>：无 emoji · 无文字勾号 √/✓ · 按钮文案水平垂直居中 · Tab/卡片不叠压 · 内页顶栏必用 <code>PageTitleBar</code> · 标题与右侧文案底对齐 · 标题栏/Tab 主体无描边 · 图片位灰底白 icon · 内容不横向溢出 · 按钮宽 ≤370px · 顶 Tab 390 居中 · 状态栏白块 · 卡片不溢出 · 提示 icon 首行底对齐 · 空状态垂直居中。</li>
+        <li><strong>硬性约束</strong>：画布无圆角/无阴影/无描边 · 底栏占位 390×39 白块 · 返回用 chevron-left 矢量图标 · 无 emoji · 无文字勾号 √/✓ · 按钮文案水平垂直居中 · Tab/卡片不叠压 · 内页顶栏必用 <code>PageTitleBar</code> · 标题与右侧文案底对齐 · 标题栏/Tab 主体无描边 · 图片位灰底白 icon · 内容不横向溢出 · 按钮宽 ≤370px · 顶 Tab 390 居中 · 状态栏白块 · 卡片不溢出 · 提示 icon 首行底对齐 · 空状态垂直居中。</li>
       </ol>
       <h3>技术栈对齐</h3>
       <table>
@@ -1068,7 +1090,7 @@
         <tr><td>开发落地</td><td>Flutter</td><td>主题 JSON 可映射本规范 Design Token</td></tr>
         <tr><td>设计稿</td><td><a href="https://www.figma.com/design/cUaUaxtcNsREKlfnQKXe1L/RTP-%E9%9B%B6%E5%94%AE%E6%A8%A1%E5%9D%97">RTP 零售模块 Figma</a></td><td>节点 72-137 · 与 HTML 原型库同步</td></tr>
         <tr><td>设计资源</td><td>Figma 实测 + 图标库</td><td>Stratis / Iconex SVG · 业务图标映射表</td></tr>
-        <tr><td>设计基准</td><td>宽 390（固定）× 高 844（默认）</td><td>高可向下延展；安全区 top 44px / bottom 34px</td></tr>
+        <tr><td>设计基准</td><td>宽 390（固定）× 高 844（默认）</td><td>高可向下延展；顶占位 44px · 底占位 39px</td></tr>
         <tr><td>UI 字体</td><td>苹果 PingFang SC · Windows 思源黑体</td><td>见 <a href="#font-platform">全局字体按设备</a>；金额仍 TCloudNumber</td></tr>
         <tr><td>全局 UI</td><td><a href="#global-ui">★ 强制章节</a></td><td>高于本章与 Figma 历史稿</td></tr>
         <tr><td>主按钮</td><td>高 48px · 圆角 4/8/12/16 择档</td><td>见全局章 · 同类型一致</td></tr>
@@ -1246,7 +1268,8 @@
       <div class="spec-block">
         <strong>画布尺寸规则 ★</strong><br>
         · <strong>宽度</strong>：固定 <code>390px</code>，所有页面设计、HTML 原型与 AI 出图不得改变宽度，禁止横向扩展画布。<br>
-        · <strong>高度</strong>：默认 <code>844px</code>（常见全面屏逻辑高度基准）；当显示内容超出默认画布可视区域时，<strong>画布高度可向下延长</strong>，以完整呈现可滚动内容，宽度仍为 390px。
+        · <strong>高度</strong>：默认 <code>844px</code>（常见全面屏逻辑高度基准）；当显示内容超出默认画布可视区域时，<strong>画布高度可向下延长</strong>，以完整呈现可滚动内容，宽度仍为 390px。<br>
+        · <strong>画布外框 ★</strong>：交付设计稿画板为直角矩形，<strong>无圆角、无阴影、无描边</strong>（不含页面内组件样式）。
       </div>
       <table>
         <tr><th>元素</th><th>尺寸</th><th>说明</th></tr>
@@ -1254,11 +1277,13 @@
         <tr><td>画布高度（默认）</td><td>844 px</td><td>首屏/短页基准；AI 出图默认从此高度起稿</td></tr>
         <tr><td>画布高度（延展）</td><td>≥ 844 px，按内容向下增高</td><td>长列表、多段表单、长详情等；仅纵向扩展</td></tr>
         <tr><td>Flutter 2x</td><td>宽 780 · 高 1688 起</td><td>逻辑宽 390 固定；高度 2x 随设计稿延展</td></tr>
+        <tr><td>画布外框 ★</td><td>直角矩形</td><td>画板禁止圆角 / 投影 / 外描边</td></tr>
         <tr><td>页面水平边距</td><td>16px</td><td>内容区距屏幕边缘</td></tr>
         <tr><td>PageTitleBar ★</td><td>44px</td><td>内页顶栏 · 组件库「页面标题栏」· 白底 · 主体无描边</td></tr>
         <tr><td>TabBar 高度</td><td>56px</td><td>含安全区 bottom padding</td></tr>
         <tr><td>状态栏占位 ★</td><td>390×44px 纯白块</td><td>设计稿不画系统状态 UI；开发用 safe-area</td></tr>
-        <tr><td>底部安全区</td><td>34px</td><td>iPhone 全面屏</td></tr>
+        <tr><td>底部占位区 ★</td><td>390×39px 纯白块</td><td>页面最底部预留；无阴影、无描边、无圆角</td></tr>
+        <tr><td>底部安全区（开发）</td><td>34px</td><td>Flutter safe-area 参考</td></tr>
         <tr><td>Cell 行高</td><td>56px</td><td>标准单行 Cell</td></tr>
         <tr><td>Cell 行高（多行）</td><td>≥72px</td><td>含描述文字</td></tr>
         <tr><td>Bottom Action Bar</td><td>56px + safe-bottom</td><td>固定底部操作栏</td></tr>
@@ -1275,6 +1300,7 @@
               <div class="app-name">剑琅联盟</div>
               <div class="app-tagline">商务协作 · 高效共赢</div>
             </div>
+            <div class="phone-bottom-safe" aria-hidden="true"></div>
           </div>
           <p class="cap">启动页 · 390×844 · 纯白底</p>
         </div>
@@ -1297,6 +1323,7 @@
               <div class="phone-tabbar" style="flex-shrink:0">
                 <span class="active">● 首页</span><span>● 工作台</span><span>● 消息</span><span>● 我的</span>
               </div>
+              <div class="phone-bottom-safe" aria-hidden="true"></div>
             </div>
           </div>
           <p class="cap">标准内页 · 390×844</p>
@@ -1687,6 +1714,7 @@
               <span class="action">分享</span>
             </div>
             <div style="height:120px;background:var(--bg-page)"></div>
+            <div class="phone-bottom-safe" aria-hidden="true"></div>
           </div>
           <table style="margin-top:16px">
             <tr><th>属性</th><th>值</th><th>说明</th></tr>
@@ -1695,7 +1723,7 @@
             <tr><td>栏宽</td><td>390px</td><td>与画布同宽，内容区水平铺满</td></tr>
             <tr><td>标题</td><td>16px / 500 / #333</td><td>水平居中；过长单行省略</td></tr>
             <tr><td>文案对齐 ★</td><td>底对齐</td><td>标题与右侧操作文字<strong>底部在同一水平线</strong>；返回图标区仍垂直居中</td></tr>
-            <tr><td>返回</td><td>chevron-left · 24px</td><td>左侧 44×44 点击区，图标 #333</td></tr>
+            <tr><td>返回 ★</td><td>chevron-left · 24px</td><td>左侧 44×44 点击区，图标 #333；<strong>禁止</strong>文字 <code>&lt;</code> / <code>＜</code>，须用矢量图标</td></tr>
             <tr><td>右侧操作</td><td>14px · #333（与标题同色）</td><td>0–2 项文字按钮；无操作时可留空</td></tr>
             <tr><td>调用 ★</td><td>设计页必用</td><td>Figma / HTML 原型 / AI 出图内页顶栏统一本组件，勿用通用 Navbar 替代</td></tr>
             <tr><td>禁止</td><td>—</td><td>标题栏内不放 Logo（首页等特殊场景另议）</td></tr>
@@ -1883,6 +1911,7 @@
               <p style="font-size:12px;color:var(--text-secondary)">点击下方按钮创建第一笔订单</p>
               <button class="btn btn-primary btn--r12 btn-block" style="margin-top:16px;max-width:200px">新建订单</button>
             </div>
+            <div class="phone-bottom-safe" aria-hidden="true" style="margin-top:auto"></div>
           </div>
           <p style="margin-top:12px;font-size:12px;color:var(--text-secondary)">图标 + 文案组在<strong>内容区垂直居中</strong>；主按钮宽 ≤370px。</p>
         </div>
@@ -2099,6 +2128,9 @@
       "buttonMaxWidth": 370,
       "pageTabWidth": 390,
       "statusBarPlaceholder": { "width": 390, "height": 44, "fill": "#FFFFFF" },
+      "bottomPlaceholder": { "width": 390, "height": 39, "fill": "#FFFFFF", "noShadow": true, "noBorder": true, "noRadius": true },
+      "canvasFrame": { "noRadius": true, "noShadow": true, "noBorder": true },
+      "pageTitleBarBackIcon": "chevron-left",
       "pageTitleBarFigma": "https://www.figma.com/design/44P9g5yKcQEyXdHCayIrMn/RTS-AI读稿?node-id=6-623",
       "radiusBtnPrimary": 24,
       "radiusBtnPrimaryNote": "同类型按钮须统一使用 radiusBtn4|8|12|16 之一",
@@ -2106,17 +2138,18 @@
     }
   }
 }</pre>
-      <p style="font-size:12px;color:var(--text-secondary)">注：画布 390×844；按钮高 48px、圆角四档 4/8/12/16（2x 为 8/16/24/32）；同类型按钮圆角须一致；导航 44px。</p>
+      <p style="font-size:12px;color:var(--text-secondary)">注：画布 390×844 直角无外框；顶占位 390×44、底占位 390×39 白块；按钮高 48px、圆角四档 4/8/12/16；导航 44px；返回 chevron-left 矢量图标。</p>
 
       <h3>AI Prompt 模板</h3>
       <pre>请按照《剑琅联盟 移动端设计规范 v1.4》设计 [页面名称]：
-- 最高优先级：★ 全局强制 UI — 390×844、#F7F7F7 底、无阴影无渐变；按钮高 48px、圆角仅 4/8/12/16 且同类型一致
+- 最高优先级：★ 全局强制 UI — 390×844 直角画板（无圆角/无阴影/无描边）、#F7F7F7 底、无阴影无渐变；按钮高 48px、圆角仅 4/8/12/16 且同类型一致
 - 产品：剑琅联盟 · Logo: LOGO2.png
 - 字体：苹果 PingFang SC / Windows 思源黑体 Source Han Sans SC（Windows 禁止 PingFang SC）；金额 TCloudNumber-Bold；¥ 与「应付/实付」用 UI 字体，¥ 与数字间距 4px
 - 勾号：仅用图标 check / check-circle-filled，禁止文字 √ 或 ✓
 - 文字：#333 / #929292 · 边框 #D7D7D5 · 主色 #F32F41
 - 图标：24px（安全 20）/ 16px 小箭头 · Stratis 库 · 颜色 #F32F41 / #333 / #929
-- 硬性：无 emoji；按钮文案在按钮内水平垂直居中；Tab/卡片不遮挡；内页顶栏必用 PageTitleBar（页面标题栏）；标题与右侧文案底对齐；PageTitleBar/PageTabs/TabBar 主体无描边；图片位 #EDEDED+白 image icon；不横向溢出；按钮 max 370px；顶 Tab 390 居中；状态栏 390×44 白块；卡片内容不溢出；提示 icon 与首行底对齐；空状态内容区垂直居中；PageTitleBar 对齐 Figma RTS-AI 6-623
+- 占位：状态栏 390×44 白块；页面最底 390×39 白块（无阴影/描边/圆角）
+- 硬性：无 emoji；返回用 chevron-left 矢量图标（禁止文字 &lt;）；按钮文案在按钮内水平垂直居中；Tab/卡片不遮挡；内页顶栏必用 PageTitleBar（页面标题栏）；标题与右侧文案底对齐；PageTitleBar/PageTabs/TabBar 主体无描边；图片位 #EDEDED+白 image icon；不横向溢出；按钮 max 370px；顶 Tab 390 居中；卡片内容不溢出；提示 icon 与首行底对齐；空状态内容区垂直居中；PageTitleBar 对齐 Figma RTS-AI 6-623
 - 组件：第7章组件目录
 - 内容：[具体业务字段]</pre>
     </section>
