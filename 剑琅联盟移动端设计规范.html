@@ -933,7 +933,8 @@
               <li>通用功能图标：24×24px 画布，可视安全区 20×20px</li>
               <li>小箭头 / 辅助图标：16×16px</li>
               <li>颜色：重要操作 <code>#F32F41</code> · 常规 <code>#333333</code> · 次要 <code>#929292</code></li>
-              <li>风格：线性简约、统一圆角倒角；复用第 6 章 Stratis 组件库，禁止自创</li>
+              <li>风格：线性简约、统一圆角倒角</li>
+              <li><strong>调用优先级 ★</strong>：优先调用第 6 章<strong>图标库</strong>（Stratis → Iconex → WeChat）；库内无合适项时，可从<strong>外部</strong>引入矢量图标（如 Figma Community、业务专属素材），须遵守本章尺寸与颜色规范，并在标注中说明来源。</li>
               <li><strong>确认 / 正确态勾号 ★</strong>：勾选、步骤完成、成功反馈等<strong>禁止</strong>使用字符 <code>√</code>、<code>✓</code> 或手写「勾」字；须用图标 <code>check</code>（16px 线性）或 <code>check-circle-filled</code>（面性成功），见第 7 章表单控件。</li>
               <li><strong>顶栏返回 ★</strong>：<code>PageTitleBar</code> 返回须用 <code>chevron-left</code> 矢量图标，<strong>禁止</strong>文字 <code>&lt;</code> / <code>＜</code>。</li>
             </ul>
@@ -1018,6 +1019,7 @@
           <li><strong>返回须用矢量图标 ★</strong>：<code>PageTitleBar</code> 左侧返回<strong>禁止</strong>使用文字符号 <code>&lt;</code>、<code>＜</code>、<code>‹</code> 等；须调用图标 <code>chevron-left</code>（24px · #333），见第 6 章。</li>
           <li><strong>勾号用图标</strong>：组件内表示确认、已选、步骤完成时<strong>禁止</strong>文字 <code>√</code>/<code>✓</code>；使用 <code>check</code> 或 <code>check-circle-filled</code>（见第 6、7 章）。</li>
           <li><strong>按钮文案居中</strong>：<code>Button</code>、对话框底栏、底栏操作条等一切带文字按钮，文案在按钮可点击区域内<strong>水平居中且垂直居中</strong>（单行、双行均适用；双行时整体居中）。</li>
+          <li><strong>图标与组件调用 ★</strong>：优先调用本规范第 6 章<strong>图标库</strong>与第 7 章<strong>组件库</strong>；若库内无合适项，可从<strong>外部</strong>引入图标或组件，但外观须符合 ★ 全局强制 UI（尺寸、色板、圆角、无阴影等），并在设计标注 / AI 说明中注明来源。</li>
         </ol>
 
         <div class="spec-block">
@@ -1081,7 +1083,8 @@
         <strong>第一优先级：</strong>完整执行 <a href="#global-ui">★ 全局强制 UI</a>（直角画板、所有 Frame 自动布局、#F7F7F7 底、无阴影无渐变、顶/底白块占位、色板、字体、图标尺寸、间距、圆角、44px 导航、48px 按钮、返回 chevron-left 矢量图标）。组件使用第 7 章命名（如 PageTitleBar、TabBar），视觉不得违背全局章。
       </div>
       <ol>
-        <li><strong>组合组件</strong>：从第 7 章按场景选用组件，交互与布局遵循本规范。</li>
+        <li><strong>组合组件</strong>：优先从第 7 章组件库按场景选用；库内无合适项时可从外部引入，视觉须符合本规范。</li>
+        <li><strong>图标与组件</strong>：优先第 6、7 章库内资源；无合适项时可调用外部图标 / 组件，仍须遵守 ★ 全局强制 UI，并注明来源。</li>
         <li><strong>颜色 / 圆角 / 间距</strong>：仅使用全局章与第 2–5 章 Token；按钮圆角四档择一且同类型一致；禁止投影与渐变背景。</li>
         <li><strong>金额排版</strong>：数字 TCloudNumber Bold；<code>¥</code> 与「应付/实付」等用 UI 字体（苹果 PingFang SC / Windows 思源黑体），<code>¥</code> 与数字间距 4px。</li>
         <li><strong>字体按设备</strong>：苹果 → PingFang SC；Windows → 思源黑体 Source Han Sans SC（勿在 Windows 稿中用 PingFang SC）。</li>
@@ -1384,7 +1387,7 @@
     <!-- 6. 图标库 -->
     <section id="icons">
       <h2 class="section-title"><span class="num">6</span>图标库（可直接调用）</h2>
-      <p><strong>尺寸与颜色以 <a href="#global-ui">★ 全局强制 UI</a> 为准。</strong>图标库由三套 Figma 资源构成：<a href="https://www.figma.com/design/0lZMESxiHe6rxzVUG3hMIT/Stratis-UI-Icons---1000--Free-Figma-icons--Community-?node-id=101-3505">Stratis UI Icons</a>（主库）· <a href="https://www.figma.com/design/uXSogFY3f1EEJsK1iDPf9h/Iconex---Freebie-icons--Community-?node-id=0-1">Iconex Freebie</a>（补充）· <a href="https://www.figma.com/design/UqA4U4cmf68pkXynOIhPHU/Le-Wagon-%E5%BE%AE%E4%BF%A1-UX-%E5%B7%A5%E5%85%B7%E5%BA%93-WeChat-UX-Kit--Community-?node-id=0-1">WeChat UX Kit</a>（微信场景精选，<code>icons/wechat/</code>、<code>icons/wechat-filled/</code>，构建见 <code>scripts/build-wechat-ux-icons.js</code>）。解析顺序：<strong>Stratis → Iconex → WeChat</strong>；卡片分别标注 <code>Iconex</code> / <code>WeChat</code>。微信专属语义优先用 <code>wx-*</code> 命名；可与 Stratis 等价的项在目录中带 <code>alias</code> 仍显示 Stratis 资源。</p>
+      <p><strong>尺寸与颜色以 <a href="#global-ui">★ 全局强制 UI</a> 为准。</strong><strong>优先</strong>调用本库已有图标；库内无合适项时，可从外部引入矢量图标，须符合全局尺寸与色板，并标注来源。图标库由三套 Figma 资源构成：<a href="https://www.figma.com/design/0lZMESxiHe6rxzVUG3hMIT/Stratis-UI-Icons---1000--Free-Figma-icons--Community-?node-id=101-3505">Stratis UI Icons</a>（主库）· <a href="https://www.figma.com/design/uXSogFY3f1EEJsK1iDPf9h/Iconex---Freebie-icons--Community-?node-id=0-1">Iconex Freebie</a>（补充）· <a href="https://www.figma.com/design/UqA4U4cmf68pkXynOIhPHU/Le-Wagon-%E5%BE%AE%E4%BF%A1-UX-%E5%B7%A5%E5%85%B7%E5%BA%93-WeChat-UX-Kit--Community-?node-id=0-1">WeChat UX Kit</a>（微信场景精选，<code>icons/wechat/</code>、<code>icons/wechat-filled/</code>，构建见 <code>scripts/build-wechat-ux-icons.js</code>）。解析顺序：<strong>Stratis → Iconex → WeChat</strong>；卡片分别标注 <code>Iconex</code> / <code>WeChat</code>。微信专属语义优先用 <code>wx-*</code> 命名；可与 Stratis 等价的项在目录中带 <code>alias</code> 仍显示 Stratis 资源。</p>
       <a class="figma-link-card" href="https://www.figma.com/design/0lZMESxiHe6rxzVUG3hMIT/Stratis-UI-Icons---1000--Free-Figma-icons--Community-?node-id=101-3505" target="_blank" rel="noopener">
         <span class="icon-box">ST</span>
         <div><strong>Stratis UI Icons · 1000+ 免费图标</strong><br><span style="font-size:12px;color:var(--text-secondary)">Figma Community · 主图标库（线性 / 面性）</span></div>
@@ -1471,7 +1474,7 @@
     <!-- 7. 组件库（可调用） -->
     <section id="components">
       <h2 class="section-title"><span class="num">7</span>组件库（可调用）</h2>
-      <p>以下为剑琅联盟移动端可调用组件。AI 出图须标注 <code>组件名 + 变体</code>，视觉遵循 <a href="#global-ui">★ 全局强制 UI</a>。微信生态页面可参考 <a href="https://www.figma.com/design/UqA4U4cmf68pkXynOIhPHU/Le-Wagon-%E5%BE%AE%E4%BF%A1-UX-%E5%B7%A5%E5%85%B7%E5%BA%93-WeChat-UX-Kit--Community-?node-id=0-1" target="_blank" rel="noopener">WeChat UX Kit</a> 结构，但<strong>颜色、圆角、按钮、无阴影</strong>仍以本规范为准。</p>
+      <p>以下为剑琅联盟移动端可调用组件。<strong>优先</strong>选用本目录已有组件；库内无合适项时，可从外部 Figma 资源或业务组件引入，视觉须遵循 <a href="#global-ui">★ 全局强制 UI</a>，并标注来源。AI 出图须标注 <code>组件名 + 变体</code>。微信生态页面可参考 <a href="https://www.figma.com/design/UqA4U4cmf68pkXynOIhPHU/Le-Wagon-%E5%BE%AE%E4%BF%A1-UX-%E5%B7%A5%E5%85%B7%E5%BA%93-WeChat-UX-Kit--Community-?node-id=0-1" target="_blank" rel="noopener">WeChat UX Kit</a> 结构，但<strong>颜色、圆角、按钮、无阴影</strong>仍以本规范为准。</p>
 
       <div class="comp-block" id="wechat-ux-components">
         <div class="comp-block-hd"><strong>7.0 WeChat UX Kit 组件映射</strong><code>Le Wagon · 精选</code></div>
@@ -2125,6 +2128,7 @@
       "canvasFrame": { "noRadius": true, "noShadow": true, "noBorder": true },
       "figmaAutoLayout": { "allFrames": true },
       "contentCardWhite": { "fill": "#FFFFFF", "noBorder": true },
+      "libraryFirstPolicy": { "iconsChapter": 6, "componentsChapter": 7, "allowExternalFallback": true },
       "pageTitleBarBackIcon": "chevron-left",
       "pageTitleBarFigma": "https://www.figma.com/design/44P9g5yKcQEyXdHCayIrMn/RTS-AI读稿?node-id=6-623",
       "radiusBtnPrimary": 24,
@@ -2699,10 +2703,4 @@
   initTapFeedback(document.querySelector('.main'));
 
   if (typeof specAssetUrl === 'function') {
-    document.querySelectorAll('.font-download-btn[href]').forEach(a => {
-      a.href = specAssetUrl(a.getAttribute('href'));
-    });
-  }
-</script>
-</body>
-</html>
+    document.querySelectorAll('.font-download-btn[href]').
