@@ -16,6 +16,7 @@ const ICON_LIBRARY_ICONEX = [
   { name: 'graph', cat: 'data', meaning: '趋势图', scene: '经营曲线、KPI', source: 'iconex' },
   { name: 'heartbeat', cat: 'data', meaning: '健康/活跃', scene: '会员活跃度', source: 'iconex' },
   { name: 'hide', cat: 'form', meaning: '隐藏内容', scene: '敏感信息、掩码', source: 'iconex' },
+  { name: 'eye', cat: 'form', meaning: '查看/可见', scene: '预览、显示密码 · browse 同源', source: 'iconex' },
   { name: 'microphone', cat: 'comm', meaning: '麦克风', scene: '语音输入、通话', source: 'iconex' },
   { name: 'scanner', cat: 'action', meaning: '扫描器', scene: '扫码枪、识别', source: 'iconex' },
   { name: 'toggle-left', cat: 'form', meaning: '开关（左）', scene: '设置项开关', source: 'iconex' },

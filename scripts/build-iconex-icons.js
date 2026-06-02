@@ -35,6 +35,8 @@ const ICONEX_ICON_MAP = {
   graph: 'graph.svg',
   heartbeat: 'heartbeat.svg',
   hide: 'hide.svg',
+  eye: 'eye.svg',
+  browse: 'eye.svg',
   microphone: 'microphone.svg',
   scanner: 'scanner.svg',
   'toggle-left': 'toggle_left.svg',

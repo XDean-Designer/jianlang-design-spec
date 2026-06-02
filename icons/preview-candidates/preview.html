@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>图标替换候选 · 预览确认</title>
+  <style>
+    :root {
+      --text: #333;
+      --muted: #888;
+      --border: #e7e7e7;
+      --brand: #E10600;
+      --bg: #f5f5f5;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: -apple-system, BlinkMacSystemFont, "PingFang SC", "Microsoft YaHei", sans-serif;
+      color: var(--text);
+      background: var(--bg);
+      line-height: 1.5;
+    }
+    header {
+      background: #fff;
+      border-bottom: 1px solid var(--border);
+      padding: 20px 24px;
+    }
+    header h1 { margin: 0 0 6px; font-size: 20px; font-weight: 600; }
+    header p { margin: 0; color: var(--muted); font-size: 14px; }
+    main { max-width: 960px; margin: 0 auto; padding: 24px; }
+    .card {
+      background: #fff;
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 20px;
+      margin-bottom: 16px;
+    }
+    .card h2 { margin: 0 0 4px; font-size: 16px; font-weight: 600; }
+    .meta { font-size: 13px; color: var(--muted); margin-bottom: 16px; }
+    .meta code { background: #f0f0f0; padding: 1px 6px; border-radius: 4px; font-size: 12px; }
+    .row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+    }
+    @media (max-width: 640px) { .row { grid-template-columns: 1fr; } }
+    .cell {
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 16px;
+      text-align: center;
+    }
+    .cell.recommended { border-color: #ffc9c9; background: #fffafa; }
+    .label {
+      font-size: 12px;
+      color: var(--muted);
+      margin-bottom: 12px;
+    }
+    .label strong { color: var(--brand); }
+    .icon-box {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 24px;
+      min-height: 72px;
+    }
+    .icon-box img {
+      width: 24px;
+      height: 24px;
+      color: #333;
+    }
+    .icon-box img.x32 { width: 32px; height: 32px; }
+    .note {
+      margin-top: 12px;
+      font-size: 12px;
+      color: var(--muted);
+      text-align: left;
+    }
+    .alt {
+      margin-top: 12px;
+      padding-top: 12px;
+      border-top: 1px dashed var(--border);
+    }
+    footer {
+      text-align: center;
+      padding: 8px 24px 32px;
+      font-size: 13px;
+      color: var(--muted);
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>图标替换候选预览</h1>
+    <p>确认后再写入图标库 · 左列为<strong>当前</strong>，右列为<strong>推荐替换</strong>（24px / 32px）</p>
+  </header>
+  <main>
+
+    <section class="card">
+      <h2>1. 更多操作 / 省略/更多 / 更多</h2>
+      <div class="meta">影响图标名：<code>more</code> · <code>ellipsis</code> · <code>wx-more</code>（微信别名）</div>
+      <div class="row">
+        <div class="cell">
+          <div class="label">当前 · Stratis 空心三圆点</div>
+          <div class="icon-box">
+            <img src="../stratis/more.svg" alt="">
+            <img class="x32" src="../stratis/more.svg" alt="">
+          </div>
+          <div class="note">线框圆点，视觉偏轻，不像省略号</div>
+        </div>
+        <div class="cell recommended">
+          <div class="label"><strong>推荐</strong> · Iconex 三实心圆点（无外框）</div>
+          <div class="icon-box">
+            <img src="ellipsis-filled-proposed.svg" alt="">
+            <img class="x32" src="ellipsis-filled-proposed.svg" alt="">
+          </div>
+          <div class="note">来源：Iconex <code>more_circle</code> 内三点 · 实心省略号 · <code>more</code> 与 <code>ellipsis</code> 统一用此形</div>
+        </div>
+      </div>
+    </section>
+
+    <section class="card">
+      <h2>2. 打印</h2>
+      <div class="meta">影响图标名：<code>print</code></div>
+      <div class="row">
+        <div class="cell">
+          <div class="label">当前 · 误映射为文件矩形</div>
+          <div class="icon-box">
+            <img src="../stratis/print.svg" alt="">
+            <img class="x32" src="../stratis/print.svg" alt="">
+          </div>
+          <div class="note">build 脚本映射到了 <code>file-01.svg</code>，显示为方块</div>
+        </div>
+        <div class="cell recommended">
+          <div class="label"><strong>推荐</strong> · Lucide 打印机（线形）</div>
+          <div class="icon-box">
+            <img src="print-proposed.svg" alt="">
+            <img class="x32" src="print-proposed.svg" alt="">
+          </div>
+          <div class="note">来源：Lucide Icons (ISC) · 24px 线宽 2 · 与规范线形图标一致</div>
+        </div>
+      </div>
+    </section>
+
+    <section class="card">
+      <h2>3. 查看</h2>
+      <div class="meta">影响图标名：<code>browse</code></div>
+      <div class="row">
+        <div class="cell">
+          <div class="label">当前 · 仅显示瞳孔圆点</div>
+          <div class="icon-box">
+            <img src="../stratis/browse.svg" alt="">
+            <img class="x32" src="../stratis/browse.svg" alt="">
+          </div>
+          <div class="note">Stratis 源文件 <code>eye-open.svg</code> 不完整，只剩瞳孔</div>
+        </div>
+        <div class="cell recommended">
+          <div class="label"><strong>推荐 A</strong> · Lucide 眼睛（线形）</div>
+          <div class="icon-box">
+            <img src="browse-proposed.svg" alt="">
+            <img class="x32" src="browse-proposed.svg" alt="">
+          </div>
+          <div class="note">来源：Lucide Icons (ISC) · 线形，与 Stratis 风格接近</div>
+          <div class="alt">
+            <div class="label">备选 B · Iconex 眼睛（面性）</div>
+            <div class="icon-box">
+              <img src="browse-proposed-iconex.svg" alt="">
+              <img class="x32" src="browse-proposed-iconex.svg" alt="">
+            </div>
+            <div class="note">来源：Iconex <code>eye.svg</code> · 面性，与库内 Iconex 图标风格一致</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="card">
+      <h2>4. 电话</h2>
+      <div class="meta">影响图标名：<code>call</code> · <code>call-1</code></div>
+      <div class="row">
+        <div class="cell">
+          <div class="label">当前 call · 线形听筒（尚可）</div>
+          <div class="icon-box">
+            <img src="../stratis/call.svg" alt="">
+            <img class="x32" src="../stratis/call.svg" alt="">
+          </div>
+          <div class="note"><code>call</code> 已是倾斜听筒；<code>call-1</code> 为座机+声波（见下）</div>
+          <div class="alt">
+            <div class="label">当前 call-1 · 座机样式</div>
+            <div class="icon-box">
+              <img src="../stratis/call-1.svg" alt="">
+              <img class="x32" src="../stratis/call-1.svg" alt="">
+            </div>
+          </div>
+        </div>
+        <div class="cell recommended">
+          <div class="label"><strong>推荐</strong> · Iconex 倾斜听筒（面性）</div>
+          <div class="icon-box">
+            <img src="call-proposed.svg" alt="">
+            <img class="x32" src="call-proposed.svg" alt="">
+          </div>
+          <div class="note">来源：Iconex <code>call.svg</code> · 倾斜听筒轮廓清晰 · <code>call</code> 与 <code>call-1</code> 可统一</div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+  <footer>打开方式：浏览器直接打开本文件 · 路径 <code>icons/preview-candidates/preview.html</code></footer>
+</body>
+</html>

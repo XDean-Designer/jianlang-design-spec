@@ -38,13 +38,11 @@ const STRATIS_ICON_MAP = {
   copy: 'general-outline/copy-left.svg',
   scan: 'security-outline/scan.svg',
   qrcode: 'security-outline/scan.svg',
-  print: 'files-outline/file-01.svg',
   download: 'general-outline/download-01.svg',
   upload: 'general-outline/upload-01.svg',
   calendar: 'time-outline/calendar-01.svg',
   time: 'time-outline/clock-01.svg',
   location: 'travel-and-location-outline/marker-01.svg',
-  browse: 'general-outline/eye-open.svg',
   'browse-off': 'general-outline/eye-closed.svg',
   'lock-on': 'security-outline/lock-01.svg',
   'lock-off': 'security-outline/lock-open-01.svg',
@@ -195,6 +193,7 @@ fs.writeFileSync(
 );
 
 require('./normalize-stratis-svgs.js');
+require('./apply-icon-overrides.js');
 
 console.log('Copied', Object.keys(copied).length, 'icons to', OUT_DIR);
 if (missing.length) {
