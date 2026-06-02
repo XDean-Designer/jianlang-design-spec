@@ -81,6 +81,7 @@
       --page-tab-width: 390px; /* 顶部 Tab 条画布宽 */
       --modal-margin: 32px; /* 居中弹窗距画布左右边距 */
       --modal-centered-w: calc(var(--canvas-w) - var(--modal-margin) * 2); /* 326px */
+      --tab-indicator-w: 32px; /* Tabs / PageTabs 选中指示条宽度 */
       /* Figma 主页面 / RTP 零售模块 实测 Token */
       --figma-text-primary: #333333;
       --figma-text-secondary: #929292;
@@ -398,7 +399,7 @@
       bottom: 0;
       left: 50%;
       transform: translateX(-50%);
-      width: 16px;
+      width: var(--tab-indicator-w);
       height: 3px;
       background: var(--brand-6);
       border-radius: 2px;
@@ -409,7 +410,7 @@
     .u-tabs { display: flex; height: 48px; background: #fff; border: none; }
     .u-tabs span { flex: 1; display: flex; align-items: center; justify-content: center; font-size: 14px; color: var(--text-secondary); position: relative; }
     .u-tabs span.on { color: var(--text-primary); font-weight: 500; }
-    .u-tabs span.on::after { content: ''; position: absolute; bottom: 0; left: 50%; transform: translateX(-50%); width: 16px; height: 3px; background: var(--brand-6); border-radius: 2px; }
+    .u-tabs span.on::after { content: ''; position: absolute; bottom: 0; left: 50%; transform: translateX(-50%); width: var(--tab-indicator-w); height: 3px; background: var(--brand-6); border-radius: 2px; }
     .u-tabbar { height: 56px; background: #fff; border: none; display: flex; box-sizing: border-box; }
     .u-tabbar .tab {
       flex: 1;
@@ -460,6 +461,9 @@
     }
     .font-data-sample .yen { font-family: var(--font-ui); font-weight: 500; }
     .font-data-sample .num { font-family: var(--font-data); font-weight: 700; letter-spacing: -.02em; }
+    .u-card-stat-num { font-size: 28px; line-height: 1.2; color: var(--text-primary); }
+    .u-card-stat-num .yen { font-family: var(--font-ui); font-weight: 600; margin-right: 4px; }
+    .u-card-stat-num .num { font-family: var(--font-data); font-weight: 700; letter-spacing: -.02em; }
     .u-search { height: 36px; background: var(--bg-disabled); border-radius: var(--radius-input); margin: var(--space-list-y) var(--space-page); display: flex; align-items: center; padding: 0 12px; gap: var(--space-icon-text); color: var(--text-secondary); font-size: 14px; border: 1px solid var(--border); box-shadow: none; }
     .u-notice,
     .u-alert-blue,
@@ -489,8 +493,8 @@
     .u-alert-blue .alert-text,
     .alert-info .alert-text { flex: 1; min-width: 0; }
     .u-steps { display: flex; padding: 16px; background: #fff; gap: 4px; }
-    .u-steps .step { flex: 1; text-align: center; font-size: 12px; color: var(--text-secondary); }
-    .u-steps .step .dot { width: 24px; height: 24px; border-radius: 50%; background: var(--gray-3); color: var(--text-secondary); display: inline-flex; align-items: center; justify-content: center; font-size: 12px; margin-bottom: 4px; }
+    .u-steps .step { flex: 1; display: flex; flex-direction: column; align-items: center; font-size: 12px; color: var(--text-secondary); }
+    .u-steps .step .dot { width: 24px; height: 24px; border-radius: 50%; background: var(--gray-3); color: var(--text-secondary); display: inline-flex; align-items: center; justify-content: center; font-size: 12px; margin-bottom: 8px; flex-shrink: 0; }
     .u-steps .step.done .dot { background: var(--success-6); color: #fff; font-size: 0; }
     .u-steps .step.cur .dot { background: var(--brand-6); color: #fff; }
     .u-checkbox-mark {
@@ -503,12 +507,12 @@
       justify-content: center;
       flex-shrink: 0;
     }
-    .u-checkbox-mark .s-icon { width: 14px; height: 14px; font-size: 14px; color: #fff; }
-    .u-steps .step.done .dot .s-icon { width: 14px; height: 14px; font-size: 14px; color: #fff; }
+    .u-checkbox-mark .s-icon { width: 17px; height: 17px; font-size: 17px; color: #fff; }
+    .u-steps .step.done .dot .s-icon { width: 17px; height: 17px; font-size: 17px; color: #fff; }
     .u-switch { width: 44px; height: 24px; background: var(--gray-4); border-radius: 12px; position: relative; }
     .u-switch.on { background: var(--brand-6); }
-    .u-switch::after { content: ''; position: absolute; width: 20px; height: 20px; background: #fff; border-radius: 50%; top: 2px; left: 2px; border: 1px solid var(--border); box-shadow: none; }
-    .u-switch.on::after { left: 22px; }
+    .u-switch::after { content: ''; position: absolute; width: 20px; height: 20px; background: #fff; border-radius: 50%; top: 50%; left: 2px; transform: translateY(-50%); border: 1px solid var(--border); box-shadow: none; box-sizing: border-box; }
+    .u-switch.on::after { left: auto; right: 2px; transform: translateY(-50%); }
     .u-action-sheet { max-width: var(--canvas-w); margin: 0 auto; background: var(--bg-page); border-radius: var(--radius-card) var(--radius-card) 0 0; overflow: hidden; }
     .u-action-sheet .sheet-item { display: block; width: 100%; padding: 16px; text-align: center; font-size: 16px; color: var(--text-primary); background: #fff; border: none; border-bottom: 1px solid var(--border); cursor: pointer; }
     .u-action-sheet .sheet-item--cancel { margin-top: 8px; font-weight: 500; }
@@ -519,7 +523,7 @@
     .u-progress { height: 4px; background: var(--gray-2); border-radius: 2px; overflow: hidden; }
     .u-progress i { display: block; height: 100%; width: 60%; background: var(--brand-6); border-radius: 2px; }
     .u-fab { width: 48px; height: 48px; border-radius: 50%; background: var(--brand-6); color: #fff; display: flex; align-items: center; justify-content: center; box-shadow: none; margin-left: auto; }
-    .u-bottom-bar { display: flex; gap: 12px; padding: 8px 16px; background: #fff; border-top: 1px solid var(--border); }
+    .u-bottom-bar { display: flex; gap: 12px; padding: 8px 16px; background: #fff; border: none; box-shadow: none; }
     .u-bottom-bar .btn { flex: 1; }
     .u-dialog { width: 311px; margin: 0 auto; background: #fff; border-radius: var(--radius-xl); padding: 24px 16px 16px; text-align: center; }
     .u-dialog h5 { font-size: 16px; font-weight: 500; margin-bottom: 8px; }
@@ -821,7 +825,7 @@
     .u-product-card .body { padding: 8px; }
     .u-product-card .brand { font-size: 10px; color: var(--figma-text-secondary); }
     .u-product-card .title { font-size: 12px; font-weight: 600; line-height: 1.35; margin: 2px 0; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
-    .u-product-card .price { font-size: 14px; font-weight: 700; color: var(--brand-6); }
+    .u-product-card .price { font-family: var(--font-data); font-size: 14px; font-weight: 700; color: var(--brand-6); }
     .u-product-card .sub { font-size: 10px; color: var(--figma-text-secondary); }
     .u-price-row { display: flex; gap: 16px; font-size: 12px; flex-wrap: wrap; }
     .u-price-row .col label { display: block; font-size: 10px; color: var(--figma-text-secondary); margin-bottom: 4px; }
@@ -982,6 +986,7 @@
   <script src="icons/wechat-ux-catalog.js"></script>
   <script src="icons/wechat-ux-components.js"></script>
   <script src="icons/xiaobin-modal-components.js"></script>
+  <script src="icons/custom-map.js"></script>
 </head>
 <body class="spec-site">
 <div class="layout">
@@ -1569,8 +1574,9 @@
         <tr><td>预约</td><td><code>calendar</code></td><td>美业</td><td>—</td></tr>
         <tr><td>经营分析</td><td><code>chart</code></td><td>美业</td><td>—</td></tr>
         <tr><td>业绩排行</td><td><code>chart-bar</code></td><td>美业</td><td>—</td></tr>
-        <tr><td>联盟广场</td><td><code>shop</code></td><td>零售</td><td>RTP 内容入口</td></tr>
-        <tr><td>首页 Tab</td><td><code>home</code></td><td>导航</td><td>磨砂底栏选中黑底</td></tr>
+        <tr><td>联盟广场 / 商城 Tab</td><td><code>shopping-bag</code></td><td>零售</td><td>TabBar 商城 · Iconex</td></tr>
+        <tr><td>首页 Tab（选中）</td><td><code>home-tab-filled</code></td><td>导航</td><td>定制 · 门洞圆头粗短线</td></tr>
+        <tr><td>首页 Tab（未选）</td><td><code>home-tab</code></td><td>导航</td><td>定制线性</td></tr>
         <tr><td>客户 Tab</td><td><code>user</code></td><td>导航</td><td>—</td></tr>
         <tr><td>业绩 Tab</td><td><code>chart-line</code></td><td>导航</td><td>—</td></tr>
         <tr><td>工作台 Tab</td><td><code>app</code></td><td>导航</td><td>—</td></tr>
@@ -1911,7 +1917,7 @@
             <tr><th>属性</th><th>值</th></tr>
             <tr><td>容器宽 ★</td><td>390px，相对画布水平居中</td></tr>
             <tr><td>高度</td><td>48px · 白底 · 主体无描边</td></tr>
-            <tr><td>指示器</td><td>16×3px · brand-6 · 贴底居中（非容器描边）</td></tr>
+            <tr><td>指示器</td><td><strong>32×3px</strong> · brand-6 · 贴底居中（非容器描边）</td></tr>
           </table>
         </div>
       </div>
@@ -1921,14 +1927,16 @@
         <div class="comp-block-bd">
           <div class="comp-preview-phone">
             <div class="u-tabbar">
-              <div class="tab on"><span class="s-icon s-icon--filled" data-icon="home-filled" data-filled="1"></span>首页</div>
-              <div class="tab"><span class="s-icon" data-icon="shop" data-filled="0"></span>商城</div>
+              <div class="tab on"><span class="s-icon s-icon--filled" data-icon="home-tab-filled" data-filled="1"></span>首页</div>
+              <div class="tab"><span class="s-icon" data-icon="shopping-bag" data-filled="0"></span>商城</div>
               <div class="tab"><span class="s-icon" data-icon="cart" data-filled="0"></span>购物车</div>
               <div class="tab"><span class="s-icon" data-icon="user" data-filled="0"></span>我的</div>
             </div>
           </div>
           <table style="margin-top:12px">
             <tr><th>属性</th><th>值</th></tr>
+            <tr><td>首页图标 ★</td><td><code>home-tab-filled</code>（选中）· 门洞为圆头粗短线 · 定制 SVG</td></tr>
+            <tr><td>商城图标 ★</td><td><code>shopping-bag</code>（Iconex 外部库）</td></tr>
             <tr><td>图标 ★</td><td>24×24 · 未选中线性 · stroke-width 1.5</td></tr>
             <tr><td>选中态 ★</td><td>切换为品牌色 <strong>面性</strong>图标（<code>-filled</code>）· 文案 #F32F41</td></tr>
             <tr><td>文案</td><td>11px · 未选中 #929292</td></tr>
@@ -1943,7 +1951,7 @@
           <div class="comp-preview-phone">
             <div class="u-tabs"><span class="on">全部</span><span>待审批</span><span>已完成</span></div>
           </div>
-          <p>高 48px · 主体无描边 · 选中指示器 16×3px brand-6 · ≤4 项等分</p>
+          <p>高 48px · 主体无描边 · 选中指示器 <strong>32×3px</strong> brand-6（居中 · 长度为原 16px 的两倍）· ≤4 项等分</p>
         </div>
       </div>
 
@@ -2012,6 +2020,7 @@
               <div class="step"><div class="dot">3</div>完成</div>
             </div>
           </div>
+          <p style="margin-top:8px;font-size:12px;color:var(--text-secondary)">圆点与步骤文案间距 <strong>8px</strong> · 完成态勾号 17px</p>
         </div>
       </div>
 
@@ -2248,7 +2257,7 @@
             <tr><th>按钮</th><th>规格</th></tr>
             <tr><td>主操作（填充）★</td><td>红底白字 · brand-6</td></tr>
             <tr><td>次操作（描边）★</td><td>白底红字红描边</td></tr>
-            <tr><td>布局</td><td>高 56px + safe-bottom · 双按钮间距 12px · 圆角同档（建议 16px）</td></tr>
+            <tr><td>布局</td><td>高 56px + safe-bottom · 双按钮间距 12px · 圆角同档（建议 16px）· 白底<strong>无描边、无阴影</strong></td></tr>
           </table>
         </div>
       </div>
@@ -2276,10 +2285,10 @@
         <div class="comp-block-bd">
           <div class="u-content-card" style="max-width:360px">
             <div style="display:flex;justify-content:space-between;margin-bottom:12px"><span style="font-weight:500">本月销售额</span><span class="s-icon" data-icon="chevron-right" style="color:var(--gray-6)"></span></div>
-            <div style="font-size:28px;font-weight:600">¥ 1,286,400</div>
+            <div class="u-card-stat-num"><span class="yen">¥</span><span class="num">1,286,400</span></div>
             <div style="font-size:12px;color:var(--success-6);margin-top:4px">↑ 12.5% 较上月</div>
           </div>
-          <p style="margin-top:8px">白底 <code>#FFFFFF</code> · 圆角 12px · padding 16px · <strong>无描边</strong> · 用于工作台数据概览</p>
+          <p style="margin-top:8px">白底 <code>#FFFFFF</code> · 圆角 12px · padding 16px · <strong>无描边</strong> · 金额数字 <strong>TCloudNumber-Bold</strong> · 用于工作台数据概览</p>
         </div>
       </div>
     </section>
@@ -2452,7 +2461,9 @@
     { name: 'chevron-up', cat: 'nav', meaning: '收起', scene: 'Collapse 展开态' },
     { name: 'arrow-left', cat: 'nav', meaning: '返回（线型）', scene: '备用返回箭头' },
     { name: 'close', cat: 'nav', meaning: '关闭', scene: '弹窗、标签页、搜索清除' },
-    { name: 'home', cat: 'nav', meaning: '首页', scene: 'TabBar 首页' },
+    { name: 'home-tab', cat: 'nav', meaning: '首页 Tab', scene: 'TabBar 首页 · 线性 · 门洞粗短线' },
+    { name: 'home-tab-filled', cat: 'filled', meaning: '首页 Tab（面性）', scene: 'TabBar 首页选中 · 定制' },
+    { name: 'shopping-bag', cat: 'retail', meaning: '购物袋', scene: 'TabBar 商城 · Iconex', source: 'iconex' },
     { name: 'app', cat: 'nav', meaning: '工作台/应用', scene: 'TabBar 工作台' },
     { name: 'menu', cat: 'nav', meaning: '菜单', scene: '侧边栏入口、更多导航' },
     { name: 'jump', cat: 'nav', meaning: '外链跳转', scene: '打开 H5、外部系统' },
@@ -2737,6 +2748,12 @@
       : (typeof ICONEX_ICON_MAP !== 'undefined' ? ICONEX_ICON_MAP : null);
     if (iconexMap && iconexMap[assetSlug]) {
       return { dir: preferFilled ? 'icons/iconex-filled/' : 'icons/iconex/', file: iconexMap[assetSlug], filled: preferFilled };
+    }
+    const customMap = preferFilled
+      ? (typeof CUSTOM_FILLED_ICON_MAP !== 'undefined' ? CUSTOM_FILLED_ICON_MAP : null)
+      : (typeof CUSTOM_ICON_MAP !== 'undefined' ? CUSTOM_ICON_MAP : null);
+    if (!alias && customMap && customMap[slug]) {
+      return { dir: preferFilled ? 'icons/custom/' : 'icons/custom/', file: customMap[slug], filled: preferFilled };
     }
     if (!alias) {
       const wechat = wechatLocalAsset(slug, preferFilled);
