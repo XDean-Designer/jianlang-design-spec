@@ -79,6 +79,8 @@
       --canvas-h: 844px; /* 画布高：默认；phone-frame 使用 min-height 可向下延展 */
       --btn-max-width: 370px; /* 按钮最大宽度（画布 390，左右各留 10px） */
       --page-tab-width: 390px; /* 顶部 Tab 条画布宽 */
+      --modal-margin: 32px; /* 居中弹窗距画布左右边距 */
+      --modal-centered-w: calc(var(--canvas-w) - var(--modal-margin) * 2); /* 326px */
       /* Figma 主页面 / RTP 零售模块 实测 Token */
       --figma-text-primary: #333333;
       --figma-text-secondary: #929292;
@@ -523,6 +525,135 @@
     .u-dialog h5 { font-size: 16px; font-weight: 500; margin-bottom: 8px; }
     .u-dialog p { font-size: 14px; color: var(--text-secondary); margin-bottom: 20px; }
     .u-dialog .acts { display: flex; gap: 12px; }
+    .u-modal-popup {
+      box-sizing: border-box;
+      background: var(--bg-container);
+      border-radius: var(--radius-btn-16);
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 12px;
+      box-shadow: none;
+      border: none;
+      overflow: hidden;
+      width: 100%;
+    }
+    .u-modal-popup__title {
+      margin: 0;
+      width: 100%;
+      font-size: 17px;
+      font-weight: 600;
+      line-height: 26px;
+      text-align: center;
+      color: var(--text-primary);
+      word-break: break-word;
+    }
+    .u-modal-popup__desc {
+      margin: 0;
+      width: 100%;
+      font-size: 16px;
+      font-weight: 400;
+      line-height: 24px;
+      text-align: center;
+      color: var(--text-secondary);
+      word-break: break-word;
+    }
+    .u-modal-popup__icon-wrap {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background: var(--bg-disabled);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      color: var(--text-primary);
+    }
+    .u-modal-popup__icon-wrap img,
+    .u-modal-popup__icon-wrap svg {
+      width: 24px;
+      height: 24px;
+      display: block;
+    }
+    .u-modal-popup__media {
+      width: 100%;
+      height: 135px;
+      border-radius: var(--radius-input);
+      overflow: hidden;
+      flex-shrink: 0;
+    }
+    .u-modal-popup__media.u-image-placeholder {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .u-modal-popup__actions {
+      display: flex;
+      gap: 12px;
+      width: 100%;
+      padding-top: 8px;
+      box-sizing: border-box;
+    }
+    .u-modal-popup__actions .btn { flex: 1; min-width: 0; }
+    .u-modal-popup--centered {
+      width: var(--modal-centered-w);
+      max-width: var(--modal-centered-w);
+      margin-left: var(--modal-margin);
+      margin-right: var(--modal-margin);
+    }
+    .u-modal-popup--bottom {
+      width: var(--canvas-w);
+      max-width: var(--canvas-w);
+      margin: 0;
+      border-radius: var(--radius-btn-16) var(--radius-btn-16) 0 0;
+      padding: 20px 20px 40px;
+    }
+    .u-modal-popup--rtl {
+      direction: rtl;
+    }
+    .u-modal-popup--rtl .u-modal-popup__actions {
+      flex-direction: row-reverse;
+    }
+    .u-modal-demo-stage {
+      width: var(--canvas-w);
+      max-width: 100%;
+      margin: 0 auto 16px;
+      background: var(--bg-page);
+      box-sizing: border-box;
+      position: relative;
+      overflow: hidden;
+    }
+    .u-modal-demo-stage--centered {
+      padding: 48px 0;
+      display: flex;
+      justify-content: center;
+    }
+    .u-modal-demo-stage--bottom {
+      min-height: 280px;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+    }
+    .modal-variant-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+      gap: var(--space-module);
+    }
+    .modal-variant-card {
+      background: var(--bg-page);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-input);
+      padding: 12px;
+      box-shadow: none;
+    }
+    .modal-variant-card .cap {
+      font-size: 11px;
+      color: var(--text-secondary);
+      margin-top: 8px;
+      line-height: 1.4;
+    }
+    .modal-variant-card code { font-size: 10px; }
     .u-empty { text-align: center; padding: 40px 16px; color: var(--text-secondary); }
     .u-empty .s-icon { font-size: 64px; color: var(--gray-5); }
     .u-empty--canvas {
@@ -830,6 +961,7 @@
   <script src="icons/wechat-filled-map.js"></script>
   <script src="icons/wechat-ux-catalog.js"></script>
   <script src="icons/wechat-ux-components.js"></script>
+  <script src="icons/xiaobin-modal-components.js"></script>
 </head>
 <body class="spec-site">
 <div class="layout">
@@ -1020,6 +1152,7 @@
           <li><strong>勾号用图标</strong>：组件内表示确认、已选、步骤完成时<strong>禁止</strong>文字 <code>√</code>/<code>✓</code>；使用 <code>check</code> 或 <code>check-circle-filled</code>（见第 6、7 章）。</li>
           <li><strong>按钮文案居中</strong>：<code>Button</code>、对话框底栏、底栏操作条等一切带文字按钮，文案在按钮可点击区域内<strong>水平居中且垂直居中</strong>（单行、双行均适用；双行时整体居中）。</li>
           <li><strong>图标与组件调用 ★</strong>：优先调用本规范第 6 章<strong>图标库</strong>与第 7 章<strong>组件库</strong>；若库内无合适项，可从<strong>外部</strong>引入图标或组件，但外观须符合 ★ 全局强制 UI（尺寸、色板、圆角、无阴影等），并在设计标注 / AI 说明中注明来源。</li>
+          <li><strong>弹窗边距 ★</strong>：<strong>居中弹窗</strong>（<code>ModalPopup/centered</code>）距画布<strong>左右各 32px</strong>（内容区宽 <code>326px</code> = 390 − 32×2）。<strong>底部弹窗</strong>（<code>ModalPopup/bottom</code>）<strong>左、右、下边距均为 0</strong>（通栏 390px 贴底）。规范<strong>不包含</strong>半透明遮罩层组件；Figma 源稿遮罩仅作交互说明，不入库。</li>
         </ol>
 
         <div class="spec-block">
@@ -1090,7 +1223,7 @@
         <li><strong>字体按设备</strong>：苹果 → PingFang SC；Windows → 思源黑体 Source Han Sans SC（勿在 Windows 稿中用 PingFang SC）。</li>
         <li><strong>勾号</strong>：确认/正确态只用图标 <code>check</code>，禁止文字 √。</li>
         <li><strong>品牌露出</strong>：启动/登录/首页 Navbar 使用 <code>LOGO2.png</code> 与「剑琅联盟」。</li>
-        <li><strong>硬性约束</strong>：画布无圆角/无阴影/无描边 · 所有 Frame 自动布局 · 底栏占位 390×39 白块 · 返回用 chevron-left 矢量图标 · 白底内容卡片无描边 · 无 emoji · 无文字勾号 √/✓ · 按钮文案水平垂直居中 · Tab/卡片不叠压 · 内页顶栏必用 <code>PageTitleBar</code> · 标题与右侧文案底对齐 · 标题栏/Tab 主体无描边 · 图片位灰底白 icon · 内容不横向溢出 · 按钮宽 ≤370px · 顶 Tab 390 居中 · 状态栏白块 · 卡片不溢出 · 提示 icon 首行底对齐 · 空状态垂直居中。</li>
+        <li><strong>硬性约束</strong>：画布无圆角/无阴影/无描边 · 所有 Frame 自动布局 · 居中弹窗左右边距 32px · 底栏占位 390×39 白块 · 返回用 chevron-left 矢量图标 · 白底内容卡片无描边 · 无 emoji · 无文字勾号 √/✓ · 按钮文案水平垂直居中 · Tab/卡片不叠压 · 内页顶栏必用 <code>PageTitleBar</code> · 标题与右侧文案底对齐 · 标题栏/Tab 主体无描边 · 图片位灰底白 icon · 内容不横向溢出 · 按钮宽 ≤370px · 顶 Tab 390 居中 · 状态栏白块 · 卡片不溢出 · 提示 icon 首行底对齐 · 空状态垂直居中。</li>
       </ol>
       <h3>技术栈对齐</h3>
       <table>
@@ -1293,6 +1426,8 @@
         <tr><td>TabBar 高度</td><td>56px</td><td>含安全区 bottom padding</td></tr>
         <tr><td>状态栏占位 ★</td><td>390×44px 纯白块</td><td>设计稿不画系统状态 UI；开发用 safe-area</td></tr>
         <tr><td>底部占位区 ★</td><td>390×39px 纯白块</td><td>页面最底部预留；无阴影、无描边、无圆角</td></tr>
+        <tr><td>居中弹窗边距 ★</td><td>左右各 32px</td><td>ModalPopup/centered · 内容宽 326px</td></tr>
+        <tr><td>底部弹窗边距 ★</td><td>左 / 右 / 下 0</td><td>ModalPopup/bottom · 390 通栏贴底</td></tr>
         <tr><td>底部安全区（开发）</td><td>34px</td><td>Flutter safe-area 参考</td></tr>
         <tr><td>列表行高</td><td>56px</td><td>标准单行列表</td></tr>
         <tr><td>列表行高（多行）</td><td>≥72px</td><td>含描述文字</td></tr>
@@ -1507,6 +1642,8 @@
         <tr><td>导航</td><td>TabBar</td><td>标准底栏</td><td>子模块 3–4 Tab</td></tr>
         <tr><td>反馈</td><td>AlertBanner</td><td>提示信息栏</td><td>图标与首行文案底对齐</td></tr>
         <tr><td>反馈</td><td>ActionSheet</td><td>动作面板</td><td>WeChat UX · 底出菜单 · 见 <a href="#wechat-ux-components">7.0</a></td></tr>
+        <tr><td>反馈</td><td>ModalPopup</td><td>弹窗</td><td>xiaobin 源稿 · 7 变体 · 见 <a href="#comp-modal-popup">7.1</a></td></tr>
+        <tr><td>反馈</td><td>Dialog</td><td>简易对话框</td><td>轻量确认 · 与 ModalPopup 并存</td></tr>
         <tr><td>表单</td><td>SearchBar</td><td>搜索栏</td><td>WeChat UX · 圆角 8px 灰底</td></tr>
         <tr><td>通讯</td><td>ChatBubble</td><td>聊天气泡</td><td>WeChat UX · 客服/IM</td></tr>
         <tr><td>营销</td><td>PromoCard</td><td>营销卡（纯色底）</td><td>获客/推客 · 无渐变</td></tr>
@@ -1874,6 +2011,142 @@
         </div>
       </div>
 
+      <div class="comp-block" id="comp-modal-popup">
+        <div class="comp-block-hd"><strong>7.1 ModalPopup 弹窗</strong><code>xiaobin · Figma xqMgMp7wLhmEvvgiv6rSdW</code></div>
+        <div class="comp-block-bd">
+          <p style="font-size:12px;color:var(--text-secondary);margin-bottom:12px">来源 <a href="https://www.figma.com/design/xqMgMp7wLhmEvvgiv6rSdW/xiaobin" target="_blank" rel="noopener">xiaobin（RTL）Figma</a>。落地为剑琅 <strong>LTR</strong>；视觉服从 ★ 全局强制 UI（<strong>无阴影</strong>、按钮高 <strong>48px</strong>、次钮 <strong>Outline</strong>、主钮 <strong>Primary</strong>）。<strong>不含遮罩层</strong>。AI 标注：<code>ModalPopup + 变体</code> + <code>source:xiaobin</code>。</p>
+          <table id="xiaobin-modal-map">
+            <tr><th>组件 ID</th><th>名称</th><th>Figma</th><th>说明</th></tr>
+          </table>
+          <table style="margin-top:16px">
+            <tr><th>属性</th><th>居中弹窗</th><th>底部弹窗</th></tr>
+            <tr><td>边距 ★</td><td>左右各 <strong>32px</strong>（宽 326px）</td><td>左 / 右 / 下均为 <strong>0</strong>（宽 390 贴底）</td></tr>
+            <tr><td>圆角</td><td>16px 四角</td><td>顶左 / 顶右 16px · 底边 0</td></tr>
+            <tr><td>内边距</td><td>20px</td><td>上 20 · 左右 20 · 下 40</td></tr>
+            <tr><td>标题</td><td colspan="2">17px / 600 / #333 · 居中</td></tr>
+            <tr><td>副文案</td><td colspan="2">16px / 400 / #929292 · 居中</td></tr>
+            <tr><td>按钮区</td><td colspan="2">距文案 8px · 间距 12px · 高 48px · 圆角 12px</td></tr>
+            <tr><td>Icon 媒体</td><td colspan="2">40×40 圆底 #EDEDED · 24px SVG · <code>icons/xiaobin/bell-notification.svg</code></td></tr>
+            <tr><td>Image 媒体</td><td colspan="2">宽 100% · 高 135px · 圆角 8px · 占位 #EDEDED + 白 image icon</td></tr>
+          </table>
+          <h4 style="margin:24px 0 12px;font-size:14px">LTR 变体预览（剑琅默认）</h4>
+          <div class="modal-variant-grid">
+            <div class="modal-variant-card">
+              <div class="u-modal-demo-stage u-modal-demo-stage--centered">
+                <article class="u-modal-popup u-modal-popup--centered" aria-label="居中双按钮">
+                  <h3 class="u-modal-popup__title">主标题</h3>
+                  <p class="u-modal-popup__desc">副标题 / 相关信息说明文案，尽量简洁。</p>
+                  <div class="u-modal-popup__actions">
+                    <button type="button" class="btn btn-outline btn--r12">取消</button>
+                    <button type="button" class="btn btn-primary btn--r12">确定</button>
+                  </div>
+                </article>
+              </div>
+              <div class="cap"><code>ModalPopup/centered/dual/default</code> · Figma <a href="https://www.figma.com/design/xqMgMp7wLhmEvvgiv6rSdW/xiaobin?node-id=1-5485" target="_blank" rel="noopener">1:5485</a></div>
+            </div>
+            <div class="modal-variant-card">
+              <div class="u-modal-demo-stage u-modal-demo-stage--centered">
+                <article class="u-modal-popup u-modal-popup--centered" aria-label="居中单按钮">
+                  <h3 class="u-modal-popup__title">主标题</h3>
+                  <p class="u-modal-popup__desc">副标题 / 相关信息说明文案。</p>
+                  <div class="u-modal-popup__actions">
+                    <button type="button" class="btn btn-primary btn--r12">确定</button>
+                  </div>
+                </article>
+              </div>
+              <div class="cap"><code>ModalPopup/centered/single/default</code> · Figma <a href="https://www.figma.com/design/xqMgMp7wLhmEvvgiv6rSdW/xiaobin?node-id=1-5493" target="_blank" rel="noopener">1:5493</a></div>
+            </div>
+            <div class="modal-variant-card">
+              <div class="u-modal-demo-stage u-modal-demo-stage--centered">
+                <article class="u-modal-popup u-modal-popup--centered" aria-label="居中双按钮带图标">
+                  <div class="u-modal-popup__icon-wrap"><img src="icons/xiaobin/bell-notification.svg" alt="" width="24" height="24"></div>
+                  <h3 class="u-modal-popup__title">主标题</h3>
+                  <p class="u-modal-popup__desc">副标题 / 相关信息说明文案。</p>
+                  <div class="u-modal-popup__actions">
+                    <button type="button" class="btn btn-outline btn--r12">取消</button>
+                    <button type="button" class="btn btn-primary btn--r12">确定</button>
+                  </div>
+                </article>
+              </div>
+              <div class="cap"><code>ModalPopup/centered/dual/icon</code> · Figma <a href="https://www.figma.com/design/xqMgMp7wLhmEvvgiv6rSdW/xiaobin?node-id=1-5499" target="_blank" rel="noopener">1:5499</a></div>
+            </div>
+            <div class="modal-variant-card">
+              <div class="u-modal-demo-stage u-modal-demo-stage--centered">
+                <article class="u-modal-popup u-modal-popup--centered" aria-label="居中单按钮带图标">
+                  <div class="u-modal-popup__icon-wrap"><img src="icons/xiaobin/bell-notification.svg" alt="" width="24" height="24"></div>
+                  <h3 class="u-modal-popup__title">主标题</h3>
+                  <p class="u-modal-popup__desc">副标题 / 相关信息说明文案。</p>
+                  <div class="u-modal-popup__actions">
+                    <button type="button" class="btn btn-primary btn--r12">确定</button>
+                  </div>
+                </article>
+              </div>
+              <div class="cap"><code>ModalPopup/centered/single/icon</code> · Figma <a href="https://www.figma.com/design/xqMgMp7wLhmEvvgiv6rSdW/xiaobin?node-id=1-5509" target="_blank" rel="noopener">1:5509</a></div>
+            </div>
+            <div class="modal-variant-card">
+              <div class="u-modal-demo-stage u-modal-demo-stage--centered">
+                <article class="u-modal-popup u-modal-popup--centered" aria-label="居中双按钮带顶图">
+                  <div class="u-modal-popup__media u-image-placeholder"><span class="s-icon s-icon--24 s-icon--on-brand" data-icon="image" aria-hidden="true"></span></div>
+                  <h3 class="u-modal-popup__title">主标题</h3>
+                  <p class="u-modal-popup__desc">副标题 / 相关信息说明文案。</p>
+                  <div class="u-modal-popup__actions">
+                    <button type="button" class="btn btn-outline btn--r12">取消</button>
+                    <button type="button" class="btn btn-primary btn--r12">确定</button>
+                  </div>
+                </article>
+              </div>
+              <div class="cap"><code>ModalPopup/centered/dual/image</code> · Figma <a href="https://www.figma.com/design/xqMgMp7wLhmEvvgiv6rSdW/xiaobin?node-id=1-5517" target="_blank" rel="noopener">1:5517</a></div>
+            </div>
+            <div class="modal-variant-card">
+              <div class="u-modal-demo-stage u-modal-demo-stage--centered">
+                <article class="u-modal-popup u-modal-popup--centered" aria-label="居中单按钮带顶图">
+                  <div class="u-modal-popup__media u-image-placeholder"><span class="s-icon s-icon--24 s-icon--on-brand" data-icon="image" aria-hidden="true"></span></div>
+                  <h3 class="u-modal-popup__title">主标题</h3>
+                  <p class="u-modal-popup__desc">副标题 / 相关信息说明文案。</p>
+                  <div class="u-modal-popup__actions">
+                    <button type="button" class="btn btn-primary btn--r12">确定</button>
+                  </div>
+                </article>
+              </div>
+              <div class="cap"><code>ModalPopup/centered/single/image</code> · Figma <a href="https://www.figma.com/design/xqMgMp7wLhmEvvgiv6rSdW/xiaobin?node-id=1-5526" target="_blank" rel="noopener">1:5526</a></div>
+            </div>
+            <div class="modal-variant-card" style="grid-column:1/-1;max-width:390px">
+              <div class="u-modal-demo-stage u-modal-demo-stage--bottom">
+                <article class="u-modal-popup u-modal-popup--bottom" aria-label="底部弹窗">
+                  <h3 class="u-modal-popup__title">主标题</h3>
+                  <p class="u-modal-popup__desc">说明文案应尽量简洁，避免打断用户流程。</p>
+                  <div class="u-modal-popup__actions">
+                    <button type="button" class="btn btn-outline btn--r12">取消</button>
+                    <button type="button" class="btn btn-primary btn--r12">确定</button>
+                  </div>
+                </article>
+              </div>
+              <div class="cap"><code>ModalPopup/bottom</code> · Figma <a href="https://www.figma.com/design/xqMgMp7wLhmEvvgiv6rSdW/xiaobin?node-id=1-5480" target="_blank" rel="noopener">1:5480</a> · 390 通栏贴底</div>
+            </div>
+          </div>
+          <h4 style="margin:28px 0 12px;font-size:14px">RTL 变体文档（xiaobin 源稿 · 保留对照）</h4>
+          <p style="font-size:12px;color:var(--text-secondary);margin-bottom:12px">剑琅 App 默认 <strong>LTR</strong>。以下为源稿 RTL 布局对照预览（按钮顺序镜像），实现时可加 <code>dir="rtl"</code> 或修饰符 <code>--rtl</code>。</p>
+          <table>
+            <tr><th>属性</th><th>LTR（剑琅默认）</th><th>RTL（xiaobin 源稿）</th></tr>
+            <tr><td>双按钮顺序</td><td>左 Outline 取消 · 右 Primary 确定</td><td>镜像：Primary 在左 · Outline 在右</td></tr>
+            <tr><td>文案对齐</td><td>居中</td><td>居中</td></tr>
+            <tr><td>边距</td><td>居中 32px / 底部 0</td><td>同数值，方向镜像</td></tr>
+            <tr><td>遮罩</td><td colspan="2">规范不入库 · 交互层自行实现</td></tr>
+          </table>
+          <div class="u-modal-demo-stage u-modal-demo-stage--centered" style="margin-top:16px">
+            <article class="u-modal-popup u-modal-popup--centered u-modal-popup--rtl" dir="rtl" aria-label="RTL 对照">
+              <h3 class="u-modal-popup__title">主标题</h3>
+              <p class="u-modal-popup__desc">RTL 布局对照 · 按钮顺序镜像。</p>
+              <div class="u-modal-popup__actions">
+                <button type="button" class="btn btn-outline btn--r12">取消</button>
+                <button type="button" class="btn btn-primary btn--r12">确定</button>
+              </div>
+            </article>
+          </div>
+          <p style="margin-top:12px;font-size:12px;color:var(--text-secondary)">与 Figma 源稿差异（B 方案）：去除弹窗/按钮投影；次按钮由灰底改为 Outline；按钮高度 48px；居中弹窗边距按规范 32px（源稿约 25px）。</p>
+        </div>
+      </div>
+
       <div class="comp-block" id="comp-dialog">
         <div class="comp-block-hd"><strong>Dialog / Toast 对话框与轻提示</strong><code>Dialog · Toast</code></div>
         <div class="comp-block-bd">
@@ -2128,6 +2401,9 @@
       "canvasFrame": { "noRadius": true, "noShadow": true, "noBorder": true },
       "figmaAutoLayout": { "allFrames": true },
       "contentCardWhite": { "fill": "#FFFFFF", "noBorder": true },
+      "libraryFirstPolicy": { "iconsChapter": 6, "componentsChapter": 7, "allowExternalFallback": true },
+      "modalMargin": { "centeredHorizontal": 32, "centeredWidth": 326, "bottomLeftRightBottom": 0 },
+      "modalPopupSource": "https://www.figma.com/design/xqMgMp7wLhmEvvgiv6rSdW/xiaobin",
       "pageTitleBarBackIcon": "chevron-left",
       "pageTitleBarFigma": "https://www.figma.com/design/44P9g5yKcQEyXdHCayIrMn/RTS-AI读稿?node-id=6-623",
       "radiusBtnPrimary": 24,
@@ -2145,10 +2421,12 @@
 - 字体：苹果 PingFang SC / Windows 思源黑体 Source Han Sans SC（Windows 禁止 PingFang SC）；金额 TCloudNumber-Bold；¥ 与「应付/实付」用 UI 字体，¥ 与数字间距 4px
 - 勾号：仅用图标 check / check-circle-filled，禁止文字 √ 或 ✓
 - 文字：#333 / #929292 · 边框 #D7D7D5 · 主色 #F32F41
-- 图标：24px（安全 20）/ 16px 小箭头 · Stratis 库 · 颜色 #F32F41 / #333 / #929
+- 图标：优先第 6 章库（Stratis / Iconex / WeChat）；无合适项可外部矢量图标 · 24px（安全 20）/ 16px · 颜色 #F32F41 / #333 / #929
+- 组件：优先第 7 章库；无合适项可外部引入，须符合全局 UI 并注明来源
 - 占位：状态栏 390×44 白块；页面最底 390×39 白块（无阴影/描边/圆角）
 - 硬性：无 emoji；Figma 所有 Frame 须 Auto Layout；返回用 chevron-left 矢量图标（禁止文字 &lt;）；白底内容卡片无描边；按钮文案在按钮内水平垂直居中；Tab/卡片不遮挡；内页顶栏必用 PageTitleBar（页面标题栏）；标题与右侧文案底对齐；PageTitleBar/PageTabs/TabBar 主体无描边；图片位 #EDEDED+白 image icon；不横向溢出；按钮 max 370px；顶 Tab 390 居中；卡片内容不溢出；提示 icon 与首行底对齐；空状态内容区垂直居中；PageTitleBar 对齐 Figma RTS-AI 6-623
-- 组件：第7章组件目录
+- 组件：优先第 7 章库；弹窗用 ModalPopup（7.1 · xiaobin 7 变体）；无合适项可外部引入
+- 弹窗：居中左右边距 32px · 底部弹窗左/右/下 0 · 无遮罩入库 · 无阴影 · 按钮 48px
 - 内容：[具体业务字段]</pre>
     </section>
 
@@ -2627,6 +2905,20 @@
       table.appendChild(tr);
     });
   })();
+
+  (function renderXiaobinModalTable() {
+    const table = document.getElementById('xiaobin-modal-map');
+    if (!table || typeof XIAOBIN_MODAL_COMPONENTS === 'undefined') return;
+    XIAOBIN_MODAL_COMPONENTS.forEach(row => {
+      const tr = document.createElement('tr');
+      tr.innerHTML = `<td><code>${row.id}</code></td><td>${row.name}</td><td><a href="${row.figmaUrl}" target="_blank" rel="noopener">${row.figmaNode}</a></td><td>${row.note}</td>`;
+      table.appendChild(tr);
+    });
+  })();
+
+  document.querySelectorAll('.u-modal-popup__icon-wrap img[src^="icons/"]').forEach(img => {
+    if (typeof specAssetUrl === 'function') img.src = specAssetUrl(img.getAttribute('src'));
+  });
 
   document.getElementById('icon-search').addEventListener('input', e => {
     iconQuery = e.target.value;
