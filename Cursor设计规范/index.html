@@ -605,9 +605,11 @@
     .u-modal-popup--bottom {
       width: var(--canvas-w);
       max-width: var(--canvas-w);
-      margin: 0;
+      margin-left: auto;
+      margin-right: auto;
       border-radius: var(--radius-btn-16) var(--radius-btn-16) 0 0;
       padding: 20px 20px 40px;
+      flex-shrink: 0;
     }
     .u-modal-popup--rtl {
       direction: rtl;
@@ -634,6 +636,7 @@
       display: flex;
       flex-direction: column;
       justify-content: flex-end;
+      align-items: center;
     }
     .modal-variant-grid {
       display: grid;
@@ -654,6 +657,13 @@
       line-height: 1.4;
     }
     .modal-variant-card code { font-size: 10px; }
+    .modal-variant-card--bottom {
+      grid-column: 1 / -1;
+      max-width: var(--canvas-w);
+      width: 100%;
+      margin-left: auto;
+      margin-right: auto;
+    }
     .u-empty { text-align: center; padding: 40px 16px; color: var(--text-secondary); }
     .u-empty .s-icon { font-size: 64px; color: var(--gray-5); }
     .u-empty--canvas {
