@@ -611,12 +611,6 @@
       padding: 20px 20px 40px;
       flex-shrink: 0;
     }
-    .u-modal-popup--rtl {
-      direction: rtl;
-    }
-    .u-modal-popup--rtl .u-modal-popup__actions {
-      flex-direction: row-reverse;
-    }
     .u-modal-demo-stage {
       width: var(--canvas-w);
       max-width: 100%;
@@ -1668,7 +1662,7 @@
         <tr><td>导航</td><td>TabBar</td><td>标准底栏</td><td>子模块 3–4 Tab</td></tr>
         <tr><td>反馈</td><td>AlertBanner</td><td>提示信息栏</td><td>图标与首行文案底对齐</td></tr>
         <tr><td>反馈</td><td>ActionSheet</td><td>动作面板</td><td>WeChat UX · 底出菜单 · 见 <a href="#wechat-ux-components">7.0</a></td></tr>
-        <tr><td>反馈</td><td>ModalPopup</td><td>弹窗</td><td>xiaobin 源稿 · 7 变体 · 见 <a href="#comp-modal-popup">7.1</a></td></tr>
+        <tr><td>反馈</td><td>ModalPopup</td><td>弹窗</td><td>全局通用 · 7 变体 · 见 <a href="#comp-modal-popup">7.1</a></td></tr>
         <tr><td>反馈</td><td>Dialog</td><td>简易对话框</td><td>轻量确认 · 与 ModalPopup 并存</td></tr>
         <tr><td>表单</td><td>SearchBar</td><td>搜索栏</td><td>WeChat UX · 圆角 8px 灰底</td></tr>
         <tr><td>通讯</td><td>ChatBubble</td><td>聊天气泡</td><td>WeChat UX · 客服/IM</td></tr>
@@ -2038,9 +2032,9 @@
       </div>
 
       <div class="comp-block" id="comp-modal-popup">
-        <div class="comp-block-hd"><strong>7.1 ModalPopup 弹窗</strong><code>xiaobin · Figma xqMgMp7wLhmEvvgiv6rSdW</code></div>
+        <div class="comp-block-hd"><strong>7.1 ModalPopup 弹窗</strong><code>全局通用 · Figma xqMgMp7wLhmEvvgiv6rSdW</code></div>
         <div class="comp-block-bd">
-          <p style="font-size:12px;color:var(--text-secondary);margin-bottom:12px">来源 <a href="https://www.figma.com/design/xqMgMp7wLhmEvvgiv6rSdW/xiaobin" target="_blank" rel="noopener">xiaobin（RTL）Figma</a>。落地为剑琅 <strong>LTR</strong>；视觉服从 ★ 全局强制 UI（<strong>无阴影</strong>、按钮高 <strong>48px</strong>、次钮 <strong>Outline</strong>、主钮 <strong>Primary</strong>）。<strong>不含遮罩层</strong>。AI 标注：<code>ModalPopup + 变体</code> + <code>source:xiaobin</code>。</p>
+          <p style="font-size:12px;color:var(--text-secondary);margin-bottom:12px">剑琅联盟<strong>全局通用</strong>弹窗组件（居中 / 底部共 7 变体）。视觉服从 ★ 全局强制 UI（<strong>无阴影</strong>、按钮高 <strong>48px</strong>、次钮 <strong>Outline</strong>、主钮 <strong>Primary</strong>）。<strong>不含遮罩层</strong>。设计稿参照 <a href="https://www.figma.com/design/xqMgMp7wLhmEvvgiv6rSdW/xiaobin" target="_blank" rel="noopener">Figma · xiaobin</a>。AI 标注：<code>ModalPopup + 变体</code>。</p>
           <table id="xiaobin-modal-map">
             <tr><th>组件 ID</th><th>名称</th><th>Figma</th><th>说明</th></tr>
           </table>
@@ -2052,10 +2046,11 @@
             <tr><td>标题</td><td colspan="2">17px / 600 / #333 · 居中</td></tr>
             <tr><td>副文案</td><td colspan="2">16px / 400 / #929292 · 居中</td></tr>
             <tr><td>按钮区</td><td colspan="2">距文案 8px · 间距 12px · 高 48px · 圆角 12px</td></tr>
+            <tr><td>双按钮顺序</td><td colspan="2">左 Outline 取消 · 右 Primary 确定</td></tr>
             <tr><td>Icon 媒体</td><td colspan="2">40×40 圆底 #EDEDED · 24px SVG · <code>icons/xiaobin/bell-notification.svg</code></td></tr>
             <tr><td>Image 媒体</td><td colspan="2">宽 100% · 高 135px · 圆角 8px · 占位 #EDEDED + 白 image icon</td></tr>
           </table>
-          <h4 style="margin:24px 0 12px;font-size:14px">LTR 变体预览（剑琅默认）</h4>
+          <h4 style="margin:24px 0 12px;font-size:14px">变体预览</h4>
           <div class="modal-variant-grid">
             <div class="modal-variant-card">
               <div class="u-modal-demo-stage u-modal-demo-stage--centered">
@@ -2150,26 +2145,7 @@
               <div class="cap"><code>ModalPopup/bottom</code> · Figma <a href="https://www.figma.com/design/xqMgMp7wLhmEvvgiv6rSdW/xiaobin?node-id=1-5480" target="_blank" rel="noopener">1:5480</a> · 390 通栏贴底</div>
             </div>
           </div>
-          <h4 style="margin:28px 0 12px;font-size:14px">RTL 变体文档（xiaobin 源稿 · 保留对照）</h4>
-          <p style="font-size:12px;color:var(--text-secondary);margin-bottom:12px">剑琅 App 默认 <strong>LTR</strong>。以下为源稿 RTL 布局对照预览（按钮顺序镜像），实现时可加 <code>dir="rtl"</code> 或修饰符 <code>--rtl</code>。</p>
-          <table>
-            <tr><th>属性</th><th>LTR（剑琅默认）</th><th>RTL（xiaobin 源稿）</th></tr>
-            <tr><td>双按钮顺序</td><td>左 Outline 取消 · 右 Primary 确定</td><td>镜像：Primary 在左 · Outline 在右</td></tr>
-            <tr><td>文案对齐</td><td>居中</td><td>居中</td></tr>
-            <tr><td>边距</td><td>居中 32px / 底部 0</td><td>同数值，方向镜像</td></tr>
-            <tr><td>遮罩</td><td colspan="2">规范不入库 · 交互层自行实现</td></tr>
-          </table>
-          <div class="u-modal-demo-stage u-modal-demo-stage--centered" style="margin-top:16px">
-            <article class="u-modal-popup u-modal-popup--centered u-modal-popup--rtl" dir="rtl" aria-label="RTL 对照">
-              <h3 class="u-modal-popup__title">主标题</h3>
-              <p class="u-modal-popup__desc">RTL 布局对照 · 按钮顺序镜像。</p>
-              <div class="u-modal-popup__actions">
-                <button type="button" class="btn btn-outline btn--r12">取消</button>
-                <button type="button" class="btn btn-primary btn--r12">确定</button>
-              </div>
-            </article>
-          </div>
-          <p style="margin-top:12px;font-size:12px;color:var(--text-secondary)">与 Figma 源稿差异（B 方案）：去除弹窗/按钮投影；次按钮由灰底改为 Outline；按钮高度 48px；居中弹窗边距按规范 32px（源稿约 25px）。</p>
+          <p style="margin-top:12px;font-size:12px;color:var(--text-secondary)">与 Figma 初稿差异：去除弹窗/按钮投影；次按钮由灰底改为 Outline；按钮高度 48px；居中弹窗边距按规范 32px。</p>
         </div>
       </div>
 
@@ -2451,7 +2427,7 @@
 - 组件：优先第 7 章库；无合适项可外部引入，须符合全局 UI 并注明来源
 - 占位：状态栏 390×44 白块；页面最底 390×39 白块（无阴影/描边/圆角）
 - 硬性：无 emoji；Figma 所有 Frame 须 Auto Layout；返回用 chevron-left 矢量图标（禁止文字 &lt;）；白底内容卡片无描边；按钮文案在按钮内水平垂直居中；Tab/卡片不遮挡；内页顶栏必用 PageTitleBar（页面标题栏）；标题与右侧文案底对齐；PageTitleBar/PageTabs/TabBar 主体无描边；图片位 #EDEDED+白 image icon；不横向溢出；按钮 max 370px；顶 Tab 390 居中；卡片内容不溢出；提示 icon 与首行底对齐；空状态内容区垂直居中；PageTitleBar 对齐 Figma RTS-AI 6-623
-- 组件：优先第 7 章库；弹窗用 ModalPopup（7.1 · xiaobin 7 变体）；无合适项可外部引入
+- 组件：优先第 7 章库；弹窗用 ModalPopup（7.1 · 7 变体）；无合适项可外部引入
 - 弹窗：居中左右边距 32px · 底部弹窗左/右/下 0 · 无遮罩入库 · 无阴影 · 按钮 48px
 - 内容：[具体业务字段]</pre>
     </section>

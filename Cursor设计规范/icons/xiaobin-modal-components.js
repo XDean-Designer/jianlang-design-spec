@@ -1,6 +1,6 @@
 /**
- * xiaobin ModalPopup 组件映射（Figma RTL 源稿 → 剑琅规范 LTR 落地）
- * 源文件：https://www.figma.com/design/xqMgMp7wLhmEvvgiv6rSdW/xiaobin（RTL）
+ * ModalPopup 全局弹窗组件映射
+ * 设计稿参照：https://www.figma.com/design/xqMgMp7wLhmEvvgiv6rSdW/xiaobin
  */
 const XIAOBIN_MODAL_COMPONENTS = [
   { id: 'ModalPopup/bottom', name: '底部弹窗', figmaNode: '1:5480', variant: 'bottom', buttons: 'dual', media: 'none', figmaUrl: 'https://www.figma.com/design/xqMgMp7wLhmEvvgiv6rSdW/xiaobin?node-id=1-5480', note: '390 通栏 · 左右下边距 0 · 顶圆角 16px · 无遮罩层入库' },
