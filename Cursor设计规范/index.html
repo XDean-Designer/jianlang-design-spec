@@ -846,7 +846,7 @@
       border: 1px solid var(--border);
     }
     .u-member-card__head {
-      padding: var(--space-card);
+      padding: 14px 14px 12px;
       background-color: var(--mc-fallback);
       background-image: var(--mc-detail-bg);
       background-position: center;
@@ -861,16 +861,14 @@
     .u-member-card__metrics .metric__label { display: block; font-size: 11px; color: var(--figma-text-secondary); line-height: 1.3; margin-bottom: 2px; }
     .u-member-card__metrics .metric__value { font-size: 14px; font-weight: 600; line-height: 1.35; }
     .u-member-card__metrics .metric__price { font-family: var(--font-data); font-size: 20px; font-weight: 700; letter-spacing: -.02em; }
-    .u-member-card__inset {
-      margin-top: 10px;
-      padding: 8px 10px;
+    .u-member-card__body {
+      padding: 10px 14px 12px;
       background: #fff;
-      border-radius: 8px;
       font-size: 11px;
       line-height: 1.55;
       color: var(--figma-text-secondary);
     }
-    .u-member-card__inset p + p { margin-top: 4px; }
+    .u-member-card__body p + p { margin-top: 4px; }
     .u-member-card__foot {
       display: flex;
       align-items: center;
@@ -909,12 +907,12 @@
     .u-member-card--package { --mc-fallback: #E5CFB7; --mc-detail-bg: url('assets/member-card/package-detail.png'); --mc-compact-bg: url('assets/member-card/package-compact.png'); --mc-cta: #F7E5D3; }
     .u-member-card--compact {
       max-width: 358px;
-      height: 40px;
+      height: 48px;
       display: flex;
       align-items: center;
-      gap: 8px;
-      padding: 0 12px 0 10px;
-      border-radius: 8px;
+      gap: 10px;
+      padding: 0 14px 0 12px;
+      border-radius: 10px;
       background-color: var(--mc-fallback);
       background-image: var(--mc-compact-bg);
       background-position: center;
@@ -927,16 +925,16 @@
     }
     .u-member-card--compact .u-member-card__badge {
       flex-shrink: 0;
-      min-width: 40px;
-      height: 22px;
-      padding: 0 6px;
+      min-width: 52px;
+      height: 24px;
+      padding: 0 8px;
       display: inline-flex;
       align-items: center;
       justify-content: center;
-      font-size: 11px;
+      font-size: 12px;
       font-weight: 500;
       border-radius: 4px;
-      background: rgba(255,255,255,.58);
+      background: rgba(255,255,255,.72);
       color: var(--figma-text-primary);
       position: relative;
       z-index: 1;
@@ -961,8 +959,22 @@
     .member-card-showcase .u-member-card__type { font-size: 15px; }
     .member-card-showcase .u-member-card__metrics .metric__price { font-size: 17px; }
     .member-card-showcase .u-member-card__foot { padding: 8px 10px 10px; }
+    .member-card-showcase .u-member-card__body { padding: 8px 10px; font-size: 10px; }
     .member-card-showcase .u-member-card__links { gap: 8px; font-size: 11px; }
     .member-card-showcase .u-member-card__cta { height: 26px; line-height: 26px; padding: 0 12px; font-size: 12px; }
+    .member-card-page-preview { width: var(--canvas-w); max-width: 100%; margin: 16px auto 0; background: var(--bg-page); border: 1px solid var(--border); border-radius: var(--radius-l); overflow: hidden; }
+    .member-card-page-preview .u-page-title-bar .action { font-size: 14px; color: var(--figma-text-primary); }
+    .member-card-page-preview__body { padding: 16px; }
+    .member-card-page-preview .u-member-card--compact { max-width: none; width: 100%; }
+    .member-card-stat-block { margin-top: 16px; background: #fff; border-radius: 12px; padding: 14px 16px; border: none; }
+    .member-card-stat-block__title { display: flex; align-items: center; gap: 6px; font-size: 15px; font-weight: 600; color: var(--figma-text-primary); margin-bottom: 14px; }
+    .member-card-stat-block__title::before { content: ''; width: 3px; height: 14px; border-radius: 2px; background: var(--accent-blue); flex-shrink: 0; }
+    .member-card-stat-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+    .member-card-stat-item { display: flex; flex-direction: column; gap: 6px; }
+    .member-card-stat-item__label { display: flex; align-items: center; gap: 4px; font-size: 12px; color: var(--figma-text-secondary); }
+    .member-card-stat-item__label .s-icon { font-size: 16px; width: 16px; height: 16px; }
+    .member-card-stat-item__value { font-family: var(--font-data); font-size: 22px; font-weight: 700; color: var(--figma-text-primary); line-height: 1.2; }
+    .member-card-stat-item__value .unit { font-family: var(--font-ui); font-size: 14px; font-weight: 500; margin-left: 2px; }
     @media (max-width: 900px) {
       .sidebar { display: none; }
       .spec-topbar { display: flex; }
@@ -1738,17 +1750,21 @@
         <div class="comp-block-bd">
           <p style="font-size:12px;color:var(--text-secondary);margin-bottom:12px">卡面使用切图背景（<code>assets/member-card/</code>）· 详卡 Frame 五张 · 列表条 Mask 五张 · CTA 色由切图主色推导。AI 标注：<code>MemberCard/detail + --stored</code> 或 <code>MemberCard/compact + --times</code>。</p>
           <figure class="member-card-figma-ref">
-            <img src="assets/figma-member-cards-ref.jpg" alt="Figma 会员卡组件设计稿对照" width="800" height="434" loading="lazy">
-            <figcaption>设计稿对照（自 Figma 导出缩略图）· 实现须与上图视觉一致</figcaption>
+            <img src="assets/member-card/ref-detail-cards.png" alt="页面截图：五类会员卡详卡" width="800" loading="lazy">
+            <figcaption>页面截图 · 详卡五类横向对照（享受折扣 + 卡内余额 + 有效期限/赠送项目）</figcaption>
+          </figure>
+          <figure class="member-card-figma-ref">
+            <img src="assets/member-card/ref-compact-page.png" alt="页面截图：卡详情页 compact 卡" width="800" loading="lazy">
+            <figcaption>页面截图 · 卡详情页 compact 卡 + 卡统计</figcaption>
           </figure>
           <h4 style="margin:0 0 10px;font-size:14px">形态一 · 详卡 MemberCard/detail</h4>
-          <p style="font-size:12px;color:var(--text-secondary);margin-bottom:12px">切图纹理头区 + 内嵌白底说明 + 底栏操作；标题/金额 <code>#333</code>，标签 <code>#929292</code>；开单为切图主色衍生胶囊按钮。</p>
+          <p style="font-size:12px;color:var(--text-secondary);margin-bottom:12px">切图头区（卡名 + 享受折扣/卡内余额）+ 白底说明区（有效期限、赠送项目）+ 底栏操作；左下首页图标 · 右链 + 「开单」胶囊。</p>
           <article class="u-member-card u-member-card--stored" aria-label="储值卡详卡">
             <div class="u-member-card__head">
               <div class="u-member-card__type">储值卡</div>
               <div class="u-member-card__metrics">
                 <div class="metric">
-                  <span class="metric__label">零售折扣</span>
+                  <span class="metric__label">享受折扣</span>
                   <span class="metric__value">所有项目8折</span>
                 </div>
                 <div class="metric metric--end">
@@ -1756,13 +1772,13 @@
                   <span class="metric__value metric__price">¥2000.99</span>
                 </div>
               </div>
-              <div class="u-member-card__inset">
-                <p>适用范围：全店通用</p>
-                <p>使用须知：不可退款，请在有效期内使用</p>
-              </div>
+            </div>
+            <div class="u-member-card__body">
+              <p>有效期限：永久有效</p>
+              <p>赠送项目：洗吹3次，烫染1次，洗吹3次，烫染1次…</p>
             </div>
             <div class="u-member-card__foot">
-              <span class="s-icon" data-icon="jump" aria-hidden="true"></span>
+              <span class="s-icon" data-icon="home" aria-hidden="true"></span>
               <nav class="u-member-card__links" aria-label="卡操作">
                 <a href="#">退卡</a>
                 <a href="#">升降级</a>
@@ -1777,66 +1793,92 @@
               <div class="u-member-card__head">
                 <div class="u-member-card__type">储值卡</div>
                 <div class="u-member-card__metrics">
-                  <div class="metric"><span class="metric__label">零售折扣</span><span class="metric__value">所有项目8折</span></div>
+                  <div class="metric"><span class="metric__label">享受折扣</span><span class="metric__value">所有项目8折</span></div>
                   <div class="metric metric--end"><span class="metric__label">卡内余额</span><span class="metric__value metric__price">¥2000.99</span></div>
                 </div>
-                <div class="u-member-card__inset"><p>适用范围：全店通用</p></div>
               </div>
-              <div class="u-member-card__foot"><span class="s-icon" data-icon="jump"></span><nav class="u-member-card__links"><a href="#">退卡</a><a href="#">升降级</a><a href="#">充值</a></nav><button type="button" class="u-member-card__cta">开单</button></div>
+              <div class="u-member-card__body"><p>有效期限：永久有效</p><p>赠送项目：洗吹3次，烫染1次…</p></div>
+              <div class="u-member-card__foot"><span class="s-icon" data-icon="home"></span><nav class="u-member-card__links"><a href="#">退卡</a><a href="#">升降级</a><a href="#">充值</a></nav><button type="button" class="u-member-card__cta">开单</button></div>
             </article>
             <article class="u-member-card u-member-card--times">
               <div class="u-member-card__head">
                 <div class="u-member-card__type">计次卡</div>
                 <div class="u-member-card__metrics">
-                  <div class="metric"><span class="metric__label">剩余次数</span><span class="metric__value">5次</span></div>
-                  <div class="metric metric--end"><span class="metric__label">卡内余额</span><span class="metric__value metric__price">¥0.00</span></div>
+                  <div class="metric"><span class="metric__label">享受折扣</span><span class="metric__value">所有项目8折</span></div>
+                  <div class="metric metric--end"><span class="metric__label">卡内余额</span><span class="metric__value metric__price">¥2000.99</span></div>
                 </div>
-                <div class="u-member-card__inset"><p>适用范围：指定项目</p></div>
               </div>
-              <div class="u-member-card__foot"><span class="s-icon" data-icon="jump"></span><nav class="u-member-card__links"><a href="#">退卡</a><a href="#">升降级</a><a href="#">充值</a></nav><button type="button" class="u-member-card__cta">开单</button></div>
+              <div class="u-member-card__body"><p>有效期限：永久有效</p><p>赠送项目：洗吹3次，烫染1次…</p></div>
+              <div class="u-member-card__foot"><span class="s-icon" data-icon="home"></span><nav class="u-member-card__links"><a href="#">退卡</a><a href="#">升降级</a><a href="#">充值</a></nav><button type="button" class="u-member-card__cta">开单</button></div>
             </article>
             <article class="u-member-card u-member-card--discount">
               <div class="u-member-card__head">
                 <div class="u-member-card__type">折扣卡</div>
                 <div class="u-member-card__metrics">
-                  <div class="metric"><span class="metric__label">零售折扣</span><span class="metric__value">所有项目8折</span></div>
+                  <div class="metric"><span class="metric__label">享受折扣</span><span class="metric__value">所有项目8折</span></div>
                   <div class="metric metric--end"><span class="metric__label">卡内余额</span><span class="metric__value metric__price">¥2000.99</span></div>
                 </div>
-                <div class="u-member-card__inset"><p>适用范围：全店通用</p></div>
               </div>
-              <div class="u-member-card__foot"><span class="s-icon" data-icon="jump"></span><nav class="u-member-card__links"><a href="#">退卡</a><a href="#">升降级</a><a href="#">充值</a></nav><button type="button" class="u-member-card__cta">开单</button></div>
+              <div class="u-member-card__body"><p>有效期限：永久有效</p><p>赠送项目：洗吹3次，烫染1次…</p></div>
+              <div class="u-member-card__foot"><span class="s-icon" data-icon="home"></span><nav class="u-member-card__links"><a href="#">退卡</a><a href="#">升降级</a><a href="#">充值</a></nav><button type="button" class="u-member-card__cta">开单</button></div>
             </article>
             <article class="u-member-card u-member-card--period">
               <div class="u-member-card__head">
                 <div class="u-member-card__type">周期卡</div>
                 <div class="u-member-card__metrics">
-                  <div class="metric"><span class="metric__label">有效期</span><span class="metric__value">30天</span></div>
+                  <div class="metric"><span class="metric__label">享受折扣</span><span class="metric__value">所有项目8折</span></div>
                   <div class="metric metric--end"><span class="metric__label">卡内余额</span><span class="metric__value metric__price">¥2000.99</span></div>
                 </div>
-                <div class="u-member-card__inset"><p>适用范围：全店通用</p></div>
               </div>
-              <div class="u-member-card__foot"><span class="s-icon" data-icon="jump"></span><nav class="u-member-card__links"><a href="#">退卡</a><a href="#">升降级</a><a href="#">充值</a></nav><button type="button" class="u-member-card__cta">开单</button></div>
+              <div class="u-member-card__body"><p>有效期限：永久有效</p><p>赠送项目：洗吹3次，烫染1次…</p></div>
+              <div class="u-member-card__foot"><span class="s-icon" data-icon="home"></span><nav class="u-member-card__links"><a href="#">退卡</a><a href="#">升降级</a><a href="#">充值</a></nav><button type="button" class="u-member-card__cta">开单</button></div>
             </article>
             <article class="u-member-card u-member-card--package">
               <div class="u-member-card__head">
                 <div class="u-member-card__type">套餐卡</div>
                 <div class="u-member-card__metrics">
-                  <div class="metric"><span class="metric__label">套餐内容</span><span class="metric__value">5次护理</span></div>
+                  <div class="metric"><span class="metric__label">享受折扣</span><span class="metric__value">所有项目8折</span></div>
                   <div class="metric metric--end"><span class="metric__label">卡内余额</span><span class="metric__value metric__price">¥2000.99</span></div>
                 </div>
-                <div class="u-member-card__inset"><p>适用范围：全店通用</p></div>
               </div>
-              <div class="u-member-card__foot"><span class="s-icon" data-icon="jump"></span><nav class="u-member-card__links"><a href="#">退卡</a><a href="#">升降级</a><a href="#">充值</a></nav><button type="button" class="u-member-card__cta">开单</button></div>
+              <div class="u-member-card__body"><p>有效期限：永久有效</p><p>赠送项目：洗吹3次，烫染1次…</p></div>
+              <div class="u-member-card__foot"><span class="s-icon" data-icon="home"></span><nav class="u-member-card__links"><a href="#">退卡</a><a href="#">升降级</a><a href="#">充值</a></nav><button type="button" class="u-member-card__cta">开单</button></div>
             </article>
           </div>
           <h4 style="margin:24px 0 10px;font-size:14px">形态二 · 列表条 MemberCard/compact</h4>
-          <p style="font-size:12px;color:var(--text-secondary);margin-bottom:12px">高度 40px · 圆角 8px · Mask 切图底 · 左侧类型徽标 + 卡名称 · 保留 1px 描边。</p>
+          <p style="font-size:12px;color:var(--text-secondary);margin-bottom:12px">高度 48px · 圆角 10px · Mask 切图底 · 左侧完整类型名徽标 + 卡名称 · 保留 1px 描边。</p>
           <div class="member-card-stack">
-            <div class="u-member-card u-member-card--compact u-member-card--stored"><span class="u-member-card__badge">储值</span><span class="u-member-card__name">储值3000元</span></div>
-            <div class="u-member-card u-member-card--compact u-member-card--times"><span class="u-member-card__badge">次卡</span><span class="u-member-card__name">基础5次卡</span></div>
-            <div class="u-member-card u-member-card--compact u-member-card--discount"><span class="u-member-card__badge">折扣</span><span class="u-member-card__name">灵动5折卡</span></div>
-            <div class="u-member-card u-member-card--compact u-member-card--period"><span class="u-member-card__badge">周期</span><span class="u-member-card__name">月卡30天</span></div>
-            <div class="u-member-card u-member-card--compact u-member-card--package"><span class="u-member-card__badge">套餐</span><span class="u-member-card__name">套餐5次卡</span></div>
+            <div class="u-member-card u-member-card--compact u-member-card--stored"><span class="u-member-card__badge">储值卡</span><span class="u-member-card__name">储值3000元</span></div>
+            <div class="u-member-card u-member-card--compact u-member-card--times"><span class="u-member-card__badge">计次卡</span><span class="u-member-card__name">剪发5次卡</span></div>
+            <div class="u-member-card u-member-card--compact u-member-card--discount"><span class="u-member-card__badge">折扣卡</span><span class="u-member-card__name">烫染5折卡</span></div>
+            <div class="u-member-card u-member-card--compact u-member-card--period"><span class="u-member-card__badge">周期卡</span><span class="u-member-card__name">美发卡</span></div>
+            <div class="u-member-card u-member-card--compact u-member-card--package"><span class="u-member-card__badge">套餐卡</span><span class="u-member-card__name">套餐5次卡</span></div>
+          </div>
+          <h4 style="margin:24px 0 10px;font-size:14px">页面场景 · 卡详情</h4>
+          <p style="font-size:12px;color:var(--text-secondary);margin-bottom:12px">compact 卡置于 PageTitleBar 下方 · 卡统计区块（持卡人数 / 总计余额）。</p>
+          <div class="member-card-page-preview">
+            <div class="phone-status-bar" aria-hidden="true"></div>
+            <div class="u-page-title-bar">
+              <span class="s-icon back s-icon--24" data-icon="chevron-left" aria-label="返回"></span>
+              <span class="title">卡详情</span>
+              <span class="action">下架</span>
+            </div>
+            <div class="member-card-page-preview__body">
+              <div class="u-member-card u-member-card--compact u-member-card--stored"><span class="u-member-card__badge">储值卡</span><span class="u-member-card__name">储值3000元</span></div>
+              <div class="member-card-stat-block">
+                <div class="member-card-stat-block__title">卡统计</div>
+                <div class="member-card-stat-grid">
+                  <div class="member-card-stat-item">
+                    <div class="member-card-stat-item__label"><span class="s-icon" data-icon="user" style="color:#1A70FE"></span>持卡人数</div>
+                    <div class="member-card-stat-item__value">0<span class="unit">人</span></div>
+                  </div>
+                  <div class="member-card-stat-item">
+                    <div class="member-card-stat-item__label"><span class="s-icon" data-icon="wallet" style="color:#FF8C00"></span>总计余额</div>
+                    <div class="member-card-stat-item__value">2000<span class="unit">元</span></div>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
           <table style="width:100%;font-size:12px;margin-top:20px;border-collapse:collapse">
             <tr style="background:var(--gray-1)"><th style="text-align:left;padding:8px">修饰符</th><th style="text-align:left;padding:8px">详卡切图</th><th style="text-align:left;padding:8px">开单按钮</th><th style="text-align:left;padding:8px">列表条切图</th></tr>
@@ -1846,7 +1888,7 @@
             <tr><td style="padding:8px"><code>--period</code></td><td style="padding:8px"><code>period-detail.png</code></td><td style="padding:8px">#FFE7E3</td><td style="padding:8px"><code>period-compact.png</code></td></tr>
             <tr><td style="padding:8px"><code>--package</code></td><td style="padding:8px"><code>package-detail.png</code></td><td style="padding:8px">#F7E5D3</td><td style="padding:8px"><code>package-compact.png</code></td></tr>
           </table>
-          <p style="margin-top:12px;font-size:12px;color:var(--text-secondary)">详卡宽 358（画布 390 左右边距 16）· 头区 <code>background-size: cover</code> · 说明区内嵌白底圆角 8 · 金额 <code>20px TCloudNumber-Bold</code> · 底栏右对齐文字链 + 「开单」胶囊 · 资源目录 <code>assets/member-card/</code>。</p>
+          <p style="margin-top:12px;font-size:12px;color:var(--text-secondary)">详卡宽 358 · 头区切图 + 白底说明区（非头区内嵌）· 指标左「享受折扣」右「卡内余额」· 金额 <code>20px TCloudNumber-Bold</code> · 底栏首页图标 + 文字链 + 「开单」· compact 高 48px · 资源 <code>assets/member-card/</code>。</p>
         </div>
       </div>
 
