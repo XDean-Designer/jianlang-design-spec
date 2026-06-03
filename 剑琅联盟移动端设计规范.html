@@ -831,13 +831,12 @@
     .u-price-row .col label { display: block; font-size: 10px; color: var(--figma-text-secondary); margin-bottom: 4px; }
     .u-price-row .col .v { font-weight: 600; color: var(--figma-text-primary); }
     .u-price-row .col .v.retail { color: var(--brand-6); }
-    /* MemberCard — Figma ysexRTHn8Qt0DVOvROJBrX（详卡 + 列表条 · 实测色值） */
+    /* MemberCard — Figma ysexRTHn8Qt0DVOvROJBrX（详卡 + 列表条 · 切图卡面） */
     .u-member-card {
-      --mc-start: #C8D9F7;
-      --mc-end: #DBD6F4;
-      --mc-cta: #BDD5ED;
-      --mc-compact-start: #D3DAF7;
-      --mc-compact-end: #E8E4F8;
+      --mc-fallback: #CFDBF6;
+      --mc-detail-bg: url('assets/member-card/stored-detail.png');
+      --mc-compact-bg: url('assets/member-card/stored-compact.png');
+      --mc-cta: #E1F1FF;
       width: 100%;
       max-width: 358px;
       border-radius: 12px;
@@ -848,7 +847,11 @@
     }
     .u-member-card__head {
       padding: var(--space-card);
-      background: var(--mc-bg, var(--mc-start));
+      background-color: var(--mc-fallback);
+      background-image: var(--mc-detail-bg);
+      background-position: center;
+      background-size: cover;
+      background-repeat: no-repeat;
       color: var(--figma-text-primary);
     }
     .u-member-card__type { font-size: 17px; font-weight: 600; line-height: 1.25; margin-bottom: 10px; }
@@ -899,11 +902,11 @@
       font-weight: 500;
       line-height: 30px;
     }
-    .u-member-card--stored { --mc-bg: #DBD6F4; --mc-cta: #BDD5ED; --mc-compact-bg: #E8E4F8; }
-    .u-member-card--times { --mc-bg: #C7DEE6; --mc-cta: #B9D4DD; --mc-compact-bg: #E4F3F7; }
-    .u-member-card--discount { --mc-bg: #F3D8A1; --mc-cta: #E1C789; --mc-compact-bg: #FBF0DC; }
-    .u-member-card--period { --mc-bg: #F6D6CB; --mc-cta: #E3BFB3; --mc-compact-bg: #FFF0EB; }
-    .u-member-card--package { --mc-bg: #E7D7C0; --mc-cta: #D7C3A8; --mc-compact-bg: #F7F0E6; }
+    .u-member-card--stored { --mc-fallback: #CFDBF6; --mc-detail-bg: url('assets/member-card/stored-detail.png'); --mc-compact-bg: url('assets/member-card/stored-compact.png'); --mc-cta: #E1F1FF; }
+    .u-member-card--times { --mc-fallback: #C7DDE8; --mc-detail-bg: url('assets/member-card/times-detail.png'); --mc-compact-bg: url('assets/member-card/times-compact.png'); --mc-cta: #D9F3FF; }
+    .u-member-card--discount { --mc-fallback: #EACF9A; --mc-detail-bg: url('assets/member-card/discount-detail.png'); --mc-compact-bg: url('assets/member-card/discount-compact.png'); --mc-cta: #FCE5B6; }
+    .u-member-card--period { --mc-fallback: #F7D1C7; --mc-detail-bg: url('assets/member-card/period-detail.png'); --mc-compact-bg: url('assets/member-card/period-compact.png'); --mc-cta: #FFE7E3; }
+    .u-member-card--package { --mc-fallback: #E5CFB7; --mc-detail-bg: url('assets/member-card/package-detail.png'); --mc-compact-bg: url('assets/member-card/package-compact.png'); --mc-cta: #F7E5D3; }
     .u-member-card--compact {
       max-width: 358px;
       height: 40px;
@@ -912,8 +915,13 @@
       gap: 8px;
       padding: 0 12px 0 10px;
       border-radius: 8px;
-      background: var(--mc-compact-bg, var(--mc-compact-start));
+      background-color: var(--mc-fallback);
+      background-image: var(--mc-compact-bg);
+      background-position: center;
+      background-size: cover;
+      background-repeat: no-repeat;
       box-shadow: none;
+      border: 1px solid var(--border);
       position: relative;
       overflow: hidden;
     }
@@ -928,8 +936,10 @@
       font-size: 11px;
       font-weight: 500;
       border-radius: 4px;
-      background: rgba(255,255,255,.45);
+      background: rgba(255,255,255,.58);
       color: var(--figma-text-primary);
+      position: relative;
+      z-index: 1;
     }
     .u-member-card--compact .u-member-card__name {
       flex: 1;
@@ -939,6 +949,8 @@
       white-space: nowrap;
       overflow: hidden;
       text-overflow: ellipsis;
+      position: relative;
+      z-index: 1;
     }
     .member-card-stack { display: flex; flex-direction: column; gap: 8px; max-width: 358px; }
     .member-card-figma-ref { margin: 16px 0; border: 1px solid var(--border); border-radius: 8px; overflow: hidden; max-width: 100%; }
@@ -1724,13 +1736,13 @@
       <div class="comp-block" id="comp-member-card">
         <div class="comp-block-hd"><strong>MemberCard 会员卡</strong><code>Figma ysexRTH · 详卡 + 列表条</code></div>
         <div class="comp-block-bd">
-          <p style="font-size:12px;color:var(--text-secondary);margin-bottom:12px">来源 <a href="https://www.figma.com/design/ysexRTHn8Qt0DVOvROJBrX/Untitled?node-id=0-1">Figma 会员卡组件</a>（file <code>ysexRTHn8Qt0DVOvROJBrX</code>）。AI 标注：<code>MemberCard/detail + --stored</code> 或 <code>MemberCard/compact + --times</code>。</p>
+          <p style="font-size:12px;color:var(--text-secondary);margin-bottom:12px">卡面使用切图背景（<code>assets/member-card/</code>）· 详卡 Frame 五张 · 列表条 Mask 五张 · CTA 色由切图主色推导。AI 标注：<code>MemberCard/detail + --stored</code> 或 <code>MemberCard/compact + --times</code>。</p>
           <figure class="member-card-figma-ref">
             <img src="assets/figma-member-cards-ref.jpg" alt="Figma 会员卡组件设计稿对照" width="800" height="434" loading="lazy">
             <figcaption>设计稿对照（自 Figma 导出缩略图）· 实现须与上图视觉一致</figcaption>
           </figure>
           <h4 style="margin:0 0 10px;font-size:14px">形态一 · 详卡 MemberCard/detail</h4>
-          <p style="font-size:12px;color:var(--text-secondary);margin-bottom:12px">纯色头区（无渐变）+ 内嵌白底说明 + 底栏操作；标题/金额 <code>#333</code>，标签 <code>#929292</code>；开单为浅色胶囊按钮。</p>
+          <p style="font-size:12px;color:var(--text-secondary);margin-bottom:12px">切图纹理头区 + 内嵌白底说明 + 底栏操作；标题/金额 <code>#333</code>，标签 <code>#929292</code>；开单为切图主色衍生胶囊按钮。</p>
           <article class="u-member-card u-member-card--stored" aria-label="储值卡详卡">
             <div class="u-member-card__head">
               <div class="u-member-card__type">储值卡</div>
@@ -1818,7 +1830,7 @@
             </article>
           </div>
           <h4 style="margin:24px 0 10px;font-size:14px">形态二 · 列表条 MemberCard/compact</h4>
-          <p style="font-size:12px;color:var(--text-secondary);margin-bottom:12px">高度 40px · 圆角 8px · 纯色横条底 · 左侧类型徽标 + 卡名称。</p>
+          <p style="font-size:12px;color:var(--text-secondary);margin-bottom:12px">高度 40px · 圆角 8px · Mask 切图底 · 左侧类型徽标 + 卡名称 · 保留 1px 描边。</p>
           <div class="member-card-stack">
             <div class="u-member-card u-member-card--compact u-member-card--stored"><span class="u-member-card__badge">储值</span><span class="u-member-card__name">储值3000元</span></div>
             <div class="u-member-card u-member-card--compact u-member-card--times"><span class="u-member-card__badge">次卡</span><span class="u-member-card__name">基础5次卡</span></div>
@@ -1827,14 +1839,14 @@
             <div class="u-member-card u-member-card--compact u-member-card--package"><span class="u-member-card__badge">套餐</span><span class="u-member-card__name">套餐5次卡</span></div>
           </div>
           <table style="width:100%;font-size:12px;margin-top:20px;border-collapse:collapse">
-            <tr style="background:var(--gray-1)"><th style="text-align:left;padding:8px">修饰符</th><th style="text-align:left;padding:8px">详卡头区底色</th><th style="text-align:left;padding:8px">开单按钮</th><th style="text-align:left;padding:8px">列表条底色</th></tr>
-            <tr><td style="padding:8px"><code>--stored</code></td><td style="padding:8px">#DBD6F4</td><td style="padding:8px">#BDD5ED</td><td style="padding:8px">#E8E4F8</td></tr>
-            <tr><td style="padding:8px"><code>--times</code></td><td style="padding:8px">#C7DEE6</td><td style="padding:8px">#B9D4DD</td><td style="padding:8px">#E4F3F7</td></tr>
-            <tr><td style="padding:8px"><code>--discount</code></td><td style="padding:8px">#F3D8A1</td><td style="padding:8px">#E1C789</td><td style="padding:8px">#FBF0DC</td></tr>
-            <tr><td style="padding:8px"><code>--period</code></td><td style="padding:8px">#F6D6CB</td><td style="padding:8px">#E3BFB3</td><td style="padding:8px">#FFF0EB</td></tr>
-            <tr><td style="padding:8px"><code>--package</code></td><td style="padding:8px">#E7D7C0</td><td style="padding:8px">#D7C3A8</td><td style="padding:8px">#F7F0E6</td></tr>
+            <tr style="background:var(--gray-1)"><th style="text-align:left;padding:8px">修饰符</th><th style="text-align:left;padding:8px">详卡切图</th><th style="text-align:left;padding:8px">开单按钮</th><th style="text-align:left;padding:8px">列表条切图</th></tr>
+            <tr><td style="padding:8px"><code>--stored</code></td><td style="padding:8px"><code>stored-detail.png</code></td><td style="padding:8px">#E1F1FF</td><td style="padding:8px"><code>stored-compact.png</code></td></tr>
+            <tr><td style="padding:8px"><code>--times</code></td><td style="padding:8px"><code>times-detail.png</code></td><td style="padding:8px">#D9F3FF</td><td style="padding:8px"><code>times-compact.png</code></td></tr>
+            <tr><td style="padding:8px"><code>--discount</code></td><td style="padding:8px"><code>discount-detail.png</code></td><td style="padding:8px">#FCE5B6</td><td style="padding:8px"><code>discount-compact.png</code></td></tr>
+            <tr><td style="padding:8px"><code>--period</code></td><td style="padding:8px"><code>period-detail.png</code></td><td style="padding:8px">#FFE7E3</td><td style="padding:8px"><code>period-compact.png</code></td></tr>
+            <tr><td style="padding:8px"><code>--package</code></td><td style="padding:8px"><code>package-detail.png</code></td><td style="padding:8px">#F7E5D3</td><td style="padding:8px"><code>package-compact.png</code></td></tr>
           </table>
-          <p style="margin-top:12px;font-size:12px;color:var(--text-secondary)">详卡宽 358（画布 390 左右边距 16）· 头区内边距 14 · 说明区内嵌白底圆角 8 · 金额 <code>20px TCloudNumber-Bold</code> · 底栏右对齐文字链 + 「开单」胶囊。</p>
+          <p style="margin-top:12px;font-size:12px;color:var(--text-secondary)">详卡宽 358（画布 390 左右边距 16）· 头区 <code>background-size: cover</code> · 说明区内嵌白底圆角 8 · 金额 <code>20px TCloudNumber-Bold</code> · 底栏右对齐文字链 + 「开单」胶囊 · 资源目录 <code>assets/member-card/</code>。</p>
         </div>
       </div>
 
@@ -3013,6 +3025,19 @@
   if (typeof specAssetUrl === 'function') {
     document.querySelectorAll('.font-download-btn[href]').forEach(a => {
       a.href = specAssetUrl(a.getAttribute('href'));
+    });
+    const MC_THEMES = ['stored', 'times', 'discount', 'period', 'package'];
+    MC_THEMES.forEach(theme => {
+      const detailUrl = specAssetUrl('assets/member-card/' + theme + '-detail.png');
+      const compactUrl = specAssetUrl('assets/member-card/' + theme + '-compact.png');
+      document.querySelectorAll('.u-member-card--' + theme).forEach(el => {
+        if (el.classList.contains('u-member-card--compact')) {
+          el.style.backgroundImage = 'url("' + compactUrl + '")';
+        } else {
+          const head = el.querySelector('.u-member-card__head');
+          if (head) head.style.backgroundImage = 'url("' + detailUrl + '")';
+        }
+      });
     });
   }
 </script>
