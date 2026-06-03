@@ -846,11 +846,13 @@
       border: 1px solid var(--border);
     }
     .u-member-card:not(.u-member-card--compact) .u-member-card__head {
-      margin: 0;
+      margin: 0 0 12px;
       padding: 16px 16px 14px;
       min-height: 140px;
       box-sizing: border-box;
-      border-radius: 12px 12px 0 0;
+      display: flex;
+      flex-direction: column;
+      border-radius: 12px;
       background-color: var(--mc-fallback);
       background-image: var(--mc-detail-bg);
       background-position: center;
@@ -858,15 +860,15 @@
       background-repeat: no-repeat;
       color: var(--figma-text-primary);
     }
-    .u-member-card__type { font-size: 17px; font-weight: 600; line-height: 1.25; margin-bottom: 22px; }
-    .u-member-card__metrics { display: flex; justify-content: space-between; align-items: flex-end; gap: 16px; }
+    .u-member-card__type { font-size: 17px; font-weight: 600; line-height: 1.25; margin: 0; flex-shrink: 0; }
+    .u-member-card__metrics { display: flex; justify-content: space-between; align-items: flex-end; gap: 16px; margin-top: auto; padding-top: 8px; }
     .u-member-card__metrics .metric { min-width: 0; }
     .u-member-card__metrics .metric--end { text-align: right; flex-shrink: 0; }
     .u-member-card__metrics .metric__label { display: block; font-size: 11px; color: var(--figma-text-secondary); line-height: 1.3; margin-bottom: 6px; }
     .u-member-card__metrics .metric__value { font-size: 14px; font-weight: 600; line-height: 1.35; }
     .u-member-card__metrics .metric__price { font-family: var(--font-data); font-size: 20px; font-weight: 700; letter-spacing: -.02em; }
     .u-member-card__body {
-      padding: 12px 16px 10px;
+      padding: 16px 16px 12px;
       background: #fff;
       font-size: 11px;
       line-height: 1.55;
@@ -876,8 +878,8 @@
     .u-member-card__foot {
       display: flex;
       align-items: center;
-      gap: 8px;
-      padding: 12px 16px 14px;
+      gap: 10px;
+      padding: 18px 16px 16px;
       background: #fff;
       position: relative;
     }
@@ -889,21 +891,26 @@
       right: 14px;
       border-top: 1px dashed #DCDCDC;
     }
-    .u-member-card__del {
+    body.spec-site .u-member-card button.u-member-card__del {
       flex-shrink: 0;
-      width: 30px;
-      height: 30px;
+      width: auto;
+      height: auto;
+      min-width: 0;
       padding: 0;
       border: none;
-      border-radius: 100px;
-      background: var(--mc-cta);
+      border-radius: 0;
+      background: transparent;
       color: var(--figma-text-primary);
+      font-size: 13px;
+      line-height: 1;
       display: inline-flex;
       align-items: center;
       justify-content: center;
       cursor: pointer;
+      appearance: none;
+      -webkit-appearance: none;
     }
-    .u-member-card__del .s-icon { font-size: 16px; width: 16px; height: 16px; color: inherit; }
+    .u-member-card__del .s-icon { font-size: 18px; width: 18px; height: 18px; color: inherit; }
     .u-member-card__links {
       flex: 1;
       display: flex;
@@ -915,23 +922,27 @@
       min-width: 0;
     }
     .u-member-card__links a { color: inherit; text-decoration: none; white-space: nowrap; }
-    .u-member-card__cta {
+    body.spec-site .u-member-card button.u-member-card__cta {
       flex-shrink: 0;
       height: 30px;
       padding: 0 18px;
       border: none;
       border-radius: 100px;
       background: var(--mc-cta);
+      background-color: var(--mc-cta);
       color: var(--figma-text-primary);
       font-size: 13px;
       font-weight: 500;
       line-height: 30px;
+      appearance: none;
+      -webkit-appearance: none;
+      cursor: pointer;
     }
-    .u-member-card--stored { --mc-fallback: #CFDBF6; --mc-detail-bg: url('assets/member-card/stored-detail.png'); --mc-compact-bg: url('assets/member-card/stored-compact.png'); --mc-cta: #BDD5ED; }
+    .u-member-card--stored { --mc-fallback: #D0D9F7; --mc-detail-bg: url('assets/member-card/stored-detail.png'); --mc-compact-bg: url('assets/member-card/stored-compact.png'); --mc-cta: #BDD5ED; }
     .u-member-card--times { --mc-fallback: #C7DDE8; --mc-detail-bg: url('assets/member-card/times-detail.png'); --mc-compact-bg: url('assets/member-card/times-compact.png'); --mc-cta: #B9D4DD; }
-    .u-member-card--discount { --mc-fallback: #EACF9A; --mc-detail-bg: url('assets/member-card/discount-detail.png'); --mc-compact-bg: url('assets/member-card/discount-compact.png'); --mc-cta: #E1C789; }
-    .u-member-card--period { --mc-fallback: #F7D1C7; --mc-detail-bg: url('assets/member-card/period-detail.png'); --mc-compact-bg: url('assets/member-card/period-compact.png'); --mc-cta: #E3BFB3; }
-    .u-member-card--package { --mc-fallback: #E5CFB7; --mc-detail-bg: url('assets/member-card/package-detail.png'); --mc-compact-bg: url('assets/member-card/package-compact.png'); --mc-cta: #D7C3A8; }
+    .u-member-card--discount { --mc-fallback: #EDD19C; --mc-detail-bg: url('assets/member-card/discount-detail.png'); --mc-compact-bg: url('assets/member-card/discount-compact.png'); --mc-cta: #E1C789; }
+    .u-member-card--period { --mc-fallback: #F8D3C9; --mc-detail-bg: url('assets/member-card/period-detail.png'); --mc-compact-bg: url('assets/member-card/period-compact.png'); --mc-cta: #E3BFB3; }
+    .u-member-card--package { --mc-fallback: #E7D1B9; --mc-detail-bg: url('assets/member-card/package-detail.png'); --mc-compact-bg: url('assets/member-card/package-compact.png'); --mc-cta: #D7C3A8; }
     .u-member-card--compact {
       max-width: 358px;
       height: 48px;
@@ -961,17 +972,16 @@
       z-index: 1;
     }
     .member-card-stack { display: flex; flex-direction: column; gap: 8px; max-width: 358px; }
-    .member-card-figma-ref { margin: 16px 0; border: 1px solid var(--border); border-radius: 8px; overflow: hidden; max-width: 100%; }
-    .member-card-figma-ref img { display: block; width: 100%; height: auto; }
-    .member-card-figma-ref figcaption { font-size: 11px; color: var(--text-secondary); padding: 8px 12px; background: var(--gray-1); }
     .member-card-showcase { display: flex; gap: 12px; overflow-x: auto; padding-bottom: 8px; margin: 16px 0; -webkit-overflow-scrolling: touch; }
     .member-card-showcase .u-member-card { flex: 0 0 258px; max-width: 258px; }
-    .member-card-showcase .u-member-card:not(.u-member-card--compact) .u-member-card__head { min-height: 120px; padding: 12px 12px 10px; margin: 0; border-radius: 12px 12px 0 0; }
-    .member-card-showcase .u-member-card__type { font-size: 15px; margin-bottom: 14px; }
+    .member-card-showcase .u-member-card:not(.u-member-card--compact) .u-member-card__head { min-height: 118px; padding: 12px 12px 10px; margin: 0 0 8px; border-radius: 10px; display: flex; flex-direction: column; }
+    .member-card-showcase .u-member-card__type { font-size: 15px; margin: 0; }
+    .member-card-showcase .u-member-card__metrics { margin-top: auto; padding-top: 6px; }
     .member-card-showcase .u-member-card__metrics .metric__price { font-size: 17px; }
     .member-card-showcase .u-member-card__foot { padding: 8px 10px 10px; }
     .member-card-showcase .u-member-card__body { padding: 8px 10px; font-size: 10px; }
     .member-card-showcase .u-member-card__links { gap: 8px; font-size: 11px; }
+    .member-card-showcase .u-member-card button.u-member-card__del .s-icon { font-size: 16px; width: 16px; height: 16px; }
     .member-card-showcase .u-member-card__cta { height: 26px; line-height: 26px; padding: 0 12px; font-size: 12px; }
     .member-card-page-preview { width: var(--canvas-w); max-width: 100%; margin: 16px auto 0; background: var(--bg-page); border: 1px solid var(--border); border-radius: var(--radius-l); overflow: hidden; }
     .member-card-page-preview .u-page-title-bar .action { font-size: 14px; color: var(--figma-text-primary); }
@@ -1760,16 +1770,8 @@
         <div class="comp-block-hd"><strong>MemberCard 会员卡</strong><code>Figma ysexRTH · 详卡 + 列表条</code></div>
         <div class="comp-block-bd">
           <p style="font-size:12px;color:var(--text-secondary);margin-bottom:12px">卡面使用切图背景（<code>assets/member-card/</code>）· 详卡 Frame 五张 · 列表条 Mask 五张 · CTA 色由切图主色推导。AI 标注：<code>MemberCard/detail + --stored</code> 或 <code>MemberCard/compact + --times</code>。</p>
-          <figure class="member-card-figma-ref">
-            <img src="assets/member-card/ref-detail-cards.png" alt="页面截图：五类会员卡详卡" width="800" loading="lazy">
-            <figcaption>页面截图 · 详卡五类横向对照（享受折扣 + 卡内余额 + 有效期限/赠送项目）</figcaption>
-          </figure>
-          <figure class="member-card-figma-ref">
-            <img src="assets/member-card/ref-compact-page.png" alt="页面截图：卡详情页 compact 卡" width="800" loading="lazy">
-            <figcaption>页面截图 · 卡详情页 compact 卡 + 卡统计</figcaption>
-          </figure>
           <h4 style="margin:0 0 10px;font-size:14px">形态一 · 详卡 MemberCard/detail</h4>
-          <p style="font-size:12px;color:var(--text-secondary);margin-bottom:12px">彩色头区贴顶/贴左右（margin 0）· 头底无分割线 · 白区底栏上方虚线（左右内缩 14px）· 删除同色系胶囊 · 开单同色。</p>
+          <p style="font-size:12px;color:var(--text-secondary);margin-bottom:12px">彩色头区四角圆角 12px · 上左右贴边 · 头底留白露出下圆角 · 白区/底栏间距加大 · 左下删除为线性图标（无圆形底）· 开单 <code>--mc-cta</code> 卡面色系。</p>
           <article class="u-member-card u-member-card--stored" aria-label="储值卡详卡">
             <div class="u-member-card__head">
               <div class="u-member-card__type">储值卡</div>
@@ -1899,7 +1901,7 @@
             <tr><td style="padding:8px"><code>--period</code></td><td style="padding:8px"><code>period-detail.png</code></td><td style="padding:8px">#E3BFB3</td><td style="padding:8px"><code>period-compact.png</code></td></tr>
             <tr><td style="padding:8px"><code>--package</code></td><td style="padding:8px"><code>package-detail.png</code></td><td style="padding:8px">#D7C3A8</td><td style="padding:8px"><code>package-compact.png</code></td></tr>
           </table>
-          <p style="margin-top:12px;font-size:12px;color:var(--text-secondary)">详卡宽 358 · 头区 min-height 140px · 上左右 margin 0 · 底栏虚线 <code>14px</code> 内缩 · 删除/开单 <code>--mc-cta</code> · 资源 <code>assets/member-card/</code>。</p>
+          <p style="margin-top:12px;font-size:12px;color:var(--text-secondary)">详卡宽 358 · 头区四角圆角 · 底栏虚线内缩 14px · 底栏 padding-top 18px · 删除仅图标 · 开单 background-color 与卡面同色系 · 资源 <code>assets/member-card/</code>。</p>
         </div>
       </div>
 
