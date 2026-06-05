@@ -5,6 +5,86 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>剑琅联盟移动端设计规范</title>
   <link rel="icon" href="LOGO2.png" type="image/png">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="assets/tailwind-spec-config.js"></script>
+  <style type="text/tailwindcss">
+    @layer components {
+      .u-member-card {
+        @apply w-full max-w-card overflow-hidden bg-white border border-border rounded-card shadow-none;
+        --mc-fallback: #CFDBF6;
+        --mc-detail-bg: url('assets/member-card/stored-detail.png');
+        --mc-compact-bg: url('assets/member-card/stored-compact.png');
+        --mc-cta: #CEDAF2;
+      }
+      .u-member-card:not(.u-member-card--compact) .u-member-card__head {
+        @apply flex flex-col min-h-[168px] mb-2 pt-[24px] px-4 pb-4 rounded-card box-border text-figma-primary;
+        margin-left: 0; margin-right: 0; margin-top: 0;
+        background-color: var(--mc-fallback);
+        background-image: var(--mc-detail-bg);
+        background-position: center;
+        background-size: cover;
+        background-repeat: no-repeat;
+      }
+      .u-member-card__type { @apply text-[17px] font-semibold leading-tight m-0 shrink-0; }
+      .u-member-card__metrics { @apply flex justify-between items-end gap-4 mt-auto pt-2; }
+      .u-member-card__metrics .metric { @apply min-w-0; }
+      .u-member-card__metrics .metric--end { @apply text-left shrink-0; }
+      .u-member-card__metrics .metric__label { @apply block text-[11px] text-mc-label leading-snug mb-1.5; }
+      .u-member-card__metrics .metric__value { @apply text-sm font-semibold leading-snug; }
+      .u-member-card__metrics .metric__price { @apply font-data text-xl font-bold tracking-tight; }
+      .u-member-card__body { @apply py-2 px-4 pb-3 bg-white text-xs leading-normal text-mc-body; }
+      .u-member-card__body p + p { @apply mt-2.5; }
+      .u-member-card__foot { @apply flex items-center gap-2.5 py-3.5 px-4 bg-white relative; }
+      .u-member-card__foot::before {
+        content: '';
+        @apply absolute top-0 h-px border-0;
+        left: 14px; right: 14px;
+        background: repeating-linear-gradient(90deg, #DCDCDC 0, #DCDCDC 4px, transparent 4px, transparent 10px);
+      }
+      body.spec-site .u-member-card button.u-member-card__del {
+        @apply inline-flex shrink-0 items-center justify-center p-0 border-0 rounded-none bg-transparent text-mc-del text-[13px] leading-none cursor-pointer appearance-none;
+        width: auto; height: auto; min-width: 0;
+      }
+      .u-member-card__del-icon { @apply w-[18px] h-[18px]; stroke: currentColor; }
+      .u-member-card__links {
+        @apply flex flex-1 justify-end items-center gap-4 text-[13px] font-medium leading-7 text-figma-primary min-w-0;
+      }
+      .u-member-card__links a { @apply text-inherit no-underline whitespace-nowrap text-[13px] font-medium leading-7; }
+      body.spec-site .u-member-card button.u-member-card__cta {
+        @apply inline-flex shrink-0 h-7 px-[18px] border-0 rounded-pill text-[13px] font-medium leading-7 text-figma-primary cursor-pointer appearance-none;
+        background: var(--mc-cta); background-color: var(--mc-cta);
+      }
+      .u-member-card--stored { --mc-fallback: #D0D9F7; --mc-detail-bg: url('assets/member-card/stored-detail.png'); --mc-compact-bg: url('assets/member-card/stored-compact.png'); --mc-cta: #CEDAF2; }
+      .u-member-card--times { --mc-fallback: #C7DDE8; --mc-detail-bg: url('assets/member-card/times-detail.png'); --mc-compact-bg: url('assets/member-card/times-compact.png'); --mc-cta: #C5DCEB; }
+      .u-member-card--discount { --mc-fallback: #EDD19C; --mc-detail-bg: url('assets/member-card/discount-detail.png'); --mc-compact-bg: url('assets/member-card/discount-compact.png'); --mc-cta: #E5C88A; }
+      .u-member-card--period { --mc-fallback: #F8D3C9; --mc-detail-bg: url('assets/member-card/period-detail.png'); --mc-compact-bg: url('assets/member-card/period-compact.png'); --mc-cta: #EBC0B5; }
+      .u-member-card--package { --mc-fallback: #E7D1B9; --mc-detail-bg: url('assets/member-card/package-detail.png'); --mc-compact-bg: url('assets/member-card/package-compact.png'); --mc-cta: #DCC9AE; }
+      .u-member-card--compact {
+        @apply max-w-card h-12 flex items-center pl-[78px] pr-3.5 rounded-[10px] shadow-none border border-border relative overflow-hidden;
+        background-color: var(--mc-fallback);
+        background-image: var(--mc-compact-bg);
+        background-position: left center;
+        background-size: cover;
+        background-repeat: no-repeat;
+      }
+      .u-member-card--compact .u-member-card__name {
+        @apply flex-1 text-sm font-semibold text-figma-primary whitespace-nowrap overflow-hidden text-ellipsis relative z-[1];
+      }
+      .member-card-stack { @apply flex flex-col gap-2 max-w-card; }
+      .member-card-showcase { @apply flex gap-3 overflow-x-auto pb-2 my-4; -webkit-overflow-scrolling: touch; }
+      .member-card-showcase .u-member-card { @apply flex-none w-[258px] max-w-[258px]; }
+      .member-card-showcase .u-member-card:not(.u-member-card--compact) .u-member-card__head { @apply min-h-[118px] pt-[18px] px-3 pb-3 mb-1.5 rounded-[10px] flex flex-col; }
+      .member-card-showcase .u-member-card__type { @apply text-[15px] m-0; }
+      .member-card-showcase .u-member-card__metrics { @apply mt-auto pt-1.5; }
+      .member-card-showcase .u-member-card__metrics .metric__price { @apply text-[17px]; }
+      .member-card-showcase .u-member-card__foot { @apply py-2 px-2.5; }
+      .member-card-showcase .u-member-card__body { @apply py-1.5 px-2.5 text-[10px] text-mc-body; }
+      .member-card-showcase .u-member-card__body p + p { @apply mt-1.5; }
+      .member-card-showcase .u-member-card__links { @apply gap-2.5 text-[11px] font-medium leading-6; }
+      .member-card-showcase .u-member-card__del-icon { @apply w-4 h-4; }
+      .member-card-showcase .u-member-card__cta { @apply h-6 leading-6 px-3 text-xs; }
+    }
+  </style>
   <script>
     (function () {
       var ua = navigator.userAgent || '';
@@ -831,158 +911,7 @@
     .u-price-row .col label { display: block; font-size: 10px; color: var(--figma-text-secondary); margin-bottom: 4px; }
     .u-price-row .col .v { font-weight: 600; color: var(--figma-text-primary); }
     .u-price-row .col .v.retail { color: var(--brand-6); }
-    /* MemberCard — Figma ysexRTHn8Qt0DVOvROJBrX（详卡 + 列表条 · 切图卡面） */
-    .u-member-card {
-      --mc-fallback: #CFDBF6;
-      --mc-detail-bg: url('assets/member-card/stored-detail.png');
-      --mc-compact-bg: url('assets/member-card/stored-compact.png');
-      --mc-cta: #BDD5ED;
-      width: 100%;
-      max-width: 358px;
-      border-radius: 12px;
-      overflow: hidden;
-      background: #fff;
-      box-shadow: none;
-      border: 1px solid var(--border);
-    }
-    .u-member-card:not(.u-member-card--compact) .u-member-card__head {
-      margin: 0 0 12px;
-      padding: 16px 16px 14px;
-      min-height: 140px;
-      box-sizing: border-box;
-      display: flex;
-      flex-direction: column;
-      border-radius: 12px;
-      background-color: var(--mc-fallback);
-      background-image: var(--mc-detail-bg);
-      background-position: center;
-      background-size: cover;
-      background-repeat: no-repeat;
-      color: var(--figma-text-primary);
-    }
-    .u-member-card__type { font-size: 17px; font-weight: 600; line-height: 1.25; margin: 0; flex-shrink: 0; }
-    .u-member-card__metrics { display: flex; justify-content: space-between; align-items: flex-end; gap: 16px; margin-top: auto; padding-top: 8px; }
-    .u-member-card__metrics .metric { min-width: 0; }
-    .u-member-card__metrics .metric--end { text-align: right; flex-shrink: 0; }
-    .u-member-card__metrics .metric__label { display: block; font-size: 11px; color: var(--figma-text-secondary); line-height: 1.3; margin-bottom: 6px; }
-    .u-member-card__metrics .metric__value { font-size: 14px; font-weight: 600; line-height: 1.35; }
-    .u-member-card__metrics .metric__price { font-family: var(--font-data); font-size: 20px; font-weight: 700; letter-spacing: -.02em; }
-    .u-member-card__body {
-      padding: 16px 16px 12px;
-      background: #fff;
-      font-size: 11px;
-      line-height: 1.55;
-      color: var(--figma-text-secondary);
-    }
-    .u-member-card__body p + p { margin-top: 6px; }
-    .u-member-card__foot {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      padding: 18px 16px 16px;
-      background: #fff;
-      position: relative;
-    }
-    .u-member-card__foot::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 14px;
-      right: 14px;
-      border-top: 1px dashed #DCDCDC;
-    }
-    body.spec-site .u-member-card button.u-member-card__del {
-      flex-shrink: 0;
-      width: auto;
-      height: auto;
-      min-width: 0;
-      padding: 0;
-      border: none;
-      border-radius: 0;
-      background: transparent;
-      color: var(--figma-text-primary);
-      font-size: 13px;
-      line-height: 1;
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      cursor: pointer;
-      appearance: none;
-      -webkit-appearance: none;
-    }
-    .u-member-card__del .s-icon { font-size: 18px; width: 18px; height: 18px; color: inherit; }
-    .u-member-card__links {
-      flex: 1;
-      display: flex;
-      justify-content: flex-end;
-      align-items: center;
-      gap: 12px;
-      font-size: 12px;
-      color: var(--figma-text-primary);
-      min-width: 0;
-    }
-    .u-member-card__links a { color: inherit; text-decoration: none; white-space: nowrap; }
-    body.spec-site .u-member-card button.u-member-card__cta {
-      flex-shrink: 0;
-      height: 30px;
-      padding: 0 18px;
-      border: none;
-      border-radius: 100px;
-      background: var(--mc-cta);
-      background-color: var(--mc-cta);
-      color: var(--figma-text-primary);
-      font-size: 13px;
-      font-weight: 500;
-      line-height: 30px;
-      appearance: none;
-      -webkit-appearance: none;
-      cursor: pointer;
-    }
-    .u-member-card--stored { --mc-fallback: #D0D9F7; --mc-detail-bg: url('assets/member-card/stored-detail.png'); --mc-compact-bg: url('assets/member-card/stored-compact.png'); --mc-cta: #BDD5ED; }
-    .u-member-card--times { --mc-fallback: #C7DDE8; --mc-detail-bg: url('assets/member-card/times-detail.png'); --mc-compact-bg: url('assets/member-card/times-compact.png'); --mc-cta: #B9D4DD; }
-    .u-member-card--discount { --mc-fallback: #EDD19C; --mc-detail-bg: url('assets/member-card/discount-detail.png'); --mc-compact-bg: url('assets/member-card/discount-compact.png'); --mc-cta: #E1C789; }
-    .u-member-card--period { --mc-fallback: #F8D3C9; --mc-detail-bg: url('assets/member-card/period-detail.png'); --mc-compact-bg: url('assets/member-card/period-compact.png'); --mc-cta: #E3BFB3; }
-    .u-member-card--package { --mc-fallback: #E7D1B9; --mc-detail-bg: url('assets/member-card/package-detail.png'); --mc-compact-bg: url('assets/member-card/package-compact.png'); --mc-cta: #D7C3A8; }
-    .u-member-card--compact {
-      max-width: 358px;
-      height: 48px;
-      display: flex;
-      align-items: center;
-      padding: 0 14px 0 78px;
-      border-radius: 10px;
-      background-color: var(--mc-fallback);
-      background-image: var(--mc-compact-bg);
-      background-position: left center;
-      background-size: cover;
-      background-repeat: no-repeat;
-      box-shadow: none;
-      border: 1px solid var(--border);
-      position: relative;
-      overflow: hidden;
-    }
-    .u-member-card--compact .u-member-card__name {
-      flex: 1;
-      font-size: 14px;
-      font-weight: 600;
-      color: var(--figma-text-primary);
-      white-space: nowrap;
-      overflow: hidden;
-      text-overflow: ellipsis;
-      position: relative;
-      z-index: 1;
-    }
-    .member-card-stack { display: flex; flex-direction: column; gap: 8px; max-width: 358px; }
-    .member-card-showcase { display: flex; gap: 12px; overflow-x: auto; padding-bottom: 8px; margin: 16px 0; -webkit-overflow-scrolling: touch; }
-    .member-card-showcase .u-member-card { flex: 0 0 258px; max-width: 258px; }
-    .member-card-showcase .u-member-card:not(.u-member-card--compact) .u-member-card__head { min-height: 118px; padding: 12px 12px 10px; margin: 0 0 8px; border-radius: 10px; display: flex; flex-direction: column; }
-    .member-card-showcase .u-member-card__type { font-size: 15px; margin: 0; }
-    .member-card-showcase .u-member-card__metrics { margin-top: auto; padding-top: 6px; }
-    .member-card-showcase .u-member-card__metrics .metric__price { font-size: 17px; }
-    .member-card-showcase .u-member-card__foot { padding: 8px 10px 10px; }
-    .member-card-showcase .u-member-card__body { padding: 8px 10px; font-size: 10px; }
-    .member-card-showcase .u-member-card__links { gap: 8px; font-size: 11px; }
-    .member-card-showcase .u-member-card button.u-member-card__del .s-icon { font-size: 16px; width: 16px; height: 16px; }
-    .member-card-showcase .u-member-card__cta { height: 26px; line-height: 26px; padding: 0 12px; font-size: 12px; }
+    /* MemberCard — @layer components（Tailwind @apply）· 见 head 内 tailwindcss 样式块 */
     .member-card-page-preview { width: var(--canvas-w); max-width: 100%; margin: 16px auto 0; background: var(--bg-page); border: 1px solid var(--border); border-radius: var(--radius-l); overflow: hidden; }
     .member-card-page-preview .u-page-title-bar .action { font-size: 14px; color: var(--figma-text-primary); }
     .member-card-page-preview__body { padding: 16px; }
@@ -1040,11 +969,12 @@
       <div class="logo-wrap"><img src="LOGO2.png" alt="剑琅联盟"></div>
       <h1>剑琅联盟</h1>
       <p class="sub">移动端设计规范</p>
-      <span class="ver">Design System v1.4</span>
+      <span class="ver">Design System v1.5 · Tailwind</span>
     </div>
     <ul class="nav-list">
       <li><a href="#global-ui" class="nav-mandate">★ 全局强制 UI</a></li>
       <li><a href="#brand">品牌标识</a></li>
+      <li><a href="#tailwind-delivery">0.1 HTML + Tailwind 落地</a></li>
       <li><a href="#overview">0. 概述与 AI 指引</a></li>
       <li><a href="#principles">1. 设计原则</a></li>
       <li><a href="#colors">2. 色彩系统</a></li>
@@ -1062,7 +992,7 @@
     <div class="spec-topbar" role="banner">
       <img src="LOGO2.png" alt="剑琅联盟">
       <span class="spec-topbar-title">剑琅联盟 · 设计规范</span>
-      <span class="spec-topbar-ver">v1.4</span>
+      <span class="spec-topbar-ver">v1.5</span>
     </div>
     <div class="main-inner">
 
@@ -1086,7 +1016,7 @@
     <section id="global-ui">
       <h2 class="section-title"><span class="num">★</span>全局强制 UI 规范</h2>
       <div class="card global-mandate">
-        <p class="mandate-lead">以下条款为<strong>剑琅联盟移动端</strong>最高优先级约束，优先于本规范其他章节及历史 Figma 样稿。AI 出图、设计评审与 Flutter 落地均须先满足本章；冲突时以本章为准。</p>
+        <p class="mandate-lead">以下条款为<strong>剑琅联盟移动端</strong>最高优先级约束，优先于本规范其他章节及历史 Figma 样稿。AI 出图、设计评审与 <strong>HTML + Tailwind</strong> 落地均须先满足本章；冲突时以本章为准。</p>
         <ol>
           <li><strong>画布基准</strong>：390×844px 移动端 1 倍设计稿（宽固定 390；高默认 844，内容超出可向下延展）。
             <ul>
@@ -1125,7 +1055,7 @@
               <li><strong>两平台不变</strong>：金额<strong>纯数字 + 小数点</strong>仍用 <strong>TCloudNumber</strong>（v1.010 · Bold）；色板、字号、间距、圆角等 Token 不变。</li>
               <li>混排：<code>¥</code> 与「应付 / 实付 / 小计」等文字符号随<strong>当前平台的 UI 字体</strong>（苹果=苹方，Windows=思源黑体）；<code>¥</code> 与数字间距固定 <strong>4px</strong>。</li>
             </ul>
-            <p style="font-size:12px;color:var(--text-secondary);margin-top:8px">本规范站预览：当前为 <strong id="font-platform-label">—</strong> · 设计稿与 Flutter 须在交付说明中标注目标平台字体。</p>
+            <p style="font-size:12px;color:var(--text-secondary);margin-top:8px">本规范站预览：当前为 <strong id="font-platform-label">—</strong> · 设计稿与 HTML 交付须在说明中标注目标平台字体。</p>
             <div class="price-row-demo">
               <span class="label">实付</span><span class="yen">¥</span><span class="num">1,286.40</span>
             </div>
@@ -1274,11 +1204,36 @@
       </div>
     </section>
 
+    <!-- 0.1 HTML + Tailwind 落地 -->
+    <section id="tailwind-delivery">
+      <h2 class="section-title"><span class="num">0.1</span>HTML + Tailwind 落地指引</h2>
+      <p>阶段 1：本规范站使用 <strong>Tailwind CSS v3 CDN</strong> + <code>@layer components</code> + <code>@apply</code> 封装组件（如 MemberCard）。<strong>阶段 2（当前）</strong>：WebView 产品工程位于 <code>app/</code>，已切换 <strong>Vite + Tailwind + Capacitor</strong>，Token 自 <code>assets/tailwind-spec-config.js</code> 迁入 <code>app/tailwind.config.js</code>。</p>
+      <table>
+        <tr><th>项</th><th>阶段 1 · 规范站</th><th>阶段 2 · WebView 产品（<code>app/</code>）</th></tr>
+        <tr><td>样式</td><td>Tailwind CDN · <code>preflight: false</code></td><td>Vite + PostCSS + Tailwind v3 · <code>npm run dev</code></td></tr>
+        <tr><td>组件</td><td><code>@apply</code> 类名（<code>.u-member-card</code> 等）</td><td><code>src/styles/components/</code> 同 class · JS 模板渲染</td></tr>
+        <tr><td>Token</td><td><code>assets/tailwind-spec-config.js</code></td><td><code>app/tailwind.config.js</code> <code>theme.extend</code></td></tr>
+        <tr><td>图标</td><td>Lucide（新）+ 既有 SVG 库（过渡）</td><td>Lucide · <code>createIcons</code></td></tr>
+        <tr><td>交互</td><td>纯 HTML 预览</td><td>Hash 路由 · 卡详情演示 · Capacitor 原生壳</td></tr>
+      </table>
+      <pre style="margin-top:12px">// app/tailwind.config.js（节选）
+export default {
+  theme: {
+    extend: {
+      colors: { brand: { 6: '#F32F41' }, figma: { primary: '#333333' }, mc: { label: '#666666' } },
+      maxWidth: { card: '358px', canvas: '390px' },
+      fontFamily: { ui: ['PingFang SC', 'sans-serif'], data: ['TCloudNumber', 'sans-serif'] },
+    },
+  },
+};</pre>
+      <p style="font-size:12px;color:var(--text-secondary);margin-top:8px">产品工程演示：<code>cd app && npm run dev</code> · 路由 <code>#/card-detail/stored</code>（卡详情）· 组件 <code>MemberCard</code> / <code>PageTitleBar</code> / <code>Button</code> · 资源 <code>app/public/assets/member-card/</code>。</p>
+    </section>
+
     <!-- 0. 概述 -->
     <section id="overview">
       <h2 class="section-title"><span class="num">0</span>概述与 AI 使用指引</h2>
       <div class="card">
-        <div class="card-title"><span class="tag tag-brand">剑琅联盟</span> <span class="tag tag-ai">AI Ready</span> v1.4 · 390×844</div>
+        <div class="card-title"><span class="tag tag-brand">剑琅联盟</span> <span class="tag tag-ai">AI Ready</span> v1.6 · 390×844 · Tailwind CDN + Vite App</div>
         <p>本规范为<strong>剑琅联盟</strong>（含 RTP 商品零售模块）专属。请先阅读并遵守 <a href="#global-ui"><strong>★ 全局强制 UI</strong></a>，再使用下方组件库与 Token 章节。</p>
       </div>
       <h3>AI 批量出图必读规则</h3>
@@ -1299,9 +1254,9 @@
       <table>
         <tr><th>层级</th><th>引用</th><th>说明</th></tr>
         <tr><td>组件库</td><td>第 7 章 · 剑琅联盟</td><td>页面组件命名、预览与调用说明</td></tr>
-        <tr><td>开发落地</td><td>Flutter</td><td>主题 JSON 可映射本规范 Design Token</td></tr>
+        <tr><td>开发落地</td><td>HTML + Tailwind CSS</td><td>CDN（规范站）→ Vite + Capacitor（WebView 产品）· Token 见 <a href="#tailwind-delivery">0.1</a></td></tr>
         <tr><td>设计稿</td><td><a href="https://www.figma.com/design/cUaUaxtcNsREKlfnQKXe1L/RTP-%E9%9B%B6%E5%94%AE%E6%A8%A1%E5%9D%97">RTP 零售模块 Figma</a></td><td>节点 72-137 · 与 HTML 原型库同步</td></tr>
-        <tr><td>设计资源</td><td>Figma 实测 + 图标库</td><td>Stratis / Iconex SVG · 业务图标映射表</td></tr>
+        <tr><td>设计资源</td><td>Figma 实测 + Lucide + 图标库</td><td>Lucide 线性图标 · 业务映射表 · 过渡保留 Stratis/Iconex SVG</td></tr>
         <tr><td>设计基准</td><td>宽 390（固定）× 高 844（默认）</td><td>高可向下延展；顶占位 44px · 底占位 39px</td></tr>
         <tr><td>UI 字体</td><td>苹果 PingFang SC · Windows 思源黑体</td><td>见 <a href="#font-platform">全局字体按设备</a>；金额仍 TCloudNumber</td></tr>
         <tr><td>全局 UI</td><td><a href="#global-ui">★ 强制章节</a></td><td>高于本章与 Figma 历史稿</td></tr>
@@ -1420,7 +1375,7 @@
 
       <h3>3.1.1 TCloudNumber 字体包（v1.010）</h3>
       <div class="card font-download-panel">
-        <p style="margin-bottom:8px;font-size:13px;color:var(--text-secondary)">官方数据字体。设计稿、HTML 原型与 Flutter 金额数字统一使用 <strong>TCloudNumber-Bold</strong>。</p>
+        <p style="margin-bottom:8px;font-size:13px;color:var(--text-secondary)">官方数据字体。设计稿、HTML 原型与 Web 端金额数字统一使用 <strong>TCloudNumber-Bold</strong>。</p>
         <div class="font-data-sample"><span class="yen">¥</span><span class="num">1,286.40</span></div>
         <div class="font-download-actions">
           <a class="font-download-btn" href="assets/fonts/TCloudNumber/TCloudNumber-Bold.ttf" download="TCloudNumber-Bold.ttf">下载 Bold</a>
@@ -1428,7 +1383,7 @@
           <a class="font-download-btn" href="assets/fonts/TCloudNumber/TCloudNumber-Light.ttf" download="TCloudNumber-Light.ttf">下载 Light</a>
           <a class="font-download-btn" href="assets/fonts/TCloudNumber/TCloudNumberVF.ttf" download="TCloudNumberVF.ttf">下载 VF 可变</a>
         </div>
-        <p style="margin-top:12px;font-size:12px;color:var(--text-secondary)">Flutter UI 字体：苹果 <code>PingFang SC</code> · Windows / 安卓可配 <code>Source Han Sans SC</code>（思源黑体）。金额：<code>fontFamily: 'TCloudNumber'</code> · ttf 放入 <code>assets/fonts/</code> 并在 <code>pubspec.yaml</code> 声明。</p>
+        <p style="margin-top:12px;font-size:12px;color:var(--text-secondary)">Web UI 字体：苹果 <code>PingFang SC</code> · Windows / 安卓 <code>Source Han Sans SC</code>（思源黑体）。金额：<code>font-family: TCloudNumber</code> · 通过 <code>@font-face</code> 引入 <code>assets/fonts/TCloudNumber/</code> · Tailwind 使用 <code>font-data</code> / <code>font-ui</code>。</p>
       </div>
 
       <h3>3.2 字号阶梯（390px 画布，单位 px）</h3>
@@ -1488,7 +1443,7 @@
         <tr><td>画布宽度 ★</td><td>390 px（固定）</td><td>全站统一，禁止加宽</td></tr>
         <tr><td>画布高度（默认）</td><td>844 px</td><td>首屏/短页基准；AI 出图默认从此高度起稿</td></tr>
         <tr><td>画布高度（延展）</td><td>≥ 844 px，按内容向下增高</td><td>长列表、多段表单、长详情等；仅纵向扩展</td></tr>
-        <tr><td>Flutter 2x</td><td>宽 780 · 高 1688 起</td><td>逻辑宽 390 固定；高度 2x 随设计稿延展</td></tr>
+        <tr><td>WebView 2x 切图</td><td>宽 780 · 高 1688 起</td><td>逻辑宽 390 固定；高度 2x 随设计稿延展</td></tr>
         <tr><td>画布外框 ★</td><td>直角矩形</td><td>画板禁止圆角 / 投影 / 外描边</td></tr>
         <tr><td>Figma 自动布局 ★</td><td>全部 Frame</td><td>须启用 Auto Layout，禁止纯绝对定位摆版</td></tr>
         <tr><td>页面水平边距</td><td>16px</td><td>内容区距屏幕边缘</td></tr>
@@ -1498,7 +1453,7 @@
         <tr><td>底部占位区 ★</td><td>390×39px 纯白块</td><td>页面最底部预留；无阴影、无描边、无圆角</td></tr>
         <tr><td>居中弹窗边距 ★</td><td>左右各 32px</td><td>ModalPopup/centered · 内容宽 326px</td></tr>
         <tr><td>底部弹窗边距 ★</td><td>左 / 右 / 下 0</td><td>ModalPopup/bottom · 390 通栏贴底</td></tr>
-        <tr><td>底部安全区（开发）</td><td>34px</td><td>Flutter safe-area 参考</td></tr>
+        <tr><td>底部安全区（开发）</td><td>34px</td><td>WebView safe-area / env(safe-area-inset-bottom) 参考</td></tr>
         <tr><td>列表行高</td><td>56px</td><td>标准单行列表</td></tr>
         <tr><td>列表行高（多行）</td><td>≥72px</td><td>含描述文字</td></tr>
         <tr><td>Bottom Action Bar</td><td>56px + safe-bottom</td><td>固定底部操作栏</td></tr>
@@ -1592,6 +1547,7 @@
     <!-- 6. 图标库 -->
     <section id="icons">
       <h2 class="section-title"><span class="num">6</span>图标库（可直接调用）</h2>
+      <p><strong>Web 落地（阶段 1）</strong>：新 HTML 组件优先使用 <a href="https://lucide.dev" target="_blank" rel="noopener">Lucide</a>（如 MemberCard 删除 <code>trash-2</code>：<code>&lt;i data-lucide="trash-2"&gt;&lt;/i&gt;</code> + <code>lucide.createIcons()</code>）。既有规范图标仍走下方 Stratis / Iconex / WeChat 三套库。</p>
       <p><strong>尺寸与颜色以 <a href="#global-ui">★ 全局强制 UI</a> 为准。</strong><strong>优先</strong>调用本库已有图标；库内无合适项时，可从外部引入矢量图标，须符合全局尺寸与色板，并标注来源。图标库由三套 Figma 资源构成：<a href="https://www.figma.com/design/0lZMESxiHe6rxzVUG3hMIT/Stratis-UI-Icons---1000--Free-Figma-icons--Community-?node-id=101-3505">Stratis UI Icons</a>（主库）· <a href="https://www.figma.com/design/uXSogFY3f1EEJsK1iDPf9h/Iconex---Freebie-icons--Community-?node-id=0-1">Iconex Freebie</a>（补充）· <a href="https://www.figma.com/design/UqA4U4cmf68pkXynOIhPHU/Le-Wagon-%E5%BE%AE%E4%BF%A1-UX-%E5%B7%A5%E5%85%B7%E5%BA%93-WeChat-UX-Kit--Community-?node-id=0-1">WeChat UX Kit</a>（微信场景精选，<code>icons/wechat/</code>、<code>icons/wechat-filled/</code>，构建见 <code>scripts/build-wechat-ux-icons.js</code>）。解析顺序：<strong>Stratis → Iconex → WeChat</strong>；卡片分别标注 <code>Iconex</code> / <code>WeChat</code>。微信专属语义优先用 <code>wx-*</code> 命名；可与 Stratis 等价的项在目录中带 <code>alias</code> 仍显示 Stratis 资源。</p>
       <a class="figma-link-card" href="https://www.figma.com/design/0lZMESxiHe6rxzVUG3hMIT/Stratis-UI-Icons---1000--Free-Figma-icons--Community-?node-id=101-3505" target="_blank" rel="noopener">
         <span class="icon-box">ST</span>
@@ -1767,11 +1723,11 @@
       </div>
 
       <div class="comp-block" id="comp-member-card">
-        <div class="comp-block-hd"><strong>MemberCard 会员卡</strong><code>Figma ysexRTH · 详卡 + 列表条</code></div>
+        <div class="comp-block-hd"><strong>MemberCard 会员卡</strong><code>RTA-R1 · node 1122-1114 · 详卡 + 列表条</code></div>
         <div class="comp-block-bd">
           <p style="font-size:12px;color:var(--text-secondary);margin-bottom:12px">卡面使用切图背景（<code>assets/member-card/</code>）· 详卡 Frame 五张 · 列表条 Mask 五张 · CTA 色由切图主色推导。AI 标注：<code>MemberCard/detail + --stored</code> 或 <code>MemberCard/compact + --times</code>。</p>
           <h4 style="margin:0 0 10px;font-size:14px">形态一 · 详卡 MemberCard/detail</h4>
-          <p style="font-size:12px;color:var(--text-secondary);margin-bottom:12px">彩色头区四角圆角 12px · 上左右贴边 · 头底留白露出下圆角 · 白区/底栏间距加大 · 左下删除为线性图标（无圆形底）· 开单 <code>--mc-cta</code> 卡面色系。</p>
+          <p style="font-size:12px;color:var(--text-secondary);margin-bottom:12px">详卡像素对齐 RTA-R1 · 头区 168px / padding 24px · 白区 12px #8E8E8E · 开单 28px · 删除仅图标。</p>
           <article class="u-member-card u-member-card--stored" aria-label="储值卡详卡">
             <div class="u-member-card__head">
               <div class="u-member-card__type">储值卡</div>
@@ -1791,7 +1747,7 @@
               <p>赠送项目：洗吹3次，烫染1次，洗吹3次，烫染1次…</p>
             </div>
             <div class="u-member-card__foot">
-              <button type="button" class="u-member-card__del" aria-label="删除"><span class="s-icon" data-icon="delete"></span></button>
+              <button type="button" class="u-member-card__del" aria-label="删除"><i data-lucide="trash-2" class="u-member-card__del-icon" aria-hidden="true"></i></button>
               <nav class="u-member-card__links" aria-label="卡操作">
                 <a href="#">退卡</a>
                 <a href="#">升降级</a>
@@ -1811,7 +1767,7 @@
                 </div>
               </div>
               <div class="u-member-card__body"><p>有效期限：永久有效</p><p>赠送项目：洗吹3次，烫染1次…</p></div>
-              <div class="u-member-card__foot"><button type="button" class="u-member-card__del" aria-label="删除"><span class="s-icon" data-icon="delete"></span></button><nav class="u-member-card__links"><a href="#">退卡</a><a href="#">升降级</a><a href="#">充值</a></nav><button type="button" class="u-member-card__cta">开单</button></div>
+              <div class="u-member-card__foot"><button type="button" class="u-member-card__del" aria-label="删除"><i data-lucide="trash-2" class="u-member-card__del-icon" aria-hidden="true"></i></button><nav class="u-member-card__links"><a href="#">退卡</a><a href="#">升降级</a><a href="#">充值</a></nav><button type="button" class="u-member-card__cta">开单</button></div>
             </article>
             <article class="u-member-card u-member-card--times">
               <div class="u-member-card__head">
@@ -1822,7 +1778,7 @@
                 </div>
               </div>
               <div class="u-member-card__body"><p>有效期限：永久有效</p><p>赠送项目：洗吹3次，烫染1次…</p></div>
-              <div class="u-member-card__foot"><button type="button" class="u-member-card__del" aria-label="删除"><span class="s-icon" data-icon="delete"></span></button><nav class="u-member-card__links"><a href="#">退卡</a><a href="#">升降级</a><a href="#">充值</a></nav><button type="button" class="u-member-card__cta">开单</button></div>
+              <div class="u-member-card__foot"><button type="button" class="u-member-card__del" aria-label="删除"><i data-lucide="trash-2" class="u-member-card__del-icon" aria-hidden="true"></i></button><nav class="u-member-card__links"><a href="#">退卡</a><a href="#">升降级</a><a href="#">充值</a></nav><button type="button" class="u-member-card__cta">开单</button></div>
             </article>
             <article class="u-member-card u-member-card--discount">
               <div class="u-member-card__head">
@@ -1833,7 +1789,7 @@
                 </div>
               </div>
               <div class="u-member-card__body"><p>有效期限：永久有效</p><p>赠送项目：洗吹3次，烫染1次…</p></div>
-              <div class="u-member-card__foot"><button type="button" class="u-member-card__del" aria-label="删除"><span class="s-icon" data-icon="delete"></span></button><nav class="u-member-card__links"><a href="#">退卡</a><a href="#">升降级</a><a href="#">充值</a></nav><button type="button" class="u-member-card__cta">开单</button></div>
+              <div class="u-member-card__foot"><button type="button" class="u-member-card__del" aria-label="删除"><i data-lucide="trash-2" class="u-member-card__del-icon" aria-hidden="true"></i></button><nav class="u-member-card__links"><a href="#">退卡</a><a href="#">升降级</a><a href="#">充值</a></nav><button type="button" class="u-member-card__cta">开单</button></div>
             </article>
             <article class="u-member-card u-member-card--period">
               <div class="u-member-card__head">
@@ -1844,7 +1800,7 @@
                 </div>
               </div>
               <div class="u-member-card__body"><p>有效期限：永久有效</p><p>赠送项目：洗吹3次，烫染1次…</p></div>
-              <div class="u-member-card__foot"><button type="button" class="u-member-card__del" aria-label="删除"><span class="s-icon" data-icon="delete"></span></button><nav class="u-member-card__links"><a href="#">退卡</a><a href="#">升降级</a><a href="#">充值</a></nav><button type="button" class="u-member-card__cta">开单</button></div>
+              <div class="u-member-card__foot"><button type="button" class="u-member-card__del" aria-label="删除"><i data-lucide="trash-2" class="u-member-card__del-icon" aria-hidden="true"></i></button><nav class="u-member-card__links"><a href="#">退卡</a><a href="#">升降级</a><a href="#">充值</a></nav><button type="button" class="u-member-card__cta">开单</button></div>
             </article>
             <article class="u-member-card u-member-card--package">
               <div class="u-member-card__head">
@@ -1855,7 +1811,7 @@
                 </div>
               </div>
               <div class="u-member-card__body"><p>有效期限：永久有效</p><p>赠送项目：洗吹3次，烫染1次…</p></div>
-              <div class="u-member-card__foot"><button type="button" class="u-member-card__del" aria-label="删除"><span class="s-icon" data-icon="delete"></span></button><nav class="u-member-card__links"><a href="#">退卡</a><a href="#">升降级</a><a href="#">充值</a></nav><button type="button" class="u-member-card__cta">开单</button></div>
+              <div class="u-member-card__foot"><button type="button" class="u-member-card__del" aria-label="删除"><i data-lucide="trash-2" class="u-member-card__del-icon" aria-hidden="true"></i></button><nav class="u-member-card__links"><a href="#">退卡</a><a href="#">升降级</a><a href="#">充值</a></nav><button type="button" class="u-member-card__cta">开单</button></div>
             </article>
           </div>
           <h4 style="margin:24px 0 10px;font-size:14px">形态二 · 列表条 MemberCard/compact</h4>
@@ -1901,7 +1857,7 @@
             <tr><td style="padding:8px"><code>--period</code></td><td style="padding:8px"><code>period-detail.png</code></td><td style="padding:8px">#E3BFB3</td><td style="padding:8px"><code>period-compact.png</code></td></tr>
             <tr><td style="padding:8px"><code>--package</code></td><td style="padding:8px"><code>package-detail.png</code></td><td style="padding:8px">#D7C3A8</td><td style="padding:8px"><code>package-compact.png</code></td></tr>
           </table>
-          <p style="margin-top:12px;font-size:12px;color:var(--text-secondary)">详卡宽 358 · 头区四角圆角 · 底栏虚线内缩 14px · 底栏 padding-top 18px · 删除仅图标 · 开单 background-color 与卡面同色系 · 资源 <code>assets/member-card/</code>。</p>
+          <p style="margin-top:12px;font-size:12px;color:var(--text-secondary)">详卡宽 358 · 头 min-height 168px · 头 padding 24/16/16 · 头底 gap 8px · 白区 padding-top 8px · 底栏 padding 14px · 开单 28px · 资源 <code>assets/member-card/</code>。</p>
         </div>
       </div>
 
@@ -2403,7 +2359,7 @@
     <!-- 9. Tokens JSON -->
     <section id="tokens">
       <h2 class="section-title"><span class="num">9</span>Design Token JSON</h2>
-      <p>可复制到 Flutter <code>ThemeData</code> / JSON 主题配置，或导入设计工具 Token 插件。</p>
+      <p>可复制到 <code>tailwind.config.js</code> 的 <code>theme.extend</code>、CSS 变量，或导入设计工具 Token 插件。</p>
       <pre id="token-json">{
   "appName": "剑琅联盟",
   "appLogo": "LOGO2.png",
@@ -3096,5 +3052,7 @@
     });
   }
 </script>
+<script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
+<script>if (window.lucide) lucide.createIcons();</script>
 </body>
 </html>

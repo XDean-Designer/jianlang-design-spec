@@ -1,0 +1,45 @@
+@import './fonts.css';
+@import './components/member-card.css';
+@import './components/button.css';
+@import './components/page-title-bar.css';
+@import './components/card-detail-page.css';
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    -webkit-font-smoothing: antialiased;
+    scroll-behavior: smooth;
+  }
+
+  html.platform-windows {
+    --font-ui: 'Source Han Sans SC', 'Source Han Sans CN', 'Noto Sans SC', 'Microsoft YaHei', sans-serif;
+  }
+
+  body {
+    @apply font-ui text-sm leading-relaxed text-figma-primary bg-[#F7F7F7] m-0;
+  }
+
+  button,
+  input,
+  textarea,
+  select {
+    @apply font-ui;
+  }
+}
+
+@layer components {
+  .app-root {
+    @apply min-h-screen mx-auto max-w-canvas bg-[#F7F7F7];
+  }
+
+  .phone-status-bar {
+    @apply w-full max-w-canvas h-safe-top mx-auto bg-white shrink-0;
+  }
+
+  .phone-bottom-safe {
+    @apply w-full max-w-canvas h-[39px] mx-auto bg-white shrink-0;
+  }
+}
