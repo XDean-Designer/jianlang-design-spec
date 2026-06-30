@@ -1,7 +1,7 @@
 @layer components {
   .u-page-title-bar {
     @apply w-full max-w-canvas h-nav-h mx-auto bg-white grid items-stretch p-0 border-0 shadow-none box-border;
-    grid-template-columns: 56px 1fr 72px;
+    grid-template-columns: var(--page-title-bar-side) 1fr var(--page-title-bar-side);
   }
 
   .u-page-title-bar .back {

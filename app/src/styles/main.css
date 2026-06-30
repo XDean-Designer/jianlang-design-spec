@@ -2,6 +2,7 @@
 @import './components/member-card.css';
 @import './components/button.css';
 @import './components/page-title-bar.css';
+@import './components/home-navbar.css';
 @import './components/card-detail-page.css';
 
 @tailwind base;
@@ -9,6 +10,13 @@
 @tailwind utilities;
 
 @layer base {
+  :root {
+    --status-bar-h: 53px;
+    --nav-h: 44px;
+    --bottom-placeholder: 34px;
+    --page-title-bar-side: 72px;
+  }
+
   html {
     -webkit-font-smoothing: antialiased;
     scroll-behavior: smooth;
@@ -36,10 +44,10 @@
   }
 
   .phone-status-bar {
-    @apply w-full max-w-canvas h-safe-top mx-auto bg-white shrink-0;
+    @apply w-full max-w-canvas h-status-bar-h mx-auto bg-white shrink-0;
   }
 
   .phone-bottom-safe {
-    @apply w-full max-w-canvas h-[39px] mx-auto bg-white shrink-0;
+    @apply w-full max-w-canvas h-bottom-placeholder mx-auto bg-white shrink-0;
   }
 }

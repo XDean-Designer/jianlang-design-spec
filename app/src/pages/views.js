@@ -1,5 +1,6 @@
 import { renderMemberCardDetail, renderMemberCardCompact, CARD_TYPES } from '../components/member-card.js';
 import { renderPageTitleBar } from '../components/page-title-bar.js';
+import { renderHomeNavbar } from '../components/home-navbar.js';
 
 export function renderHome() {
   const cardLinks = Object.entries(CARD_TYPES)
@@ -11,19 +12,23 @@ export function renderHome() {
 
   return `
     <div class="home-page">
-      <h2 class="home-page__title">剑琅联盟 · WebView 产品工程</h2>
-      <p class="text-xs text-figma-secondary">Vite + Tailwind v3 + Capacitor · 阶段 2</p>
-      <nav class="home-page__nav" aria-label="演示页面">
-        ${cardLinks}
-        <a href="#/cards">五类详卡对照</a>
-      </nav>
-      <section class="demo-section">
-        <h3 class="demo-section__title">按钮组件</h3>
-        <div class="flex flex-col gap-2">
-          <button type="button" class="btn btn-primary btn-block">主按钮</button>
-          <button type="button" class="btn btn-outline btn-block">描边按钮</button>
-        </div>
-      </section>
+      <div class="phone-status-bar" aria-hidden="true"></div>
+      ${renderHomeNavbar()}
+      <div class="home-page__body">
+        <p class="text-xs text-figma-secondary">Vite + Tailwind v3 + Capacitor · 阶段 2</p>
+        <nav class="home-page__nav" aria-label="演示页面">
+          ${cardLinks}
+          <a href="#/cards">五类详卡对照</a>
+        </nav>
+        <section class="demo-section">
+          <h3 class="demo-section__title">按钮组件</h3>
+          <div class="flex flex-col gap-2">
+            <button type="button" class="btn btn-primary btn-block">主按钮</button>
+            <button type="button" class="btn btn-outline btn-block">描边按钮</button>
+          </div>
+        </section>
+      </div>
+      <div class="phone-bottom-safe" aria-hidden="true"></div>
     </div>
   `;
 }
@@ -72,10 +77,12 @@ export function renderCardsGallery() {
 
   return `
     <div class="card-detail-page">
+      <div class="phone-status-bar" aria-hidden="true"></div>
       ${renderPageTitleBar({ title: '详卡对照', action: '', backHref: '#/' })}
       <div class="card-detail-page__body">
         ${cards}
       </div>
+      <div class="phone-bottom-safe" aria-hidden="true"></div>
     </div>
   `;
 }

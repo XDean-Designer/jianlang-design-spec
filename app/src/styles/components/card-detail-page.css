@@ -46,11 +46,11 @@
   }
 
   .home-page {
-    @apply p-4 flex flex-col gap-4;
+    @apply flex flex-col min-h-screen bg-[#F7F7F7];
   }
 
-  .home-page__title {
-    @apply text-lg font-semibold text-figma-primary;
+  .home-page__body {
+    @apply flex-1 p-4 flex flex-col gap-4;
   }
 
   .home-page__nav {

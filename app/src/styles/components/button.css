@@ -1,6 +1,6 @@
 @layer components {
   .btn {
-    @apply inline-flex items-center justify-center h-12 max-w-btn px-5 rounded-xl text-sm font-medium leading-tight text-center border-0 cursor-pointer font-ui shadow-none box-border;
+    @apply inline-flex items-center justify-center h-12 max-w-btn px-5 rounded-xl text-base font-medium leading-tight text-center border-0 cursor-pointer font-ui shadow-none box-border;
     background-image: none;
   }
 

@@ -148,7 +148,10 @@
       --radius-s: 4px; --radius-m: 8px; --radius-l: 12px; --radius-xl: 12px; --radius-round: 999px;
       --radius-btn-primary: var(--radius-btn-12);
       --shadow-1: none; --shadow-2: none; --shadow-3: none;
-      --nav-h: 44px; --tabbar-h: 56px; --safe-top: 53px; --safe-bottom: 34px; --bottom-placeholder: 34px;
+      --nav-h: 44px; --tabbar-h: 56px;
+      --status-bar-h: 53px; /* 系统状态栏占位（与标题栏分属两层） */
+      --safe-top: var(--status-bar-h); /* 别名 · 兼容旧引用 */
+      --safe-bottom: 34px; --bottom-placeholder: 34px;
       --space-page: 16px; --space-module: 16px; --space-card: 16px;
       --space-icon-text: 8px; --space-list-y: 12px; --space-tag-y: 4px; --space-tag-x: 8px; --space-divider-y: 12px;
       --icon-size: 24px; --icon-safe: 20px; --icon-size-sm: 16px;
@@ -162,6 +165,8 @@
       --page-title-bar-side: 72px; /* PageTitleBar 左右等宽列 · 保证标题几何居中 */
       --modal-margin: 32px; /* 居中弹窗距画布左右边距 */
       --modal-centered-w: calc(var(--canvas-w) - var(--modal-margin) * 2); /* 326px */
+      --toast-margin-h: 40px; /* Toast 外缘距画布左右边距 */
+      --toast-max-width: calc(var(--canvas-w) - var(--toast-margin-h) * 2); /* 310px */
       --tab-indicator-w: 32px; /* Tabs / PageTabs 选中指示条宽度 */
       /* Figma 主页面 / RTP 零售模块 实测 Token */
       --figma-text-primary: #333333;
@@ -261,7 +266,7 @@
       max-width: var(--btn-max-width);
       padding: 0 20px;
       border-radius: var(--radius-btn);
-      font-size: 14px;
+      font-size: 16px;
       font-weight: 500;
       line-height: 1.2;
       text-align: center;
@@ -458,10 +463,27 @@
     .u-page-title-bar--no-back .back { visibility: hidden; pointer-events: none; }
     .page-title-bar-variants { display: flex; flex-direction: column; gap: 20px; }
     .page-title-bar-variants .variant-label { font-size: 12px; font-weight: 500; color: var(--text-secondary); margin: 0 0 -8px; }
+    /* HomeNavbar · 首页品牌顶栏（与 PageTitleBar 分轨） */
+    .u-home-navbar {
+      width: 100%;
+      max-width: var(--canvas-w);
+      height: var(--nav-h);
+      margin: 0 auto;
+      background: var(--bg-container);
+      display: flex;
+      align-items: center;
+      gap: var(--space-icon-text);
+      padding: 0 var(--space-page);
+      border: none;
+      box-shadow: none;
+      box-sizing: border-box;
+    }
+    .u-home-navbar__logo { width: 28px; height: 28px; object-fit: contain; flex-shrink: 0; }
+    .u-home-navbar__title { margin: 0; font-size: 16px; font-weight: 500; line-height: 1.2; color: var(--text-primary); }
     .phone-status-bar {
       width: 100%;
       max-width: var(--canvas-w);
-      height: var(--safe-top);
+      height: var(--status-bar-h);
       margin: 0 auto;
       background: #fff;
       flex-shrink: 0;
@@ -513,10 +535,6 @@
       background: var(--brand-6);
       border-radius: 2px;
     }
-    /* @deprecated 旧版 u-navbar · 内页请用 PageTitleBar · 首页/品牌头请用 HomeNavbar */
-    .u-navbar { height: var(--nav-h); background: #fff; display: flex; align-items: center; padding: 0 var(--space-page); border-bottom: 1px solid var(--border); font-size: 16px; font-weight: 500; box-shadow: none; }
-    .u-navbar .back { margin-right: 8px; color: var(--gray-8); }
-    .u-navbar .action { margin-left: auto; font-size: 14px; color: var(--brand-6); font-weight: 400; }
     .u-tabs { display: flex; height: 48px; background: #fff; border: none; }
     .u-tabs span { flex: 1; display: flex; align-items: center; justify-content: center; font-size: 14px; color: var(--text-secondary); position: relative; }
     .u-tabs span.on { color: var(--text-primary); font-weight: 500; }
@@ -658,11 +676,9 @@
       transform: translate(-50%, -50%);
     }
     .u-toast {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
+      display: inline-block;
       box-sizing: border-box;
-      max-width: calc(var(--canvas-w) - 64px);
+      max-width: var(--toast-max-width);
       padding: 10px 16px;
       background: rgba(51, 51, 51, 0.9);
       color: #FFFFFF;
@@ -672,10 +688,12 @@
       font-weight: 400;
       letter-spacing: 0;
       text-align: center;
+      white-space: normal;
       border-radius: 4px;
       box-shadow: none;
       border: none;
       word-break: break-word;
+      overflow-wrap: break-word;
     }
     .u-modal-popup {
       box-sizing: border-box;
@@ -851,9 +869,8 @@
     .u-skeleton { height: 16px; background: var(--bg-disabled); border-radius: var(--radius-tag); margin-bottom: 8px; border: 1px solid var(--border); }
     @keyframes spin { to { transform: rotate(360deg); } }
     .phone-status,
-    .phone-status-bar { height: var(--safe-top); background: #fff; }
+    .phone-status-bar { height: var(--status-bar-h); background: #fff; }
     .phone-status { display: none; }
-    .phone-nav { height: var(--nav-h); background: #fff; display: flex; align-items: center; padding: 0 var(--space-page); border-bottom: 1px solid var(--border); font-weight: 600; font-size: 16px; box-shadow: none; }
     .phone-body { min-height: 400px; padding: 16px; }
     .phone-tabbar { height: 56px; background: #fff; border-top: 1px solid var(--border); display: flex; }
     .phone-tabbar span { flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: center; font-size: 10px; color: var(--text-secondary); }
@@ -928,7 +945,7 @@
     .layout-phone-wrap { text-align: center; }
     .layout-phone-wrap .cap { font-size: 12px; color: var(--text-secondary); margin-top: 12px; }
     /* 4.3 布局结构示意 · 区域标注与底部安全区可视化 */
-    .layout-structure-demo .phone-status-bar { flex-shrink: 0; height: 53px; min-height: 53px; max-height: 53px; }
+    .layout-structure-demo .phone-status-bar { flex-shrink: 0; height: var(--status-bar-h); min-height: var(--status-bar-h); max-height: var(--status-bar-h); }
     .layout-structure-demo .phone-layout-stack { flex: 1; min-height: 0; }
     .layout-structure-demo .phone-bottom-safe {
       flex-shrink: 0;
@@ -1065,7 +1082,7 @@
       <div class="logo-wrap"><img src="LOGO2.png" alt="剑琅联盟"></div>
       <h1>剑琅联盟</h1>
       <p class="sub">移动端设计规范</p>
-      <span class="ver">Design System v1.5 · Tailwind</span>
+      <span class="ver">Design System v1.6 · Tailwind</span>
     </div>
     <ul class="nav-list">
       <li><a href="#global-ui" class="nav-mandate">★ 全局强制 UI</a></li>
@@ -1088,7 +1105,7 @@
     <div class="spec-topbar" role="banner">
       <img src="LOGO2.png" alt="剑琅联盟">
       <span class="spec-topbar-title">剑琅联盟 · 设计规范</span>
-      <span class="spec-topbar-ver">v1.5</span>
+      <span class="spec-topbar-ver">v1.6</span>
     </div>
     <div class="main-inner">
 
@@ -1193,7 +1210,7 @@
           </li>
           <li><strong>分割线</strong>：1px <code>#D7D7D5</code></li>
           <li><strong>顶部导航 / 标题栏</strong>：内页统一使用组件库 <code>PageTitleBar</code>（页面标题栏）；固定高 <strong>44px</strong>、白底、<strong>主体无描边</strong>；返回区为 <code>chevron-left</code> 矢量图标（24px），<strong>禁止</strong>文字 <code>&lt;</code> / <code>＜</code>；返回图标区垂直居中，<strong>标题与右侧操作文案底部水平对齐</strong>（不含系统状态栏）。</li>
-          <li><strong>全局按钮</strong>：统一高 <strong>48px</strong>、<strong>最大宽度 370px</strong>（含通栏主按钮与底栏按钮，不得超出）；无阴影无渐变；圆角仅在 <strong>4 / 8 / 12 / 16px</strong> 四档中选择，<strong>同一按钮类型</strong>在全站须使用<strong>同一圆角值</strong>。变体：<strong>填充按钮</strong> 品牌红底 <code>#F32F41</code> + <strong>白字</strong>；<strong>描边按钮</strong> 白底 + 红字 + 红描边 1px；<strong>禁用</strong> 灰底 <code>#EDEDED</code>。<strong>按钮内文案须在按钮区域内水平、垂直双向居中</strong>，禁止贴顶、贴底或偏左/偏右。</li>
+          <li><strong>全局按钮</strong>：统一高 <strong>48px</strong>、文案 <strong>16px</strong> / 500、<strong>最大宽度 370px</strong>（含通栏主按钮与底栏按钮，不得超出）；无阴影无渐变；圆角仅在 <strong>4 / 8 / 12 / 16px</strong> 四档中选择，<strong>同一按钮类型</strong>在全站须使用<strong>同一圆角值</strong>。变体：<strong>填充按钮</strong> 品牌红底 <code>#F32F41</code> + <strong>白字</strong>；<strong>描边按钮</strong> 白底 + 红字 + 红描边 1px；<strong>禁用</strong> 灰底 <code>#EDEDED</code>。<strong>按钮内文案须在按钮区域内水平、垂直双向居中</strong>，禁止贴顶、贴底或偏左/偏右。</li>
         </ol>
 
         <h3 style="margin-top:28px">页面与组件硬性约束</h3>
@@ -1316,13 +1333,14 @@
 export default {
   theme: {
     extend: {
-      colors: { brand: { 6: '#F32F41' }, figma: { primary: '#333333' }, mc: { label: '#666666' } },
-      maxWidth: { card: '358px', canvas: '390px' },
-      fontFamily: { ui: ['PingFang SC', 'sans-serif'], data: ['TCloudNumber', 'sans-serif'] },
+      spacing: { 'status-bar-h': '53px', 'nav-h': '44px', 'bottom-placeholder': '34px', 'page-title-bar-side': '72px' },
+      height: { 'status-bar-h': '53px', 'bottom-placeholder': '34px' },
+      colors: { brand: { 6: '#F32F41' }, figma: { primary: '#333333' } },
+      maxWidth: { card: '358px', canvas: '390px', btn: '370px' },
     },
   },
 };</pre>
-      <p style="font-size:12px;color:var(--text-secondary);margin-top:8px">产品工程演示：<code>cd app && npm run dev</code> · 路由 <code>#/card-detail/stored</code>（卡详情）· 组件 <code>MemberCard</code> / <code>PageTitleBar</code> / <code>Button</code> · 资源 <code>app/public/assets/member-card/</code>。</p>
+      <p style="font-size:12px;color:var(--text-secondary);margin-top:8px">产品工程演示：<code>cd app && npm run dev</code> · 路由 <code>#/</code>（HomeNavbar）· <code>#/card-detail/stored</code>（卡详情）· 组件 <code>HomeNavbar</code> / <code>PageTitleBar</code> / <code>MemberCard</code> / <code>Button</code>。</p>
     </section>
 
     <!-- 0. 概述 -->
@@ -1356,7 +1374,7 @@ export default {
         <tr><td>设计基准</td><td>宽 390（固定）× 高 844（默认）</td><td>高可向下延展；顶占位 53px · 底占位 34px</td></tr>
         <tr><td>UI 字体</td><td>苹果 PingFang SC · Windows 思源黑体</td><td>见 <a href="#font-platform">全局字体按设备</a>；金额仍 TCloudNumber</td></tr>
         <tr><td>全局 UI</td><td><a href="#global-ui">★ 强制章节</a></td><td>高于本章与 Figma 历史稿</td></tr>
-        <tr><td>主按钮</td><td>高 48px · 圆角 4/8/12/16 择档</td><td>见全局章 · 同类型一致</td></tr>
+        <tr><td>主按钮</td><td>高 48px · 字号 16px · 圆角 4/8/12/16 择档</td><td>见全局章 · 同类型一致</td></tr>
       </table>
     </section>
 
@@ -1418,8 +1436,8 @@ export default {
         <tr><td>text-secondary ★</td><td>#929292</td><td>描述、数据标签、次要信息</td></tr>
         <tr><td>text-muted</td><td>#B8B8B8</td><td>日期 Tab 未选中、弱提示</td></tr>
         <tr><td>text-inactive</td><td>#D7D7D5</td><td>分段器未选中（如实业绩）</td></tr>
-        <tr><td>text-placeholder</td><td>rgba(0,0,0,0.4)</td><td>输入框占位符（表单页）</td></tr>
-        <tr><td>text-disabled</td><td>rgba(0,0,0,0.26)</td><td>禁用文字</td></tr>
+        <tr><td>text-placeholder</td><td>#929292</td><td>输入框占位符（与 text-secondary 同色 · 表单页）</td></tr>
+        <tr><td>text-disabled</td><td>#929292</td><td>禁用文字（与 :root 一致）</td></tr>
         <tr><td>text-brand</td><td>#F32F41</td><td>品牌强调、可点击文字</td></tr>
         <tr><td>text-link</td><td>#0052D9</td><td>超链接（区别于品牌色）</td></tr>
         <tr><td>text-anti</td><td>#FFFFFF</td><td>深色/品牌色背景上的文字</td></tr>
@@ -1524,7 +1542,7 @@ export default {
         <tr><td>size-6</td><td>24px</td><td>大区块间距、Section 分隔</td></tr>
         <tr><td>size-8</td><td>32px</td><td>页面顶部留白</td></tr>
         <tr><td>size-10</td><td>40px</td><td>大按钮高度、输入框高度（large）</td></tr>
-        <tr><td>size-12</td><td>48px</td><td>Navbar 高度、Bottom Bar 按钮区</td></tr>
+        <tr><td>size-12</td><td>48px</td><td>主按钮高度、Bottom Bar 按钮区</td></tr>
       </table>
 
       <h3>4.2 页面布局常量</h3>
@@ -1760,7 +1778,7 @@ export default {
       <table class="comp-catalog">
         <tr><th>分类</th><th>组件 ID</th><th>名称</th><th>场景</th></tr>
         <tr><td>导航</td><td>PageTitleBar</td><td>页面标题栏</td><td>内页顶栏必用 · 左右等宽栅格 · Lucide 返回 · <a href="https://www.figma.com/design/44P9g5yKcQEyXdHCayIrMn/RTS-AI%E8%AF%BB%E5%8F%96?node-id=6-623">Figma 6-623</a>（仅顶栏）</td></tr>
-        <tr><td>导航</td><td>HomeNavbar</td><td>首页顶栏</td><td>左 Logo + 品牌名 · 与 PageTitleBar 分轨 · 勿用已废弃 <code>u-navbar</code></td></tr>
+        <tr><td>导航</td><td>HomeNavbar</td><td>首页顶栏</td><td>左 Logo 28px + 品牌名 16px · 见 <a href="#comp-home-navbar">7 章</a></td></tr>
         <tr><td>导航</td><td>PageTabs</td><td>顶部 Tab 条</td><td>宽 390 居中 · 页面级分段</td></tr>
         <tr><td>导航</td><td>TabBar</td><td>标准底栏</td><td>子模块 3–4 Tab</td></tr>
         <tr><td>反馈</td><td>AlertBanner</td><td>提示信息栏</td><td>图标与首行文案底对齐</td></tr>
@@ -1982,7 +2000,8 @@ export default {
           </div>
           <table>
             <tr><th>变体</th><th>规格</th></tr>
-            <tr><td>Primary ★</td><td>高 48px · 圆角四档择一 · 红底 #F32F41 + <strong>白字</strong> · 无投影</td></tr>
+            <tr><td>Primary ★</td><td>高 48px · 字号 16px / 500 · 圆角四档择一 · 红底 #F32F41 + <strong>白字</strong> · 无投影</td></tr>
+            <tr><td>字号变体</td><td>默认 16px · <code>btn-sm</code> 14px · <code>btn-lg</code> 16px（加宽 padding）</td></tr>
             <tr><td>文案对齐 ★</td><td>按钮内文字<strong>水平 + 垂直居中</strong>（flex 居中或等价实现；禁止偏上/偏下/单侧留白不均）</td></tr>
             <tr><td>Outline ★</td><td>白底 + 红字 + 红描边 1px · 与同级 Primary <strong>相同圆角</strong></td></tr>
             <tr><td>Disabled</td><td>圆角与同页主按钮一致 · bg #EDEDED</td></tr>
@@ -1995,10 +2014,34 @@ export default {
         </div>
       </div>
 
+      <div class="comp-block" id="comp-home-navbar">
+        <div class="comp-block-hd"><strong>HomeNavbar 首页顶栏</strong><code>Logo 28px + 品牌名 16px</code></div>
+        <div class="comp-block-bd">
+          <p style="font-size:12px;color:var(--text-secondary);margin-bottom:12px">首页 / 工作台等<strong>无返回</strong>场景使用；与内页 <code>PageTitleBar</code> 分轨。位于<strong>状态栏占位（53px）之下</strong>，栏高 <strong>44px</strong>，白底、<strong>主体无描边</strong>。产品工程：<code>renderHomeNavbar()</code> · <code>app/src/components/home-navbar.js</code>。</p>
+          <div class="comp-preview-phone" style="background:var(--bg-page)">
+            <div class="phone-status-bar" aria-hidden="true"></div>
+            <header class="u-home-navbar">
+              <img src="LOGO2.png" alt="" class="u-home-navbar__logo" width="28" height="28" />
+              <h1 class="u-home-navbar__title">剑琅联盟</h1>
+            </header>
+            <div style="height:80px;background:var(--bg-page)"></div>
+            <div class="phone-bottom-safe" aria-hidden="true"></div>
+          </div>
+          <table style="margin-top:16px">
+            <tr><th>属性</th><th>值</th><th>说明</th></tr>
+            <tr><td>栏高 ★</td><td>44px</td><td><code>--nav-h</code> · 白底 · 无描边</td></tr>
+            <tr><td>Logo ★</td><td>28×28px</td><td><code>LOGO2.png</code> · 与品牌章一致</td></tr>
+            <tr><td>品牌名</td><td>16px / 500 / #333</td><td><code>&lt;h1 class="u-home-navbar__title"&gt;</code></td></tr>
+            <tr><td>左内边距</td><td>16px</td><td>Logo 与文案间距 8px</td></tr>
+            <tr><td>与 PageTitleBar</td><td>分轨</td><td>首页用本组件；内页用 PageTitleBar（含返回）</td></tr>
+          </table>
+        </div>
+      </div>
+
       <div class="comp-block" id="comp-page-title-bar">
         <div class="comp-block-hd"><strong>PageTitleBar 页面标题栏</strong><code>RTS-AI · node 6-623（仅顶栏）</code></div>
         <div class="comp-block-bd">
-          <p style="font-size:12px;color:var(--text-secondary);margin-bottom:12px"><a href="https://www.figma.com/design/44P9g5yKcQEyXdHCayIrMn/RTS-AI%E8%AF%BB%E5%8F%96?node-id=6-623" target="_blank" rel="noopener">RTS-AI 读稿 · Figma 6-623</a> 为整页 <strong>Home</strong> 稿（含 Tab、内容区）；本组件<strong>仅对齐其顶栏区域</strong>。设计页 / 原型 / AI 出图内页顶栏<strong>必须</strong>调用 <code>PageTitleBar</code>；返回图标统一 <a href="https://lucide.dev/icons/chevron-left" target="_blank" rel="noopener">Lucide chevron-left</a>（与 <code>app/</code> 一致）。已废弃旧版 <code>u-navbar</code>，首页品牌头请用 <code>HomeNavbar</code>。</p>
+          <p style="font-size:12px;color:var(--text-secondary);margin-bottom:12px"><a href="https://www.figma.com/design/44P9g5yKcQEyXdHCayIrMn/RTS-AI%E8%AF%BB%E5%8F%96?node-id=6-623" target="_blank" rel="noopener">RTS-AI 读稿 · Figma 6-623</a> 为整页 <strong>Home</strong> 稿（含 Tab、内容区）；本组件<strong>仅对齐其顶栏区域</strong>。设计页 / 原型 / AI 出图内页顶栏<strong>必须</strong>调用 <code>PageTitleBar</code>；返回图标统一 <a href="https://lucide.dev/icons/chevron-left" target="_blank" rel="noopener">Lucide chevron-left</a>（与 <code>app/</code> 一致）。首页品牌头请用 <a href="#comp-home-navbar">HomeNavbar</a>。</p>
           <div class="page-title-bar-variants">
             <p class="variant-label">默认 · 返回 + 标题 + 操作</p>
             <div class="comp-preview-phone" style="background:var(--bg-page)">
@@ -2072,7 +2115,7 @@ export default {
             <tr><td>返回 ★</td><td>Lucide chevron-left · 24px</td><td><code>&lt;a class="back"&gt;</code> 44×44 · <strong>禁止</strong>文字 <code>&lt;</code></td></tr>
             <tr><td>右侧操作</td><td>16px · #333</td><td><code>&lt;button class="action"&gt;</code> · <code>action--muted</code> · <code>action--icon</code></td></tr>
             <tr><td>变体</td><td>见上方预览</td><td><code>--no-back</code> · 无操作 · 图标文案 · muted · 长标题</td></tr>
-            <tr><td>调用 ★</td><td>设计页必用</td><td>勿用已废弃 <code>u-navbar</code>；首页用 <code>HomeNavbar</code></td></tr>
+            <tr><td>调用 ★</td><td>设计页必用</td><td>内页 PageTitleBar · 首页 <a href="#comp-home-navbar">HomeNavbar</a></td></tr>
             <tr><td>禁止</td><td>—</td><td>标题栏内不放 Logo（首页等特殊场景用 HomeNavbar）</td></tr>
           </table>
         </div>
@@ -2353,8 +2396,13 @@ export default {
         <div class="comp-block-hd"><strong>Toast 轻提示</strong><code>业绩PK动画设置 · node 27-381</code></div>
         <div class="comp-block-bd">
           <p style="font-size:12px;color:var(--text-secondary);margin-bottom:12px">用于操作结果、权限不足等<strong>短时反馈</strong>。视觉以 <a href="https://www.figma.com/design/RpwcM1biwkmAghkRzcx4qS/%E4%B8%9A%E7%BB%A9PK%E5%8A%A8%E7%94%BB%E8%AE%BE%E7%BD%AE?node-id=27-381" target="_blank" rel="noopener">Figma · 业绩PK动画设置 · 27-381</a> 为准。AI 标注：<code>Toast/default</code>。</p>
-          <div class="u-toast-stage" aria-label="Toast 居中预览">
-            <div class="u-toast" role="status">暂无查看权限，请联系店主</div>
+          <p class="variant-label">单行 · 未触达边距不换行</p>
+          <div class="u-toast-stage" aria-label="Toast 单行预览">
+            <div class="u-toast" role="status">保存成功</div>
+          </div>
+          <p class="variant-label" style="margin-top:20px">多行 · 触达左右 40px 边距后换行</p>
+          <div class="u-toast-stage" aria-label="Toast 多行预览">
+            <div class="u-toast" role="status">暂无查看权限，请联系店主开通相关权限后再试</div>
           </div>
           <table style="margin-top:16px">
             <tr><th>属性</th><th>值</th></tr>
@@ -2368,8 +2416,9 @@ export default {
             <tr><td>字号 ★</td><td><strong>14px</strong></td></tr>
             <tr><td>行高 ★</td><td><strong>20px</strong></td></tr>
             <tr><td>字距 ★</td><td><strong>0</strong></td></tr>
-            <tr><td>对齐</td><td>文案居中 · 可换行</td></tr>
-            <tr><td>宽度</td><td>随文案自适应 · 最大宽 <code>326px</code>（画布左右各留 32px）</td></tr>
+            <tr><td>对齐</td><td>单行 / 多行文案均<strong>水平居中</strong></td></tr>
+            <tr><td>换行 ★</td><td>外缘距画布左右各 <strong>40px</strong>（<code>--toast-margin-h</code>）后自动换行 · 不限制行数</td></tr>
+            <tr><td>宽度</td><td>随文案自适应 · 最大宽 <code>310px</code>（<code>--toast-max-width</code> = 390 − 40×2）</td></tr>
             <tr><td>图标</td><td><strong>无</strong>（纯文字 Toast）</td></tr>
             <tr><td>遮罩</td><td><strong>无</strong> · 不阻断页面操作</td></tr>
             <tr><td>阴影</td><td><strong>无</strong></td></tr>
@@ -2541,101 +2590,101 @@ export default {
     <section id="tokens">
       <h2 class="section-title"><span class="num">9</span>Design Token JSON</h2>
       <p>可复制到 <code>tailwind.config.js</code> 的 <code>theme.extend</code>、CSS 变量，或导入设计工具 Token 插件。</p>
+      <p><strong>坐标系说明：</strong><code>tokens1x</code> 为 HTML 画布 / CSS 逻辑像素（宽 390）；<code>tokens2x</code> 为 Figma / Flutter 设计稿（宽 780，数值一般为 1x 的 2 倍）。实现 CSS / Tailwind 时<strong>仅使用 tokens1x</strong>。</p>
       <pre id="token-json">{
+  "specVersion": "1.6",
   "appName": "剑琅联盟",
   "appLogo": "LOGO2.png",
   "figmaFile": "RTP-零售模块",
   "figmaNode": "72-137",
-  "brandTheme": {
+  "tokens1x": {
     "color": {
       "textPrimary": "#333333",
       "textSecondary": "#929292",
+      "textPlaceholder": "#929292",
+      "textDisabled": "#929292",
       "textStrong": "#000000",
-      "textMuted": "#929292",
-      "brandAux1": "#FFD5D9",
-      "brandAux2": "#FFF2F2",
-      "accentBlue": "#1A70FE",
-      "accentOrange": "#F77357",
-      "brandNormalColor": "#F32F41",
-      "brandLightColor": "#FEF0F1",
-      "brandFocusColor": "#FDD9DC",
-      "brandActiveColor": "#D92939",
-      "brandDisabledColor": "#FB9BA3",
-      "successNormalColor": "#2BA471",
-      "warningNormalColor": "#E37318",
-      "errorNormalColor": "#D54941",
-      "bgColorPage": "#F7F7F7",
-      "bgColorContainer": "#FFFFFF",
-      "bgColorDisabled": "#EDEDED",
-      "textPrimaryColor": "rgba(0,0,0,0.9)",
-      "textSecondaryColor": "rgba(0,0,0,0.6)",
-      "textPlaceholderColor": "rgba(0,0,0,0.4)",
-      "textDisabledColor": "rgba(0,0,0,0.26)",
-      "textAntiColor": "#FFFFFF",
-      "borderColor": "#D7D7D5",
-      "noShadow": true,
-      "noGradient": true
+      "textBrand": "#F32F41",
+      "bgPage": "#F7F7F7",
+      "bgContainer": "#FFFFFF",
+      "bgDisabled": "#EDEDED",
+      "border": "#D7D7D5",
+      "brand6": "#F32F41"
     },
     "font": {
-      "fontXs": { "size": 20, "lineHeight": 32 },
-      "fontS": { "size": 24, "lineHeight": 40 },
-      "fontBase": { "size": 28, "lineHeight": 44 },
-      "fontM": { "size": 32, "lineHeight": 48 },
-      "fontL": { "size": 40, "lineHeight": 56 },
-      "fontXl": { "size": 48, "lineHeight": 64 }
+      "fontXs": { "size": 10, "lineHeight": 16 },
+      "fontTabbar": { "size": 11, "lineHeight": 15 },
+      "fontS": { "size": 12, "lineHeight": 20 },
+      "fontBase": { "size": 14, "lineHeight": 22 },
+      "fontM": { "size": 16, "lineHeight": 24 },
+      "fontL": { "size": 20, "lineHeight": 28 },
+      "fontXl": { "size": 24, "lineHeight": 32 },
+      "button": { "size": 16, "weight": 500 }
     },
     "radius": {
-      "radiusTag": 8,
-      "radiusInput": 16,
-      "radiusCard": 24,
-      "radiusBtn4": 8,
-      "radiusBtn8": 16,
-      "radiusBtn12": 24,
-      "radiusBtn16": 32
+      "radiusTag": 4,
+      "radiusInput": 8,
+      "radiusCard": 12,
+      "radiusBtn4": 4,
+      "radiusBtn8": 8,
+      "radiusBtn12": 12,
+      "radiusBtn16": 16
     },
-    "spacer": {
-      "spacer1": 8, "spacer2": 16, "spacer3": 24, "spacer4": 32,
-      "spacer5": 40, "spacer6": 48, "spacer8": 64
+    "layout": {
+      "canvasWidth": 390,
+      "canvasHeightDefault": 844,
+      "statusBarHeight": 53,
+      "navBarHeight": 44,
+      "tabBarHeight": 56,
+      "buttonHeight": 48,
+      "buttonMaxWidth": 370,
+      "buttonFontSize": 16,
+      "bottomPlaceholderHeight": 34,
+      "pageTitleBarSideWidth": 72,
+      "pageTabWidth": 390,
+      "modalMarginHorizontal": 32
+    },
+    "components": {
+      "pageTitleBarBackIcon": "lucide:chevron-left",
+      "pageTitleBarTitle": { "size": 18, "weight": 500 },
+      "pageTitleBarAction": { "size": 16, "weight": 400 },
+      "homeNavbarLogo": 28,
+      "homeNavbarTitle": { "size": 16, "weight": 500 },
+      "toastMarginHorizontal": 40,
+      "toastMaxWidth": 310,
+      "toastWrap": "unlimited-lines-center"
+    }
+  },
+  "tokens2x": {
+    "note": "Figma / Flutter 设计稿坐标，使用前勿与 tokens1x 混用",
+    "designWidth": 780,
+    "designHeightDefault": 1688,
+    "font": {
+      "fontBase": { "size": 28, "lineHeight": 44 },
+      "fontM": { "size": 32, "lineHeight": 48 }
+    },
+    "radius": {
+      "radiusCard": 24,
+      "radiusBtn12": 24
     },
     "layout": {
       "navBarHeight": 88,
       "buttonHeight": 96,
       "tabBarHeight": 112,
-      "cellHeight": 112,
-      "pagePaddingH": 32,
-      "designWidth": 780,
-      "designHeightDefault": 1688,
-      "designHeightMin": 1688,
-      "designHeightExtendable": true,
-      "canvasWidthFixed": 390,
-      "canvasHeightDefault": 844,
-      "buttonMaxWidth": 370,
-      "pageTabWidth": 390,
-      "statusBarPlaceholder": { "width": 390, "height": 53, "fill": "#FFFFFF" },
-      "bottomPlaceholder": { "width": 390, "height": 34, "fill": "#FFFFFF", "noShadow": true, "noBorder": true, "noRadius": true },
-      "canvasFrame": { "noRadius": true, "noShadow": true, "noBorder": true },
-      "figmaAutoLayout": { "allFrames": true },
-      "contentCardWhite": { "fill": "#FFFFFF", "noBorder": true },
-      "libraryFirstPolicy": { "iconsChapter": 6, "componentsChapter": 7, "allowExternalFallback": true },
-      "modalMargin": { "centeredHorizontal": 32, "centeredWidth": 326, "bottomLeftRightBottom": 0 },
-      "modalPopupSource": "https://www.figma.com/design/xqMgMp7wLhmEvvgiv6rSdW/xiaobin",
-      "pageTitleBarBackIcon": "lucide:chevron-left",
-      "pageTitleBarSideWidth": 72,
-      "pageTitleBarFigma": "https://www.figma.com/design/44P9g5yKcQEyXdHCayIrMn/RTS-AI读稿?node-id=6-623",
-      "pageTitleBarFigmaNote": "整页 Home 稿，仅参考顶栏区域",
-      "pageTitleBarDeprecated": "u-navbar",
-      "pageTitleBarHomeVariant": "HomeNavbar",
-      "radiusBtnPrimary": 24,
-      "radiusBtnPrimaryNote": "同类型按钮须统一使用 radiusBtn4|8|12|16 之一",
-      "globalUIMandate": "#global-ui"
+      "pagePaddingH": 32
     }
+  },
+  "references": {
+    "pageTitleBarFigma": "https://www.figma.com/design/44P9g5yKcQEyXdHCayIrMn/RTS-AI读稿?node-id=6-623",
+    "modalPopupSource": "https://www.figma.com/design/xqMgMp7wLhmEvvgiv6rSdW/xiaobin",
+    "globalUIMandate": "#global-ui"
   }
 }</pre>
-      <p style="font-size:12px;color:var(--text-secondary)">注：画布 390×844 直角无外框；顶状态栏占位 390×53、底安全区 390×34 白块；PageTitleBar 44px 独立于状态栏；按钮高 48px、圆角四档 4/8/12/16；返回 chevron-left 矢量图标。</p>
+      <p style="font-size:12px;color:var(--text-secondary)">注：画布 390×844 直角无外框；顶状态栏占位 390×53、底安全区 390×34 白块；PageTitleBar 44px 独立于状态栏；按钮高 48px、字号 16px、圆角四档 4/8/12/16；返回 chevron-left 矢量图标。</p>
 
       <h3>AI Prompt 模板</h3>
-      <pre>请按照《剑琅联盟 移动端设计规范 v1.4》设计 [页面名称]：
-- 最高优先级：★ 全局强制 UI — 390×844 直角画板（无圆角/无阴影/无描边）、所有 Frame 自动布局、#F7F7F7 底、无阴影无渐变；按钮高 48px、圆角仅 4/8/12/16 且同类型一致
+      <pre>请按照《剑琅联盟 移动端设计规范 v1.6》设计 [页面名称]：
+- 最高优先级：★ 全局强制 UI — 390×844 直角画板（无圆角/无阴影/无描边）、所有 Frame 自动布局、#F7F7F7 底、无阴影无渐变；按钮高 48px、字号 16px、圆角仅 4/8/12/16 且同类型一致
 - 产品：剑琅联盟 · Logo: LOGO2.png
 - 字体：苹果 PingFang SC / Windows 思源黑体 Source Han Sans SC（Windows 禁止 PingFang SC）；金额 TCloudNumber-Bold；¥ 与「应付/实付」用 UI 字体，¥ 与数字间距 4px
 - 勾号：仅用图标 check / check-circle-filled，禁止文字 √ 或 ✓
@@ -2643,7 +2692,7 @@ export default {
 - 图标：优先第 6 章库（Stratis / Iconex / WeChat）；无合适项可外部矢量图标 · 24px（安全 20）/ 16px · 颜色 #F32F41 / #333 / #929
 - 组件：优先第 7 章库；无合适项可外部引入，须符合全局 UI 并注明来源
 - 占位：状态栏 390×53 白块；页面最底 390×34 白块（无阴影/描边/圆角）
-- 硬性：无 emoji；Figma 所有 Frame 须 Auto Layout；返回用 Lucide chevron-left 矢量图标（禁止文字 &lt;）；白底内容卡片无描边；按钮文案在按钮内水平垂直居中；Tab/卡片不遮挡；内页顶栏必用 PageTitleBar（44px，语义 header+h1）；标题与右侧文案底对齐；栅格 --page-title-bar-side 72px 左右等宽；勿用已废弃 u-navbar；Figma 6-623 仅参考顶栏区域；PageTitleBar/PageTabs/TabBar 主体无描边；图片位 #EDEDED+白 image icon；不横向溢出；按钮 max 370px；顶 Tab 390 居中；卡片内容不溢出；提示 icon 与首行底对齐；空状态内容区垂直居中
+- 硬性：无 emoji；Figma 所有 Frame 须 Auto Layout；返回用 Lucide chevron-left 矢量图标（禁止文字 &lt;）；白底内容卡片无描边；按钮高 48px 字号 16px；按钮文案在按钮内水平垂直居中；Tab/卡片不遮挡；内页顶栏必用 PageTitleBar（44px）；首页顶栏用 HomeNavbar；状态栏占位 53px、底栏 34px；标题与右侧文案底对齐；栅格 --page-title-bar-side 72px 左右等宽；Figma 6-623 仅参考顶栏区域；PageTitleBar/PageTabs/TabBar 主体无描边；图片位 #EDEDED+白 image icon；不横向溢出；按钮 max 370px；顶 Tab 390 居中；卡片内容不溢出；提示 icon 与首行底对齐；空状态内容区垂直居中
 - 组件：优先第 7 章库；弹窗用 ModalPopup（7.1 · 7 变体）；无合适项可外部引入
 - 弹窗：居中左右边距 32px · 底部弹窗左/右/下 0 · 无遮罩入库 · 无阴影 · 按钮 48px
 - 内容：[具体业务字段]</pre>
@@ -2654,7 +2703,7 @@ export default {
         <img src="LOGO2.png" alt="剑琅联盟">
         <span>剑琅联盟 · 设计规范</span>
       </div>
-      <div class="foot-copy">v1.4 · ★ 全局强制 UI · 390×844 · © 剑琅联盟</div>
+      <div class="foot-copy">v1.6 · ★ 全局强制 UI · 390×844 · © 剑琅联盟</div>
     </footer>
 
     </div><!-- .main-inner -->

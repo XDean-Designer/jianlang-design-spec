@@ -36,11 +36,14 @@ export default {
       spacing: {
         'card-head': '168px',
         'nav-h': '44px',
-        'safe-top': '44px',
+        'status-bar-h': '53px',
+        'bottom-placeholder': '34px',
+        'page-title-bar-side': '72px',
       },
       height: {
         'nav-h': '44px',
-        'safe-top': '44px',
+        'status-bar-h': '53px',
+        'bottom-placeholder': '34px',
       },
     },
   },
