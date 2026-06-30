@@ -148,7 +148,7 @@
       --radius-s: 4px; --radius-m: 8px; --radius-l: 12px; --radius-xl: 12px; --radius-round: 999px;
       --radius-btn-primary: var(--radius-btn-12);
       --shadow-1: none; --shadow-2: none; --shadow-3: none;
-      --nav-h: 44px; --tabbar-h: 56px; --safe-top: 44px; --safe-bottom: 34px; --bottom-placeholder: 39px;
+      --nav-h: 44px; --tabbar-h: 56px; --safe-top: 53px; --safe-bottom: 34px; --bottom-placeholder: 34px;
       --space-page: 16px; --space-module: 16px; --space-card: 16px;
       --space-icon-text: 8px; --space-list-y: 12px; --space-tag-y: 4px; --space-tag-x: 8px; --space-divider-y: 12px;
       --icon-size: 24px; --icon-safe: 20px; --icon-size-sm: 16px;
@@ -159,6 +159,7 @@
       --canvas-h: 844px; /* 画布高：默认；phone-frame 使用 min-height 可向下延展 */
       --btn-max-width: 370px; /* 按钮最大宽度（画布 390，左右各留 10px） */
       --page-tab-width: 390px; /* 顶部 Tab 条画布宽 */
+      --page-title-bar-side: 72px; /* PageTitleBar 左右等宽列 · 保证标题几何居中 */
       --modal-margin: 32px; /* 居中弹窗距画布左右边距 */
       --modal-centered-w: calc(var(--canvas-w) - var(--modal-margin) * 2); /* 326px */
       --tab-indicator-w: 32px; /* Tabs / PageTabs 选中指示条宽度 */
@@ -372,16 +373,15 @@
     .comp-block-hd code { font-size: 11px; color: var(--brand-6); }
     .comp-block-bd { padding: 20px 16px; }
     .comp-preview-phone { width: var(--canvas-w); margin: 0 auto; border: 1px solid var(--border); border-radius: var(--radius-l); overflow: hidden; background: var(--bg-page); }
-  /* 页面标题栏 · 对齐 RTS-AI 读稿 node 6-623 */
-    .u-page-title-bar,
-    .u-navbar.u-page-title-bar {
+  /* 页面标题栏 · Figma 6-623 仅参考顶栏区域（见 #comp-page-title-bar） */
+    .u-page-title-bar {
       width: 100%;
       max-width: var(--canvas-w);
       height: var(--nav-h);
       margin: 0 auto;
       background: var(--bg-container);
       display: grid;
-      grid-template-columns: 56px 1fr 72px;
+      grid-template-columns: var(--page-title-bar-side) 1fr var(--page-title-bar-side);
       align-items: stretch;
       padding: 0;
       border: none;
@@ -397,17 +397,30 @@
       width: 44px;
       height: 44px;
       margin-left: 4px;
+      border: none;
+      background: transparent;
+      padding: 0;
+      cursor: pointer;
       color: var(--icon-color-default);
+      text-decoration: none;
+      font-family: inherit;
+    }
+    .u-page-title-bar .back-icon {
+      width: var(--icon-size);
+      height: var(--icon-size);
+      stroke: currentColor;
+      flex-shrink: 0;
     }
     .u-page-title-bar .title {
       display: flex;
       align-items: flex-end;
       justify-content: center;
       height: 100%;
+      margin: 0;
       padding: 0 4px 11px;
       box-sizing: border-box;
       text-align: center;
-      font-size: 16px;
+      font-size: 18px;
       font-weight: 500;
       line-height: 1.2;
       color: var(--text-primary);
@@ -422,13 +435,29 @@
       height: 100%;
       padding: 0 var(--space-page) 11px 0;
       box-sizing: border-box;
+      border: none;
+      background: transparent;
+      cursor: pointer;
+      font-family: inherit;
       font-size: 14px;
       line-height: 1.2;
       color: var(--text-primary);
       font-weight: 400;
       white-space: nowrap;
+      text-decoration: none;
     }
     .u-page-title-bar .action--muted { color: var(--text-secondary); }
+    .u-page-title-bar .action--icon { gap: 4px; }
+    .u-page-title-bar .action__icon {
+      width: var(--icon-size-sm);
+      height: var(--icon-size-sm);
+      stroke: currentColor;
+      flex-shrink: 0;
+      margin-bottom: 1px;
+    }
+    .u-page-title-bar--no-back .back { visibility: hidden; pointer-events: none; }
+    .page-title-bar-variants { display: flex; flex-direction: column; gap: 20px; }
+    .page-title-bar-variants .variant-label { font-size: 12px; font-weight: 500; color: var(--text-secondary); margin: 0 0 -8px; }
     .phone-status-bar {
       width: 100%;
       max-width: var(--canvas-w);
@@ -484,6 +513,7 @@
       background: var(--brand-6);
       border-radius: 2px;
     }
+    /* @deprecated 旧版 u-navbar · 内页请用 PageTitleBar · 首页/品牌头请用 HomeNavbar */
     .u-navbar { height: var(--nav-h); background: #fff; display: flex; align-items: center; padding: 0 var(--space-page); border-bottom: 1px solid var(--border); font-size: 16px; font-weight: 500; box-shadow: none; }
     .u-navbar .back { margin-right: 8px; color: var(--gray-8); }
     .u-navbar .action { margin-left: auto; font-size: 14px; color: var(--brand-6); font-weight: 400; }
@@ -609,6 +639,44 @@
     .u-dialog h5 { font-size: 16px; font-weight: 500; margin-bottom: 8px; }
     .u-dialog p { font-size: 14px; color: var(--text-secondary); margin-bottom: 20px; }
     .u-dialog .acts { display: flex; gap: 12px; }
+    /* Toast 轻提示 · 业绩PK动画设置 Figma RpwcM1biwkmAghkRzcx4qS · node 27-381 */
+    .u-toast-stage {
+      position: relative;
+      width: var(--canvas-w);
+      max-width: 100%;
+      height: 200px;
+      margin: 0 auto;
+      background: var(--bg-page);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-l);
+      overflow: hidden;
+    }
+    .u-toast-stage .u-toast {
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      transform: translate(-50%, -50%);
+    }
+    .u-toast {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      box-sizing: border-box;
+      max-width: calc(var(--canvas-w) - 64px);
+      padding: 10px 16px;
+      background: rgba(51, 51, 51, 0.9);
+      color: #FFFFFF;
+      font-family: "Source Han Sans SC", "Source Han Sans CN", "Noto Sans SC", var(--font-ui), sans-serif;
+      font-size: 14px;
+      line-height: 20px;
+      font-weight: 400;
+      letter-spacing: 0;
+      text-align: center;
+      border-radius: 4px;
+      box-shadow: none;
+      border: none;
+      word-break: break-word;
+    }
     .u-modal-popup {
       box-sizing: border-box;
       background: var(--bg-container);
@@ -859,6 +927,34 @@
     .layout-phones { display: flex; flex-wrap: wrap; gap: 32px; justify-content: center; align-items: flex-start; margin: 16px 0; }
     .layout-phone-wrap { text-align: center; }
     .layout-phone-wrap .cap { font-size: 12px; color: var(--text-secondary); margin-top: 12px; }
+    /* 4.3 布局结构示意 · 区域标注与底部安全区可视化 */
+    .layout-structure-demo .phone-status-bar { flex-shrink: 0; height: 53px; min-height: 53px; max-height: 53px; }
+    .layout-structure-demo .phone-layout-stack { flex: 1; min-height: 0; }
+    .layout-structure-demo .phone-bottom-safe {
+      flex-shrink: 0;
+      height: 34px;
+      min-height: 34px;
+      max-height: 34px;
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: #fff;
+      box-shadow: inset 0 1px 0 var(--gray-2);
+    }
+    .layout-structure-demo .phone-bottom-safe::before {
+      content: '底部安全区 34px';
+      font-size: 10px;
+      line-height: 1;
+      color: var(--text-secondary);
+      letter-spacing: 0;
+      pointer-events: none;
+    }
+    .layout-structure-demo .u-content-card {
+      border: none !important;
+      outline: none !important;
+      box-shadow: none !important;
+    }
     .site-footer { margin-top: var(--space-module); padding: var(--space-card) 0; border-top: 1px solid var(--border); display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: var(--space-page); background: transparent; }
     .site-footer .foot-brand { display: flex; align-items: center; gap: 12px; }
     .site-footer .foot-brand img { width: 36px; height: 36px; object-fit: contain; }
@@ -1140,14 +1236,14 @@
           <li><strong>禁止横向溢出画布</strong>：内容区宽度不得超过 <strong>390px</strong>；禁止出现横向滚动条。长文案、表格与标签须换行、截断或改为纵向排布，图片与卡片宽度适配安全边距（左右各 16px）。</li>
           <li><strong>顶部 Tab 条</strong>：页面级 Tab / 分段器容器宽度固定 <strong>390px</strong>，在画布内<strong>水平居中</strong>；<strong>Tab 主体无描边</strong>；单项等分，选中仅用底部指示条（见 <code>PageTabs</code>）。</li>
           <li><strong>标题栏与 Tab 主体无描边</strong>：<code>PageTitleBar</code>、<code>PageTabs</code>、<code>TabBar</code>、页内 <code>Tabs</code> 的容器<strong>禁止</strong>四周边框或 1px 描边包裹；与内容区通过<strong>底色、间距、选中指示条</strong>区分（指示条不属于容器描边）。</li>
-          <li><strong>状态栏占位</strong>：设计稿与 HTML 原型中，系统状态栏区域用与状态栏<strong>同尺寸（390×44px）</strong>的<strong>纯白块</strong>占位，不绘制时间、电量、信号等系统 UI。</li>
-          <li><strong>底部占位区 ★</strong>：每页设计稿<strong>最底部</strong>预留 <strong>390×39px</strong> 纯白矩形（<code>#FFFFFF</code>）；<strong>无阴影、无描边、无圆角</strong>，不绘制 Home Indicator 等系统 UI；页面内容与底栏不得侵入此区域。</li>
+          <li><strong>状态栏占位</strong>：设计稿与 HTML 原型中，系统状态栏区域用与状态栏<strong>同尺寸（390×53px）</strong>的<strong>纯白块</strong>占位，不绘制时间、电量、信号等系统 UI。</li>
+          <li><strong>底部占位区 ★</strong>：每页设计稿<strong>最底部</strong>预留 <strong>390×34px</strong> 纯白矩形（<code>#FFFFFF</code>）；对齐 <strong>iPhone 17 竖屏底部安全区</strong>（<code>--safe-bottom</code>）；<strong>无阴影、无描边、无圆角</strong>，不绘制 Home Indicator 等系统 UI；页面内容与底栏不得侵入此区域。</li>
           <li><strong>卡片内容裁切</strong>：卡片容器须设置 <code>overflow: hidden</code>（或等价裁切）；内部图标、标题、标签、按钮<strong>不得溢出</strong>到卡片圆角外，长文案须截断或换行。</li>
           <li><strong>白底内容卡片无描边 ★</strong>：填充色为纯白（<code>#FFFFFF</code> / <code>--bg-container</code>）的<strong>内容卡片</strong><strong>禁止</strong>四周边框或 1px 描边；与 <code>#F7F7F7</code> 页面底通过<strong>底色对比 + 圆角 + 间距</strong>区分。有色浅底卡（如 <code>#FFF2F2</code> 业绩卡）及输入框、描边按钮等<strong>不适用</strong>本条。</li>
           <li><strong>提示信息栏图标对齐</strong>：Notice / Alert 等提示条中，前置图标与<strong>第一行文案的基线（底部对齐）</strong>对齐；多行时图标仍对齐首行，不垂直居中整段文字。</li>
           <li><strong>空状态垂直居中</strong>：空状态页在<strong>可滚动内容区</strong>（扣除状态栏、标题栏、底栏后的区域）内，图标 + 主副文案作为一组<strong>垂直居中</strong>；禁止贴顶或仅留顶部留白。</li>
-          <li><strong>页面标题栏</strong>：所有<strong>设计页 / 原型 / AI 出图</strong>的内页顶栏须调用组件库 <code>PageTitleBar</code>（页面标题栏），禁止自定义 Navbar 样式；与 <a href="https://www.figma.com/design/44P9g5yKcQEyXdHCayIrMn/RTS-AI%E8%AF%BB%E5%8F%96?node-id=6-623" target="_blank" rel="noopener">RTS-AI 读稿 · Figma node 6-623</a> 一致（见第 7 章）。</li>
-          <li><strong>标题栏文案底对齐</strong>：<code>PageTitleBar</code> 居中标题（16px）与右侧操作（14px）须<strong>文字底部在同一水平线</strong>对齐；返回区仍为 44×44 垂直居中。</li>
+          <li><strong>页面标题栏</strong>：所有<strong>设计页 / 原型 / AI 出图</strong>的内页顶栏须调用组件库 <code>PageTitleBar</code>（页面标题栏），禁止自定义 Navbar 样式；<a href="https://www.figma.com/design/44P9g5yKcQEyXdHCayIrMn/RTS-AI%E8%AF%BB%E5%8F%96?node-id=6-623" target="_blank" rel="noopener">RTS-AI 读稿 · Figma node 6-623</a> 为整页 Home 稿，<strong>本组件仅对齐其顶栏区域</strong>（见 <a href="#comp-page-title-bar">7 章 · PageTitleBar</a> 实测差异表）。</li>
+          <li><strong>标题栏文案底对齐</strong>：<code>PageTitleBar</code> 居中标题（18px）与右侧操作（14px）须<strong>文字底部在同一水平线</strong>对齐；返回区仍为 44×44 垂直居中。</li>
           <li><strong>返回须用矢量图标 ★</strong>：<code>PageTitleBar</code> 左侧返回<strong>禁止</strong>使用文字符号 <code>&lt;</code>、<code>＜</code>、<code>‹</code> 等；须调用图标 <code>chevron-left</code>（24px · #333），见第 6 章。</li>
           <li><strong>勾号用图标</strong>：组件内表示确认、已选、步骤完成时<strong>禁止</strong>文字 <code>√</code>/<code>✓</code>；使用 <code>check</code> 或 <code>check-circle-filled</code>（见第 6、7 章）。</li>
           <li><strong>按钮文案居中</strong>：<code>Button</code>、对话框底栏、底栏操作条等一切带文字按钮，文案在按钮可点击区域内<strong>水平居中且垂直居中</strong>（单行、双行均适用；双行时整体居中）。</li>
@@ -1248,7 +1344,7 @@ export default {
         <li><strong>字体按设备</strong>：苹果 → PingFang SC；Windows → 思源黑体 Source Han Sans SC（勿在 Windows 稿中用 PingFang SC）。</li>
         <li><strong>勾号</strong>：确认/正确态只用图标 <code>check</code>，禁止文字 √。</li>
         <li><strong>品牌露出</strong>：启动/登录/首页 Navbar 使用 <code>LOGO2.png</code> 与「剑琅联盟」。</li>
-        <li><strong>硬性约束</strong>：画布无圆角/无阴影/无描边 · 所有 Frame 自动布局 · 居中弹窗左右边距 32px · 底栏占位 390×39 白块 · 返回用 chevron-left 矢量图标 · 白底内容卡片无描边 · 无 emoji · 无文字勾号 √/✓ · 按钮文案水平垂直居中 · Tab/卡片不叠压 · 内页顶栏必用 <code>PageTitleBar</code> · 标题与右侧文案底对齐 · 标题栏/Tab 主体无描边 · 图片位灰底白 icon · 内容不横向溢出 · 按钮宽 ≤370px · 顶 Tab 390 居中 · 状态栏白块 · 卡片不溢出 · 提示 icon 首行底对齐 · 空状态垂直居中。</li>
+        <li><strong>硬性约束</strong>：画布无圆角/无阴影/无描边 · 所有 Frame 自动布局 · 居中弹窗左右边距 32px · 状态栏占位 390×53 白块 · 底栏占位 390×34 白块 · 返回用 chevron-left 矢量图标 · 白底内容卡片无描边 · 无 emoji · 无文字勾号 √/✓ · 按钮文案水平垂直居中 · Tab/卡片不叠压 · 内页顶栏必用 <code>PageTitleBar</code>（44px，独立于状态栏） · 标题与右侧文案底对齐 · 标题栏/Tab 主体无描边 · 图片位灰底白 icon · 内容不横向溢出 · 按钮宽 ≤370px · 顶 Tab 390 居中 · 卡片不溢出 · 提示 icon 首行底对齐 · 空状态垂直居中。</li>
       </ol>
       <h3>技术栈对齐</h3>
       <table>
@@ -1257,7 +1353,7 @@ export default {
         <tr><td>开发落地</td><td>HTML + Tailwind CSS</td><td>CDN（规范站）→ Vite + Capacitor（WebView 产品）· Token 见 <a href="#tailwind-delivery">0.1</a></td></tr>
         <tr><td>设计稿</td><td><a href="https://www.figma.com/design/cUaUaxtcNsREKlfnQKXe1L/RTP-%E9%9B%B6%E5%94%AE%E6%A8%A1%E5%9D%97">RTP 零售模块 Figma</a></td><td>节点 72-137 · 与 HTML 原型库同步</td></tr>
         <tr><td>设计资源</td><td>Figma 实测 + Lucide + 图标库</td><td>Lucide 线性图标 · 业务映射表 · 过渡保留 Stratis/Iconex SVG</td></tr>
-        <tr><td>设计基准</td><td>宽 390（固定）× 高 844（默认）</td><td>高可向下延展；顶占位 44px · 底占位 39px</td></tr>
+        <tr><td>设计基准</td><td>宽 390（固定）× 高 844（默认）</td><td>高可向下延展；顶占位 53px · 底占位 34px</td></tr>
         <tr><td>UI 字体</td><td>苹果 PingFang SC · Windows 思源黑体</td><td>见 <a href="#font-platform">全局字体按设备</a>；金额仍 TCloudNumber</td></tr>
         <tr><td>全局 UI</td><td><a href="#global-ui">★ 强制章节</a></td><td>高于本章与 Figma 历史稿</td></tr>
         <tr><td>主按钮</td><td>高 48px · 圆角 4/8/12/16 择档</td><td>见全局章 · 同类型一致</td></tr>
@@ -1449,11 +1545,10 @@ export default {
         <tr><td>页面水平边距</td><td>16px</td><td>内容区距屏幕边缘</td></tr>
         <tr><td>PageTitleBar ★</td><td>44px</td><td>内页顶栏 · 组件库「页面标题栏」· 白底 · 主体无描边</td></tr>
         <tr><td>TabBar 高度</td><td>56px</td><td>含安全区 bottom padding</td></tr>
-        <tr><td>状态栏占位 ★</td><td>390×44px 纯白块</td><td>设计稿不画系统状态 UI；开发用 safe-area</td></tr>
-        <tr><td>底部占位区 ★</td><td>390×39px 纯白块</td><td>页面最底部预留；无阴影、无描边、无圆角</td></tr>
+        <tr><td>状态栏占位 ★</td><td>390×53px 纯白块</td><td>设计稿不画系统状态 UI；与 PageTitleBar（44px）分属上下区域</td></tr>
+        <tr><td>底部占位区 ★</td><td>390×34px 纯白块</td><td>对齐 iPhone 17 竖屏底部安全区；设计 / 开发均为 34px；无阴影、无描边、无圆角</td></tr>
         <tr><td>居中弹窗边距 ★</td><td>左右各 32px</td><td>ModalPopup/centered · 内容宽 326px</td></tr>
         <tr><td>底部弹窗边距 ★</td><td>左 / 右 / 下 0</td><td>ModalPopup/bottom · 390 通栏贴底</td></tr>
-        <tr><td>底部安全区（开发）</td><td>34px</td><td>WebView safe-area / env(safe-area-inset-bottom) 参考</td></tr>
         <tr><td>列表行高</td><td>56px</td><td>标准单行列表</td></tr>
         <tr><td>列表行高（多行）</td><td>≥72px</td><td>含描述文字</td></tr>
         <tr><td>Bottom Action Bar</td><td>56px + safe-bottom</td><td>固定底部操作栏</td></tr>
@@ -1461,7 +1556,7 @@ export default {
 
       <h3>4.3 布局结构示意</h3>
       <span class="canvas-badge">剑琅联盟 · 390 × 844</span>
-      <div class="layout-phones">
+      <div class="layout-phones layout-structure-demo">
         <div class="layout-phone-wrap">
           <div class="phone-frame phone-frame--844">
             <div class="phone-status-bar" aria-hidden="true"></div>
@@ -1472,31 +1567,31 @@ export default {
             </div>
             <div class="phone-bottom-safe" aria-hidden="true"></div>
           </div>
-          <p class="cap">启动页 · 390×844 · 纯白底</p>
+          <p class="cap">启动页 · 390×844 · 顶状态栏 53px · 底安全区 34px</p>
         </div>
         <div class="layout-phone-wrap">
           <div class="phone-frame phone-frame--844">
             <div class="phone-status-bar" aria-hidden="true"></div>
             <div class="phone-layout-stack">
-              <div class="u-page-title-bar" style="flex-shrink:0">
-                <span class="s-icon back s-icon--24" data-icon="chevron-left" aria-label="返回"></span>
-                <span class="title">订单详情</span>
-                <span class="action">分享</span>
-              </div>
+              <header class="u-page-title-bar" style="flex-shrink:0">
+                <a href="#" class="back" aria-label="返回"><i data-lucide="chevron-left" class="back-icon" aria-hidden="true"></i></a>
+                <h1 class="title">订单详情</h1>
+                <button type="button" class="action">分享</button>
+              </header>
               <div class="phone-body phone-body--fill">
                 <div class="u-content-card" style="margin-bottom:16px">
                   <div style="font-size:16px;font-weight:500;margin-bottom:4px;color:#333">内容卡片</div>
                   <div style="font-size:12px;color:var(--text-secondary)">左右 16px · 模块间距 16px · 圆角 12px · 无描边</div>
                 </div>
-                <div style="background:#fff;border-radius:9px;height:56px;display:flex;align-items:center;padding:0 16px;font-size:14px">列表行 · 高度 56px</div>
+                <div style="background:#fff;border-radius:9px;height:56px;display:flex;align-items:center;padding:0 16px;font-size:14px;border:none;box-shadow:none">列表行 · 高度 56px</div>
               </div>
               <div class="phone-tabbar" style="flex-shrink:0">
                 <span class="active">● 首页</span><span>● 工作台</span><span>● 消息</span><span>● 我的</span>
               </div>
-              <div class="phone-bottom-safe" aria-hidden="true"></div>
             </div>
+            <div class="phone-bottom-safe" aria-hidden="true"></div>
           </div>
-          <p class="cap">标准内页 · 390×844</p>
+          <p class="cap">标准内页 · TabBar 56px + 底安全区 34px · 内容卡片无描边</p>
         </div>
       </div>
     </section>
@@ -1664,12 +1759,14 @@ export default {
 
       <table class="comp-catalog">
         <tr><th>分类</th><th>组件 ID</th><th>名称</th><th>场景</th></tr>
-        <tr><td>导航</td><td>PageTitleBar</td><td>页面标题栏</td><td>设计页内页顶栏必用 · 标题/右侧文案底对齐 · <a href="https://www.figma.com/design/44P9g5yKcQEyXdHCayIrMn/RTS-AI%E8%AF%BB%E5%8F%96?node-id=6-623">Figma 6-623</a></td></tr>
+        <tr><td>导航</td><td>PageTitleBar</td><td>页面标题栏</td><td>内页顶栏必用 · 左右等宽栅格 · Lucide 返回 · <a href="https://www.figma.com/design/44P9g5yKcQEyXdHCayIrMn/RTS-AI%E8%AF%BB%E5%8F%96?node-id=6-623">Figma 6-623</a>（仅顶栏）</td></tr>
+        <tr><td>导航</td><td>HomeNavbar</td><td>首页顶栏</td><td>左 Logo + 品牌名 · 与 PageTitleBar 分轨 · 勿用已废弃 <code>u-navbar</code></td></tr>
         <tr><td>导航</td><td>PageTabs</td><td>顶部 Tab 条</td><td>宽 390 居中 · 页面级分段</td></tr>
         <tr><td>导航</td><td>TabBar</td><td>标准底栏</td><td>子模块 3–4 Tab</td></tr>
         <tr><td>反馈</td><td>AlertBanner</td><td>提示信息栏</td><td>图标与首行文案底对齐</td></tr>
         <tr><td>反馈</td><td>ActionSheet</td><td>动作面板</td><td>WeChat UX · 底出菜单 · 见 <a href="#wechat-ux-components">7.0</a></td></tr>
         <tr><td>反馈</td><td>ModalPopup</td><td>弹窗</td><td>全局通用 · 7 变体 · 见 <a href="#comp-modal-popup">7.1</a></td></tr>
+        <tr><td>反馈</td><td>Toast</td><td>轻提示</td><td>屏幕居中 · 无图标 · 见 <a href="#comp-toast">7.2</a></td></tr>
         <tr><td>反馈</td><td>Dialog</td><td>简易对话框</td><td>轻量确认 · 与 ModalPopup 并存</td></tr>
         <tr><td>表单</td><td>SearchBar</td><td>搜索栏</td><td>WeChat UX · 圆角 8px 灰底</td></tr>
         <tr><td>通讯</td><td>ChatBubble</td><td>聊天气泡</td><td>WeChat UX · 客服/IM</td></tr>
@@ -1827,11 +1924,11 @@ export default {
           <p style="font-size:12px;color:var(--text-secondary);margin-bottom:12px">compact 卡置于 PageTitleBar 下方 · 卡统计区块（持卡人数 / 总计余额）。</p>
           <div class="member-card-page-preview">
             <div class="phone-status-bar" aria-hidden="true"></div>
-            <div class="u-page-title-bar">
-              <span class="s-icon back s-icon--24" data-icon="chevron-left" aria-label="返回"></span>
-              <span class="title">卡详情</span>
-              <span class="action">下架</span>
-            </div>
+            <header class="u-page-title-bar">
+              <a href="#" class="back" aria-label="返回"><i data-lucide="chevron-left" class="back-icon" aria-hidden="true"></i></a>
+              <h1 class="title">卡详情</h1>
+              <button type="button" class="action">下架</button>
+            </header>
             <div class="member-card-page-preview__body">
               <div class="u-member-card u-member-card--compact u-member-card--stored"><span class="u-member-card__name">储值3000元</span></div>
               <div class="member-card-stat-block">
@@ -1899,30 +1996,84 @@ export default {
       </div>
 
       <div class="comp-block" id="comp-page-title-bar">
-        <div class="comp-block-hd"><strong>PageTitleBar 页面标题栏</strong><code>RTS-AI · node 6-623</code></div>
+        <div class="comp-block-hd"><strong>PageTitleBar 页面标题栏</strong><code>RTS-AI · node 6-623（仅顶栏）</code></div>
         <div class="comp-block-bd">
-          <p style="font-size:12px;color:var(--text-secondary);margin-bottom:12px">视觉以 <a href="https://www.figma.com/design/44P9g5yKcQEyXdHCayIrMn/RTS-AI%E8%AF%BB%E5%8F%96?node-id=6-623" target="_blank" rel="noopener">RTS-AI 读稿 · Figma 6-623</a> 为准。设计页 / 原型 / AI 出图<strong>必须</strong>调用本组件（<code>PageTitleBar</code> 页面标题栏），禁止另做顶栏样式。标注：<code>PageTitleBar</code> + 标题 + 可选右侧操作。</p>
-          <div class="comp-preview-phone" style="background:var(--bg-page)">
-            <div class="phone-status-bar" aria-hidden="true"></div>
-            <div class="u-page-title-bar">
-              <span class="s-icon back s-icon--24" data-icon="chevron-left" aria-label="返回"></span>
-              <span class="title">订单详情</span>
-              <span class="action">分享</span>
+          <p style="font-size:12px;color:var(--text-secondary);margin-bottom:12px"><a href="https://www.figma.com/design/44P9g5yKcQEyXdHCayIrMn/RTS-AI%E8%AF%BB%E5%8F%96?node-id=6-623" target="_blank" rel="noopener">RTS-AI 读稿 · Figma 6-623</a> 为整页 <strong>Home</strong> 稿（含 Tab、内容区）；本组件<strong>仅对齐其顶栏区域</strong>。设计页 / 原型 / AI 出图内页顶栏<strong>必须</strong>调用 <code>PageTitleBar</code>；返回图标统一 <a href="https://lucide.dev/icons/chevron-left" target="_blank" rel="noopener">Lucide chevron-left</a>（与 <code>app/</code> 一致）。已废弃旧版 <code>u-navbar</code>，首页品牌头请用 <code>HomeNavbar</code>。</p>
+          <div class="page-title-bar-variants">
+            <p class="variant-label">默认 · 返回 + 标题 + 操作</p>
+            <div class="comp-preview-phone" style="background:var(--bg-page)">
+              <div class="phone-status-bar" aria-hidden="true"></div>
+              <header class="u-page-title-bar">
+                <a href="#" class="back" aria-label="返回"><i data-lucide="chevron-left" class="back-icon" aria-hidden="true"></i></a>
+                <h1 class="title">订单详情</h1>
+                <button type="button" class="action">分享</button>
+              </header>
+              <div style="height:80px;background:var(--bg-page)"></div>
+              <div class="phone-bottom-safe" aria-hidden="true"></div>
             </div>
-            <div style="height:120px;background:var(--bg-page)"></div>
-            <div class="phone-bottom-safe" aria-hidden="true"></div>
+            <p class="variant-label">无返回</p>
+            <div class="comp-preview-phone" style="background:var(--bg-page)">
+              <header class="u-page-title-bar u-page-title-bar--no-back">
+                <a href="#" class="back" aria-hidden="true" tabindex="-1"><i data-lucide="chevron-left" class="back-icon" aria-hidden="true"></i></a>
+                <h1 class="title">工作台</h1>
+                <button type="button" class="action">设置</button>
+              </header>
+            </div>
+            <p class="variant-label">无右侧操作</p>
+            <div class="comp-preview-phone" style="background:var(--bg-page)">
+              <header class="u-page-title-bar">
+                <a href="#" class="back" aria-label="返回"><i data-lucide="chevron-left" class="back-icon" aria-hidden="true"></i></a>
+                <h1 class="title">订单列表</h1>
+                <span class="action" aria-hidden="true"></span>
+              </header>
+            </div>
+            <p class="variant-label">图标 + 文案操作（对齐 Figma「我的推广」）</p>
+            <div class="comp-preview-phone" style="background:var(--bg-page)">
+              <header class="u-page-title-bar">
+                <a href="#" class="back" aria-label="返回"><i data-lucide="chevron-left" class="back-icon" aria-hidden="true"></i></a>
+                <h1 class="title">首页</h1>
+                <button type="button" class="action action--icon"><i data-lucide="share-2" class="action__icon" aria-hidden="true"></i><span>我的推广</span></button>
+              </header>
+            </div>
+            <p class="variant-label">次要操作 muted</p>
+            <div class="comp-preview-phone" style="background:var(--bg-page)">
+              <header class="u-page-title-bar">
+                <a href="#" class="back" aria-label="返回"><i data-lucide="chevron-left" class="back-icon" aria-hidden="true"></i></a>
+                <h1 class="title">编辑资料</h1>
+                <button type="button" class="action action--muted">取消</button>
+              </header>
+            </div>
+            <p class="variant-label">长标题省略</p>
+            <div class="comp-preview-phone" style="background:var(--bg-page)">
+              <header class="u-page-title-bar">
+                <a href="#" class="back" aria-label="返回"><i data-lucide="chevron-left" class="back-icon" aria-hidden="true"></i></a>
+                <h1 class="title">剑琅联盟门店业绩统计与对账明细</h1>
+                <button type="button" class="action">导出</button>
+              </header>
+            </div>
           </div>
+          <table style="margin-top:20px">
+            <tr><th colspan="3">与 Figma 6-623 实测差异（仅顶栏相关）</th></tr>
+            <tr><th>项</th><th>Figma 6-623 实测</th><th>本规范 PageTitleBar</th></tr>
+            <tr><td>引用范围</td><td>整页 Home（Tab + 内容区）</td><td>仅顶栏 44px 区域</td></tr>
+            <tr><td>顶区总高</td><td>Header 约 90px（含状态区）</td><td>状态栏占位 53px + 标题栏 44px</td></tr>
+            <tr><td>标题字号</td><td>17px Medium</td><td>18px / 500（规范统一）</td></tr>
+            <tr><td>右侧操作</td><td>图标 +「我的推广」</td><td>14px 文案；可选 <code>action--icon</code> 变体</td></tr>
+            <tr><td>返回图标</td><td>chevron-left 24px</td><td>Lucide chevron-left 24px · #333</td></tr>
+            <tr><td>标题栏描边</td><td>无</td><td>无（主体无描边）</td></tr>
+          </table>
           <table style="margin-top:16px">
             <tr><th>属性</th><th>值</th><th>说明</th></tr>
-            <tr><td>状态栏占位 ★</td><td>390×44px</td><td>纯白块，不画系统状态元素</td></tr>
+            <tr><td>状态栏占位 ★</td><td>390×53px</td><td>纯白块，不画系统状态元素</td></tr>
             <tr><td>标题栏高度 ★</td><td>44px</td><td>白底 · <strong>主体无描边</strong></td></tr>
-            <tr><td>栏宽</td><td>390px</td><td>与画布同宽，内容区水平铺满</td></tr>
-            <tr><td>标题</td><td>16px / 500 / #333</td><td>水平居中；过长单行省略</td></tr>
-            <tr><td>文案对齐 ★</td><td>底对齐</td><td>标题与右侧操作文字<strong>底部在同一水平线</strong>；返回图标区仍垂直居中</td></tr>
-            <tr><td>返回 ★</td><td>chevron-left · 24px</td><td>左侧 44×44 点击区，图标 #333；<strong>禁止</strong>文字 <code>&lt;</code> / <code>＜</code>，须用矢量图标</td></tr>
-            <tr><td>右侧操作</td><td>14px · #333（与标题同色）</td><td>0–2 项文字按钮；无操作时可留空</td></tr>
-            <tr><td>调用 ★</td><td>设计页必用</td><td>Figma / HTML 原型 / AI 出图内页顶栏统一本组件，勿用通用 Navbar 替代</td></tr>
-            <tr><td>禁止</td><td>—</td><td>标题栏内不放 Logo（首页等特殊场景另议）</td></tr>
+            <tr><td>栅格列宽 ★</td><td><code>--page-title-bar-side</code> 72px · 1fr · 72px</td><td>左右等宽，标题几何居中</td></tr>
+            <tr><td>标题</td><td>18px / 500 / #333</td><td><code>&lt;h1 class="title"&gt;</code> · 过长单行省略</td></tr>
+            <tr><td>文案对齐 ★</td><td>底对齐</td><td>标题与右侧操作文字<strong>底部在同一水平线</strong>；返回区垂直居中</td></tr>
+            <tr><td>返回 ★</td><td>Lucide chevron-left · 24px</td><td><code>&lt;a class="back"&gt;</code> 44×44 · <strong>禁止</strong>文字 <code>&lt;</code></td></tr>
+            <tr><td>右侧操作</td><td>14px · #333</td><td><code>&lt;button class="action"&gt;</code> · <code>action--muted</code> · <code>action--icon</code></td></tr>
+            <tr><td>变体</td><td>见上方预览</td><td><code>--no-back</code> · 无操作 · 图标文案 · muted · 长标题</td></tr>
+            <tr><td>调用 ★</td><td>设计页必用</td><td>勿用已废弃 <code>u-navbar</code>；首页用 <code>HomeNavbar</code></td></tr>
+            <tr><td>禁止</td><td>—</td><td>标题栏内不放 Logo（首页等特殊场景用 HomeNavbar）</td></tr>
           </table>
         </div>
       </div>
@@ -2182,19 +2333,49 @@ export default {
       </div>
 
       <div class="comp-block" id="comp-dialog">
-        <div class="comp-block-hd"><strong>Dialog / Toast 对话框与轻提示</strong><code>Dialog · Toast</code></div>
+        <div class="comp-block-hd"><strong>Dialog 对话框</strong><code>轻量确认</code></div>
         <div class="comp-block-bd">
           <div class="u-dialog">
             <h5>确认驳回？</h5>
             <p>驳回后需重新提交审批，是否继续？</p>
             <div class="acts"><button class="btn btn-outline btn--r12" style="flex:1">取消</button><button class="btn btn-primary btn--r12" style="flex:1">确认驳回</button></div>
           </div>
-          <div style="margin-top:16px;text-align:center"><span style="display:inline-block;background:rgba(0,0,0,.8);color:#fff;padding:10px 20px;border-radius:6px;font-size:14px">操作成功</span></div>
           <table style="margin-top:16px">
             <tr><th>按钮</th><th>规格</th></tr>
             <tr><td>填充按钮 ★</td><td>红底 <code>#F32F41</code> + 白字</td></tr>
             <tr><td>描边按钮 ★</td><td>白底 + 红字 + 红描边 1px</td></tr>
           </table>
+          <p style="margin-top:12px;font-size:12px;color:var(--text-secondary)">轻提示请使用独立组件 <a href="#comp-toast">Toast</a>，勿与本 Dialog 混用样式。</p>
+        </div>
+      </div>
+
+      <div class="comp-block" id="comp-toast">
+        <div class="comp-block-hd"><strong>Toast 轻提示</strong><code>业绩PK动画设置 · node 27-381</code></div>
+        <div class="comp-block-bd">
+          <p style="font-size:12px;color:var(--text-secondary);margin-bottom:12px">用于操作结果、权限不足等<strong>短时反馈</strong>。视觉以 <a href="https://www.figma.com/design/RpwcM1biwkmAghkRzcx4qS/%E4%B8%9A%E7%BB%A9PK%E5%8A%A8%E7%94%BB%E8%AE%BE%E7%BD%AE?node-id=27-381" target="_blank" rel="noopener">Figma · 业绩PK动画设置 · 27-381</a> 为准。AI 标注：<code>Toast/default</code>。</p>
+          <div class="u-toast-stage" aria-label="Toast 居中预览">
+            <div class="u-toast" role="status">暂无查看权限，请联系店主</div>
+          </div>
+          <table style="margin-top:16px">
+            <tr><th>属性</th><th>值</th></tr>
+            <tr><td>位置 ★</td><td>屏幕<strong>水平 + 垂直居中</strong>（相对 390 画布内容区）</td></tr>
+            <tr><td>填充色 ★</td><td><code>#333333</code> · 不透明度 <strong>90%</strong>（<code>rgba(51, 51, 51, 0.9)</code>）</td></tr>
+            <tr><td>圆角</td><td><strong>4px</strong></td></tr>
+            <tr><td>内边距 ★</td><td>左右 <strong>16px</strong> · 上下 <strong>10px</strong></td></tr>
+            <tr><td>字体 ★</td><td><strong>思源黑体</strong>（Source Han Sans SC / CN）</td></tr>
+            <tr><td>字色 ★</td><td><code>#FFFFFF</code></td></tr>
+            <tr><td>字重 ★</td><td><strong>Regular</strong>（400）</td></tr>
+            <tr><td>字号 ★</td><td><strong>14px</strong></td></tr>
+            <tr><td>行高 ★</td><td><strong>20px</strong></td></tr>
+            <tr><td>字距 ★</td><td><strong>0</strong></td></tr>
+            <tr><td>对齐</td><td>文案居中 · 可换行</td></tr>
+            <tr><td>宽度</td><td>随文案自适应 · 最大宽 <code>326px</code>（画布左右各留 32px）</td></tr>
+            <tr><td>图标</td><td><strong>无</strong>（纯文字 Toast）</td></tr>
+            <tr><td>遮罩</td><td><strong>无</strong> · 不阻断页面操作</td></tr>
+            <tr><td>阴影</td><td><strong>无</strong></td></tr>
+            <tr><td>展示时长</td><td>建议 2–3s 自动消失（实现层约定）</td></tr>
+          </table>
+          <p style="margin-top:12px;font-size:12px;color:var(--text-secondary)">与 NoticeBar / AlertBanner（页内条）区分：Toast 为<strong>浮层短时提示</strong>；与 Dialog / ModalPopup 区分：Toast <strong>无按钮、无标题、无遮罩</strong>。</p>
         </div>
       </div>
 
@@ -2203,11 +2384,11 @@ export default {
         <div class="comp-block-bd">
           <div class="comp-preview-phone phone-frame--844" style="height:420px;display:flex;flex-direction:column;background:var(--bg-page)">
             <div class="phone-status-bar" aria-hidden="true"></div>
-            <div class="u-page-title-bar" style="flex-shrink:0">
-              <span class="s-icon back s-icon--24" data-icon="chevron-left"></span>
-              <span class="title">订单列表</span>
-              <span class="action"></span>
-            </div>
+            <header class="u-page-title-bar" style="flex-shrink:0">
+              <a href="#" class="back" aria-label="返回"><i data-lucide="chevron-left" class="back-icon" aria-hidden="true"></i></a>
+              <h1 class="title">订单列表</h1>
+              <span class="action" aria-hidden="true"></span>
+            </header>
             <div class="u-empty u-empty--canvas">
               <span class="s-icon" data-icon="file" style="font-size:64px;color:var(--gray-5)"></span>
               <p style="margin-top:12px;font-size:14px;color:var(--text-primary)">暂无订单数据</p>
@@ -2430,23 +2611,27 @@ export default {
       "canvasHeightDefault": 844,
       "buttonMaxWidth": 370,
       "pageTabWidth": 390,
-      "statusBarPlaceholder": { "width": 390, "height": 44, "fill": "#FFFFFF" },
-      "bottomPlaceholder": { "width": 390, "height": 39, "fill": "#FFFFFF", "noShadow": true, "noBorder": true, "noRadius": true },
+      "statusBarPlaceholder": { "width": 390, "height": 53, "fill": "#FFFFFF" },
+      "bottomPlaceholder": { "width": 390, "height": 34, "fill": "#FFFFFF", "noShadow": true, "noBorder": true, "noRadius": true },
       "canvasFrame": { "noRadius": true, "noShadow": true, "noBorder": true },
       "figmaAutoLayout": { "allFrames": true },
       "contentCardWhite": { "fill": "#FFFFFF", "noBorder": true },
       "libraryFirstPolicy": { "iconsChapter": 6, "componentsChapter": 7, "allowExternalFallback": true },
       "modalMargin": { "centeredHorizontal": 32, "centeredWidth": 326, "bottomLeftRightBottom": 0 },
       "modalPopupSource": "https://www.figma.com/design/xqMgMp7wLhmEvvgiv6rSdW/xiaobin",
-      "pageTitleBarBackIcon": "chevron-left",
+      "pageTitleBarBackIcon": "lucide:chevron-left",
+      "pageTitleBarSideWidth": 72,
       "pageTitleBarFigma": "https://www.figma.com/design/44P9g5yKcQEyXdHCayIrMn/RTS-AI读稿?node-id=6-623",
+      "pageTitleBarFigmaNote": "整页 Home 稿，仅参考顶栏区域",
+      "pageTitleBarDeprecated": "u-navbar",
+      "pageTitleBarHomeVariant": "HomeNavbar",
       "radiusBtnPrimary": 24,
       "radiusBtnPrimaryNote": "同类型按钮须统一使用 radiusBtn4|8|12|16 之一",
       "globalUIMandate": "#global-ui"
     }
   }
 }</pre>
-      <p style="font-size:12px;color:var(--text-secondary)">注：画布 390×844 直角无外框；顶占位 390×44、底占位 390×39 白块；按钮高 48px、圆角四档 4/8/12/16；导航 44px；返回 chevron-left 矢量图标。</p>
+      <p style="font-size:12px;color:var(--text-secondary)">注：画布 390×844 直角无外框；顶状态栏占位 390×53、底安全区 390×34 白块；PageTitleBar 44px 独立于状态栏；按钮高 48px、圆角四档 4/8/12/16；返回 chevron-left 矢量图标。</p>
 
       <h3>AI Prompt 模板</h3>
       <pre>请按照《剑琅联盟 移动端设计规范 v1.4》设计 [页面名称]：
@@ -2457,8 +2642,8 @@ export default {
 - 文字：#333 / #929292 · 边框 #D7D7D5 · 主色 #F32F41
 - 图标：优先第 6 章库（Stratis / Iconex / WeChat）；无合适项可外部矢量图标 · 24px（安全 20）/ 16px · 颜色 #F32F41 / #333 / #929
 - 组件：优先第 7 章库；无合适项可外部引入，须符合全局 UI 并注明来源
-- 占位：状态栏 390×44 白块；页面最底 390×39 白块（无阴影/描边/圆角）
-- 硬性：无 emoji；Figma 所有 Frame 须 Auto Layout；返回用 chevron-left 矢量图标（禁止文字 &lt;）；白底内容卡片无描边；按钮文案在按钮内水平垂直居中；Tab/卡片不遮挡；内页顶栏必用 PageTitleBar（页面标题栏）；标题与右侧文案底对齐；PageTitleBar/PageTabs/TabBar 主体无描边；图片位 #EDEDED+白 image icon；不横向溢出；按钮 max 370px；顶 Tab 390 居中；卡片内容不溢出；提示 icon 与首行底对齐；空状态内容区垂直居中；PageTitleBar 对齐 Figma RTS-AI 6-623
+- 占位：状态栏 390×53 白块；页面最底 390×34 白块（无阴影/描边/圆角）
+- 硬性：无 emoji；Figma 所有 Frame 须 Auto Layout；返回用 Lucide chevron-left 矢量图标（禁止文字 &lt;）；白底内容卡片无描边；按钮文案在按钮内水平垂直居中；Tab/卡片不遮挡；内页顶栏必用 PageTitleBar（44px，语义 header+h1）；标题与右侧文案底对齐；栅格 --page-title-bar-side 72px 左右等宽；勿用已废弃 u-navbar；Figma 6-623 仅参考顶栏区域；PageTitleBar/PageTabs/TabBar 主体无描边；图片位 #EDEDED+白 image icon；不横向溢出；按钮 max 370px；顶 Tab 390 居中；卡片内容不溢出；提示 icon 与首行底对齐；空状态内容区垂直居中
 - 组件：优先第 7 章库；弹窗用 ModalPopup（7.1 · 7 变体）；无合适项可外部引入
 - 弹窗：居中左右边距 32px · 底部弹窗左/右/下 0 · 无遮罩入库 · 无阴影 · 按钮 48px
 - 内容：[具体业务字段]</pre>

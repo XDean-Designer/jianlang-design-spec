@@ -14,7 +14,7 @@
   }
 
   .u-page-title-bar .title {
-    @apply flex items-end justify-center h-full px-1 pb-[11px] box-border text-center text-base font-medium leading-tight text-figma-primary whitespace-nowrap overflow-hidden text-ellipsis;
+    @apply flex items-end justify-center h-full px-1 pb-[11px] box-border text-center text-lg font-medium leading-tight text-figma-primary whitespace-nowrap overflow-hidden text-ellipsis;
   }
 
   .u-page-title-bar .action {
