@@ -439,7 +439,7 @@
       background: transparent;
       cursor: pointer;
       font-family: inherit;
-      font-size: 14px;
+      font-size: 16px;
       line-height: 1.2;
       color: var(--text-primary);
       font-weight: 400;
@@ -1009,7 +1009,7 @@
     .u-price-row .col .v.retail { color: var(--brand-6); }
     /* MemberCard — @layer components（Tailwind @apply）· 见 head 内 tailwindcss 样式块 */
     .member-card-page-preview { width: var(--canvas-w); max-width: 100%; margin: 16px auto 0; background: var(--bg-page); border: 1px solid var(--border); border-radius: var(--radius-l); overflow: hidden; }
-    .member-card-page-preview .u-page-title-bar .action { font-size: 14px; color: var(--figma-text-primary); }
+    .member-card-page-preview .u-page-title-bar .action { font-size: 16px; color: var(--figma-text-primary); }
     .member-card-page-preview__body { padding: 16px; }
     .member-card-page-preview .u-member-card--compact { max-width: none; width: 100%; }
     .member-card-stat-block { margin-top: 16px; background: #fff; border-radius: 12px; padding: 14px 16px; border: none; }
@@ -1243,7 +1243,7 @@
           <li><strong>提示信息栏图标对齐</strong>：Notice / Alert 等提示条中，前置图标与<strong>第一行文案的基线（底部对齐）</strong>对齐；多行时图标仍对齐首行，不垂直居中整段文字。</li>
           <li><strong>空状态垂直居中</strong>：空状态页在<strong>可滚动内容区</strong>（扣除状态栏、标题栏、底栏后的区域）内，图标 + 主副文案作为一组<strong>垂直居中</strong>；禁止贴顶或仅留顶部留白。</li>
           <li><strong>页面标题栏</strong>：所有<strong>设计页 / 原型 / AI 出图</strong>的内页顶栏须调用组件库 <code>PageTitleBar</code>（页面标题栏），禁止自定义 Navbar 样式；<a href="https://www.figma.com/design/44P9g5yKcQEyXdHCayIrMn/RTS-AI%E8%AF%BB%E5%8F%96?node-id=6-623" target="_blank" rel="noopener">RTS-AI 读稿 · Figma node 6-623</a> 为整页 Home 稿，<strong>本组件仅对齐其顶栏区域</strong>（见 <a href="#comp-page-title-bar">7 章 · PageTitleBar</a> 实测差异表）。</li>
-          <li><strong>标题栏文案底对齐</strong>：<code>PageTitleBar</code> 居中标题（18px）与右侧操作（14px）须<strong>文字底部在同一水平线</strong>对齐；返回区仍为 44×44 垂直居中。</li>
+          <li><strong>标题栏文案底对齐</strong>：<code>PageTitleBar</code> 居中标题（18px）与右侧操作（16px）须<strong>文字底部在同一水平线</strong>对齐；返回区仍为 44×44 垂直居中。</li>
           <li><strong>返回须用矢量图标 ★</strong>：<code>PageTitleBar</code> 左侧返回<strong>禁止</strong>使用文字符号 <code>&lt;</code>、<code>＜</code>、<code>‹</code> 等；须调用图标 <code>chevron-left</code>（24px · #333），见第 6 章。</li>
           <li><strong>勾号用图标</strong>：组件内表示确认、已选、步骤完成时<strong>禁止</strong>文字 <code>√</code>/<code>✓</code>；使用 <code>check</code> 或 <code>check-circle-filled</code>（见第 6、7 章）。</li>
           <li><strong>按钮文案居中</strong>：<code>Button</code>、对话框底栏、底栏操作条等一切带文字按钮，文案在按钮可点击区域内<strong>水平居中且垂直居中</strong>（单行、双行均适用；双行时整体居中）。</li>
@@ -2058,7 +2058,7 @@ export default {
             <tr><td>引用范围</td><td>整页 Home（Tab + 内容区）</td><td>仅顶栏 44px 区域</td></tr>
             <tr><td>顶区总高</td><td>Header 约 90px（含状态区）</td><td>状态栏占位 53px + 标题栏 44px</td></tr>
             <tr><td>标题字号</td><td>17px Medium</td><td>18px / 500（规范统一）</td></tr>
-            <tr><td>右侧操作</td><td>图标 +「我的推广」</td><td>14px 文案；可选 <code>action--icon</code> 变体</td></tr>
+            <tr><td>右侧操作</td><td>图标 +「我的推广」</td><td>16px 文案；可选 <code>action--icon</code> 变体</td></tr>
             <tr><td>返回图标</td><td>chevron-left 24px</td><td>Lucide chevron-left 24px · #333</td></tr>
             <tr><td>标题栏描边</td><td>无</td><td>无（主体无描边）</td></tr>
           </table>
@@ -2070,7 +2070,7 @@ export default {
             <tr><td>标题</td><td>18px / 500 / #333</td><td><code>&lt;h1 class="title"&gt;</code> · 过长单行省略</td></tr>
             <tr><td>文案对齐 ★</td><td>底对齐</td><td>标题与右侧操作文字<strong>底部在同一水平线</strong>；返回区垂直居中</td></tr>
             <tr><td>返回 ★</td><td>Lucide chevron-left · 24px</td><td><code>&lt;a class="back"&gt;</code> 44×44 · <strong>禁止</strong>文字 <code>&lt;</code></td></tr>
-            <tr><td>右侧操作</td><td>14px · #333</td><td><code>&lt;button class="action"&gt;</code> · <code>action--muted</code> · <code>action--icon</code></td></tr>
+            <tr><td>右侧操作</td><td>16px · #333</td><td><code>&lt;button class="action"&gt;</code> · <code>action--muted</code> · <code>action--icon</code></td></tr>
             <tr><td>变体</td><td>见上方预览</td><td><code>--no-back</code> · 无操作 · 图标文案 · muted · 长标题</td></tr>
             <tr><td>调用 ★</td><td>设计页必用</td><td>勿用已废弃 <code>u-navbar</code>；首页用 <code>HomeNavbar</code></td></tr>
             <tr><td>禁止</td><td>—</td><td>标题栏内不放 Logo（首页等特殊场景用 HomeNavbar）</td></tr>

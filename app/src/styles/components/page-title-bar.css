@@ -18,7 +18,7 @@
   }
 
   .u-page-title-bar .action {
-    @apply flex items-end justify-end h-full pr-4 pb-[11px] pl-0 box-border text-sm leading-tight text-figma-primary font-normal whitespace-nowrap;
+    @apply flex items-end justify-end h-full pr-4 pb-[11px] pl-0 box-border text-base leading-tight text-figma-primary font-normal whitespace-nowrap;
   }
 
   .u-page-title-bar .action--muted {
