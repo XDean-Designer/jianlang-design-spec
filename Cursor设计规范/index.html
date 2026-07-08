@@ -149,7 +149,7 @@
       --radius-btn-primary: var(--radius-btn-12);
       --shadow-1: none; --shadow-2: none; --shadow-3: none;
       --nav-h: 44px; --tabbar-h: 56px;
-      --tabbar-shadow: 0 -4px 4px 0 rgba(0, 0, 0, 0.1); /* TabBar 顶部分离 · RTP Figma 4750-807 */
+      --bottom-surface-shadow: 0 -0.5px 4px 0 rgba(0, 0, 0, 0.08); /* TabBar / Bottom Action Bar 顶部分离 */
       --status-bar-h: 53px; /* 系统状态栏占位（与标题栏分属两层） */
       --safe-top: var(--status-bar-h); /* 别名 · 兼容旧引用 */
       --safe-bottom: 34px; --bottom-placeholder: 34px;
@@ -560,7 +560,7 @@
     .u-tabs span { flex: 1; display: flex; align-items: center; justify-content: center; font-size: 14px; color: var(--text-secondary); position: relative; }
     .u-tabs span.on { color: var(--text-primary); font-weight: 500; }
     .u-tabs span.on::after { content: ''; position: absolute; bottom: 0; left: 50%; transform: translateX(-50%); width: var(--tab-indicator-w); height: 3px; background: var(--brand-6); border-radius: 2px; }
-    .u-tabbar { height: var(--tabbar-h); background: var(--bg-container); border: none; box-shadow: var(--tabbar-shadow); display: flex; box-sizing: border-box; }
+    .u-tabbar { height: var(--tabbar-h); background: var(--bg-container); border: none; box-shadow: var(--bottom-surface-shadow); display: flex; box-sizing: border-box; }
     .u-tabbar .tab {
       flex: 1;
       display: flex;
@@ -672,7 +672,7 @@
     .u-progress { height: 4px; background: var(--gray-2); border-radius: 2px; overflow: hidden; }
     .u-progress i { display: block; height: 100%; width: 60%; background: var(--brand-6); border-radius: 2px; }
     .u-fab { width: 48px; height: 48px; border-radius: 50%; background: var(--brand-6); color: #fff; display: flex; align-items: center; justify-content: center; box-shadow: none; margin-left: auto; }
-    .u-bottom-bar { display: flex; gap: 12px; padding: 8px 16px; background: #fff; border: none; box-shadow: none; }
+    .u-bottom-bar { display: flex; gap: 12px; padding: 8px 16px; background: var(--bg-container); border: none; box-shadow: var(--bottom-surface-shadow); }
     .u-bottom-bar .btn { flex: 1; }
     .u-dialog { width: 311px; margin: 0 auto; background: #fff; border-radius: var(--radius-xl); padding: 24px 16px 16px; text-align: center; }
     .u-dialog h5 { font-size: 16px; font-weight: 500; margin-bottom: 8px; }
@@ -925,7 +925,7 @@
     .phone-status-bar { height: var(--status-bar-h); background: #fff; }
     .phone-status { display: none; }
     .phone-body { min-height: 400px; padding: 16px; }
-    .phone-tabbar { height: var(--tabbar-h); background: var(--bg-container); border: none; box-shadow: var(--tabbar-shadow); display: flex; }
+    .phone-tabbar { height: var(--tabbar-h); background: var(--bg-container); border: none; box-shadow: var(--bottom-surface-shadow); display: flex; }
     .phone-tabbar span { flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: center; font-size: 10px; color: var(--text-secondary); }
     .phone-tabbar span.active { color: var(--brand-6); }
     .spec-block {
@@ -1193,7 +1193,7 @@
           <li><strong>页面背景色</strong>：<code>#F7F7F7</code>（<code>--bg-page</code>）。
             <div class="global-swatch-row"><span class="global-swatch"><i style="background:#F7F7F7"></i>#F7F7F7</span></div>
           </li>
-          <li><strong>视觉铁律</strong>：全站<strong>无阴影、无投影、无渐变</strong>；层级仅通过<strong>底色 / 1px 分割线 / 间距 / 字重</strong>区分。<strong>唯一例外</strong>：<code>TabBar</code> 标准底栏允许顶部分离投影（见下条）。</li>
+          <li><strong>视觉铁律</strong>：全站<strong>无阴影、无投影、无渐变</strong>；层级仅通过<strong>底色 / 1px 分割线 / 间距 / 字重</strong>区分。<strong>唯一例外</strong>：<code>TabBar</code>、<code>Bottom Action Bar</code> 允许顶部分离投影（见下条）。</li>
           <li><strong>品牌色体系</strong>
             <ul>
               <li>主色：<code>#F32F41</code></li>
@@ -1306,7 +1306,7 @@
           <li><strong>禁止横向溢出画布</strong>：内容区宽度不得超过 <strong>390px</strong>；禁止出现横向滚动条。长文案、表格与标签须换行、截断或改为纵向排布，图片与卡片宽度适配安全边距（左右各 16px）。</li>
           <li><strong>顶部 Tab 条</strong>：页面级 Tab / 分段器容器宽度固定 <strong>390px</strong>，在画布内<strong>水平居中</strong>；<strong>Tab 主体无描边</strong>；单项等分，选中仅用底部指示条（见 <code>PageTabs</code>）。</li>
           <li><strong>标题栏与 Tab 主体无描边</strong>：<code>PageTitleBar</code>、<code>PageTabs</code>、<code>TabBar</code>、页内 <code>Tabs</code> 的容器<strong>禁止</strong>四周边框或 1px 描边包裹；与内容区通过<strong>底色、间距、选中指示条</strong>区分（指示条不属于容器描边）。</li>
-          <li><strong>TabBar 白底与顶部分离 ★</strong>：<code>TabBar</code> 内容区高 <strong>56px</strong>、填充 <code>#FFFFFF</code>（<code>--bg-container</code>），与底安全区 <strong>34px</strong> 白块分两层；TabBar 顶缘允许分离投影 <code>box-shadow: 0 -4px 4px 0 rgba(0,0,0,0.1)</code>（<code>--tabbar-shadow</code> · RTP 零售 Figma <code>4750:807</code>）；<strong>无描边</strong>。底安全区白块仍<strong>无投影、无描边</strong>。</li>
+          <li><strong>底部栏白底与顶部分离 ★</strong>：<code>TabBar</code>、<code>Bottom Action Bar</code> 内容区高 <strong>56px</strong>、填充 <code>#FFFFFF</code>（<code>--bg-container</code>）；与底安全区 <strong>34px</strong> 白块分两层（TabBar 场景）。顶缘分离投影 <code>box-shadow: 0 -0.5px 4px 0 rgba(0,0,0,0.08)</code>（<code>--bottom-surface-shadow</code>）；<strong>无描边</strong>。底安全区白块仍<strong>无投影、无描边</strong>。</li>
           <li><strong>状态栏占位</strong>：设计稿与 HTML 原型中，系统状态栏区域用与状态栏<strong>同尺寸（390×53px）</strong>的<strong>纯白块</strong>占位，不绘制时间、电量、信号等系统 UI。</li>
           <li><strong>底部占位区 ★</strong>：每页设计稿<strong>最底部</strong>预留 <strong>390×34px</strong> 纯白矩形（<code>#FFFFFF</code>）；对齐 <strong>iPhone 17 竖屏底部安全区</strong>（<code>--safe-bottom</code>）；<strong>无阴影、无描边、无圆角</strong>，不绘制 Home Indicator 等系统 UI；页面内容与底栏不得侵入此区域。</li>
           <li><strong>卡片内容裁切</strong>：卡片容器须设置 <code>overflow: hidden</code>（或等价裁切）；内部图标、标题、标签、按钮<strong>不得溢出</strong>到卡片圆角外，长文案须截断或换行。</li>
@@ -1620,7 +1620,7 @@ export default {
         <tr><td>PageTitleBar ★</td><td>44px</td><td>内页顶栏 · 组件库「页面标题栏」· 白底 · 主体无描边</td></tr>
         <tr><td>TabBar 高度</td><td>56px</td><td>内容区高度；与底安全区 34px 分两层（合计 90px 白底）</td></tr>
         <tr><td>TabBar 背景 ★</td><td><code>#FFFFFF</code></td><td><code>--bg-container</code></td></tr>
-        <tr><td>TabBar 顶部分离 ★</td><td><code>0 -4px 4px 0 rgba(0,0,0,0.1)</code></td><td><code>--tabbar-shadow</code> · 全局无阴影之唯一组件例外</td></tr>
+        <tr><td>底部栏顶部分离 ★</td><td><code>0 -0.5px 4px 0 rgba(0,0,0,0.08)</code></td><td><code>--bottom-surface-shadow</code> · TabBar / Bottom Action Bar 共用</td></tr>
         <tr><td>状态栏占位 ★</td><td>390×53px 纯白块</td><td>设计稿不画系统状态 UI；与 PageTitleBar（44px）分属上下区域</td></tr>
         <tr><td>底部占位区 ★</td><td>390×34px 纯白块</td><td>对齐 iPhone 17 竖屏底部安全区；设计 / 开发均为 34px；无阴影、无描边、无圆角</td></tr>
         <tr><td>居中弹窗边距 ★</td><td>左右各 32px</td><td>ModalPopup/centered · 内容宽 326px</td></tr>
@@ -1712,7 +1712,7 @@ export default {
       </div>
 
       <h3>5.3 阴影（全局禁用）</h3>
-      <p>剑琅联盟移动端<strong>默认不使用</strong>投影层级（<code>--shadow-1/2/3</code> 均为 <code>none</code>）。卡片、弹层、Fab 等通过<strong>白底/灰底、1px 边框（<code>--border</code>）、圆角与间距</strong>区分层次；<strong>例外</strong>：<code>TabBar</code> 顶部分离投影见 <a href="#global-ui">★ 全局强制 UI</a> 与 <a href="#comp-tabbar">TabBar 组件</a>。</p>
+      <p>剑琅联盟移动端<strong>默认不使用</strong>投影层级（<code>--shadow-1/2/3</code> 均为 <code>none</code>）。卡片、弹层、Fab 等通过<strong>白底/灰底、1px 边框（<code>--border</code>）、圆角与间距</strong>区分层次；<strong>例外</strong>：<code>TabBar</code>、<code>Bottom Action Bar</code> 顶部分离投影见 <a href="#global-ui">★ 全局强制 UI</a>。</p>
     </section>
 
     <!-- 6. 图标库 -->
@@ -2218,7 +2218,7 @@ export default {
             <tr><td>选中态 ★</td><td>切换为品牌色 <strong>面性</strong>图标（<code>-filled</code>）· 文案 #F32F41</td></tr>
             <tr><td>文案</td><td>11px · 未选中 #929292</td></tr>
             <tr><td>栏高</td><td>56px 内容区 + 34px 底安全区 · 白底 <code>--bg-container</code> · 主体无描边</td></tr>
-            <tr><td>顶部分离 ★</td><td><code>box-shadow: 0 -4px 4px 0 rgba(0,0,0,0.1)</code>（<code>--tabbar-shadow</code>）· RTP 零售 Figma <code>4750:807</code></td></tr>
+            <tr><td>顶部分离 ★</td><td><code>box-shadow: 0 -0.5px 4px 0 rgba(0,0,0,0.08)</code>（<code>--bottom-surface-shadow</code>）</td></tr>
           </table>
         </div>
       </div>
@@ -2587,7 +2587,8 @@ export default {
             <tr><th>按钮</th><th>规格</th></tr>
             <tr><td>主操作（填充）★</td><td>红底白字 · brand-6</td></tr>
             <tr><td>次操作（描边）★</td><td>白底红字红描边</td></tr>
-            <tr><td>布局</td><td>高 56px + safe-bottom · 双按钮间距 12px · 圆角同档（建议 16px）· 白底<strong>无描边、无阴影</strong></td></tr>
+            <tr><td>布局</td><td>高 56px + safe-bottom · 双按钮间距 12px · 圆角同档（建议 16px）· 白底 · 主体无描边</td></tr>
+            <tr><td>顶部分离 ★</td><td><code>box-shadow: 0 -0.5px 4px 0 rgba(0,0,0,0.08)</code>（<code>--bottom-surface-shadow</code> · 与 TabBar 共用）</td></tr>
           </table>
         </div>
       </div>

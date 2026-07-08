@@ -4,6 +4,7 @@
 @import './components/page-title-bar.css';
 @import './components/home-navbar.css';
 @import './components/tabbar.css';
+@import './components/bottom-bar.css';
 @import './components/card-detail-page.css';
 
 @tailwind base;
@@ -16,7 +17,7 @@
     --nav-h: 44px;
     --bottom-placeholder: 34px;
     --tabbar-h: 56px;
-    --tabbar-shadow: 0 -4px 4px 0 rgba(0, 0, 0, 0.1);
+    --bottom-surface-shadow: 0 -0.5px 4px 0 rgba(0, 0, 0, 0.08);
     --font-data-weight: 400;
     --font-data-weight-lg: 700;
     --page-title-bar-side: 72px;

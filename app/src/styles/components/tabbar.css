@@ -1,7 +1,7 @@
 @layer components {
   .u-tabbar {
     @apply w-full max-w-canvas h-tabbar-h mx-auto bg-white border-0 flex shrink-0;
-    box-shadow: var(--tabbar-shadow);
+    box-shadow: var(--bottom-surface-shadow);
   }
 
   .u-tabbar .tab {
