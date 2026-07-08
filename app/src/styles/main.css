@@ -3,6 +3,7 @@
 @import './components/button.css';
 @import './components/page-title-bar.css';
 @import './components/home-navbar.css';
+@import './components/tabbar.css';
 @import './components/card-detail-page.css';
 
 @tailwind base;
@@ -14,6 +15,8 @@
     --status-bar-h: 53px;
     --nav-h: 44px;
     --bottom-placeholder: 34px;
+    --tabbar-h: 56px;
+    --tabbar-shadow: 0 -4px 4px 0 rgba(0, 0, 0, 0.1);
     --page-title-bar-side: 72px;
   }
 
