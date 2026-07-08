@@ -44,7 +44,7 @@
   }
 
   .u-member-card__metrics .metric__price {
-    @apply font-data text-xl font-bold tracking-tight;
+    @apply font-data text-xl font-normal tracking-tight;
   }
 
   .u-member-card__body {

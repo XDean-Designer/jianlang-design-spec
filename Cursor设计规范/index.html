@@ -31,7 +31,7 @@
       .u-member-card__metrics .metric--end { @apply text-left shrink-0; }
       .u-member-card__metrics .metric__label { @apply block text-[11px] text-mc-label leading-snug mb-1.5; }
       .u-member-card__metrics .metric__value { @apply text-sm font-semibold leading-snug; }
-      .u-member-card__metrics .metric__price { @apply font-data text-xl font-bold tracking-tight; }
+      .u-member-card__metrics .metric__price { @apply font-data text-xl font-normal tracking-tight; }
       .u-member-card__body { @apply py-2 px-4 pb-3 bg-white text-xs leading-normal text-mc-body; }
       .u-member-card__body p + p { @apply mt-2.5; }
       .u-member-card__foot { @apply flex items-center gap-2.5 py-3.5 px-4 bg-white relative; }
@@ -183,6 +183,8 @@
       --figma-promo-border: rgba(249, 117, 107, 0.2);
       --font-ui: "PingFang SC", -apple-system, "Helvetica Neue", sans-serif;
       --font-data: "TCloudNumber", var(--font-ui), sans-serif;
+      --font-data-weight: 400; /* 金额默认 TCloudNumber-Regular */
+      --font-data-weight-lg: 700; /* 金额 ≥24px → TCloudNumber-Bold */
     }
     * { box-sizing: border-box; margin: 0; padding: 0; }
     html { scroll-behavior: smooth; }
@@ -607,10 +609,10 @@
       margin-top: 10px;
     }
     .font-data-sample .yen { font-family: var(--font-ui); font-weight: 500; }
-    .font-data-sample .num { font-family: var(--font-data); font-weight: 700; letter-spacing: -.02em; }
+    .font-data-sample .num { font-family: var(--font-data); font-weight: var(--font-data-weight); letter-spacing: -.02em; }
     .u-card-stat-num { font-size: 28px; line-height: 1.2; color: var(--text-primary); }
     .u-card-stat-num .yen { font-family: var(--font-ui); font-weight: 600; margin-right: 4px; }
-    .u-card-stat-num .num { font-family: var(--font-data); font-weight: 700; letter-spacing: -.02em; }
+    .u-card-stat-num .num { font-family: var(--font-data); font-weight: var(--font-data-weight-lg); letter-spacing: -.02em; }
     .u-search { height: 36px; background: var(--bg-disabled); border-radius: var(--radius-input); margin: var(--space-list-y) var(--space-page); display: flex; align-items: center; padding: 0 12px; gap: var(--space-icon-text); color: var(--text-secondary); font-size: 14px; border: 1px solid var(--border); box-shadow: none; }
     .u-notice,
     .u-alert-blue,
@@ -951,7 +953,7 @@
     .global-swatch i { width: 20px; height: 20px; border-radius: 4px; flex-shrink: 0; border: 1px solid rgba(0,0,0,.06); }
     .price-row-demo { display: flex; align-items: baseline; gap: var(--price-gap); font-size: 20px; margin: 12px 0; }
     .price-row-demo .yen { font-family: var(--font-ui); font-weight: 500; color: var(--text-primary); }
-    .price-row-demo .num { font-family: var(--font-data); font-weight: 700; color: var(--text-primary); }
+    .price-row-demo .num { font-family: var(--font-data); font-weight: var(--font-data-weight); color: var(--text-primary); }
     .price-row-demo .label { font-family: var(--font-ui); font-size: 14px; color: var(--text-secondary); margin-right: 8px; }
     .s-icon--24 { font-size: var(--icon-size); width: var(--icon-size); height: var(--icon-size); color: var(--icon-color-default); }
     .s-icon--16 { font-size: var(--icon-size-sm); width: var(--icon-size-sm); height: var(--icon-size-sm); color: var(--icon-color-secondary); }
@@ -1055,7 +1057,7 @@
     .u-stat-card .seg span.on { background: var(--figma-card-pink); color: var(--figma-text-primary); font-weight: 500; }
     .u-stat-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px 17px; }
     .u-stat-grid .label { font-size: 13px; color: var(--figma-text-secondary); }
-    .u-stat-grid .val { font-family: var(--font-data); font-size: 20px; font-weight: 700; color: var(--figma-text-primary); }
+    .u-stat-grid .val { font-family: var(--font-data); font-size: 20px; font-weight: var(--font-data-weight); color: var(--figma-text-primary); }
     .u-stat-grid .val small { font-size: 15px; }
     .u-grid-entry { display: grid; grid-template-columns: repeat(5, 1fr); gap: 8px 4px; padding: 0 16px; }
     .u-grid-entry .item { text-align: center; padding: 8px 0; }
@@ -1069,7 +1071,7 @@
     .u-product-card .body { padding: 8px; }
     .u-product-card .brand { font-size: 10px; color: var(--figma-text-secondary); }
     .u-product-card .title { font-size: 12px; font-weight: 600; line-height: 1.35; margin: 2px 0; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
-    .u-product-card .price { font-family: var(--font-data); font-size: 14px; font-weight: 700; color: var(--brand-6); }
+    .u-product-card .price { font-family: var(--font-data); font-size: 14px; font-weight: var(--font-data-weight); color: var(--brand-6); }
     .u-product-card .sub { font-size: 10px; color: var(--figma-text-secondary); }
     .u-price-row { display: flex; gap: 16px; font-size: 12px; flex-wrap: wrap; }
     .u-price-row .col label { display: block; font-size: 10px; color: var(--figma-text-secondary); margin-bottom: 4px; }
@@ -1087,7 +1089,7 @@
     .member-card-stat-item { display: flex; flex-direction: column; gap: 6px; }
     .member-card-stat-item__label { display: flex; align-items: center; gap: 4px; font-size: 12px; color: var(--figma-text-secondary); }
     .member-card-stat-item__label .s-icon { font-size: 16px; width: 16px; height: 16px; }
-    .member-card-stat-item__value { font-family: var(--font-data); font-size: 22px; font-weight: 700; color: var(--figma-text-primary); line-height: 1.2; }
+    .member-card-stat-item__value { font-family: var(--font-data); font-size: 22px; font-weight: var(--font-data-weight); color: var(--figma-text-primary); line-height: 1.2; }
     .member-card-stat-item__value .unit { font-family: var(--font-ui); font-size: 14px; font-weight: 500; margin-left: 2px; }
     @media (max-width: 900px) {
       .sidebar { display: none; }
@@ -1216,7 +1218,7 @@
             <ul>
               <li><strong>Apple 设备（macOS / iOS / iPadOS）</strong>：常规文案使用 <strong>PingFang SC（苹方）</strong>，与现有规则一致。</li>
               <li><strong>Windows 设备</strong>：凡本规范中的 <strong>PingFang SC</strong> 一律改用 <strong>思源黑体 Source Han Sans SC</strong>（<code>Source Han Sans CN</code> 作备选）。原因：Windows 上 PingFang SC 在 AI 识图与标注时易误判，思源黑体更稳定。</li>
-              <li><strong>两平台不变</strong>：金额<strong>纯数字 + 小数点</strong>仍用 <strong>TCloudNumber</strong>（v1.010 · Bold）；色板、字号、间距、圆角等 Token 不变。</li>
+              <li><strong>两平台不变</strong>：金额<strong>纯数字 + 小数点</strong>仍用 <strong>TCloudNumber</strong>（v1.010）；默认 <strong>Regular（400）</strong>，字号 <strong>≥24px</strong> 时用 <strong>Bold（700）</strong>；色板、字号、间距、圆角等 Token 不变。</li>
               <li>混排：<code>¥</code> 与「应付 / 实付 / 小计」等文字符号随<strong>当前平台的 UI 字体</strong>（苹果=苹方，Windows=思源黑体）；<code>¥</code> 与数字间距固定 <strong>4px</strong>。</li>
             </ul>
             <p style="font-size:12px;color:var(--text-secondary);margin-top:8px">本规范站预览：当前为 <strong id="font-platform-label">—</strong> · 设计稿与 HTML 交付须在说明中标注目标平台字体。</p>
@@ -1410,7 +1412,7 @@ export default {
         <li><strong>组合组件</strong>：优先从第 7 章组件库按场景选用；库内无合适项时可从外部引入，视觉须符合本规范。</li>
         <li><strong>图标与组件</strong>：优先第 6、7 章库内资源；无合适项时可调用外部图标 / 组件，仍须遵守 ★ 全局强制 UI，并注明来源。</li>
         <li><strong>颜色 / 圆角 / 间距</strong>：仅使用全局章与第 2–5 章 Token；按钮圆角四档择一且同类型一致；禁止投影与渐变背景。</li>
-        <li><strong>金额排版</strong>：数字 TCloudNumber Bold；<code>¥</code> 与「应付/实付」等用 UI 字体（苹果 PingFang SC / Windows 思源黑体），<code>¥</code> 与数字间距 4px。</li>
+        <li><strong>金额排版</strong>：数字默认 TCloudNumber <strong>Regular（400）</strong>；字号 <strong>≥24px</strong> 时用 <strong>Bold（700）</strong>；商品卡/列表价 <strong>14px 固定 Regular</strong>；<code>¥</code> 与「应付/实付」等用 UI 字体（苹果 PingFang SC / Windows 思源黑体），<code>¥</code> 与数字间距 4px。</li>
         <li><strong>字体按设备</strong>：苹果 → PingFang SC；Windows → 思源黑体 Source Han Sans SC（勿在 Windows 稿中用 PingFang SC）。</li>
         <li><strong>勾号</strong>：确认/正确态只用图标 <code>check</code>，禁止文字 √。</li>
         <li><strong>品牌露出</strong>：启动/登录/首页 Navbar 使用 <code>LOGO2.png</code> 与「剑琅联盟」。</li>
@@ -1535,13 +1537,13 @@ export default {
         <tr><td>字重 Regular</td><td>400</td><td>正文、描述</td></tr>
         <tr><td>字重 Medium</td><td>500</td><td>标题、按钮、强调</td></tr>
         <tr><td>字重 Semibold</td><td>600</td><td>核心数据数字（非 TCloudNumber 时）</td></tr>
-        <tr><td>数据字体 ★</td><td><strong>TCloudNumber</strong> v1.010 Bold</td><td>仅金额纯数字与小数点；两平台相同</td></tr>
+        <tr><td>数据字体 ★</td><td><strong>TCloudNumber</strong> v1.010</td><td>金额纯数字与小数点；默认 <strong>Regular 400</strong> · ≥24px 用 <strong>Bold 700</strong></td></tr>
         <tr><td>金额混排 ★</td><td><code>¥</code>、应付/实付/小计 → UI 字体</td><td><code>¥</code> 与数字间距 4px</td></tr>
       </table>
 
       <h3>3.1.1 TCloudNumber 字体包（v1.010）</h3>
       <div class="card font-download-panel">
-        <p style="margin-bottom:8px;font-size:13px;color:var(--text-secondary)">官方数据字体。设计稿、HTML 原型与 Web 端金额数字统一使用 <strong>TCloudNumber-Bold</strong>。</p>
+        <p style="margin-bottom:8px;font-size:13px;color:var(--text-secondary)">官方数据字体。金额数字默认 <strong>TCloudNumber-Regular（400）</strong>；字号 <strong>≥24px</strong> 的大指标使用 <strong>TCloudNumber-Bold（700）</strong>。</p>
         <div class="font-data-sample"><span class="yen">¥</span><span class="num">1,286.40</span></div>
         <div class="font-download-actions">
           <a class="font-download-btn" href="assets/fonts/TCloudNumber/TCloudNumber-Bold.ttf" download="TCloudNumber-Bold.ttf">下载 Bold</a>
@@ -1563,8 +1565,8 @@ export default {
         <tr><td>font-l</td><td>20</td><td>28</td><td>500</td><td>区块标题、关键数据</td></tr>
         <tr><td>font-xl</td><td>24</td><td>32</td><td>500</td><td>页面大标题、统计数字</td></tr>
         <tr><td>font-xxl</td><td>28</td><td>36</td><td>500</td><td>登录页标题、空状态标题</td></tr>
-        <tr><td>font-data ★</td><td>20</td><td>22</td><td>700 (TCloudNumber-Bold)</td><td>业绩卡数字（Figma 实测 20px）</td></tr>
-        <tr><td>font-data-lg</td><td>32</td><td>40</td><td>700</td><td>仪表盘大指标</td></tr>
+        <tr><td>font-data ★</td><td>20</td><td>22</td><td>400 (TCloudNumber-Regular)</td><td>业绩卡、实付等常规金额</td></tr>
+        <tr><td>font-data-lg ★</td><td>32</td><td>40</td><td>700 (TCloudNumber-Bold)</td><td>仪表盘大指标（≥24px 规则）</td></tr>
         <tr><td>font-nav-label</td><td>11</td><td>15</td><td>400</td><td>标准底栏 Tab 文案（同 font-tabbar）</td></tr>
         <tr><td>font-grid-label</td><td>13</td><td>18</td><td>400</td><td>店务宫格入口（价目表等）</td></tr>
       </table>
@@ -1573,6 +1575,8 @@ export default {
       <ul>
         <li>单行文字超出使用省略号 <code>text-overflow: ellipsis</code></li>
         <li>多行描述最多 2 行，超出截断</li>
+        <li>金额数字默认 <code>font-weight: 400</code>（TCloudNumber-Regular）；字号 <strong>≥24px</strong> 时用 <code>700</code>（TCloudNumber-Bold）</li>
+        <li>商品卡 / 列表价 <strong>14px</strong>：固定 Regular，不受 ≥24px 规则影响</li>
         <li>数字金额右对齐，使用千分位；日期格式 YYYY-MM-DD HH:mm</li>
         <li>中英文混排时英文与中文之间无需额外空格（中文产品惯例）</li>
         <li>禁止低于 10px 的可读文字（标准底栏 Tab 文案为 11px）</li>
@@ -2614,7 +2618,7 @@ export default {
             <div class="u-card-stat-num"><span class="yen">¥</span><span class="num">1,286,400</span></div>
             <div style="font-size:12px;color:var(--success-6);margin-top:4px">↑ 12.5% 较上月</div>
           </div>
-          <p style="margin-top:8px">白底 <code>#FFFFFF</code> · 圆角 12px · padding 16px · <strong>无描边</strong> · 金额数字 <strong>TCloudNumber-Bold</strong> · 用于工作台数据概览</p>
+          <p style="margin-top:8px">白底 <code>#FFFFFF</code> · 圆角 12px · padding 16px · <strong>无描边</strong> · 金额 28px · <strong>TCloudNumber-Bold</strong>（≥24px）· 用于工作台数据概览</p>
         </div>
       </div>
     </section>
@@ -2639,7 +2643,7 @@ export default {
         <li>百分比：保留 1 位小数 + % 后缀</li>
         <li>日期：YYYY-MM-DD；时间：HH:mm；完整 YYYY-MM-DD HH:mm</li>
         <li>ID/编号：font-s text-secondary，可复制，点击 Toast「已复制」</li>
-        <li>大数字概览：font-data + 单位 font-s text-secondary</li>
+        <li>大数字概览：font-data-lg（≥24px Bold）+ 单位 font-s text-secondary</li>
       </ul>
 
       <h3>8.3 权限与空状态</h3>
@@ -2759,7 +2763,7 @@ export default {
       <pre>请按照《剑琅联盟 移动端设计规范 v1.6》设计 [页面名称]：
 - 最高优先级：★ 全局强制 UI — 390×844 直角画板（无圆角/无阴影/无描边）、所有 Frame 自动布局、#F7F7F7 底、无阴影无渐变；按钮高 48px、字号 16px、圆角仅 4/8/12/16 且同类型一致
 - 产品：剑琅联盟 · Logo: LOGO2.png
-- 字体：苹果 PingFang SC / Windows 思源黑体 Source Han Sans SC（Windows 禁止 PingFang SC）；金额 TCloudNumber-Bold；¥ 与「应付/实付」用 UI 字体，¥ 与数字间距 4px
+- 字体：苹果 PingFang SC / Windows 思源黑体 Source Han Sans SC（Windows 禁止 PingFang SC）；金额 TCloudNumber 默认 Regular、≥24px Bold；商品价 14px 固定 Regular；¥ 与「应付/实付」用 UI 字体，¥ 与数字间距 4px
 - 勾号：仅用图标 check / check-circle-filled，禁止文字 √ 或 ✓
 - 文字：#333 / #929292 · 边框 #D7D7D5 · 主色 #F32F41
 - 图标：优先第 6 章库（Stratis / Iconex / WeChat）；无合适项可外部矢量图标 · 24px（安全 20）/ 16px · 颜色 #F32F41 / #333 / #929

@@ -38,7 +38,7 @@
   }
 
   .member-card-stat-item__value {
-    @apply font-data text-[22px] font-bold text-figma-primary leading-tight;
+    @apply font-data text-[22px] font-normal text-figma-primary leading-tight;
   }
 
   .member-card-stat-item__value .unit {
