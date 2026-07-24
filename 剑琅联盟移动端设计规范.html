@@ -155,6 +155,9 @@
       --safe-bottom: 34px; --bottom-placeholder: 34px;
       --space-page: 16px; --space-module: 16px; --space-card: 16px;
       --space-icon-text: 8px; --space-list-y: 12px; --space-tag-y: 4px; --space-tag-x: 8px; --space-divider-y: 12px;
+      --divider-weight: 0.5px; /* 内容分隔线线粗 */
+      --divider-color: var(--gray-2); /* #EDEDED · 卡片/列表内同级分隔 */
+      --divider-inset: var(--space-card); /* 左右缩进 16px · 与内容对齐 */
       --icon-size: 24px; --icon-safe: 20px; --icon-size-sm: 16px;
       --icon-color-primary: #F32F41; --icon-color-default: #333333; --icon-color-secondary: #929292;
       --price-gap: 4px;
@@ -919,6 +922,19 @@
       box-shadow: none;
       overflow: hidden;
     }
+    /* Divider · 卡片/列表内同级内容分隔（见 #comp-divider） */
+    .u-divider {
+      display: block;
+      border: none;
+      height: 0;
+      margin: var(--space-divider-y) 0;
+      border-top: var(--divider-weight) solid var(--divider-color);
+      box-sizing: border-box;
+    }
+    .u-divider--inset {
+      margin-left: var(--divider-inset);
+      margin-right: var(--divider-inset);
+    }
     .u-skeleton { height: 16px; background: var(--bg-disabled); border-radius: var(--radius-tag); margin-bottom: 8px; border: 1px solid var(--border); }
     @keyframes spin { to { transform: rotate(360deg); } }
     .phone-status,
@@ -1199,7 +1215,7 @@
               <li>主色：<code>#F32F41</code></li>
               <li>辅助色：<code>#FFD5D9</code>、<code>#FFF2F2</code></li>
               <li>文字：重点标题 <code>#333333</code>；常规正文 / 模块标题 <code>#929292</code>；辅助说明 <code>#929292</code>；必要时最强强调可用 <code>#000000</code></li>
-              <li>分割线 / 边框：<code>#D7D7D5</code></li>
+              <li>分割线 / 边框：边框 <code>#D7D7D5</code>；内容分隔线 <code>#EDEDED</code> 0.5px</li>
               <li>禁用浅灰块：<code>#EDEDED</code></li>
               <li>卡片底色：<code>#FFFFFF</code></li>
             </ul>
@@ -1261,7 +1277,13 @@
               <li>输入框 / 小模块：8px</li>
             </ul>
           </li>
-          <li><strong>分割线</strong>：1px <code>#D7D7D5</code></li>
+          <li><strong>分割线 ★</strong>
+            <ul>
+              <li><strong>边框</strong>（输入框、描边按钮等）：1px <code>#D7D7D5</code>（<code>--border</code>）</li>
+              <li><strong>卡片内 / 列表 Cell 组内</strong>同级内容分隔：线粗 <strong>0.5px</strong> · 色 <code>#EDEDED</code>（<code>--gray-2</code> / <code>--divider-color</code>）；左右缩进 <strong>16px</strong>（<code>--divider-inset</code> = <code>--space-card</code>），两端与内容对齐，<strong>禁止</strong>左右贴卡片或列表容器外缘；AI 标注 <code>Divider/inset</code> · 类名 <code>u-divider u-divider--inset</code>。</li>
+              <li>上下留白默认 <strong>12px</strong>（<code>--space-divider-y</code>）</li>
+            </ul>
+          </li>
           <li><strong>顶部导航 / 标题栏</strong>：内页统一使用组件库 <code>PageTitleBar</code>（页面标题栏）；固定高 <strong>44px</strong>、白底、<strong>主体无描边</strong>；返回区为 <code>chevron-left</code> 矢量图标（24px），<strong>禁止</strong>文字 <code>&lt;</code> / <code>＜</code>；返回图标区垂直居中，<strong>标题与右侧操作文案底部水平对齐</strong>（不含系统状态栏）。</li>
           <li><strong>全局按钮</strong>：统一高 <strong>48px</strong>、文案 <strong>16px</strong> / 500、<strong>最大宽度 370px</strong>（含通栏主按钮与底栏按钮，不得超出）；无阴影无渐变；圆角仅在 <strong>4 / 8 / 12 / 16px</strong> 四档中选择，<strong>同一按钮类型</strong>在全站须使用<strong>同一圆角值</strong>。变体：<strong>填充按钮</strong> 品牌红底 <code>#F32F41</code> + <strong>白字</strong>；<strong>描边按钮</strong> 白底 + 红字 + 红描边 1px；<strong>禁用</strong> 灰底 <code>#EDEDED</code>。<strong>按钮内文案须在按钮区域内水平、垂直双向居中</strong>，禁止贴顶、贴底或偏左/偏右。</li>
         </ol>
@@ -1311,6 +1333,7 @@
           <li><strong>底部占位区 ★</strong>：每页设计稿<strong>最底部</strong>预留 <strong>390×34px</strong> 纯白矩形（<code>#FFFFFF</code>）；对齐 <strong>iPhone 17 竖屏底部安全区</strong>（<code>--safe-bottom</code>）；<strong>无阴影、无描边、无圆角</strong>，不绘制 Home Indicator 等系统 UI；页面内容与底栏不得侵入此区域。</li>
           <li><strong>卡片内容裁切</strong>：卡片容器须设置 <code>overflow: hidden</code>（或等价裁切）；内部图标、标题、标签、按钮<strong>不得溢出</strong>到卡片圆角外，长文案须截断或换行。</li>
           <li><strong>白底内容卡片无描边 ★</strong>：填充色为纯白（<code>#FFFFFF</code> / <code>--bg-container</code>）的<strong>内容卡片</strong><strong>禁止</strong>四周边框或 1px 描边；与 <code>#F7F7F7</code> 页面底通过<strong>底色对比 + 圆角 + 间距</strong>区分。有色浅底卡（如 <code>#FFF2F2</code> 业绩卡）及输入框、描边按钮等<strong>不适用</strong>本条。</li>
+          <li><strong>卡片 / 列表内分隔线内容对齐 ★</strong>：分隔同级区块时使用 <code>Divider/inset</code>（0.5px · <code>#EDEDED</code> · 左右各 16px）；线两端须与正文/主内容左右缘对齐，禁止通栏贴边。</li>
           <li><strong>提示信息栏图标对齐</strong>：Notice / Alert 等提示条中，前置图标与<strong>第一行文案的基线（底部对齐）</strong>对齐；多行时图标仍对齐首行，不垂直居中整段文字。</li>
           <li><strong>空状态垂直居中</strong>：空状态页在<strong>可滚动内容区</strong>（扣除状态栏、标题栏、底栏后的区域）内，图标 + 主副文案作为一组<strong>垂直居中</strong>；禁止贴顶或仅留顶部留白。</li>
           <li><strong>页面标题栏</strong>：所有<strong>设计页 / 原型 / AI 出图</strong>的内页顶栏须调用组件库 <code>PageTitleBar</code>（页面标题栏），禁止自定义 Navbar 样式；<a href="https://www.figma.com/design/44P9g5yKcQEyXdHCayIrMn/RTS-AI%E8%AF%BB%E5%8F%96?node-id=6-623" target="_blank" rel="noopener">RTS-AI 读稿 · Figma node 6-623</a> 为整页 Home 稿，<strong>本组件仅对齐其顶栏区域</strong>（见 <a href="#comp-page-title-bar">7 章 · PageTitleBar</a> 实测差异表）。</li>
@@ -1416,7 +1439,7 @@ export default {
         <li><strong>字体按设备</strong>：苹果 → PingFang SC；Windows → 思源黑体 Source Han Sans SC（勿在 Windows 稿中用 PingFang SC）。</li>
         <li><strong>勾号</strong>：确认/正确态只用图标 <code>check</code>，禁止文字 √。</li>
         <li><strong>品牌露出</strong>：启动/登录/首页 Navbar 使用 <code>LOGO2.png</code> 与「剑琅联盟」。</li>
-        <li><strong>硬性约束</strong>：画布无圆角/无阴影/无描边 · 所有 Frame 自动布局 · 居中弹窗左右边距 32px · 状态栏占位 390×53 白块 · 底栏占位 390×34 白块 · 返回用 chevron-left 矢量图标 · 白底内容卡片无描边 · 无 emoji · 无文字勾号 √/✓ · 按钮文案水平垂直居中 · Tab/卡片不叠压 · 内页顶栏必用 <code>PageTitleBar</code>（44px，独立于状态栏） · 标题与右侧文案底对齐 · 标题栏/Tab 主体无描边 · 图片位灰底白 icon · 内容不横向溢出 · 按钮宽 ≤370px · 顶 Tab 390 居中 · 卡片不溢出 · 提示 icon 首行底对齐 · 空状态垂直居中。</li>
+        <li><strong>硬性约束</strong>：画布无圆角/无阴影/无描边 · 所有 Frame 自动布局 · 居中弹窗左右边距 32px · 状态栏占位 390×53 白块 · 底栏占位 390×34 白块 · 返回用 chevron-left 矢量图标 · 白底内容卡片无描边 · 卡片/列表内分隔线 0.5px #EDEDED 左右缩进 16px · 无 emoji · 无文字勾号 √/✓ · 按钮文案水平垂直居中 · Tab/卡片不叠压 · 内页顶栏必用 <code>PageTitleBar</code>（44px，独立于状态栏） · 标题与右侧文案底对齐 · 标题栏/Tab 主体无描边 · 图片位灰底白 icon · 内容不横向溢出 · 按钮宽 ≤370px · 顶 Tab 390 居中 · 卡片不溢出 · 提示 icon 首行底对齐 · 空状态垂直居中。</li>
       </ol>
       <h3>技术栈对齐</h3>
       <table>
@@ -1477,8 +1500,8 @@ export default {
       <table>
         <tr><th>Token</th><th>色值</th><th>用途</th></tr>
         <tr><td>gray-1 ★</td><td>#F7F7F7</td><td>页面背景 bg-page</td></tr>
-        <tr><td>gray-2 ★</td><td>#EDEDED</td><td>禁用浅灰块</td></tr>
-        <tr><td>gray-3 ★</td><td>#D7D7D5</td><td>边框 / 分割线 border</td></tr>
+        <tr><td>gray-2 ★</td><td>#EDEDED</td><td>禁用底 / 卡片·列表内内容分隔线</td></tr>
+        <tr><td>gray-3 ★</td><td>#D7D7D5</td><td>边框 border（非内容分隔线）</td></tr>
         <tr><td>gray-4 ~ gray-8</td><td>#DCDCDC ~ #777777</td><td>图标、占位、次要元素</td></tr>
         <tr><td>gray-9 ~ gray-12</td><td>#5E5E5E ~ #2C2C2C</td><td>深色文字、深色模式基础</td></tr>
       </table>
@@ -1512,7 +1535,7 @@ export default {
         <tr><td>bg-page ★</td><td>#F7F7F7</td><td>页面底色</td></tr>
         <tr><td>bg-container ★</td><td>#FFFFFF</td><td>卡片、Cell、弹窗</td></tr>
         <tr><td>bg-disabled ★</td><td>#EDEDED</td><td>禁用按钮、浅灰块</td></tr>
-        <tr><td>border ★</td><td>#D7D7D5</td><td>默认边框 / 分割线 1px</td></tr>
+        <tr><td>border ★</td><td>#D7D7D5</td><td>默认边框 1px（非内容分隔线）</td></tr>
         <tr><td>border-focus</td><td>#F32F41</td><td>输入框聚焦边框</td></tr>
       </table>
 
@@ -2594,10 +2617,29 @@ export default {
       </div>
 
       <div class="comp-block" id="comp-divider">
-        <div class="comp-block-hd"><strong>Divider 分割线</strong><code>Divider</code></div>
+        <div class="comp-block-hd"><strong>Divider 分割线</strong><code>Divider / inset</code></div>
         <div class="comp-block-bd">
-          <p>水平 0.5px gray-3 · 可带文字「以下为审批记录」font-s text-secondary</p>
-          <hr style="border:none;border-top:0.5px solid var(--gray-3);margin:12px 0">
+          <p style="font-size:12px;color:var(--text-secondary);margin-bottom:12px">卡片内、列表 Cell 组内分隔<strong>同级内容</strong>时使用 <code>Divider/inset</code>：线粗 <strong>0.5px</strong> · 色 <code>#EDEDED</code> · 左右缩进 <strong>16px</strong>，两端与内容对齐，<strong>禁止</strong>左右贴容器外缘。类名：<code>u-divider u-divider--inset</code>。</p>
+          <div class="u-content-card" style="padding:0;max-width:360px;border:1px dashed var(--border)">
+            <div style="padding:16px">
+              <div style="font-size:16px;font-weight:500;color:var(--text-primary)">区块标题 A</div>
+              <div style="font-size:12px;color:var(--text-secondary);margin-top:4px">同级内容 · 左右 16px</div>
+            </div>
+            <hr class="u-divider u-divider--inset" aria-hidden="true">
+            <div style="padding:16px">
+              <div style="font-size:16px;font-weight:500;color:var(--text-primary)">区块标题 B</div>
+              <div style="font-size:12px;color:var(--text-secondary);margin-top:4px">分隔线两端与上文对齐，不贴卡片左右边</div>
+            </div>
+          </div>
+          <table style="margin-top:16px">
+            <tr><th>属性</th><th>值</th></tr>
+            <tr><td>变体 ★</td><td><code>Divider/inset</code> · 卡片内 / 列表 Cell 组内同级分隔</td></tr>
+            <tr><td>线粗 ★</td><td><strong>0.5px</strong>（<code>--divider-weight</code>）</td></tr>
+            <tr><td>颜色 ★</td><td><code>#EDEDED</code>（<code>--gray-2</code> / <code>--divider-color</code>）</td></tr>
+            <tr><td>左右缩进 ★</td><td>各 <strong>16px</strong>（<code>--divider-inset</code> = <code>--space-card</code>）· 与内容对齐</td></tr>
+            <tr><td>上下留白</td><td>默认 <strong>12px</strong>（<code>--space-divider-y</code>）</td></tr>
+            <tr><td>禁止</td><td>左右通栏贴边（贴卡片或列表容器外缘）</td></tr>
+          </table>
         </div>
       </div>
 
@@ -2770,7 +2812,7 @@ export default {
 - 图标：优先第 6 章库（Stratis / Iconex / WeChat）；无合适项可外部矢量图标 · 24px（安全 20）/ 16px · 颜色 #F32F41 / #333 / #929
 - 组件：优先第 7 章库；无合适项可外部引入，须符合全局 UI 并注明来源
 - 占位：状态栏 390×53 白块；页面最底 390×34 白块（无阴影/描边/圆角）
-- 硬性：无 emoji；Figma 所有 Frame 须 Auto Layout；返回用 Lucide chevron-left 矢量图标（禁止文字 &lt;）；白底内容卡片无描边；按钮高 48px 字号 16px；按钮文案在按钮内水平垂直居中；Tab/卡片不遮挡；内页顶栏必用 PageTitleBar（44px）；首页顶栏用 HomeNavbar；状态栏占位 53px、底栏 34px；标题与右侧文案底对齐；栅格 --page-title-bar-side 72px 左右等宽；Figma 6-623 仅参考顶栏区域；PageTitleBar/PageTabs/TabBar 主体无描边；图片位 #EDEDED+白 image icon；不横向溢出；按钮 max 370px；顶 Tab 390 居中；卡片内容不溢出；提示 icon 与首行底对齐；空状态内容区垂直居中
+- 硬性：无 emoji；Figma 所有 Frame 须 Auto Layout；返回用 Lucide chevron-left 矢量图标（禁止文字 &lt;）；白底内容卡片无描边；卡片/列表内分隔线 0.5px #EDEDED、左右缩进 16px（禁止贴边）；按钮高 48px 字号 16px；按钮文案在按钮内水平垂直居中；Tab/卡片不遮挡；内页顶栏必用 PageTitleBar（44px）；首页顶栏用 HomeNavbar；状态栏占位 53px、底栏 34px；标题与右侧文案底对齐；栅格 --page-title-bar-side 72px 左右等宽；Figma 6-623 仅参考顶栏区域；PageTitleBar/PageTabs/TabBar 主体无描边；图片位 #EDEDED+白 image icon；不横向溢出；按钮 max 370px；顶 Tab 390 居中；卡片内容不溢出；提示 icon 与首行底对齐；空状态内容区垂直居中
 - 组件：优先第 7 章库；弹窗用 ModalPopup（7.1 · 7 变体）；无合适项可外部引入
 - 弹窗：居中左右边距 32px · 底部弹窗左/右/下 0 · 无遮罩入库 · 无阴影 · 按钮 48px
 - 内容：[具体业务字段]</pre>
